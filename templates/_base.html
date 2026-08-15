@@ -1,0 +1,352 @@
+{% load static i18n %}
+<!DOCTYPE html>
+<!-- تغییر خودکار زبان و جهت صفحه بر اساس زبان انتخابی کاربر -->
+<html lang="{{ LANGUAGE_CODE }}" dir="{% if LANGUAGE_BIDI %}rtl{% else %}ltr{% endif %}">
+<head>
+    <!--====== Meta Tags ======-->
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{% trans "شرکت کیان صنعت" %}{% endblock %}</title>
+
+    <!--====== Favicon ======-->
+    <link href="{% static 'assets/images/favicon.png' %}" rel="shortcut icon" type="image/png" />
+    
+    <!--====== CSS Plugins ======-->
+    <link href="{% static 'assets/fonts/fontawesome/css/all.min.css' %}" rel="stylesheet" />
+    
+    <!-- لود کردن شرطی فایل بوت‌استرپ: اگر زبان راست‌چین بود rtl وگرنه ltr -->
+    {% if LANGUAGE_BIDI %}
+        <link href="{% static 'assets/css/plugins/bootstrap.rtl.min.css' %}" rel="stylesheet" />
+    {% else %}
+        <link href="{% static 'assets/css/plugins/bootstrap.min.css' %}" rel="stylesheet" />
+    {% endif %}
+
+    <link href="{% static 'assets/css/plugins/slick.css' %}" rel="stylesheet" />
+    <link href="{% static 'assets/css/plugins/magnific-popup.css' %}" rel="stylesheet" />
+    <link href="{% static 'assets/css/plugins/aos.css' %}" rel="stylesheet" />
+    <link href="{% static 'assets/css/spacings.css' %}" rel="stylesheet" />
+    <link href="{% static 'assets/css/style.css' %}" rel="stylesheet" />
+
+    <style>
+        /* =========================================
+           معرفی فونت محلی وزیرمتن به مرورگر
+        ========================================= */
+        @font-face {
+            font-family: 'Vazirmatn';
+            src: url("{% static 'assets/fonts/fontawesome/webfonts/Vazirmatn-Regular.ttf' %}") format('truetype');
+            font-weight: normal;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        body, h1, h2, h3, h4, h5, h6, p, a, span, div, input, button, textarea, select {
+            font-family: 'Vazirmatn', sans-serif !important;
+        }
+
+        /* =========================================
+           کلاس‌های سراسری برای تیترهای هماهنگ
+        ========================================= */
+        .premium-title {
+            font-weight: 800 !important;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .pre-title-custom {
+            display: inline-flex;
+            align-items: center;
+            font-size: 14px;
+            font-weight: bold;
+            color: #ff3366;
+            margin-bottom: 10px;
+            gap: 5px;
+        }
+
+        /* =========================================
+           استایل‌های فرم خبرنامه سازگار با LTR و RTL
+        ========================================= */
+        .newsletter-input::placeholder {
+            color: #555 !important;
+            opacity: 1 !important;
+            font-weight: 500;
+        }
+
+        #subscribe_btn {
+            transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease;
+        }
+        .fade-in-btn {
+            opacity: 1;
+            visibility: visible;
+            transform: scale(1);
+        }
+        .fade-out-btn {
+            opacity: 0;
+            visibility: hidden;
+            transform: scale(0.9);
+        }
+
+        .newsletter-form-wrapper {
+            position: relative;
+            background-color: #fff;
+            border-radius: 40px;
+            padding: 5px;
+            height: 70px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            display: flex;
+            align-items: center;
+        }
+
+        .newsletter-input-field {
+            height: 100%;
+            /* استفاده از پراپرتی‌های منطقی برای کارکرد صحیح در هر دو زبان */
+            padding-inline-start: 20px; 
+            padding-inline-end: 140px; 
+            font-size: 15px;
+            outline: none;
+            width: 100%;
+            color: #222;
+        }
+
+        /* تنظیم جهت نوشته پلیس‌هولدر بر اساس جهت صفحه */
+        html[dir="rtl"] .newsletter-input-field { text-align: right; }
+        html[dir="ltr"] .newsletter-input-field { text-align: left; }
+
+        /* وقتی ایمیل تایپ می‌شود خودکار LTR شود */
+        .newsletter-input-field:not(:placeholder-shown) {
+            direction: ltr !important;
+            text-align: left !important;
+        }
+
+        .newsletter-submit-btn {
+            position: absolute;
+            inset-inline-end: 5px; /* به جای left، در هر دو زبان در جای درست قرار می‌گیرد */
+            top: 5px;
+            height: 60px;
+            border-radius: 35px;
+            padding: 0 30px;
+            white-space: nowrap;
+            font-weight: 600;
+            border: none;
+            box-shadow: 0 5px 15px rgba(255, 51, 102, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        @media (max-width: 575px) {
+            .newsletter-form-wrapper { height: 60px; }
+            .newsletter-input-field {
+                font-size: 12px;
+                padding-inline-end: 105px;
+                padding-inline-start: 15px;
+            }
+            .newsletter-submit-btn {
+                height: 50px;
+                padding: 0 18px;
+                font-size: 13px;
+            }
+        }
+    </style>
+
+    {% block extra_css %}{% endblock %}
+</head>
+<body>
+
+    <!--====== Search Modal ======-->
+    <div class="modal fade search-modal" id="search-modal">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <form>
+                    <div class="form-group">
+                        <input class="form_control" name="search" placeholder="{% trans 'جستجو کنید...' %}" type="search" />
+                        <label><i class="fa fa-search"></i></label>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!--====== Preloader ======-->
+    <div class="preloader">
+        <div class="loading-wrapper">
+            <div class="loading"></div>
+            <div id="loading-icon">
+                <img alt="loader" src="{% static 'assets/images/loader.png' %}" />
+            </div>
+        </div>
+    </div>
+
+    <!--====== Mobile Overlay ======-->
+    <div class="offcanvas__overlay"></div>
+
+    <!--====== Header / Navbar ======-->
+    {% block header %}
+    {% endblock %}
+
+    <!--====== Smooth Scroll Wrapper ======-->
+    <div id="smooth-wrapper">
+        <div id="smooth-content">
+            
+            <!--====== Main Content ======-->
+            <main>
+                {% block content %}
+                {% endblock %}
+            </main>
+
+            <!--====== Footer ======-->
+            {% block footer %}
+            <footer class="main-footer bg_cover" data-src="{% static 'assets/images/footer/footer-bg.jpg' %}">
+                <div class="shape">
+                    <img alt="shape" src="{% static 'assets/images/footer/footer-shape1.png' %}" />
+                </div>
+                
+
+                <!--=== Footer Bottom Wrapper ===-->
+                <div class="footer-bottom-wrapper bg_cover" data-src="{% static 'assets/images/footer/footer-widget-bg.jpg' %}">
+                    <div class="container">
+                        <div class="footer-widget-area pt-100 pb-55">
+                            <div class="row">
+                                <div class="col-lg-4 col-md-6 order-1">
+                                    <div class="footer-widget footer-about-widget mb-40" data-aos="fade-up" data-aos-duration="800">
+                                        <div class="widget-content">
+                                            <div class="footer-logo mb-30">
+                                                <a href="/">
+                                                    <img alt="{% trans 'کیان صنعت' %}" src="{% static 'assets/images/home-one/logo/logo-white.png' %}" />
+                                                </a>
+                                            </div>
+                                            <p>{% trans "شرکت کیان صنعت، پیشرو در ارائه راهکارهای مهندسی، تجهیزات صنعتی و خدمات فنی و مهندسی با بالاترین استانداردهای کیفی." %}</p>
+                                            <div class="social-box">
+                                                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                                                <a href="#"><i class="fab fa-twitter"></i></a>
+                                                <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                                                <a href="#"><i class="fab fa-youtube"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-5 col-md-12 order-3 order-lg-2">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="footer-widget footer-nav-widget mb-40" data-aos="fade-up" data-aos-duration="1000">
+                                                <div class="widget-content">
+                                                    <h4 class="widget-title">{% trans "لینک‌های سریع" %}</h4>
+                                                    <div class="line-wrap"><span></span><span></span><span></span></div>
+                                                    <ul class="widget-nav">
+                                                        <li><a href="/">{% trans "صفحه اصلی" %}</a></li>
+                                                        <li><a href="#">{% trans "درباره ما" %}</a></li>
+                                                        <li><a href="#">{% trans "خدمات ما" %}</a></li>
+                                                        <li><a href="#">{% trans "پروژه‌ها" %}</a></li>
+                                                        <li><a href="#">{% trans "اخبار و مقالات" %}</a></li>
+                                                        <li><a href="#">{% trans "تماس با ما" %}</a></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="footer-widget footer-nav-widget mb-40" data-aos="fade-up" data-aos-duration="1200">
+                                                <div class="widget-content">
+                                                    <h4 class="widget-title">{% trans "خدمات ما" %}</h4>
+                                                    <div class="line-wrap"><span></span><span></span><span></span></div>
+                                                    <ul class="widget-nav">
+                                                        <li><a href="#">{% trans "مشاوره مهندسی" %}</a></li>
+                                                        <li><a href="#">{% trans "تامین تجهیزات صنعتی" %}</a></li>
+                                                        <li><a href="#">{% trans "طراحی و اجرای خطوط" %}</a></li>
+                                                        <li><a href="#">{% trans "اتوماسیون صنعتی" %}</a></li>
+                                                        <li><a href="#">{% trans "نگهداری و تعمیرات" %}</a></li>
+                                                        <li><a href="#">{% trans "پشتیبانی تخصصی" %}</a></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-3 col-md-6 order-2 order-lg-3">
+                                    <div class="footer-widget footer-contact-info-widget mb-40" data-aos="fade-up" data-aos-duration="1400">
+                                        <div class="widget-content">
+                                            <h4 class="widget-title">{% trans "ارتباط با ما" %}</h4>
+                                            <div class="line-wrap"><span></span><span></span><span></span></div>
+                                            <div class="orbia-info-box style-two mb-20">
+                                                <div class="icon"><i class="far fa-map-marker-alt"></i></div>
+                                                <div class="info"><p>{% trans "تهران، خیابان شریعتی، پلاک ۱۲۶" %}</p></div>
+                                            </div>
+                                            <div class="orbia-info-box style-two mb-20">
+                                                <div class="icon"><i class="far fa-envelope"></i></div>
+                                                <div class="info"><p><a href="mailto:info@kspphub.com">info@kspphub.com</a></p></div>
+                                            </div>
+                                            <div class="orbia-info-box style-two mb-20">
+                                                <div class="icon"><i class="far fa-phone-alt"></i></div>
+                                                <div class="info"><p><a href="tel:02112345678">{% trans "۰۲۱-۱۲۳۴۵۶۷۸" %}</a></p></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!--=== Copyright Area ===-->
+                        <div class="copyright-area">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="copyright-text text-lg-start text-center">
+                                        <p>{% blocktrans %}© تمامی حقوق برای شرکت <span>کیان صنعت</span> محفوظ است.{% endblocktrans %}</p>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="copyright-link text-lg-end text-center">
+                                        <a href="#">{% trans "شرایط و ضوابط" %}</a>
+                                        <a href="#">{% trans "حریم خصوصی" %}</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+            {% endblock %}
+
+        </div> <!-- end smooth-content -->
+    </div> <!-- end smooth-wrapper -->
+
+    <!--====== JS Plugins ======-->
+    <script src="{% static 'assets/js/plugins/jquery-3.7.1.min.js' %}"></script>
+    <script src="{% static 'assets/js/plugins/popper.min.js' %}"></script>
+    <script src="{% static 'assets/js/plugins/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'assets/js/plugins/gsap/gsap.min.js' %}"></script>
+    <script src="{% static 'assets/js/plugins/gsap/SplitText.min.js' %}"></script>
+    <script src="{% static 'assets/js/plugins/gsap/ScrollSmoother.min.js' %}"></script>
+    <script src="{% static 'assets/js/plugins/gsap/ScrollTrigger.min.js' %}"></script>
+    <script src="{% static 'assets/js/plugins/slick.min.js' %}"></script>
+    <script src="{% static 'assets/js/plugins/jquery.magnific-popup.min.js' %}"></script>
+    <script src="{% static 'assets/js/plugins/jquery.waypoints.js' %}"></script>
+    <script src="{% static 'assets/js/plugins/jquery.counterup.min.js' %}"></script>
+    <script src="{% static 'assets/js/plugins/aos.js' %}"></script>
+    <script src="{% static 'assets/js/theme.js' %}"></script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const termsCheckbox = document.getElementById("terms_checkbox");
+            const subscribeBtn = document.getElementById("subscribe_btn");
+            
+            if (termsCheckbox && subscribeBtn) {
+                const toggleButton = () => {
+                    if (termsCheckbox.checked) {
+                        subscribeBtn.classList.remove("fade-out-btn");
+                        subscribeBtn.classList.add("fade-in-btn");
+                    } else {
+                        subscribeBtn.classList.remove("fade-in-btn");
+                        subscribeBtn.classList.add("fade-out-btn");
+                    }
+                };
+                
+                toggleButton();
+                termsCheckbox.addEventListener("change", toggleButton);
+            }
+        });
+    </script>
+
+    {% block extra_js %}{% endblock %}
+</body>
+</html>

@@ -1,0 +1,1171 @@
+{% extends "_base.html" %}
+{% load static %}
+{% load i18n %}
+
+
+{% block header %}
+    <style>
+        /* ======================================================== */
+        /* === 1. تنظیمات سراسری (فونت، دکمه‌ها و تصاویر) === */
+        /* ======================================================== */
+        html { scroll-behavior: smooth; }
+        body, h1, h2, h3, h4, h5, h6, p, span, a, button, input, textarea, div, li {
+            font-family: 'Vazirmatn', sans-serif !important;
+        }
+        img { border-radius: 15px !important; }
+        .brand-logo img { border-radius: 0 !important; }
+        .theme-btn { transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1) !important; }
+        .theme-btn:hover {
+            transform: translateY(-3px) !important;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12) !important;
+        }
+
+        /* ========================================= */
+        /* === 2. استایل اختصاصی تاگل تغییر زبان === */
+        /* ========================================= */
+        .custom-lang-toggle {
+            position: relative; display: inline-flex; align-items: center; width: 72px; height: 34px;
+            background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 17px; cursor: pointer;
+            transition: all 0.3s ease; box-sizing: border-box; overflow: hidden; margin: 0;
+        }
+        .custom-lang-toggle:hover { background: rgba(255, 255, 255, 0.15); border-color: rgba(255, 255, 255, 0.4); }
+        .custom-lang-toggle .toggle-circle {
+            position: absolute; top: 2px; width: 28px; height: 28px; background: #ffffff;
+            border-radius: 50%; transition: inset-inline-end 0.4s cubic-bezier(0.25, 0.8, 0.25, 1); z-index: 1;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+        .custom-lang-toggle.fa-active .toggle-circle { inset-inline-end: 39px; }
+        .custom-lang-toggle.en-active .toggle-circle { inset-inline-end: 3px; }
+        
+        .custom-lang-toggle span {
+            position: relative; z-index: 2; width: 50%; text-align: center; font-size: 11px;
+            font-weight: 800; letter-spacing: 0.5px; user-select: none; transition: opacity 0.3s ease;
+            color: #ffffff;
+        }
+
+        .nav-right-item { gap: 20px; justify-content: flex-end; display: flex; align-items: center; }
+        .language-switcher, .search-button, .navbar-toggler { margin: 0 !important; }
+
+        /* ======================================================== */
+        /* === 3. استایل هدر شناور و شیشه‌ای با اولویت بالا === */
+        /* ======================================================== */
+        #smart-header {
+            transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), opacity 0.3s ease, background 0.3s ease !important;
+            will-change: transform, opacity; background: transparent; border-bottom: none; opacity: 1;
+        }
+        #smart-header.sticky, #smart-header.is-fixed {
+            position: fixed !important; top: 0 !important; left: 0 !important; right: 0 !important;
+            margin: 15px auto !important; width: 96% !important; max-width: 1600px !important;
+            min-height: 85px !important;
+            display: flex; align-items: center;
+            background: rgba(10, 14, 39, 0.9) !important; backdrop-filter: blur(16px) !important; 
+            -webkit-backdrop-filter: blur(16px) !important; border: 1px solid rgba(255, 255, 255, 0.08) !important; 
+            border-radius: 24px !important; z-index: 9999 !important;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25) !important; animation: none !important; 
+        }
+        #smart-header.is-hidden { transform: translateY(-150%) !important; opacity: 0 !important; pointer-events: none !important; }
+        #smart-header.is-fixed .header-navigation { width: 100%; }
+
+        /* ======================================================== */
+        /* === 4. استایل منوها و تنظیمات فاصله (تغییرات جدید) === */
+        /* ======================================================== */
+        .header-navigation ul li a, .main-menu ul li a {
+            color: #ffffff !important; text-decoration: none !important; opacity: 1 !important;
+            padding: 10px 18px; border-radius: 30px; transition: all 0.3s ease; position: relative;
+        }
+        .header-navigation ul li a:hover, .main-menu ul li a:hover {
+            color: #e0e0e0 !important; background: rgba(255, 255, 255, 0.06); 
+        }
+
+        @media (min-width: 1200px) {
+            #navbarNav { display: flex !important; flex-basis: auto; flex-grow: 1; align-items: center; }
+        }
+
+        .theme-nav-menu {
+            transition: margin 0.3s ease-in-out !important;
+            margin-inline-start: 80px !important;
+        }
+
+        #smart-header.is-fixed .theme-nav-menu,
+        #smart-header.sticky .theme-nav-menu {
+            margin-inline-start: 120px !important;
+        }
+
+        /* ======================================================== */
+        /* === 5. استایل دکمه جستجو === */
+        /* ======================================================== */
+        .search-btn {
+            width: 42px !important; height: 42px !important; display: flex; align-items: center; justify-content: center;
+            background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 50%;
+            color: rgba(255, 255, 255, 0.85); cursor: pointer; transition: all 0.3s ease;
+        }
+        .search-btn:hover {
+            background: rgba(255, 255, 255, 0.15); color: #fff;
+            border-color: rgba(155, 81, 224, 0.5); box-shadow: 0 0 15px rgba(155, 81, 224, 0.2); 
+        }
+
+        /* ======================================================== */
+        /* === 6. اصلاح تصویر دست ربات === */
+        /* ======================================================== */
+        .orbia-about_one .orbia-image-box {
+            position: relative !important; width: 100% !important; display: flex !important; flex-direction: column !important;
+            justify-content: center !important; align-items: center !important; margin: 0 auto !important;
+            transform: none !important; animation: none !important; transition: transform 0.5s ease-out;
+        }
+        .orbia-about_one .orbia-image-box .image_two {
+            position: relative !important; width: 100% !important; max-width: 450px !important; height: auto !important;
+            z-index: 1 !important; margin: 0 auto !important; display: block !important; transform: none !important; transition: all 0.3s ease;
+        }
+
+        /* ======================================================== */
+        /* === 7. تنظیمات بخش پروژه‌ها === */
+        /* ======================================================== */
+        .orbia-project_one { padding-top: 80px !important; padding-bottom: 80px !important; }
+        .orbia-project_one .section-title .sub-title { font-size: 16px !important; font-weight: 500 !important; margin-bottom: 15px; display: inline-block; }
+        .orbia-project_one .section-title .title-h2 { font-size: 32px !important; font-weight: 700 !important; line-height: 1.6 !important; margin-bottom: 35px; }
+        .orbia-project-item { margin-bottom: 20px; border-bottom: 1px solid rgba(0, 0, 0, 0.08); padding-bottom: 20px; }
+        .orbia-project-item:last-child { border-bottom: none; }
+        .orbia-project-item .project-title span { font-size: 13px !important; font-weight: 500 !important; color: #6c757d; margin-bottom: 8px; display: block; }
+        .orbia-project-item .project-title h3 { font-size: 20px !important; font-weight: 600 !important; color: #1f1f1f; line-height: 1.6; margin-bottom: 0; }
+        .orbia-project-item .project-content p { font-size: 15px !important; line-height: 1.8 !important; color: #4b4b4b; margin-top: 15px; margin-bottom: 20px; }
+        .orbia-project-item .project-content .theme-btn { font-size: 14px !important; padding: 10px 25px !important; }
+
+        /* ======================================================== */
+        /* === 8. رسپانسیو و مدیا کوئری‌ها === */
+        /* ======================================================== */
+        @media (min-width: 1600px) {
+            .orbia-about_one .orbia-image-box { transform: translateY(-50px) !important; }
+            .orbia-about_one .orbia-image-box .image_two { max-width: 400px !important; }
+        }
+        
+        @media (min-width: 1400px) {
+            .main-menu ul li { margin: 0 12px !important; }
+            .main-menu ul li a { font-size: 16px !important; padding: 10px 18px !important; }
+            #smart-header.is-fixed .main-menu ul li a { font-size: 14px !important; padding: 10px 12px !important; }
+        }
+        @media (min-width: 1200px) and (max-width: 1399px) {
+            .theme-nav-menu { margin-inline-start: 40px !important; }
+            #smart-header.is-fixed .theme-nav-menu { margin-inline-start: 60px !important; }
+            .main-menu ul li { margin: 0 8px !important; }
+            .main-menu ul li a { font-size: 14px !important; padding: 10px 12px !important; }
+            #smart-header.is-fixed .main-menu ul li a { font-size: 12px !important; padding: 10px 8px !important; }
+            #smart-header.is-fixed .main-menu ul li { margin: 0 4px !important; }
+        }
+        @media (min-width: 992px) and (max-width: 1199px) {
+            .theme-nav-menu { margin-inline-start: 20px !important; }
+            #smart-header.is-fixed .theme-nav-menu { margin-inline-start: 30px !important; }
+            .main-menu ul li { margin: 0 2px !important; }
+            .main-menu ul li a { font-size: 13px !important; padding: 10px 8px !important; }
+            .header-navigation .container-fluid { padding-inline-start: 15px; padding-inline-end: 15px; }
+            #smart-header.is-fixed .main-menu ul li a { font-size: 11px !important; padding: 10px 4px !important; }
+        }
+        @media (min-width: 992px) and (max-width: 1599px) {
+            .orbia-about_one .orbia-image-box .image_two { max-width: 500px !important; }
+        }
+        @media (min-width: 992px) {
+            .orbia-about_one ul li, .orbia-about_one li { white-space: nowrap !important; font-size: 15px !important; line-height: 2.2 !important; overflow: visible !important; }
+            .orbia-about_one li i { margin-inline-start: 8px !important; }
+        }
+        @media (min-width: 992px) and (max-width: 1399.98px) {
+            .orbia-hero_one .hero-image img { height: 65vh !important; max-height: 65vh !important; width: auto !important; }
+            .orbia-about_one .orbia-image-box .image_two { max-width: 320px !important; }
+        }
+
+        /* ==================================================================== */
+        /* === 8c. استایل کامل منوی موبایل (آپدیت نهایی: فونت، تراز، حذف لوگو) === */
+        /* ==================================================================== */
+        @media (max-width: 991.98px) {
+            .theme-nav-menu, #smart-header.is-fixed .theme-nav-menu, #smart-header.sticky .theme-nav-menu {
+                margin-inline-start: 0 !important;
+            }
+            
+            #smart-header.sticky, #smart-header.is-fixed {
+                width: 100% !important; margin: 0 !important; border-radius: 0 !important;
+                min-height: 70px !important;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+                border-left: none !important; border-right: none !important; border-top: none !important;
+            }
+            .nav-right-item { gap: 12px !important; }
+            .brand-logo img { max-height: 38px; width: auto; }
+            
+            .custom-lang-toggle { width: 66px !important; height: 34px !important; }
+            .custom-lang-toggle .toggle-circle { width: 28px !important; height: 28px !important; top: 2px !important; }
+            .custom-lang-toggle.fa-active .toggle-circle { inset-inline-end: 33px !important; }
+            .custom-lang-toggle.en-active .toggle-circle { inset-inline-end: 3px !important; }
+            .custom-lang-toggle span { font-size: 10px; line-height: 32px; }
+            
+            .search-btn { width: 34px !important; height: 34px !important; padding: 0 !important; }
+            .search-btn i { font-size: 16px !important; }
+            .navbar-toggler { width: 40px !important; height: 34px !important; transform: none !important; display: flex !important; flex-direction: column; justify-content: center; align-items: center; padding: 0 !important; }
+            
+            .theme-nav-menu {
+                position: fixed !important; top: 0 !important; left: 0 !important; right: 0 !important;
+                width: 100% !important; height: 100vh !important; max-height: 100vh !important;
+                margin: 0 !important; overflow-y: auto !important;
+                background: rgba(10, 14, 39, 0.98) !important;
+                backdrop-filter: blur(16px) !important; -webkit-backdrop-filter: blur(16px) !important;
+                padding: 20px 20px 40px 20px !important; z-index: 99998 !important; box-sizing: border-box !important;
+                transform: translateY(-100%); opacity: 0; visibility: hidden;
+                transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), opacity 0.3s ease, visibility 0.3s ease;
+            }
+            .theme-nav-menu.menu-on { transform: translateY(0) !important; opacity: 1 !important; visibility: visible !important; }
+
+            /* هدر داخلی منو: لوگوی تکراری حذف و دکمه بستن در گوشه قرار می‌گیرد */
+            .theme-nav-menu .theme-menu-top {
+                display: flex !important; align-items: center; justify-content: flex-end !important;
+                margin-bottom: 20px; padding-bottom: 15px; border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            }
+
+            /* ترازبندی منو بر اساس زبان سایت */
+            html[dir="rtl"] .theme-nav-menu .main-menu ul { text-align: right !important; padding-right: 15px !important; padding-left: 0 !important; }
+            html[dir="ltr"] .theme-nav-menu .main-menu ul { text-align: left !important; padding-left: 15px !important; padding-right: 0 !important; }
+
+            .theme-nav-menu .main-menu { width: 100%; margin: 0 0 30px 0; }
+            .theme-nav-menu .main-menu ul { list-style: none !important; margin: 0 !important; display: flex; flex-direction: column; gap: 4px; }
+            .theme-nav-menu .main-menu ul li { margin: 0 !important; width: 100%; }
+            
+            /* اصلاح سایز فونت و افزودن خط جداکننده نازک */
+            .theme-nav-menu .main-menu ul li a {
+                display: block !important; width: 100% !important; color: #ffffff !important;
+                font-size: 14px !important; font-weight: 500 !important; padding: 12px 10px !important;
+                border-radius: 8px !important; background: transparent !important; text-decoration: none !important;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.05) !important;
+            }
+            .theme-nav-menu .main-menu ul li:last-child a { border-bottom: none !important; }
+            .theme-nav-menu .main-menu ul li a:active, .theme-nav-menu .main-menu ul li a:hover { background: rgba(255, 255, 255, 0.08) !important; }
+
+            .theme-nav-menu .theme-menu-bottom { padding-top: 15px; border-top: 1px solid rgba(255, 255, 255, 0.1); }
+            .theme-nav-menu .theme-menu-bottom h5 { color: #ffffff !important; font-size: 14px; margin-bottom: 15px; }
+            .theme-nav-menu .theme-menu-bottom .social-link { list-style: none !important; display: flex !important; gap: 12px; margin: 0 !important; padding: 0 !important; }
+            .theme-nav-menu .theme-menu-bottom .social-link a {
+                width: 38px; height: 38px; display: flex !important; align-items: center; justify-content: center;
+                border-radius: 50%; background: rgba(255, 255, 255, 0.08); border: 1px solid rgba(255, 255, 255, 0.15); color: #ffffff !important;
+            }
+
+            .navbar-close {
+                cursor: pointer; color: #ffffff; font-size: 16px; width: 36px; height: 36px;
+                display: flex; align-items: center; justify-content: center; border-radius: 50%;
+                background: rgba(255, 255, 255, 0.08); border: 1px solid rgba(255, 255, 255, 0.15); transition: all 0.3s ease; flex-shrink: 0;
+            }
+            .navbar-close:hover { background: rgba(255, 255, 255, 0.18); border-color: rgba(255, 255, 255, 0.35); }
+        }
+
+        /* ==================================================================== */
+        /* === 8b. رفع تداخل نوبار با هیرو در موبایل - مخصوص نسخه EN/LTR === */
+        /* ==================================================================== */
+        @media (max-width: 991.98px) {
+            html[dir="ltr"] #smart-header {
+                position: fixed !important; top: 0 !important; left: 0 !important; right: 0 !important;
+                width: 100% !important; margin: 0 !important; border-radius: 0 !important;
+                min-height: 70px !important; z-index: 9999 !important;
+            }
+            html[dir="ltr"] #smart-header:not(.is-fixed):not(.sticky) {
+                background: transparent !important; backdrop-filter: none !important; -webkit-backdrop-filter: none !important;
+                border-bottom: none !important; box-shadow: none !important;
+            }
+            html[dir="ltr"] .orbia-hero_one .hero-wrapper { padding-top: 70px !important; }
+        }
+
+        /* ======================================================== */
+        /* === 9 & 11. بخش چرا ما و خدمات === */
+        /* ======================================================== */
+        .glass-satisfaction-box {
+            background: rgba(255, 255, 255, 0.08) !important; backdrop-filter: blur(12px) !important;
+            -webkit-backdrop-filter: blur(12px) !important; border: 1px solid rgba(255, 255, 255, 0.15) !important;
+            border-radius: 15px !important; color: #ffffff !important; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2) !important; padding: 20px !important;
+        }
+        .glass-satisfaction-box h2, .glass-satisfaction-box span { color: #ffffff !important; }
+        .neon-subtitle { color: #ff3366 !important; font-weight: 600; }
+        .dark-bg-text { color: rgba(255, 255, 255, 0.8) !important; line-height: 1.8 !important; }
+        .feature-item-aligned { display: flex !important; align-items: center !important; margin-bottom: 25px !important; }
+        .feature-item-aligned .icon { margin-inline-start: 15px !important; display: flex; align-items: center; justify-content: center; }
+        .feature-item-aligned h4 { margin: 0 !important; line-height: 1.4 !important; color: #ffffff !important; }
+
+        .glass-service-card {
+            background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.6); border-radius: 20px !important; padding: 2.5rem 1.5rem !important; 
+            transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1); height: 100%; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        .dark-mode .glass-service-card { background: rgba(25, 28, 41, 0.7); border: 1px solid rgba(255, 255, 255, 0.1); box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); }
+        .hover-lift { transition: transform 0.3s ease, box-shadow 0.3s ease; }
+        .hover-lift:hover { transform: translateY(-10px) !important; box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08) !important; }
+        .dark-mode .hover-lift:hover { box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4) !important; }
+        .service-icon-wrapper {
+            display: inline-flex; align-items: center; justify-content: center; width: 70px; height: 70px;
+            border-radius: 18px; background: rgba(155, 81, 224, 0.1); color: #9b51e0; font-size: 32px;
+            margin-bottom: 1.5rem; transition: all 0.3s ease;
+        }
+        .hover-lift:hover .service-icon-wrapper { background: #9b51e0; color: #ffffff; transform: scale(1.1) rotate(5deg); }
+        .service-card-title { font-weight: 700 !important; font-size: 1.3rem; margin-bottom: 1rem; color: #1f1f1f; }
+        .dark-mode .service-card-title { color: #ffffff; }
+        .service-card-desc { font-weight: 400; line-height: 1.8 !important; color: #6c757d; font-size: 0.95rem; margin-bottom: 0; }
+        .dark-mode .service-card-desc { color: rgba(255, 255, 255, 0.7); }
+
+        /* ======================================================== */
+        /* === 12. بهبود ساختار متن و چیدمان بخش هیرو === */
+        /* ======================================================== */
+        .orbia-hero_one .hero-wrapper { min-height: 90vh; display: flex; align-items: stretch; }
+        .orbia-hero_one .hero-content { text-align: start !important; padding-top: 100px; z-index: 5; position: relative; align-self: center; }
+        @media (min-width: 1200px) { .orbia-hero_one .hero-content { max-width: 650px; margin-inline-end: 50px; } }
+        .orbia-hero_one .hero-content h1 { font-weight: 800 !important; margin-bottom: 20px; line-height: 1.4 !important; font-size: clamp(30px, 4vw, 52px) !important; max-width: 550px; text-shadow: 2px 2px 10px rgba(0,0,0,0.5); }
+        .orbia-hero_one .hero-content p { font-weight: 400 !important; line-height: 2 !important; font-size: 16px !important; max-width: 100%; opacity: 0.9; }
+        @media (min-width: 992px) { .orbia-hero_one .hero-content p { font-size: 18px !important; max-width: 85%; } }
+        
+        .orbia-hero_one .hero-image { display: flex !important; align-items: flex-end !important; align-self: flex-end !important; height: 100%; }
+        .orbia-hero_one .hero-image img { height: 85vh; max-height: 85vh; width: auto; object-fit: contain; object-position: bottom !important; vertical-align: bottom; margin-bottom: 0 !important; }
+
+        /* ======================================================== */
+        /* === 18. استایل‌های اختصاصی نسخه انگلیسی (LTR) === */
+        /* ======================================================== */
+        .sub-title::before, .sub-title::after, .tag-line::before, .tag-line::after, .section-title span::before, .section-title span::after { display: none !important; content: none !important; }
+        .sub-title, .tag-line, .section-title span { padding-inline-start: 0 !important; padding-inline-end: 0 !important; margin-inline-start: 0 !important; margin-inline-end: 0 !important; }
+        html[dir="ltr"] .orbia-hero_one .row { flex-direction: row !important; align-items: stretch !important; position: static !important; }
+        html[dir="ltr"] .orbia-about_one .orbia-content-box, html[dir="ltr"] .orbia-project_one .section-title { text-align: left !important; }
+        html[dir="ltr"] .orbia-hero_one .hero-wrapper { position: relative !important; overflow: hidden !important; }
+        html[dir="ltr"] .orbia-hero_one .hero-content { text-align: left !important; padding-top: calc(20vh) !important; position: relative !important; z-index: 10 !important; }
+        
+        @media (min-width: 768px) and (max-width: 1399px) {
+            html[dir="ltr"] .orbia-hero_one .hero-content { padding-top: calc(26vh + 20px) !important; }
+        }
+
+        html[dir="ltr"] .orbia-hero_one .hero-image {
+            position: absolute !important; bottom: 0 !important; right: 0 !important; left: auto !important; height: 85vh !important; width: auto !important;
+            display: flex !important; align-items: flex-end !important; justify-content: flex-end !important; z-index: 5 !important; transform: none !important;
+        }
+        html[dir="ltr"] .orbia-hero_one .hero-image img { height: 85vh !important; max-height: 85vh !important; width: auto !important; max-width: none !important; object-fit: contain !important; object-position: bottom right !important; transform: none !important; }
+        
+        @media (max-width: 991px) {
+            html[dir="ltr"] .orbia-hero_one .hero-wrapper { min-height: auto !important; padding-bottom: 50px !important; }
+            html[dir="ltr"] .orbia-hero_one .hero-content { padding-top: 15vh !important; margin-top: 0 !important; text-align: center !important; }
+            html[dir="ltr"] .orbia-hero_one .hero-content h1 { font-size: clamp(28px, 6vw, 40px) !important; text-align: center !important; word-break: break-word; }
+            html[dir="ltr"] .orbia-hero_one .hero-content p { font-size: clamp(15px, 3vw, 18px) !important; text-align: center !important; margin: 0 auto 20px auto !important; }
+            html[dir="ltr"] .orbia-hero_one .hero-image { position: relative !important; height: auto !important; right: auto !important; left: auto !important; }
+            html[dir="ltr"] .orbia-hero_one .hero-image img { height: auto !important; max-height: 50vh !important; }
+        }
+    </style>
+
+    <!-- Transparent Header -->
+    <header class="header-area header-one transparent-header" id="smart-header">
+        <div class="header-navigation">
+            <div class="container-fluid">
+                <div class="primary-menu">
+                    <div class="site-branding">
+                        <a class="brand-logo" href="{% url 'core:home' %}"><img alt="{% trans 'لوگو کیان صنعت' %}"
+                                src="{% static 'assets/images/home-one/logo/logo-white.png' %}" /></a>
+                    </div>
+                    
+                    <div class="theme-nav-menu" id="navbarNav">
+                        <!-- نسخه اصلاح‌شده هدر منوی موبایل: لوگوی اضافی حذف و دکمه ضربدر باقی‌مانده است -->
+                        <div class="theme-menu-top d-block d-xl-none">
+                            <div class="navbar-close"><i class="fas fa-times"></i></div>
+                        </div>
+                        <nav class="main-menu">
+                            <ul>
+                                <li class="menu-item"><a href="{% url 'core:home' %}">{% trans "صفحه اصلی" %}</a></li>
+                                <li class="menu-item"><a href="#">{% trans "فعالیت‌ها" %}</a></li>
+                                <li class="menu-item"><a href="#">{% trans "محصولات" %}</a></li>
+                                <li class="menu-item"><a href="#">{% trans "بازرگانی" %}</a></li>
+                                <li class="menu-item"><a href="#">{% trans "اخبار و رویدادها" %}</a></li>
+                                <li class="menu-item"><a href="#">{% trans "درباره ما" %}</a></li>
+                                <li class="menu-item"><a href="#">{% trans "تماس با ما" %}</a></li>
+                            </ul>
+                        </nav>
+                        <div class="theme-menu-bottom mt-50 d-block d-xl-none">
+                            <h5>{% trans "ما را دنبال کنید" %}</h5>
+                            <ul class="social-link">
+                                <li><a href="#"><i class="fab fa-instagram"></i></a></li>
+                                <li><a href="#"><i class="fab fa-linkedin-in"></i></a></li>
+                                <li><a href="#"><i class="fab fa-telegram"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="nav-right-item d-flex align-items-center">
+                        <div class="language-switcher">
+                            <form action="{% url 'set_language' %}" method="post" id="lang-form" style="margin: 0; display: flex; align-items: center;">
+                                {% csrf_token %}
+                                <input name="next" type="hidden" value="{{ request.get_full_path|default:'/' }}" />
+                                {% get_current_language as LANGUAGE_CODE %}
+                                <input type="hidden" name="language" id="language-val" value="{{ LANGUAGE_CODE }}">
+                                <div class="custom-lang-toggle {% if LANGUAGE_CODE == 'en' %}en-active{% else %}fa-active{% endif %}" 
+                                     onclick="document.getElementById('language-val').value = '{% if LANGUAGE_CODE == 'en' %}fa{% else %}en{% endif %}'; document.getElementById('lang-form').submit();">
+                                    <div class="toggle-circle"></div>
+                                    <span class="lang-fa">FA</span>
+                                    <span class="lang-en">EN</span>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="search-button">
+                            <div class="search-btn" data-bs-target="#search-modal" data-bs-toggle="modal">
+                                <i class="far fa-search"></i>
+                            </div>
+                        </div>
+                        
+                        <div class="navbar-toggler" aria-label="Toggle navigation">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const header = document.getElementById('smart-header');
+            const headerNav = header.querySelector('.header-navigation');
+            
+            const neutralizeTemplateJS = function(mutations, observer) {
+                mutations.forEach(function(mutation) {
+                    const target = mutation.target;
+                    if (mutation.attributeName === 'class') {
+                        if (target.classList.contains('sticky')) {
+                            target.classList.remove('sticky');
+                        }
+                    }
+                    if (mutation.attributeName === 'style') {
+                        target.removeAttribute('style');
+                    }
+                });
+            };
+
+            const observerOptions = { attributes: true, attributeFilter: ['class', 'style'] };
+            
+            const headerObserver = new MutationObserver(neutralizeTemplateJS);
+            headerObserver.observe(header, observerOptions);
+            
+            if (headerNav) {
+                const navObserver = new MutationObserver(neutralizeTemplateJS);
+                navObserver.observe(headerNav, observerOptions);
+            }
+
+            let scrollTimeout;
+            window.addEventListener('scroll', function() {
+                let currentScroll = window.scrollY || document.documentElement.scrollTop;
+                if (currentScroll > 150) {
+                    if (!header.classList.contains('is-fixed')) {
+                        header.classList.add('is-fixed');
+                        header.classList.add('is-hidden');
+                        clearTimeout(scrollTimeout);
+                        scrollTimeout = setTimeout(function() {
+                            header.classList.remove('is-hidden');
+                        }, 300); 
+                    }
+                } else {
+                    if (header.classList.contains('is-fixed')) {
+                        header.classList.remove('is-fixed');
+                        header.classList.remove('is-hidden');
+                        clearTimeout(scrollTimeout);
+                    }
+                }
+            }, { passive: true });
+        });
+    </script>
+{% endblock %}
+
+
+
+
+
+
+
+
+{% block content %}
+    <!-- استایل‌های اختصاصی صفحه اصلی -->
+    <style>
+        /* ۱. سرکوب و حذف کامل نقطه‌های قرمز تزئینی CSS قالب */
+        .sub-title::before, .sub-title::after,
+        .tag-line::before, .tag-line::after,
+        .section-title span::before, .section-title span::after {
+            display: none !important;
+            content: none !important;
+        }
+        /* حذف فاصله‌ی خالی جا مانده از نقطه برای تراز شدن بی‌نقص متن */
+        .sub-title, .tag-line, .section-title span {
+            padding-inline-start: 0 !important;
+            padding-inline-end: 0 !important;
+            margin-inline-start: 0 !important;
+            margin-inline-end: 0 !important;
+        }
+
+        /* ۲. یکسان‌سازی اندازه ربات هیرو در دسکتاپ (فارسی و انگلیسی) */
+        @media (min-width: 992px) {
+            .orbia-hero_one .hero-image img {
+                height: 85vh !important;
+                max-height: 85vh !important;
+                width: auto !important;
+                object-fit: contain;
+                object-position: bottom !important;
+            }
+        }
+
+        /* ۳. مخفی‌سازی قطعی ربات هیرو در موبایل و تبلت (زیر 992px) */
+        @media (max-width: 991.98px) {
+            .orbia-hero_one .hero-image,
+            .orbia-hero_one .hero-image img {
+                display: none !important;
+                height: 0 !important;
+                visibility: hidden !important;
+            }
+        }
+
+        /* ۴. استایل‌های اختصاصی برای نسخه انگلیسی (LTR) */
+        @media (min-width: 992px) {
+            html[dir="ltr"] .orbia-hero_one .row {
+                flex-direction: row-reverse;
+            }
+        }
+
+        /* ۵. حل مشکل تداخل نوبار استاتیک و به هم ریختگی متن در موبایل انگلیسی */
+        @media (max-width: 991.98px) {
+            html[dir="ltr"] .orbia-hero_one .row {
+                flex-direction: row !important;
+            }
+            html[dir="ltr"] .orbia-hero_one .hero-content {
+                padding-top: 50px !important;
+            }
+        }
+
+        html[dir="ltr"] .orbia-hero_one .hero-content,
+        html[dir="ltr"] .orbia-hero_one .hero-content.text-xl-start {
+            text-align: left !important;
+        }
+
+        html[dir="ltr"] .orbia-hero_one .hero-image img {
+            transform: scaleX(-1);
+        }
+        
+        html[dir="ltr"] .orbia-about_one .orbia-image-box .image_two {
+            transform: scaleX(-1) !important;
+        }
+
+        /* ۶. تنظیمات آیکون‌ها و فاصله‌های بخش اطلاعات تماس */
+        .orbia-contact-info-list .orbia-info-box {
+            display: flex !important;
+            align-items: center !important; /* تراز عمودی دقیق آیکون و متن */
+            gap: 20px !important; /* فاصله استاندارد بین آیکون و متن */
+            padding: 20px !important;
+        }
+        .orbia-contact-info-list .orbia-info-box .icon {
+            flex-shrink: 0 !important; /* جلوگیری از تغییر شکل آیکون */
+            width: 55px !important; /* ابعاد متناسب و کوچکتر آیکون */
+            height: 55px !important;
+            line-height: 55px !important;
+            font-size: 24px !important;
+            display: flex !important;
+            justify-content: center !important;
+            align-items: center !important;
+            margin: 0 !important;
+        }
+        .orbia-contact-info-list .orbia-info-box .content {
+            flex-grow: 1 !important;
+            margin: 0 !important; /* حذف فاصله‌های اضافی قالب */
+        }
+        .orbia-contact-info-list .orbia-info-box h4 a {
+            text-decoration: none;
+            transition: opacity 0.3s ease;
+        }
+        .orbia-contact-info-list .orbia-info-box h4 a:hover {
+            opacity: 0.7;
+        }
+    </style>
+
+    <main>
+        <!--====== Start Hero Section ======-->
+        <section class="orbia-hero_one">
+            <!-- Hero Wrapper -->
+            <div class="hero-wrapper bg_cover" data-src="{% static 'assets/images/home-one/hero/hero-bg.jpg' %}">
+                <div class="hero-shape shape-one"><img alt="shape"
+                        src="{% static 'assets/images/home-one/hero/hero-shape2.png' %}" /></div>
+                <div class="hero-shape shape-two"><img alt="shape"
+                        src="{% static 'assets/images/home-one/hero/hero-shape1.png' %}" /></div>
+                <div class="container-fluid">
+                    <div class="row justify-content-center justify-content-xl-start">
+                        <div class="col-xl-7 col-lg-10">
+                            <!-- Hero Content -->
+                            <div class="hero-content text-xl-start">
+                                
+                                <!-- Tagline -->
+                                <div class="tag-line d-inline-flex align-items-center mb-3" data-aos="fade-down" data-aos-duration="1500" style="color: #ff3366; font-weight: 600; font-size: 16px;">
+                                    {% trans "کیان صنعت، فناوری هوشمند برای آینده" %}
+                                </div>
+                                
+                                <!-- Main Title -->
+                                <h1 class="text-white fw-bolder mb-4" style="line-height: 1.4;">
+                                    {% if LANGUAGE_BIDI %}
+                                        {% trans "هوشمندسازی و رباتیک؛" %}<br>
+                                        {% trans "توسعه پایدار در" %}<br>
+                                        {% trans "صنایع مدرن" %}
+                                    {% else %}
+                                        {% trans "Smart Automation & Robotics;" %}<br>
+                                        {% trans "Sustainable Development" %}<br>
+                                        {% trans "in Modern Industries" %}
+                                    {% endif %}
+                                </h1>
+                                
+                                <!-- Description -->
+                                <p class="text-white-75" data-aos="fade-up" data-aos-duration="1500">
+                                    {% trans "ارائه‌دهنده راهکارهای جامع در زمینه نیروگاه‌های خورشیدی، هوش مصنوعی، ربات‌های هوشمند و مدیریت انرژی برای شهرهای هوشمند." %}
+                                </p>
+                                
+                            </div>
+                        </div>
+                        <div class="col-xl-5 col-lg-10">
+                            <!-- Hero Image -->
+                            <div class="hero-image d-none d-lg-block">
+                                <img alt="image" src="{% static 'assets/images/home-one/hero/hero-img1.png' %}" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section><!--====== End Hero Section ======-->
+
+        <!--====== Start About Section ======-->
+        <section class="orbia-about_one pt-120 pb-120 bg-white">
+            <div class="shape" style="position: absolute; inset-inline-end: 0; inset-inline-start: auto; transform: scaleX({% if LANGUAGE_BIDI %}-1{% else %}1{% endif %});">
+                <img alt="shape" src="{% static 'assets/images/home-one/about/about-shape.png' %}" />
+            </div>
+            <div class="container">
+                <div class="row align-items-center justify-content-center">
+                    
+                    <div class="col-xl-7 col-lg-10 order-last order-xl-first mb-5 mb-xl-0 pe-xl-5">
+                        <div class="orbia-content-box text-start">
+                            
+                            <!-- Section Title -->
+                            <div class="section-title mb-4">
+                                <div class="d-inline-flex align-items-center mb-3" data-aos="fade-down" data-aos-duration="1000" style="color: #ff3366; font-weight: 700; font-size: 16px;">
+                                    {% trans "درباره کیان صنعت" %}
+                                </div>
+                                <h2 class="fw-bolder text-dark" style="line-height: 1.6; font-size: clamp(26px, 3.5vw, 42px);">
+                                    {% if LANGUAGE_BIDI %}
+                                        {% trans "پیشگام در نوآوری، مشتری مداری و" %} <br class="d-none d-md-block"> {% trans "تحقیق و توسعه" %}
+                                    {% else %}
+                                        {% trans "Pioneering Innovation," %}<br class="d-none d-md-block">
+                                        {% trans "Customer Focus, and R&D" %}
+                                    {% endif %}
+                                </h2>
+                            </div>
+                            
+                            <p class="mb-4 text-secondary" data-aos="fade-up" data-aos-duration="1200" style="line-height: 1.9; font-size: 16px; color: #4b5563 !important; max-width: 650px;">
+                                {% trans "شرکت کیان صنعت با تکیه بر دانش فنی روز دنیا و تکریم نیروی انسانی متخصص، جدیدترین فناوری‌های هوشمندسازی، اتوماسیون صنعتی و انرژی‌های تجدیدپذیر را به کار می‌گیرد." %}
+                            </p>
+                            
+                            <!-- Custom Checklist -->
+                            <ul class="check-list gradient-check list-unstyled mb-5" data-aos="fade-up" data-aos-duration="1400">
+                                <li class="mb-3 d-flex align-items-start">
+                                    <i class="fas fa-check-circle mt-1" style="font-size: 16px; margin-inline-start: 12px;"></i>
+                                    <span class="text-dark" style="font-weight: 500; font-size: 16px;">{% trans "مشتری مداری و ارائه خدمات و تجهیزات با بالاترین کیفیت." %}</span>
+                                </li>
+                                <li class="mb-3 d-flex align-items-start">
+                                    <i class="fas fa-check-circle mt-1" style="font-size: 16px; margin-inline-start: 12px;"></i>
+                                    <span class="text-dark" style="font-weight: 500; font-size: 16px;">{% trans "تکریم نیروی انسانی به عنوان ارزشمندترین سرمایه سازمان." %}</span>
+                                </li>
+                                <li class="mb-3 d-flex align-items-start">
+                                    <i class="fas fa-check-circle mt-1" style="font-size: 16px; margin-inline-start: 12px;"></i>
+                                    <span class="text-dark" style="font-weight: 500; font-size: 16px;">{% trans "تمرکز بر تحقیق و توسعه (R&D) مستمر جهت پیشگامی در تکنولوژی." %}</span>
+                                </li>
+                            </ul>
+                            
+                            <div class="orbia-button" data-aos="fade-up" data-aos-duration="1600">
+                                <a class="theme-btn gradient-btn rounded-pill px-4 py-3 w-100 w-md-auto text-center" href="#" style="font-weight: 600;">
+                                    {% trans "اطلاعات بیشتر درباره ما" %}<i class="far fa-arrow-{% if LANGUAGE_BIDI %}left{% else %}right{% endif %} ms-2"></i>
+                                </a>
+                            </div>
+                            
+                        </div>
+                    </div>
+
+                    <div class="col-xl-5 col-lg-10 order-first order-xl-last mb-5 mb-xl-0 d-flex justify-content-center align-items-center">
+                        <div class="orbia-image-box w-100 text-center" data-aos="fade-up" data-aos-duration="1000">
+                            <img class="image_two" alt="Robot Hand" src="{% static 'assets/images/home-one/about/about-img2.png' %}" />
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section><!--====== End About Section ======-->
+
+        <!--====== Start Project Section ======-->
+        <section class="orbia-project_one pt-115 pb-110 p-r z-1">
+            <div class="shape" style="position: absolute; inset-inline-start: 0; inset-inline-end: auto; z-index: -1; transform: scaleX({% if LANGUAGE_BIDI %}-1{% else %}1{% endif %});">
+                <img alt="shape" src="{% static 'assets/images/home-one/project/shape.png' %}" />
+            </div>
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-xl-5 col-lg-10 text-center text-xl-start">
+                        <div class="section-title mb-4 mb-xl-5" data-aos="fade-down" data-aos-duration="1000">
+                            <span class="sub-title">{% trans "فعالیت‌ها و پروژه‌های ما" %}</span>
+                        </div>
+                    </div>
+                    <div class="col-xl-7 col-lg-10">
+                        <div class="section-title mb-55 text-center text-xl-start">
+                            <h2 style="line-height: 1.5;">
+                                {% if LANGUAGE_BIDI %}
+                                    {% trans "کاربردهای دنیای واقعی فناوری اتوماسیون،" %}<br>
+                                    {% trans "انرژی پاک و معماری هوشمند" %}
+                                {% else %}
+                                    {% trans "Real-world Applications of Automation Technology," %}<br>
+                                    {% trans "Clean Energy, and Smart Architecture" %}
+                                {% endif %}
+                            </h2>
+                        </div>
+                    </div>
+                </div>
+                <div class="row justify-content-end">
+                    <div class="col-xl-7 col-lg-12">
+                        <!-- Project Wrapper -->
+                        <div class="project-wrapper" id="projectAccordion">
+                            <!-- Orbia Project Item 1 -->
+                            <div class="orbia-project-item style-one" data-aos="fade-up" data-aos-duration="800">
+                                <div aria-expanded="true" class="project-header" data-bs-target="#collapse1" data-bs-toggle="collapse" role="button">
+                                    <div class="project-title">
+                                        <span>{% trans "انرژی سبز و پایدار:" %}</span>
+                                        <h3 class="title">{% trans "طراحی و راه‌اندازی نیروگاه خورشیدی" %}</h3>
+                                    </div>
+                                </div>
+                                <div class="accordion-collapse collapse show" data-bs-parent="#projectAccordion" id="collapse1">
+                                    <div class="project-content">
+                                        <img alt="project image" src="{% static 'assets/images/home-one/project/project-img1.jpg' %}" />
+                                        <p>{% trans "طراحی، تامین تجهیزات و اجرای صفر تا صد نیروگاه‌های خورشیدی متصل و منفصل از شبکه با جدیدترین پنل‌ها و اینورترهای استاندارد جهانی." %}</p>
+                                        <div class="orbia-button">
+                                            <a class="theme-btn gradient-btn" href="#">{% trans "مشاهده جزئیات" %}<i class="far fa-arrow-{% if LANGUAGE_BIDI %}left{% else %}right{% endif %} ms-2"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Orbia Project Item 2 -->
+                            <div class="orbia-project-item style-one" data-aos="fade-up" data-aos-duration="1000">
+                                <div aria-expanded="false" class="project-header" data-bs-target="#collapse2" data-bs-toggle="collapse" role="button">
+                                    <div class="project-title">
+                                        <span>{% trans "تکنولوژی و رباتیک:" %}</span>
+                                        <h3 class="title">{% trans "اجرای پروژه‌های هوش مصنوعی و ربات‌های هوشمند" %}</h3>
+                                    </div>
+                                </div>
+                                <div class="accordion-collapse collapse" data-bs-parent="#projectAccordion" id="collapse2">
+                                    <div class="project-content">
+                                        <img alt="project image" src="{% static 'assets/images/home-one/project/project-img3.jpg' %}" />
+                                        <p>{% trans "طراحی و توسعه ربات‌های هوشمند صنعتی و اداری، دستیارهای شخصی هوشمند و سیستم‌های پیشرفته اتوماسیون و پردازش تصویر." %}</p>
+                                        <div class="orbia-button">
+                                            <a class="theme-btn gradient-btn" href="#">{% trans "مشاهده جزئیات" %}<i class="far fa-arrow-{% if LANGUAGE_BIDI %}left{% else %}right{% endif %} ms-2"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Orbia Project Item 3 -->
+                            <div class="orbia-project-item style-one" data-aos="fade-up" data-aos-duration="1200">
+                                <div aria-expanded="false" class="project-header" data-bs-target="#collapse3" data-bs-toggle="collapse" role="button">
+                                    <div class="project-title">
+                                        <span>{% trans "معماری و عمران:" %}</span>
+                                        <h3 class="title">{% trans "طراحی و ساخت انواع نماهای ساختمان و نماهای هوشمند" %}</h3>
+                                    </div>
+                                </div>
+                                <div class="accordion-collapse collapse" data-bs-parent="#projectAccordion" id="collapse3">
+                                    <div class="project-content">
+                                        <img alt="project image" src="{% static 'assets/images/home-one/project/project-img3.jpg' %}" />
+                                        <p>{% trans "پیاده‌سازی پروژه‌های عمرانی مدرن، شهرهای هوشمند و اجرای نماهای ساختمانی هوشمند با قابلیت کنترل بهینه انرژی و اقلیم." %}</p>
+                                        <div class="orbia-button">
+                                            <a class="theme-btn gradient-btn" href="#">{% trans "مشاهده جزئیات" %}<i class="far fa-arrow-{% if LANGUAGE_BIDI %}left{% else %}right{% endif %} ms-2"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!--====== End Project Section ======-->
+
+        <!--====== Start Choose Section ======-->
+        <section class="orbia-choose_one pt-80">
+            <div class="orbia-choose-wrapper p-r z-1 bg_cover" data-src="{% static 'assets/images/home-one/bg/choose-bg.jpg' %}">
+                <div class="container">
+                    <div class="row align-items-center">
+                        <div class="col-xl-5 col-xxl-6">
+                            <!-- Orbia Image -->
+                            <div class="orbia-image mb-5 mb-xl-0" data-aos="fade-up" data-aos-duration="1000">
+                                <img class="w-100" alt="choose image" src="{% static 'assets/images/home-one/gallery/choose-img1.jpg' %}" style="border-radius: 20px;" />
+                                
+                                <!-- باکس شیشه‌ای رضایت -->
+                                <div class="orbia-rating-box glass-satisfaction-box">
+                                    <div class="content">
+                                        <h2>
+                                            {% if LANGUAGE_BIDI %}
+                                                ۹۸٪
+                                            {% else %}
+                                                98%
+                                            {% endif %}
+                                        </h2>
+                                        <p>{% trans "رضایت در اجرای پروژه‌های صنعتی و انرژی!" %}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-xl-7 col-xxl-6">
+                            <!-- Orbia Content Box -->
+                            <div class="orbia-content-box pe-xxl-4">
+                                <div class="section-title text-white">
+                                    <span class="sub-title neon-subtitle" data-aos="fade-down" data-aos-duration="1400">{% trans "چرا ما را انتخاب کنید" %}</span>
+                                    <h2 style="line-height: 1.5;">
+                                        {% if LANGUAGE_BIDI %}
+                                            {% trans "تحول صنایع با ادغام" %}<br>
+                                            {% trans "مهندسی مدرن و" %}<br>
+                                            {% trans "فناوری‌های هوشمند" %}
+                                        {% else %}
+                                            {% trans "Transforming Industries by Integrating" %}<br>
+                                            {% trans "Modern Engineering and" %}<br>
+                                            {% trans "Smart Technologies" %}
+                                        {% endif %}
+                                    </h2>
+                                </div>
+                                <p class="dark-bg-text" data-aos="fade-up" data-aos-duration="1200">{% trans "ما به عنوان یک شرکت پیشرو در زمینه اتوماسیون صنعتی، مدیریت انرژی و طراحی نیروگاه‌های خورشیدی، با ارائه راهکارهای هوشمند، کارایی و بهره‌وری کسب‌وکار و پروژه‌های شما را به بالاترین سطح ممکن ارتقاء می‌دهیم." %}</p>
+                                
+                                <div class="experience-iconic-wrapper">
+                                    <div class="experience-box" data-aos="fade-up" data-aos-duration="1400">
+                                        <div class="content">
+                                            <div class="number">
+                                                <h2>
+                                                    {% if LANGUAGE_BIDI %}
+                                                        ۱۵
+                                                    {% else %}
+                                                        15
+                                                    {% endif %}
+                                                </h2>
+                                                <span class="symbol"><img alt="plus symbol" src="{% static 'assets/images/home-one/gallery/plus.png' %}" /></span>
+                                            </div>
+                                            <h4>{% trans "سال‌ها تخصص و تجربه" %}</h4>
+                                        </div>
+                                    </div>
+                                    <div class="iconic-box-list">
+                                        <div class="orbia-iconic-left-box style-one feature-item-aligned mb-30" data-aos="fade-up" data-aos-duration="1600">
+                                            <div class="icon">
+                                                <img alt="icon" src="{% static 'assets/images/home-one/icon/icon5.png' %}" />
+                                            </div>
+                                            <div class="content">
+                                                <h4>{% trans "یکپارچه‌سازی فناوری" %}</h4>
+                                                <p class="dark-bg-text mb-0">{% trans "تلفیق هوش مصنوعی، رباتیک و اینترنت اشیا (IoT) برای مدیریت هوشمند زیرساخت‌ها." %}</p>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="orbia-iconic-left-box style-one feature-item-aligned mb-30" data-aos="fade-up" data-aos-duration="1800">
+                                            <div class="icon">
+                                                <img alt="icon" src="{% static 'assets/images/home-one/icon/icon6.png' %}" />
+                                            </div>
+                                            <div class="content">
+                                                <h4>{% trans "مهندسان و متخصصان خبره" %}</h4>
+                                                <p class="dark-bg-text mb-0">{% trans "بهره‌مندی از تیمی مجرب از مهندسان برق، مکانیک، نرم‌افزار و بازرگانی بین‌الملل." %}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <p class="dark-bg-text" data-aos="fade-up" data-aos-duration="2000">{% trans "کیفیت اتفاقی نیست؛ پروژه‌های موفق ما تضمین‌کننده ادعای ماست." %}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section><!--====== End Choose Section ======-->
+
+        
+        <!--====== Start Advanced Section ======-->
+        <section class="orbia-advance-sec pt-115 pb-80" style="background-color: #fcfcfc;">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-lg-8">
+                        <div class="section-title text-center mb-55">
+                            <span class="sub-title" data-aos="fade-down" data-aos-duration="1000">{% trans "فناوری و زیرساخت پیشرفته" %}</span>
+                            <h2 class="">{% trans "گام نهادن در مسیر آینده با راهکارهای مدرن مهندسی" %}</h2>
+                        </div>
+                    </div>
+                </div>
+                <div class="row align-items-stretch">
+                    <!-- کارت ۱ -->
+                    <div class="col-xl-3 col-md-6 col-sm-12 mb-4" data-aos="fade-up" data-aos-duration="1000">
+                        <div class="glass-service-card hover-lift text-center">
+                            <div class="service-icon-wrapper">
+                                <i class="fas fa-bolt"></i>
+                            </div>
+                            <h3 class="service-card-title">{% trans "مدیریت هوشمند انرژی" %}</h3>
+                            <p class="service-card-desc">{% trans "کاهش مصرف و بهینه‌سازی توزیع انرژی در مجتمع‌های صنعتی و مسکونی." %}</p>
+                        </div>
+                    </div>
+                    <!-- کارت ۲ -->
+                    <div class="col-xl-3 col-md-6 col-sm-12 mb-4" data-aos="fade-up" data-aos-duration="1200">
+                        <div class="glass-service-card hover-lift text-center">
+                            <div class="service-icon-wrapper">
+                                <i class="fas fa-robot"></i>
+                            </div>
+                            <h3 class="service-card-title">{% trans "سیستم‌های رباتیک" %}</h3>
+                            <p class="service-card-desc">{% trans "طراحی و بکارگیری ربات‌های صنعتی هوشمند جهت افزایش راندمان خطوط تولید." %}</p>
+                        </div>
+                    </div>
+                    <!-- کارت ۳ -->
+                    <div class="col-xl-3 col-md-6 col-sm-12 mb-4" data-aos="fade-up" data-aos-duration="1400">
+                        <div class="glass-service-card hover-lift text-center">
+                            <div class="service-icon-wrapper">
+                                <i class="fas fa-solar-panel"></i>
+                            </div>
+                            <h3 class="service-card-title">{% trans "تجهیزات خورشیدی" %}</h3>
+                            <p class="service-card-desc">{% trans "تامین مدرن‌ترین تجهیزات خورشیدی و احداث نیروگاه‌های تجدیدپذیر پاک." %}</p>
+                        </div>
+                    </div>
+                    <!-- کارت ۴ -->
+                    <div class="col-xl-3 col-md-6 col-sm-12 mb-4" data-aos="fade-up" data-aos-duration="1600">
+                        <div class="glass-service-card hover-lift text-center">
+                            <div class="service-icon-wrapper">
+                                <i class="fas fa-cogs"></i>
+                            </div>
+                            <h3 class="service-card-title">{% trans "بازرگانی ماشین‌آلات" %}</h3>
+                            <p class="service-card-desc">{% trans "خدمات بازرگانی داخلی و بین‌المللی برای واردات و صادرات دستگاه‌های تولیدی." %}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section><!--====== End Advanced Section ======-->
+
+        <!--====== Start Contact Section ======-->
+        <section class="orbia-contact_one bg_cover pt-120 pb-120" data-src="{% static 'assets/images/home-one/bg/contact-bg.jpg' %}">
+            <div class="container">
+                <div class="row justify-content-center align-items-stretch">
+                    
+                    <!-- ستون فرم -->
+                    <div class="col-xl-6 col-lg-8 order-2 order-xl-1">
+                        <!-- Orbia Contact Wrapper -->
+                        <div class="orbia-contact-wrapper h-100 mb-5 mb-xl-0" data-aos="fade-up" data-aos-duration="1000" style="padding: 40px; border-radius: 30px;">
+                            <h3>{% trans "تماس با کیان صنعت" %}</h3>
+                            <p style="margin-bottom: 30px;">{% trans "فرم زیر را پر کنید تا کارشناسان و مهندسان ما در سریع‌ترین زمان جهت مشاوره تخصصی و ارائه راهکار با شما تماس بگیرند!" %}</p>
+                            
+                            <!-- فرم هوشمند -->
+                            <form id="contact-form" class="orbia-contact-form" method="POST" action="#">
+                                {% csrf_token %}
+
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <input class="form_control" name="name" placeholder="{% trans 'نام شما' %}" required="" type="text" style="font-size: 14px; height: 55px;" />
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <input class="form_control" name="email" placeholder="{% trans 'ایمیل (اختیاری)' %}" type="email" style="font-size: 14px; height: 55px;" />
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <input class="form_control" name="company_name" placeholder="{% trans 'نام شرکت / سازمان' %}" type="text" style="font-size: 14px; height: 55px;" />
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <input class="form_control" name="phone" placeholder="{% trans 'شماره تماس (الزامی)' %}" required="" type="text" style="font-size: 14px; height: 55px;" />
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12">
+                                        <div class="form-group">
+                                            <input class="form_control" name="subject" placeholder="{% trans 'موضوع درخواست' %}" required="" type="text" style="font-size: 14px; height: 55px;" />
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12">
+                                        <div class="form-group mb-3">
+                                            <textarea class="form_control" name="message" placeholder="{% trans 'متن پیام شما...' %}" rows="3" required style="font-size: 14px; padding-top: 15px;"></textarea>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- چک‌باکس قوانین -->
+                                    <div class="col-lg-12 mb-4">
+                                        <div class="form-check d-flex align-items-center" style="gap: 12px; padding-inline-end: 0;">
+                                            <input class="form-check-input cursor-pointer m-0" type="checkbox" id="contact_terms" style="width: 18px; height: 18px; float: none; accent-color: #9b51e0;">
+                                            <label class="form-check-label cursor-pointer" for="contact_terms" style="font-size: 14px; color: #444; font-weight: 500;">
+                                                {% trans "با شرایط و قوانین حریم خصوصی موافقم." %}
+                                            </label>
+                                        </div>
+                                    </div>
+
+                                    <!-- دکمه ارسال با کلاس contact-btn-hidden -->
+                                    <div class="col-lg-12 submit-btn-wrapper position-relative" style="min-height: 55px;">
+                                        <div class="form-group mb-0 h-100">
+                                            <button type="submit" id="contact_submit_btn" class="theme-btn gradient-btn w-100 contact-btn-hidden" style="height: 55px; font-weight: 500;">
+                                                {% trans "ارسال پیام" %}<i class="far fa-arrow-{% if LANGUAGE_BIDI %}left{% else %}right{% endif %} ms-2"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    
+                    <!-- ستون اطلاعات تماس -->
+                    <div class="col-xl-6 col-lg-8 order-1 order-xl-2 mb-5 mb-xl-0">
+                        <!-- Orbia Content Box -->
+                        <div class="orbia-content-box h-100 d-flex flex-column justify-content-center">
+                            <div class="section-title text-white">
+                                <span class="sub-title" data-aos="fade-down" data-aos-duration="1000">{% trans "ما اینجا هستیم تا پاسخگوی شما باشیم" %}</span>
+                                <h2 style="line-height: 1.5; font-size: clamp(28px, 4vw, 40px);">
+                                    {% if LANGUAGE_BIDI %}
+                                        {% trans "ارتباط مستقیم با" %}<br>{% trans "دفتر مرکزی کیان صنعت" %}
+                                    {% else %}
+                                        {% trans "Direct Connection with" %}<br>{% trans "Kian Sanat Head Office" %}
+                                    {% endif %}
+                                </h2>
+                            </div>
+                            <p data-aos="fade-up" data-aos-duration="1200">{% trans "با افتخار آماده ارائه مشاوره‌های تخصصی در زمینه پروژه‌های هوشمندسازی، انرژی‌های پاک، رباتیک و خدمات بازرگانی ماشین‌آلات به شما عزیزان هستیم." %}</p>
+                            
+                            <div class="orbia-contact-info-list mt-4">
+                                <!-- Phone -->
+                                <div class="orbia-info-box style-one mb-4 glass-morphism" data-aos="fade-up" data-aos-duration="1500" style="border-radius: 15px;">
+                                    <div class="icon">
+                                        <i class="far fa-phone"></i>
+                                    </div>
+                                    <div class="content">
+                                        <span style="font-size: 13px; opacity: 0.8; display: block; margin-bottom: 5px;">{% trans "تلفن‌های تماس" %}</span>
+                                        <h4 style="font-size: 18px; margin: 0; text-align: start;">
+                                            <a href="tel:+989132201286" dir="ltr" style="display: inline-block;">
+                                                {% if LANGUAGE_BIDI %}۰۹۱۳-۲۲۰-۱۲۸۶{% else %}0913-220-1286{% endif %}
+                                            </a>
+                                        </h4>
+                                        <h4 style="font-size: 18px; margin: 5px 0 0 0; text-align: start;">
+                                            <a href="tel:+989137812920" dir="ltr" style="display: inline-block;">
+                                                {% if LANGUAGE_BIDI %}۰۹۱۳-۷۸۱-۲۹۲۰{% else %}0913-781-2920{% endif %}
+                                            </a>
+                                        </h4>
+                                    </div>
+                                </div>
+                                
+                                <!-- Email -->
+                                <div class="orbia-info-box style-one mb-4 glass-morphism" data-aos="fade-up" data-aos-duration="1600" style="border-radius: 15px;">
+                                    <div class="icon">
+                                        <i class="far fa-envelope"></i>
+                                    </div>
+                                    <div class="content">
+                                        <span style="font-size: 13px; opacity: 0.8; display: block; margin-bottom: 5px;">{% trans "آدرس ایمیل" %}</span>
+                                        <h4 style="text-align: start; font-size: 18px; margin: 0;">
+                                            <a href="mailto:info@kspptech.com">info@kspptech.com</a>
+                                        </h4>
+                                    </div>
+                                </div>
+
+                                <!-- Address -->
+                                <div class="orbia-info-box style-one glass-morphism" data-aos="fade-up" data-aos-duration="1700" style="border-radius: 15px;">
+                                    <div class="icon">
+                                        <i class="far fa-map-marker-alt"></i>
+                                    </div>
+                                    <div class="content">
+                                        <span style="font-size: 13px; opacity: 0.8; display: block; margin-bottom: 5px;">{% trans "آدرس دفتر مرکزی" %}</span>
+                                        <h4 style="text-align: start; font-size: 16px; line-height: 1.6; margin: 0;">
+                                            {% if LANGUAGE_BIDI %}
+                                                {% trans "اصفهان، شهرضا، شهرک صنعتی امیرکبیر،" %}<br>{% trans "بلوار کاوه، نبش فرعی ۹" %}
+                                            {% else %}
+                                                {% trans "Isfahan, Shahreza, Amirkabir Industrial Estate," %}<br>{% trans "Kaveh Blvd, Corner of Alley 9" %}
+                                            {% endif %}
+                                        </h4>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            
+            <!-- اسکریپت کنترل دکمه فرم تماس -->
+            <script>
+                document.addEventListener("DOMContentLoaded", function() {
+                    const termsCheck = document.getElementById("contact_terms");
+                    const submitBtn = document.getElementById("contact_submit_btn");
+
+                    if (termsCheck && submitBtn) {
+                        termsCheck.addEventListener("change", function() {
+                            if (this.checked) {
+                                submitBtn.classList.remove("contact-btn-hidden");
+                                submitBtn.classList.add("contact-btn-visible");
+                            } else {
+                                submitBtn.classList.remove("contact-btn-visible");
+                                submitBtn.classList.add("contact-btn-hidden");
+                            }
+                        });
+                    }
+                });
+            </script>
+        </section><!--====== End Contact Section ======-->
+
+        <!--====== Start Blog Section ======-->
+        <section class="orbia-blog_one pt-115 pb-70">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-xl-8 col-lg-10">
+                        <div class="section-title text-center mb-55">
+                            <span class="sub-title" data-aos="fade-down" data-aos-duration="1000">{% trans "آخرین اخبار و مقالات" %}</span>
+                            <h2 style="line-height: 1.5;">
+                                {% if LANGUAGE_BIDI %}
+                                    {% trans "اخبار صنعت، انرژی‌های پاک" %}<br>{% trans "و تکنولوژی‌های نو" %}
+                                {% else %}
+                                    {% trans "Industry News, Clean Energy" %}<br>{% trans "and New Technologies" %}
+                                {% endif %}
+                            </h2>
+                        </div>
+                    </div>
+                </div>
+                <div class="row justify-content-center">
+                    <div class="col-xl-4 col-md-6 col-sm-12">
+                        <div class="orbia-blog-post-item style-one mb-40" data-aos="fade-up" data-aos-duration="1000">
+                            <div class="post-thumbnail">
+                                <img alt="blog image" src="{% static 'assets/images/home-one/blog/blog-img1.jpg' %}" />
+                            </div>
+                            <div class="post-content">
+                                <ul class="post-meta list-unstyled">
+                                    <li><i class="far fa-user"></i>{% trans "توسط" %} <a href="#">{% trans "روابط عمومی" %}</a></li>
+                                    <li><i class="far fa-comments"></i><a href="#">
+                                        {% if LANGUAGE_BIDI %}(۰) نظر{% else %}(0) Comments{% endif %}
+                                    </a></li>
+                                </ul>
+                                <h4 class="title" style="font-weight: 500; font-size: 18px; line-height: 1.7;"><a href="#">{% trans "آینده انرژی‌های تجدیدپذیر و نقش نیروگاه‌های خورشیدی در صنایع." %}</a></h4>
+                                <a class="read-more read-more-btn style-one" href="#">{% trans "ادامه مطلب" %}<i class="far fa-arrow-{% if LANGUAGE_BIDI %}left{% else %}right{% endif %}"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-4 col-md-6 col-sm-12">
+                        <div class="orbia-blog-post-item style-one mb-40" data-aos="fade-up" data-aos-duration="1200">
+                            <div class="post-thumbnail">
+                                <img alt="blog image" src="{% static 'assets/images/home-one/blog/blog-img2.jpg' %}" />
+                            </div>
+                            <div class="post-content">
+                                <ul class="post-meta list-unstyled">
+                                    <li><i class="far fa-user"></i>{% trans "توسط" %} <a href="#">{% trans "واحد تحقیق و توسعه" %}</a></li>
+                                    <li><i class="far fa-comments"></i><a href="#">
+                                        {% if LANGUAGE_BIDI %}(۲) نظر{% else %}(2) Comments{% endif %}
+                                    </a></li>
+                                </ul>
+                                <h4 class="title" style="font-weight: 500; font-size: 18px; line-height: 1.7;"><a href="#">{% trans "نقش رباتیک و هوش مصنوعی در تحول خطوط تولید صنعتی." %}</a></h4>
+                                <a class="read-more read-more-btn style-one" href="#">{% trans "ادامه مطلب" %}<i class="far fa-arrow-{% if LANGUAGE_BIDI %}left{% else %}right{% endif %}"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-4 col-md-6 col-sm-12">
+                        <div class="orbia-blog-post-item style-one mb-40" data-aos="fade-up" data-aos-duration="1400">
+                            <div class="post-thumbnail">
+                                <img alt="blog image" src="{% static 'assets/images/home-one/blog/blog-img3.jpg' %}" />
+                            </div>
+                            <div class="post-content">
+                                <ul class="post-meta list-unstyled">
+                                    <li><i class="far fa-user"></i>{% trans "توسط" %} <a href="#">{% trans "تیم معماری" %}</a></li>
+                                    <li><i class="far fa-comments"></i><a href="#">
+                                        {% if LANGUAGE_BIDI %}(۱) نظر{% else %}(1) Comments{% endif %}
+                                    </a></li>
+                                </ul>
+                                <h4 class="title" style="font-weight: 500; font-size: 18px; line-height: 1.7;"><a href="#">{% trans "جدیدترین دستاوردهای نمای ساختمان هوشمند برای بهینه‌سازی انرژی." %}</a></h4>
+                                <a class="read-more read-more-btn style-one" href="#">{% trans "ادامه مطلب" %}<i class="far fa-arrow-{% if LANGUAGE_BIDI %}left{% else %}right{% endif %}"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section><!--====== End Blog Section ======-->
+
+    </main>
+{% endblock %}
+

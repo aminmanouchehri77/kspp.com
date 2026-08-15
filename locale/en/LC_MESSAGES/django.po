@@ -1,0 +1,551 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-08-12 16:01+0430\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: .\config\settings.py:130
+msgid "Persian"
+msgstr "Persian"
+
+#: .\config\settings.py:131
+msgid "English"
+msgstr "English"
+
+#: .\core\templates\core\index.html:371 .\core\templates\core\index.html:377
+msgid "لوگو کیان صنعت"
+msgstr "Kian Sanat Logo"
+
+#: .\core\templates\core\index.html:383 .\templates\_base.html:291
+msgid "صفحه اصلی"
+msgstr "Home"
+
+#: .\core\templates\core\index.html:384
+msgid "فعالیت‌ها"
+msgstr "Activities"
+
+#: .\core\templates\core\index.html:385
+msgid "محصولات"
+msgstr "Products"
+
+#: .\core\templates\core\index.html:386
+msgid "بازرگانی"
+msgstr "Commerce"
+
+#: .\core\templates\core\index.html:387
+msgid "اخبار و رویدادها"
+msgstr "News & Events"
+
+#: .\core\templates\core\index.html:388
+msgid "آکادمی کیان صنعت"
+msgstr "Kian Sanat Academy"
+
+#: .\core\templates\core\index.html:389 .\templates\_base.html:292
+msgid "درباره ما"
+msgstr "About Us"
+
+#: .\core\templates\core\index.html:393
+msgid "ما را دنبال کنید"
+msgstr "Follow Us"
+
+#: .\core\templates\core\index.html:506
+msgid "کیان صنعت، فناوری هوشمند برای آینده"
+msgstr "Kian Sanat, Smart Technology for the Future"
+
+#: .\core\templates\core\index.html:511
+msgid "هوشمندسازی و رباتیک؛"
+msgstr "Smartification & Robotics;"
+
+#: .\core\templates\core\index.html:512
+msgid "توسعه پایدار در"
+msgstr "Sustainable Development in"
+
+#: .\core\templates\core\index.html:513
+msgid "صنایع مدرن"
+msgstr "Modern Industries"
+
+#: .\core\templates\core\index.html:518
+msgid ""
+"ارائه‌دهنده راهکارهای جامع در زمینه نیروگاه‌های خورشیدی، هوش مصنوعی، ربات‌های "
+"هوشمند و مدیریت انرژی برای شهرهای هوشمند."
+msgstr ""
+"Provider of comprehensive solutions in solar power plants, artificial "
+"intelligence, smart robots, and energy management for smart cities."
+
+#: .\core\templates\core\index.html:549
+msgid "درباره کیان صنعت"
+msgstr "About Kian Sanat"
+
+#: .\core\templates\core\index.html:552
+msgid "پیشگام در نوآوری، مشتری مداری و"
+msgstr "Pioneer in Innovation, Customer Orientation and"
+
+#: .\core\templates\core\index.html:552
+msgid "تحقیق و توسعه"
+msgstr "Research & Development"
+
+#: .\core\templates\core\index.html:557
+msgid ""
+"شرکت کیان صنعت با تکیه بر دانش فنی روز دنیا و تکریم نیروی انسانی متخصص، "
+"جدیدترین فناوری‌های هوشمندسازی، اتوماسیون صنعتی و انرژی‌های تجدیدپذیر را به "
+"کار می‌گیرد."
+msgstr ""
+"Kian Sanat Company, relying on world-class technical knowledge and honoring "
+"specialized human resources, employs the latest smart technologies, "
+"industrial automation, and renewable energies."
+
+#: .\core\templates\core\index.html:564
+msgid "مشتری مداری و ارائه خدمات و تجهیزات با بالاترین کیفیت."
+msgstr "Customer focus and providing services and equipment of the highest quality."
+
+#: .\core\templates\core\index.html:568
+msgid "تکریم نیروی انسانی به عنوان ارزشمندترین سرمایه سازمان."
+msgstr "Honoring human resources as the organization's most valuable asset."
+
+#: .\core\templates\core\index.html:572
+msgid "تمرکز بر تحقیق و توسعه (R&D) مستمر جهت پیشگامی در تکنولوژی."
+msgstr "Focusing on continuous Research & Development (R&D) to lead in technology."
+
+#: .\core\templates\core\index.html:578
+msgid "اطلاعات بیشتر درباره ما"
+msgstr "More Information About Us"
+
+#: .\core\templates\core\index.html:604
+msgid "فعالیت‌ها و پروژه‌های ما"
+msgstr "Our Activities and Projects"
+
+#: .\core\templates\core\index.html:609
+msgid "کاربردهای دنیای واقعی فناوری اتوماسیون،"
+msgstr "Real-world Applications of Automation Technology,"
+
+#: .\core\templates\core\index.html:609
+msgid "انرژی پاک و معماری هوشمند"
+msgstr "Clean Energy and Smart Architecture"
+
+#: .\core\templates\core\index.html:621
+msgid "انرژی سبز و پایدار:"
+msgstr "Green and Sustainable Energy:"
+
+#: .\core\templates\core\index.html:622
+msgid "طراحی و راه‌اندازی نیروگاه خورشیدی"
+msgstr "Design and Installation of Solar Power Plants"
+
+#: .\core\templates\core\index.html:628
+msgid ""
+"طراحی، تامین تجهیزات و اجرای صفر تا صد نیروگاه‌های خورشیدی متصل و منفصل از "
+"شبکه با جدیدترین پنل‌ها و اینورترهای استاندارد جهانی."
+msgstr ""
+"Design, procurement, and turnkey execution of on-grid and off-grid solar "
+"power plants with the latest world-standard panels and inverters."
+
+#: .\core\templates\core\index.html:630 .\core\templates\core\index.html:648
+#: .\core\templates\core\index.html:666
+msgid "مشاهده جزئیات"
+msgstr "View Details"
+
+#: .\core\templates\core\index.html:639
+msgid "تکنولوژی و رباتیک:"
+msgstr "Technology & Robotics:"
+
+#: .\core\templates\core\index.html:640
+msgid "اجرای پروژه‌های هوش مصنوعی و ربات‌های هوشمند"
+msgstr "Execution of AI and Smart Robotics Projects"
+
+#: .\core\templates\core\index.html:646
+msgid ""
+"طراحی و توسعه ربات‌های هوشمند صنعتی و اداری، دستیارهای شخصی هوشمند و سیستم‌های "
+"پیشرفته اتوماسیون و پردازش تصویر."
+msgstr ""
+"Design and development of smart industrial and office robots, intelligent "
+"personal assistants, and advanced automation and image processing systems."
+
+#: .\core\templates\core\index.html:657
+msgid "معماری و عمران:"
+msgstr "Architecture & Civil Engineering:"
+
+#: .\core\templates\core\index.html:658
+msgid "طراحی و ساخت انواع نماهای ساختمان و نماهای هوشمند"
+msgstr "Design and Construction of Building Facades and Smart Facades"
+
+#: .\core\templates\core\index.html:664
+msgid ""
+"پیاده‌سازی پروژه‌های عمرانی مدرن، شهرهای هوشمند و اجرای نماهای ساختمانی هوشمند "
+"با قابلیت کنترل بهینه انرژی و اقلیم."
+msgstr ""
+"Implementation of modern civil projects, smart cities, and execution of "
+"smart building facades with optimal energy and climate control capabilities."
+
+#: .\core\templates\core\index.html:691
+msgid "۹۸٪"
+msgstr "98%"
+
+#: .\core\templates\core\index.html:692
+msgid "رضایت در اجرای پروژه‌های صنعتی و انرژی!"
+msgstr "Satisfaction in Executing Industrial and Energy Projects!"
+
+#: .\core\templates\core\index.html:702
+msgid "چرا ما را انتخاب کنید"
+msgstr "Why Choose Us"
+
+#: .\core\templates\core\index.html:703
+msgid "تحول صنایع با ادغام"
+msgstr "Transforming Industries by Integrating"
+
+#: .\core\templates\core\index.html:703
+msgid "مهندسی مدرن و"
+msgstr "Modern Engineering and"
+
+#: .\core\templates\core\index.html:703
+msgid "فناوری‌های هوشمند"
+msgstr "Smart Technologies"
+
+#: .\core\templates\core\index.html:705
+msgid ""
+"ما به عنوان یک شرکت پیشرو در زمینه اتوماسیون صنعتی، مدیریت انرژی و طراحی "
+"نیروگاه‌های خورشیدی، با ارائه راهکارهای هوشمند، کارایی و بهره‌وری کسب‌وکار و "
+"پروژه‌های شما را به بالاترین سطح ممکن ارتقاء می‌دهیم."
+msgstr ""
+"As a leading company in industrial automation, energy management, and solar "
+"power plant design, we elevate your business efficiency and productivity to "
+"the highest level by providing smart solutions."
+
+#: .\core\templates\core\index.html:711
+msgid "۱۵"
+msgstr "15"
+
+#: .\core\templates\core\index.html:714
+msgid "سال‌ها تخصص و تجربه"
+msgstr "Years of Expertise and Experience"
+
+#: .\core\templates\core\index.html:723
+msgid "یکپارچه‌سازی فناوری"
+msgstr "Technology Integration"
+
+#: .\core\templates\core\index.html:724
+msgid ""
+"تلفیق هوش مصنوعی، رباتیک و اینترنت اشیا (IoT) برای مدیریت هوشمند زیرساخت‌ها."
+msgstr ""
+"Integrating AI, robotics, and the Internet of Things (IoT) for smart "
+"infrastructure management."
+
+#: .\core\templates\core\index.html:733
+msgid "مهندسان و متخصصان خبره"
+msgstr "Expert Engineers and Specialists"
+
+#: .\core\templates\core\index.html:734
+msgid ""
+"بهره‌مندی از تیمی مجرب از مهندسان برق، مکانیک، نرم‌افزار و بازرگانی بین‌الملل."
+msgstr ""
+"Benefiting from an experienced team of electrical, mechanical, and software "
+"engineers, alongside international trade experts."
+
+#: .\core\templates\core\index.html:739
+msgid "کیفیت اتفاقی نیست؛ پروژه‌های موفق ما تضمین‌کننده ادعای ماست."
+msgstr "Quality is not an accident; our successful projects guarantee our claim."
+
+#: .\core\templates\core\index.html:754
+msgid "فناوری و زیرساخت پیشرفته"
+msgstr "Advanced Technology and Infrastructure"
+
+#: .\core\templates\core\index.html:755
+msgid "گام نهادن در مسیر آینده با راهکارهای مدرن مهندسی"
+msgstr "Stepping into the Future with Modern Engineering Solutions"
+
+#: .\core\templates\core\index.html:766
+msgid "مدیریت هوشمند انرژی"
+msgstr "Smart Energy Management"
+
+#: .\core\templates\core\index.html:767
+msgid "کاهش مصرف و بهینه‌سازی توزیع انرژی در مجتمع‌های صنعتی و مسکونی."
+msgstr "Reducing consumption and optimizing energy distribution in industrial and residential complexes."
+
+#: .\core\templates\core\index.html:776
+msgid "سیستم‌های رباتیک"
+msgstr "Robotic Systems"
+
+#: .\core\templates\core\index.html:777
+msgid "طراحی و بکارگیری ربات‌های صنعتی هوشمند جهت افزایش راندمان خطوط تولید."
+msgstr "Designing and deploying smart industrial robots to increase production line efficiency."
+
+#: .\core\templates\core\index.html:786
+msgid "تجهیزات خورشیدی"
+msgstr "Solar Equipment"
+
+#: .\core\templates\core\index.html:787
+msgid "تامین مدرن‌ترین تجهیزات خورشیدی و احداث نیروگاه‌های تجدیدپذیر پاک."
+msgstr "Supplying the most modern solar equipment and constructing clean renewable power plants."
+
+#: .\core\templates\core\index.html:796
+msgid "بازرگانی ماشین‌آلات"
+msgstr "Machinery Trade"
+
+#: .\core\templates\core\index.html:797
+msgid "خدمات بازرگانی داخلی و بین‌المللی برای واردات و صادرات دستگاه‌های تولیدی."
+msgstr "Domestic and international commercial services for importing and exporting production machinery."
+
+#: .\core\templates\core\index.html:813
+msgid "تماس با کیان صنعت"
+msgstr "Contact Kian Sanat"
+
+#: .\core\templates\core\index.html:814
+msgid ""
+"فرم زیر را پر کنید تا کارشناسان و مهندسان ما در سریع‌ترین زمان جهت مشاوره "
+"تخصصی و ارائه راهکار با شما تماس بگیرند!"
+msgstr ""
+"Fill out the form below so our experts and engineers can contact you as soon "
+"as possible for specialized consultation and solutions!"
+
+#: .\core\templates\core\index.html:823
+msgid "نام شما"
+msgstr "Your Name"
+
+#: .\core\templates\core\index.html:828
+msgid "ایمیل (اختیاری)"
+msgstr "Email (Optional)"
+
+#: .\core\templates\core\index.html:833
+msgid "نام شرکت / سازمان"
+msgstr "Company / Organization Name"
+
+#: .\core\templates\core\index.html:838
+msgid "شماره تماس (الزامی)"
+msgstr "Phone Number (Required)"
+
+#: .\core\templates\core\index.html:843
+msgid "موضوع درخواست"
+msgstr "Request Subject"
+
+#: .\core\templates\core\index.html:848
+msgid "متن پیام شما..."
+msgstr "Your Message..."
+
+#: .\core\templates\core\index.html:857 .\templates\_base.html:239
+msgid "با شرایط و قوانین حریم خصوصی موافقم."
+msgstr "I agree to the privacy terms and conditions."
+
+#: .\core\templates\core\index.html:866
+msgid "ارسال پیام"
+msgstr "Send Message"
+
+#: .\core\templates\core\index.html:880
+msgid "ما اینجا هستیم تا پاسخگوی شما باشیم"
+msgstr "We are here to answer you"
+
+#: .\core\templates\core\index.html:881
+msgid "ارتباط مستقیم با"
+msgstr "Direct Contact with"
+
+#: .\core\templates\core\index.html:881
+msgid "دفتر مرکزی کیان صنعت"
+msgstr "Kian Sanat Headquarters"
+
+#: .\core\templates\core\index.html:883
+msgid ""
+"با افتخار آماده ارائه مشاوره‌های تخصصی در زمینه پروژه‌های هوشمندسازی، انرژی‌های "
+"پاک، رباتیک و خدمات بازرگانی ماشین‌آلات به شما عزیزان هستیم."
+msgstr ""
+"We are proud to offer specialized consulting in smartification projects, "
+"clean energy, robotics, and machinery trade services to you."
+
+#: .\core\templates\core\index.html:892
+msgid "تلفن‌های تماس"
+msgstr "Contact Numbers"
+
+#: .\core\templates\core\index.html:904
+msgid "آدرس ایمیل"
+msgstr "Email Address"
+
+#: .\core\templates\core\index.html:915
+msgid "آدرس دفتر مرکزی"
+msgstr "Headquarters Address"
+
+#: .\core\templates\core\index.html:917
+msgid "اصفهان، شهرضا، شهرک صنعتی امیرکبیر،"
+msgstr "Isfahan, Shahreza, Amirkabir Industrial Estate,"
+
+#: .\core\templates\core\index.html:917
+msgid "بلوار کاوه، نبش فرعی ۹"
+msgstr "Kaveh Blvd, Corner of 9th Alley"
+
+#: .\core\templates\core\index.html:955
+msgid "آخرین اخبار و مقالات"
+msgstr "Latest News and Articles"
+
+#: .\core\templates\core\index.html:956
+msgid "اخبار صنعت، انرژی‌های پاک"
+msgstr "Industry News, Clean Energies"
+
+#: .\core\templates\core\index.html:956
+msgid "و تکنولوژی‌های نو"
+msgstr "and New Technologies"
+
+#: .\core\templates\core\index.html:968 .\core\templates\core\index.html:983
+#: .\core\templates\core\index.html:998
+msgid "توسط"
+msgstr "By"
+
+#: .\core\templates\core\index.html:968
+msgid "روابط عمومی"
+msgstr "Public Relations"
+
+#: .\core\templates\core\index.html:969
+msgid "(۰) نظر"
+msgstr "(0) Comments"
+
+#: .\core\templates\core\index.html:971
+msgid "آینده انرژی‌های تجدیدپذیر و نقش نیروگاه‌های خورشیدی در صنایع."
+msgstr "The future of renewable energies and the role of solar power plants in industries."
+
+#: .\core\templates\core\index.html:972 .\core\templates\core\index.html:987
+#: .\core\templates\core\index.html:1002
+msgid "ادامه مطلب"
+msgstr "Read More"
+
+#: .\core\templates\core\index.html:983
+msgid "واحد تحقیق و توسعه"
+msgstr "R&D Department"
+
+#: .\core\templates\core\index.html:984
+msgid "(۲) نظر"
+msgstr "(2) Comments"
+
+#: .\core\templates\core\index.html:986
+msgid "نقش رباتیک و هوش مصنوعی در تحول خطوط تولید صنعتی."
+msgstr "The role of robotics and AI in transforming industrial production lines."
+
+#: .\core\templates\core\index.html:998
+msgid "تیم معماری"
+msgstr "Architecture Team"
+
+#: .\core\templates\core\index.html:999
+msgid "(۱) نظر"
+msgstr "(1) Comment"
+
+#: .\core\templates\core\index.html:1001
+msgid "جدیدترین دستاوردهای نمای ساختمان هوشمند برای بهینه‌سازی انرژی."
+msgstr "The latest achievements in smart building facades for energy optimization."
+
+#: .\templates\_base.html:10
+msgid "شرکت کیان صنعت"
+msgstr "Kian Sanat Company"
+
+#: .\templates\_base.html:162
+msgid "جستجو کنید..."
+msgstr "Search..."
+
+#: .\templates\_base.html:211
+msgid "شروع کنید"
+msgstr "Get Started"
+
+#: .\templates\_base.html:214
+msgid "به شبکه صنعتی و تخصصی"
+msgstr "Join the industrial and specialized network"
+
+#: .\templates\_base.html:214
+msgid "کیان صنعت بپیوندید!"
+msgstr "of Kian Sanat!"
+
+#: .\templates\_base.html:227
+msgid "بیش از ۵۰۰۰ عضو فعال"
+msgstr "More than 5,000 active members"
+
+#: .\templates\_base.html:244
+msgid "آدرس ایمیل خود را وارد کنید..."
+msgstr "Enter your email address..."
+
+#: .\templates\_base.html:247
+msgid "عضویت"
+msgstr "Subscribe"
+
+#: .\templates\_base.html:269
+msgid "کیان صنعت"
+msgstr "Kian Sanat"
+
+#: .\templates\_base.html:272
+msgid ""
+"شرکت کیان صنعت، پیشرو در ارائه راهکارهای مهندسی، تجهیزات صنعتی و خدمات فنی و "
+"مهندسی با بالاترین استانداردهای کیفی."
+msgstr ""
+"Kian Sanat Company, a leader in providing engineering solutions, industrial "
+"equipment, and technical engineering services with the highest quality standards."
+
+#: .\templates\_base.html:288
+msgid "لینک‌های سریع"
+msgstr "Quick Links"
+
+#: .\templates\_base.html:293 .\templates\_base.html:304
+msgid "خدمات ما"
+msgstr "Our Services"
+
+#: .\templates\_base.html:294
+msgid "پروژه‌ها"
+msgstr "Projects"
+
+#: .\templates\_base.html:295
+msgid "اخبار و مقالات"
+msgstr "News & Articles"
+
+#: .\templates\_base.html:296
+msgid "تماس با ما"
+msgstr "Contact Us"
+
+#: .\templates\_base.html:307
+msgid "مشاوره مهندسی"
+msgstr "Engineering Consulting"
+
+#: .\templates\_base.html:308
+msgid "تامین تجهیزات صنعتی"
+msgstr "Industrial Equipment Supply"
+
+#: .\templates\_base.html:309
+msgid "طراحی و اجرای خطوط"
+msgstr "Design and Execution of Lines"
+
+#: .\templates\_base.html:310
+msgid "اتوماسیون صنعتی"
+msgstr "Industrial Automation"
+
+#: .\templates\_base.html:311
+msgid "نگهداری و تعمیرات"
+msgstr "Maintenance and Repair"
+
+#: .\templates\_base.html:312
+msgid "پشتیبانی تخصصی"
+msgstr "Specialized Support"
+
+#: .\templates\_base.html:323
+msgid "ارتباط با ما"
+msgstr "Connect with Us"
+
+#: .\templates\_base.html:327
+msgid "تهران، خیابان شریعتی، پلاک ۱۲۶"
+msgstr "Tehran, Shariati St, No. 126"
+
+#: .\templates\_base.html:335
+msgid "۰۲۱-۱۲۳۴۵۶۷۸"
+msgstr "021-12345678"
+
+#: .\templates\_base.html:348
+msgid "© تمامی حقوق برای شرکت <span>کیان صنعت</span> محفوظ است."
+msgstr "© All rights reserved for <span>Kian Sanat</span> Company."
+
+#: .\templates\_base.html:353
+msgid "شرایط و ضوابط"
+msgstr "Terms & Conditions"
+
+#: .\templates\_base.html:354
+msgid "حریم خصوصی"
+msgstr "Privacy Policy"
