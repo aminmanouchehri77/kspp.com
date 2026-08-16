@@ -13,8 +13,10 @@ router.register(r'logos', views.ClientLogoViewSet)
 router.register(r'contact', views.ContactMessageViewSet)
 
 urlpatterns = [
-    # مسیر صفحه اصلی سایت
+    # مسیر صفحه اصلی و صفحات ثابت سایت
     path('', views.HomeView.as_view(), name='home'),
+    path('about/', views.AboutView.as_view(), name='about'),
+    path('contact/', views.ContactView.as_view(), name='contact'),
     
     # مسیرهای API (پیشوند api/ خواهند داشت)
     path('api/', include(router.urls)),

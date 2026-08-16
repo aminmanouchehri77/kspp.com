@@ -1,0 +1,445 @@
+{% extends '_base.html' %}
+{% load static i18n %}
+
+{% block title %}
+    {% trans "تماس با ما | شرکت کیان صنعت" %}
+{% endblock %}
+
+{% block content %}
+    <style>
+        /* ==========================================
+           بارگذاری فونت Vazirmatn (پیش‌فرض)
+           ========================================== */
+        /* در صورتی که از CDN استفاده می‌کنید، این خط را نگه دارید */
+        /* اگر فونت را به صورت local دارید، مسیر آن را در اینجا قرار دهید */
+        @import url('https://cdn.jsdelivr.net/font/vazirmatn/vazirmatn.css'); /* یا مسیر محلی فونت */
+
+        /* ==========================================
+           استایل‌های عمومی صفحه (فونت یکسان)
+           ========================================== */
+        body {
+            font-family: 'Vazirmatn', sans-serif !important; /* اعمال فونت Vazirmatn برای کل صفحه */
+            line-height: 1.6; /* تنظیم خط اصلی برای خوانایی بهتر */
+        }
+
+        /* ==========================================
+           استایل‌های اختصاصی صفحه تماس با ما (بر اساس UI جدید)
+           ========================================== */
+        
+        .ks-contact-subtitle {
+            color: #d83b63;
+            font-weight: 600;
+            font-size: 16px;
+            margin-bottom: 10px;
+            display: block;
+        }
+        
+        .ks-contact-title, .ks-form-title { /* عنوان صفحه و فرم */
+            color: #1a1a2e;
+            font-weight: 800; /* یا 700 بسته به وزن‌های موجود در فونت */
+            font-size: 42px;
+            line-height: 1.4;
+            margin-bottom: 20px;
+        }
+
+        .ks-contact-desc {
+            color: #666;
+            font-size: 16px;
+            line-height: 1.8;
+            margin-bottom: 40px;
+        }
+
+        .ks-info-label {
+            font-size: 15px;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 8px;
+        }
+
+        .ks-info-value, .ks-info-value a {
+            color: #666;
+            font-size: 15px;
+            text-decoration: none;
+            transition: 0.3s;
+            line-height: 1.6;
+        }
+
+        .ks-info-value a:hover {
+            color: #8b5cf6;
+        }
+
+        /* نقشه گوگل */
+        .ks-map-container {
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            height: 100%;
+            min-height: 450px;
+            background-color: #e5e3df; 
+            display: flex; /* اضافه شده برای پر کردن کامل فضا توسط نقشه */
+            flex-direction: column;
+        }
+
+        .ks-map-container iframe {
+            width: 100%;
+            flex: 1; /* جایگزین height: 100% برای پوشش دادن کامل کانتینر */
+            border: none;
+        }
+
+        /* بخش فرم ارسال پیام */
+        .ks-form-wrapper {
+            background-color: #fafafc; 
+            border: 1px solid #8b5cf6; 
+            border-radius: 30px;
+            padding: 50px;
+            box-shadow: 0 15px 40px rgba(139, 92, 246, 0.08); 
+            margin-top: 20px;
+        }
+
+        .ks-form-title { /* تکرار شده برای اطمینان */
+            color: #1a1a2e;
+            font-weight: 700;
+            font-size: 28px;
+            margin-bottom: 40px;
+        }
+
+        .ks-form-input {
+            width: 100%;
+            border: 1px solid #8b5cf6; 
+            border-radius: 50px;
+            padding: 16px 25px;
+            font-size: 14px;
+            color: #333;
+            background: #fff;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        .ks-form-input:focus {
+            box-shadow: 0 0 0 4px rgba(139, 92, 246, 0.2); 
+        }
+
+        .ks-form-textarea {
+            border-radius: 24px;
+            resize: vertical;
+            min-height: 150px;
+        }
+
+        .ks-submit-btn {
+            background: linear-gradient(135deg, #8b5cf6 0%, #d83b63 100%);
+            color: #fff;
+            border: none;
+            border-radius: 50px;
+            padding: 14px 45px;
+            font-size: 16px;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: 0.3s;
+            cursor: pointer;
+        }
+
+        .ks-submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(139, 92, 246, 0.3);
+            color: #fff;
+        }
+
+        .ks-social-icons a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: #f0f0f5;
+            color: #333;
+            margin-inline-end: 8px;
+            transition: 0.3s;
+            text-decoration: none;
+        }
+
+        .ks-social-icons a:hover {
+            background: #1a1a2e;
+            color: #fff;
+        }
+
+        @media (max-width: 991.98px) {
+            .ks-contact-title { font-size: 32px; }
+            .ks-form-wrapper { padding: 30px 20px; }
+            .ks-map-container { min-height: 350px; margin-top: 40px; }
+        }
+        
+        /* تراز چپ متن‌ها در حالت انگلیسی (LTR) برای دسکتاپ */
+        html[dir="ltr"] .ks-contact-title,
+        html[dir="ltr"] .ks-contact-desc,
+        html[dir="ltr"] .ks-info-label {
+            text-align: left !important;
+        }
+        html[dir="ltr"] .ks-info-value {
+            text-align: left !important;
+        }
+
+        /* ==========================================
+           استایل‌های واکنش‌گرا (موبایل) - وسط‌چین کردن محتوا
+           ========================================== */
+        @media (max-width: 767.98px) {
+            .ks-contact-subtitle,
+            .ks-contact-title,
+            .ks-contact-desc,
+            .ks-info-label,
+            .ks-info-value,
+            html[dir="ltr"] .ks-contact-title,
+            html[dir="ltr"] .ks-contact-desc,
+            html[dir="ltr"] .ks-info-label,
+            html[dir="ltr"] .ks-info-value {
+                text-align: center !important;
+            }
+
+            .ks-social-icons {
+                justify-content: center !important;
+                display: flex;
+                flex-wrap: wrap;
+            }
+
+            .ks-info-value a {
+                display: inline-block !important;
+                margin-bottom: 5px;
+            }
+        }
+
+        /* ==========================================
+           استایل‌های هیرو برای هماهنگی فونت
+           ========================================== */
+        .page-hero h1,
+        .page-hero ul li,
+        .page-hero ul li a {
+            font-family: 'Vazirmatn', sans-serif !important; /* اطمینان از استفاده از فونت اصلی */
+            font-weight: 700; /* یا وزن مناسب دیگر */
+        }
+        .page-hero ul li {
+            margin-top: 10px; /* تنظیم فاصله */
+        }
+        .page-hero ul li a {
+            color: #fff; /* رنگ لینک‌ها در هیرو */
+            text-decoration: none;
+        }
+        .page-hero ul li a:hover {
+            text-decoration: underline;
+        }
+    </style>
+
+    <!--======  Start Page Hero Section  ======-->
+    <section class="page-hero bg_cover p-r z-1" data-src="{% static 'assets/images/innerpage/bg/page-bg.jpg' %}">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="page-content text-center">
+                        <h1>{% trans "تماس با ما" %}</h1>
+                        <ul>
+                            <li><a href="{% url 'core:home' %}">{% trans "صفحه اصلی" %}</a></li>
+                            <li>{% trans "تماس با ما" %}</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--======  End Page Hero Section  ======-->
+
+    <!--======  Start Contact Info & Map Section  ======-->
+    <section class="pt-100 pb-100">
+        <div class="container">
+            <div class="row align-items-center">
+                
+                <!-- سمت راست: اطلاعات تماس -->
+                <div class="col-lg-5 order-2 order-lg-1 mt-5 mt-lg-0" data-aos="fade-up" data-aos-duration="1000">
+                    <span class="ks-contact-subtitle">{% trans "ارتباط با ما" %}</span>
+                    
+                    <h2 class="ks-contact-title">
+                        {% blocktrans %}همیشه پاسخگوی شما <br class="d-none d-md-block"> هستیم{% endblocktrans %}
+                    </h2>
+                    
+                    <p class="ks-contact-desc">
+                        {% blocktrans %}جهت مشاوره، پشتیبانی و ثبت درخواست <br class="d-none d-md-block"> با کارشناسان کیان صنعت در ارتباط باشید.{% endblocktrans %}
+                    </p>
+
+                    <div class="row mb-4">
+                        <div class="col-md-6 mb-4 mb-md-0">
+                            <h6 class="ks-info-label">{% trans "پست الکترونیک:" %}</h6>
+                            <div class="ks-info-value">
+                                <a href="mailto:info@kspptech.com">info@kspptech.com</a>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <h6 class="ks-info-label">{% trans "شماره‌های تماس:" %}</h6>
+                            <div class="ks-info-value">
+                                <!-- تگ dir فقط برای فرمت اعداد استفاده شده تا تراز آنها به هم نریزد -->
+                                <a href="tel:+989132201286" class="d-block mb-1"><span dir="ltr">0913-220-1286</span></a>
+                                <a href="tel:+989137812920" class="d-block"><span dir="ltr">0913-781-2920</span></a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row mb-4">
+                        <div class="col-12">
+                            <h6 class="ks-info-label">{% trans "آدرس دفتر مرکزی و کارخانه:" %}</h6>
+                            <div class="ks-info-value">
+                                {% trans "اصفهان، شهرضا، شهرک صنعتی امیرکبیر، بلوار کاوه، نبش فرعی ۱" %}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-12">
+                            <h6 class="ks-info-label">{% trans "شبکه‌های اجتماعی:" %}</h6>
+                            <div class="ks-social-icons mt-2">
+                                <a href="#"><i class="fab fa-telegram-plane"></i></a>
+                                <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                                <a href="#"><i class="fab fa-instagram"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- سمت چپ: نقشه گوگل -->
+                <div class="col-lg-7 order-1 order-lg-2" data-aos="fade-up" data-aos-duration="1000">
+                    <div class="ks-map-container">
+                        <iframe loading="lazy"
+                            src="https://maps.google.com/maps?q=%D8%B4%D9%87%D8%B1%DA%A9+%D8%B5%D9%86%D8%B9%D8%AA%DB%8C+%D8%A7%D9%85%DB%8C%D8%B1%DA%A9%D8%A8%DB%8C%D8%B1+%D8%B4%D9%87%D8%B1%D8%B6%D8%A7&t=&z=14&ie=UTF8&iwloc=&output=embed"
+                            allowfullscreen="">
+                        </iframe>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+    <!--======  End Contact Info & Map Section  ======-->
+
+    <!--======  Start Contact Form Section  ======-->
+    <section class="pb-120">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-10">
+                    <div class="ks-form-wrapper text-center" data-aos="fade-up" data-aos-duration="1000">
+                        <h3 class="ks-form-title">{% trans "ارسال پیام به ما" %}</h3>
+                        
+                        <form id="contactForm">
+                            {% csrf_token %}
+                            <div class="row">
+                                <div class="col-lg-4 col-md-12 mb-4">
+                                    <input class="ks-form-input" id="id_name" name="name" 
+                                           placeholder="{% trans 'نام و نام خانوادگی' %}" required type="text" />
+                                </div>
+                                <div class="col-lg-4 col-md-12 mb-4">
+                                    <input class="ks-form-input" id="id_phone" name="phone" 
+                                           placeholder="{% trans 'شماره تماس' %}" type="text" />
+                                </div>
+                                <div class="col-lg-4 col-md-12 mb-4">
+                                    <input class="ks-form-input" id="id_email" name="email" 
+                                           placeholder="{% trans 'آدرس ایمیل (اختیاری)' %}" type="email" />
+                                </div>
+                                
+                                <div class="col-lg-12 mb-4">
+                                    <textarea class="ks-form-input ks-form-textarea" id="id_message" name="message" 
+                                              placeholder="{% trans 'متن پیام شما...' %}" required></textarea>
+                                </div>
+                                
+                                <div class="col-lg-12 text-center mt-2">
+                                    <button type="submit" id="submitBtn" class="ks-submit-btn">
+                                        {% trans "ارسال پیام" %}
+                                        <i class="far fa-paper-plane mx-2"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--======  End Contact Form Section  ======-->
+
+{% endblock content %}
+
+{% block extra_js %}
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const contactForm = document.getElementById("contactForm");
+        const submitBtn = document.getElementById("submitBtn");
+
+        // مقادیر ترجمه شده برای SweetAlert
+        const sendingText = '{% trans "در حال ارسال..." %} <i class="fas fa-spinner fa-spin mx-2"></i>';
+        const successTitle = '{% trans "پیام ارسال شد!" %}';
+        const successText = '{% trans "پیام شما با موفقیت ثبت شد و کارشناسان ما به زودی با شما تماس خواهند گرفت." %}';
+        const errorTitle = '{% trans "خطا در ارسال" %}';
+        const errorText = '{% trans "متاسفانه مشکلی در ارسال پیام به وجود آمد. لطفاً دوباره تلاش کنید." %}';
+        const confirmBtnText = '{% trans "تایید" %}';
+
+        if (contactForm) {
+            contactForm.addEventListener("submit", function (e) {
+                e.preventDefault();
+                
+                const originalBtnContent = submitBtn.innerHTML;
+                submitBtn.innerHTML = sendingText;
+                submitBtn.disabled = true;
+
+                const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+
+                const formData = {
+                    name: document.getElementById('id_name').value,
+                    phone: document.getElementById('id_phone').value,
+                    email: document.getElementById('id_email').value,
+                    message: document.getElementById('id_message').value,
+                };
+
+                fetch('/api/contact/', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRFToken': csrfToken
+                    },
+                    body: JSON.stringify(formData)
+                })
+                .then(response => {
+                    if (response.ok) {
+                        return response.json();
+                    } else {
+                        throw new Error('Form Submission Error');
+                    }
+                })
+                .then(data => {
+                    Swal.fire({
+                        icon: 'success',
+                        title: successTitle,
+                        text: successText,
+                        confirmButtonText: confirmBtnText,
+                        confirmButtonColor: '#8b5cf6',
+                        background: '#ffffff',
+                        customClass: { popup: 'rounded-4' }
+                    });
+                    contactForm.reset();
+                })
+                .catch(error => {
+                    Swal.fire({
+                        icon: 'error',
+                        title: errorTitle,
+                        text: errorText,
+                        confirmButtonText: confirmBtnText,
+                        confirmButtonColor: '#d83b63',
+                        customClass: { popup: 'rounded-4' }
+                    });
+                })
+                .finally(() => {
+                    submitBtn.innerHTML = originalBtnContent;
+                    submitBtn.disabled = false;
+                });
+            });
+        }
+    });
+</script>
+{% endblock extra_js %}

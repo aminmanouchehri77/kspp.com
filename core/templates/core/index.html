@@ -367,9 +367,10 @@
                                 <li class="menu-item"><a href="#">{% trans "محصولات" %}</a></li>
                                 <li class="menu-item"><a href="#">{% trans "بازرگانی" %}</a></li>
                                 <li class="menu-item"><a href="#">{% trans "اخبار و رویدادها" %}</a></li>
-                                <li class="menu-item"><a href="#">{% trans "درباره ما" %}</a></li>
-                                <li class="menu-item"><a href="#">{% trans "تماس با ما" %}</a></li>
+                                <li class="menu-item"><a href="{% url 'core:about' %}">{% trans "درباره ما" %}</a></li>
+                                <li class="menu-item"><a href="{% url 'core:contact' %}">{% trans "تماس با ما" %}</a></li>
                             </ul>
+
                         </nav>
                         <div class="theme-menu-bottom mt-50 d-block d-xl-none">
                             <h5>{% trans "ما را دنبال کنید" %}</h5>

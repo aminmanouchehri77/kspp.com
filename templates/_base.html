@@ -1,6 +1,5 @@
 {% load static i18n %}
 <!DOCTYPE html>
-<!-- تغییر خودکار زبان و جهت صفحه بر اساس زبان انتخابی کاربر -->
 <html lang="{{ LANGUAGE_CODE }}" dir="{% if LANGUAGE_BIDI %}rtl{% else %}ltr{% endif %}">
 <head>
     <!--====== Meta Tags ======-->
@@ -14,8 +13,9 @@
     
     <!--====== CSS Plugins ======-->
     <link href="{% static 'assets/fonts/fontawesome/css/all.min.css' %}" rel="stylesheet" />
-    
-    <!-- لود کردن شرطی فایل بوت‌استرپ: اگر زبان راست‌چین بود rtl وگرنه ltr -->
+    <!-- Vazirmatn Font -->
+  
+
     {% if LANGUAGE_BIDI %}
         <link href="{% static 'assets/css/plugins/bootstrap.rtl.min.css' %}" rel="stylesheet" />
     {% else %}
@@ -28,10 +28,8 @@
     <link href="{% static 'assets/css/spacings.css' %}" rel="stylesheet" />
     <link href="{% static 'assets/css/style.css' %}" rel="stylesheet" />
 
+    <!-- استایل‌های عمومی سراسری -->
     <style>
-        /* =========================================
-           معرفی فونت محلی وزیرمتن به مرورگر
-        ========================================= */
         @font-face {
             font-family: 'Vazirmatn';
             src: url("{% static 'assets/fonts/fontawesome/webfonts/Vazirmatn-Regular.ttf' %}") format('truetype');
@@ -40,13 +38,15 @@
             font-display: swap;
         }
 
-        body, h1, h2, h3, h4, h5, h6, p, a, span, div, input, button, textarea, select {
+        /* اعمال قطعی فونت وزیرمتن روی تمامی عناصر از جمله بخش هیرو */
+        body, h1, h2, h3, h4, h5, h6, p, a, span, div, input, button, textarea, select, ul, li {
             font-family: 'Vazirmatn', sans-serif !important;
         }
 
-        /* =========================================
-           کلاس‌های سراسری برای تیترهای هماهنگ
-        ========================================= */
+        .orbia-hero_one * {
+            font-family: 'Vazirmatn', sans-serif !important;
+        }
+
         .premium-title {
             font-weight: 800 !important;
             text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
@@ -62,90 +62,31 @@
             gap: 5px;
         }
 
-        /* =========================================
-           استایل‌های فرم خبرنامه سازگار با LTR و RTL
-        ========================================= */
-        .newsletter-input::placeholder {
-            color: #555 !important;
-            opacity: 1 !important;
-            font-weight: 500;
-        }
-
-        #subscribe_btn {
-            transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease;
-        }
-        .fade-in-btn {
-            opacity: 1;
-            visibility: visible;
-            transform: scale(1);
-        }
-        .fade-out-btn {
-            opacity: 0;
-            visibility: hidden;
-            transform: scale(0.9);
-        }
-
+        .newsletter-input::placeholder { color: #555 !important; opacity: 1 !important; font-weight: 500; }
+        #subscribe_btn { transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease; }
+        .fade-in-btn { opacity: 1; visibility: visible; transform: scale(1); }
+        .fade-out-btn { opacity: 0; visibility: hidden; transform: scale(0.9); }
         .newsletter-form-wrapper {
-            position: relative;
-            background-color: #fff;
-            border-radius: 40px;
-            padding: 5px;
-            height: 70px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-            display: flex;
-            align-items: center;
+            position: relative; background-color: #fff; border-radius: 40px; padding: 5px;
+            height: 70px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); display: flex; align-items: center;
         }
-
         .newsletter-input-field {
-            height: 100%;
-            /* استفاده از پراپرتی‌های منطقی برای کارکرد صحیح در هر دو زبان */
-            padding-inline-start: 20px; 
-            padding-inline-end: 140px; 
-            font-size: 15px;
-            outline: none;
-            width: 100%;
-            color: #222;
+            height: 100%; padding-inline-start: 20px; padding-inline-end: 140px; 
+            font-size: 15px; outline: none; width: 100%; color: #222;
         }
-
-        /* تنظیم جهت نوشته پلیس‌هولدر بر اساس جهت صفحه */
         html[dir="rtl"] .newsletter-input-field { text-align: right; }
         html[dir="ltr"] .newsletter-input-field { text-align: left; }
-
-        /* وقتی ایمیل تایپ می‌شود خودکار LTR شود */
-        .newsletter-input-field:not(:placeholder-shown) {
-            direction: ltr !important;
-            text-align: left !important;
-        }
-
+        .newsletter-input-field:not(:placeholder-shown) { direction: ltr !important; text-align: left !important; }
         .newsletter-submit-btn {
-            position: absolute;
-            inset-inline-end: 5px; /* به جای left، در هر دو زبان در جای درست قرار می‌گیرد */
-            top: 5px;
-            height: 60px;
-            border-radius: 35px;
-            padding: 0 30px;
-            white-space: nowrap;
-            font-weight: 600;
-            border: none;
-            box-shadow: 0 5px 15px rgba(255, 51, 102, 0.3);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
+            position: absolute; inset-inline-end: 5px; top: 5px; height: 60px;
+            border-radius: 35px; padding: 0 30px; white-space: nowrap; font-weight: 600;
+            border: none; box-shadow: 0 5px 15px rgba(255, 51, 102, 0.3); display: flex;
+            align-items: center; justify-content: center; gap: 8px;
         }
-
         @media (max-width: 575px) {
             .newsletter-form-wrapper { height: 60px; }
-            .newsletter-input-field {
-                font-size: 12px;
-                padding-inline-end: 105px;
-                padding-inline-start: 15px;
-            }
-            .newsletter-submit-btn {
-                height: 50px;
-                padding: 0 18px;
-                font-size: 13px;
-            }
+            .newsletter-input-field { font-size: 12px; padding-inline-end: 105px; padding-inline-start: 15px; }
+            .newsletter-submit-btn { height: 50px; padding: 0 18px; font-size: 13px; }
         }
     </style>
 
@@ -182,27 +123,482 @@
 
     <!--====== Header / Navbar ======-->
     {% block header %}
-    {% endblock %}
+    <style>
+        /* ======================================================== */
+        /* === 1. تنظیمات سراسری (دکمه‌ها و تصاویر) === */
+        /* ======================================================== */
+        html { scroll-behavior: smooth; }
+        img { border-radius: 15px !important; }
+        .brand-logo img { border-radius: 0 !important; }
+        .theme-btn { transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1) !important; }
+        .theme-btn:hover {
+            transform: translateY(-3px) !important;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12) !important;
+        }
+
+        /* ========================================= */
+        /* === 2. استایل اختصاصی تاگل تغییر زبان === */
+        /* ========================================= */
+        .custom-lang-toggle {
+            position: relative; display: inline-flex; align-items: center; width: 72px; height: 34px;
+            background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 17px; cursor: pointer;
+            transition: all 0.3s ease; box-sizing: border-box; overflow: hidden; margin: 0;
+        }
+        .custom-lang-toggle:hover { background: rgba(255, 255, 255, 0.15); border-color: rgba(255, 255, 255, 0.4); }
+        .custom-lang-toggle .toggle-circle {
+            position: absolute; top: 2px; width: 28px; height: 28px; background: #ffffff;
+            border-radius: 50%; transition: inset-inline-end 0.4s cubic-bezier(0.25, 0.8, 0.25, 1); z-index: 1;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+        .custom-lang-toggle.fa-active .toggle-circle { inset-inline-end: 39px; }
+        .custom-lang-toggle.en-active .toggle-circle { inset-inline-end: 3px; }
+        
+        .custom-lang-toggle span {
+            position: relative; z-index: 2; width: 50%; text-align: center; font-size: 11px;
+            font-weight: 800; letter-spacing: 0.5px; user-select: none; transition: opacity 0.3s ease;
+            color: #ffffff;
+        }
+
+        .nav-right-item { gap: 20px; justify-content: flex-end; display: flex; align-items: center; }
+        .language-switcher, .search-button, .navbar-toggler { margin: 0 !important; }
+
+        /* ======================================================== */
+        /* === 3. استایل هدر شناور و شیشه‌ای با اولویت بالا === */
+        /* ======================================================== */
+        #smart-header {
+            transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), opacity 0.3s ease, background 0.3s ease !important;
+            will-change: transform, opacity; background: transparent; border-bottom: none; opacity: 1;
+        }
+        #smart-header.sticky, #smart-header.is-fixed {
+            position: fixed !important; top: 0 !important; left: 0 !important; right: 0 !important;
+            margin: 15px auto !important; width: 96% !important; max-width: 1600px !important;
+            min-height: 85px !important;
+            display: flex; align-items: center;
+            background: rgba(10, 14, 39, 0.9) !important; backdrop-filter: blur(16px) !important; 
+            -webkit-backdrop-filter: blur(16px) !important; border: 1px solid rgba(255, 255, 255, 0.08) !important; 
+            border-radius: 24px !important; z-index: 9999 !important;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25) !important; animation: none !important; 
+        }
+        #smart-header.is-hidden { transform: translateY(-150%) !important; opacity: 0 !important; pointer-events: none !important; }
+        #smart-header.is-fixed .header-navigation { width: 100%; }
+
+        /* ======================================================== */
+        /* === 4. استایل منوها و تنظیمات فاصله === */
+        /* ======================================================== */
+        .header-navigation ul li a, .main-menu ul li a {
+            color: #ffffff !important; text-decoration: none !important; opacity: 1 !important;
+            padding: 10px 18px; border-radius: 30px; transition: all 0.3s ease; position: relative;
+        }
+        .header-navigation ul li a:hover, .main-menu ul li a:hover {
+            color: #e0e0e0 !important; background: rgba(255, 255, 255, 0.06); 
+        }
+
+        @media (min-width: 1200px) {
+            #navbarNav { display: flex !important; flex-basis: auto; flex-grow: 1; align-items: center; }
+        }
+
+        .theme-nav-menu {
+            transition: margin 0.3s ease-in-out !important;
+            margin-inline-start: 80px !important;
+        }
+
+        #smart-header.is-fixed .theme-nav-menu,
+        #smart-header.sticky .theme-nav-menu {
+            margin-inline-start: 120px !important;
+        }
+
+        /* ======================================================== */
+        /* === 5. استایل دکمه جستجو === */
+        /* ======================================================== */
+        .search-btn {
+            width: 42px !important; height: 42px !important; display: flex; align-items: center; justify-content: center;
+            background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 50%;
+            color: rgba(255, 255, 255, 0.85); cursor: pointer; transition: all 0.3s ease;
+        }
+        .search-btn:hover {
+            background: rgba(255, 255, 255, 0.15); color: #fff;
+            border-color: rgba(155, 81, 224, 0.5); box-shadow: 0 0 15px rgba(155, 81, 224, 0.2); 
+        }
+
+        /* ======================================================== */
+        /* === 6. اصلاح تصویر دست ربات === */
+        /* ======================================================== */
+        .orbia-about_one .orbia-image-box {
+            position: relative !important; width: 100% !important; display: flex !important; flex-direction: column !important;
+            justify-content: center !important; align-items: center !important; margin: 0 auto !important;
+            transform: none !important; animation: none !important; transition: transform 0.5s ease-out;
+        }
+        .orbia-about_one .orbia-image-box .image_two {
+            position: relative !important; width: 100% !important; max-width: 450px !important; height: auto !important;
+            z-index: 1 !important; margin: 0 auto !important; display: block !important; transform: none !important; transition: all 0.3s ease;
+        }
+
+        /* ======================================================== */
+        /* === 7. تنظیمات بخش پروژه‌ها === */
+        /* ======================================================== */
+        .orbia-project_one { padding-top: 80px !important; padding-bottom: 80px !important; }
+        .orbia-project_one .section-title .sub-title { font-size: 16px !important; font-weight: 500 !important; margin-bottom: 15px; display: inline-block; }
+        .orbia-project_one .section-title .title-h2 { font-size: 32px !important; font-weight: 700 !important; line-height: 1.6 !important; margin-bottom: 35px; }
+        .orbia-project-item { margin-bottom: 20px; border-bottom: 1px solid rgba(0, 0, 0, 0.08); padding-bottom: 20px; }
+        .orbia-project-item:last-child { border-bottom: none; }
+        .orbia-project-item .project-title span { font-size: 13px !important; font-weight: 500 !important; color: #6c757d; margin-bottom: 8px; display: block; }
+        .orbia-project-item .project-title h3 { font-size: 20px !important; font-weight: 600 !important; color: #1f1f1f; line-height: 1.6; margin-bottom: 0; }
+        .orbia-project-item .project-content p { font-size: 15px !important; line-height: 1.8 !important; color: #4b4b4b; margin-top: 15px; margin-bottom: 20px; }
+        .orbia-project-item .project-content .theme-btn { font-size: 14px !important; padding: 10px 25px !important; }
+
+        /* ======================================================== */
+        /* === 8. رسپانسیو و مدیا کوئری‌ها === */
+        /* ======================================================== */
+        @media (min-width: 1600px) {
+            .orbia-about_one .orbia-image-box { transform: translateY(-50px) !important; }
+            .orbia-about_one .orbia-image-box .image_two { max-width: 400px !important; }
+        }
+        
+        @media (min-width: 1400px) {
+            .main-menu ul li { margin: 0 12px !important; }
+            .main-menu ul li a { font-size: 16px !important; padding: 10px 18px !important; }
+            #smart-header.is-fixed .main-menu ul li a { font-size: 14px !important; padding: 10px 12px !important; }
+        }
+        @media (min-width: 1200px) and (max-width: 1399px) {
+            .theme-nav-menu { margin-inline-start: 40px !important; }
+            #smart-header.is-fixed .theme-nav-menu { margin-inline-start: 60px !important; }
+            .main-menu ul li { margin: 0 8px !important; }
+            .main-menu ul li a { font-size: 14px !important; padding: 10px 12px !important; }
+            #smart-header.is-fixed .main-menu ul li a { font-size: 12px !important; padding: 10px 8px !important; }
+            #smart-header.is-fixed .main-menu ul li { margin: 0 4px !important; }
+        }
+        @media (min-width: 992px) and (max-width: 1199px) {
+            .theme-nav-menu { margin-inline-start: 20px !important; }
+            #smart-header.is-fixed .theme-nav-menu { margin-inline-start: 30px !important; }
+            .main-menu ul li { margin: 0 2px !important; }
+            .main-menu ul li a { font-size: 13px !important; padding: 10px 8px !important; }
+            .header-navigation .container-fluid { padding-inline-start: 15px; padding-inline-end: 15px; }
+            #smart-header.is-fixed .main-menu ul li a { font-size: 11px !important; padding: 10px 4px !important; }
+        }
+        @media (min-width: 992px) and (max-width: 1599px) {
+            .orbia-about_one .orbia-image-box .image_two { max-width: 500px !important; }
+        }
+        @media (min-width: 992px) {
+            .orbia-about_one ul li, .orbia-about_one li { white-space: nowrap !important; font-size: 15px !important; line-height: 2.2 !important; overflow: visible !important; }
+            .orbia-about_one li i { margin-inline-start: 8px !important; }
+        }
+        @media (min-width: 992px) and (max-width: 1399.98px) {
+            .orbia-hero_one .hero-image img { height: 65vh !important; max-height: 65vh !important; width: auto !important; }
+            .orbia-about_one .orbia-image-box .image_two { max-width: 320px !important; }
+        }
+
+        /* ==================================================================== */
+        /* === 8c. استایل کامل منوی موبایل (حذف لوگو اضافی و تراز صحیح) === */
+        /* ==================================================================== */
+        @media (max-width: 991.98px) {
+            .theme-nav-menu, #smart-header.is-fixed .theme-nav-menu, #smart-header.sticky .theme-nav-menu {
+                margin-inline-start: 0 !important;
+            }
+            
+            #smart-header.sticky, #smart-header.is-fixed {
+                width: 100% !important; margin: 0 !important; border-radius: 0 !important;
+                min-height: 70px !important;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+                border-left: none !important; border-right: none !important; border-top: none !important;
+            }
+            .nav-right-item { gap: 12px !important; }
+            .brand-logo img { max-height: 38px; width: auto; }
+            
+            .custom-lang-toggle { width: 66px !important; height: 34px !important; }
+            .custom-lang-toggle .toggle-circle { width: 28px !important; height: 28px !important; top: 2px !important; }
+            .custom-lang-toggle.fa-active .toggle-circle { inset-inline-end: 33px !important; }
+            .custom-lang-toggle.en-active .toggle-circle { inset-inline-end: 3px !important; }
+            .custom-lang-toggle span { font-size: 10px; line-height: 32px; }
+            
+            .search-btn { width: 34px !important; height: 34px !important; padding: 0 !important; }
+            .search-btn i { font-size: 16px !important; }
+            .navbar-toggler { width: 40px !important; height: 34px !important; transform: none !important; display: flex !important; flex-direction: column; justify-content: center; align-items: center; padding: 0 !important; }
+            
+            .theme-nav-menu {
+                position: fixed !important; top: 0 !important; left: 0 !important; right: 0 !important;
+                width: 100% !important; height: 100vh !important; max-height: 100vh !important;
+                margin: 0 !important; overflow-y: auto !important;
+                background: rgba(10, 14, 39, 0.98) !important;
+                backdrop-filter: blur(16px) !important; -webkit-backdrop-filter: blur(16px) !important;
+                padding: 20px 20px 40px 20px !important; z-index: 99998 !important; box-sizing: border-box !important;
+                transform: translateY(-100%); opacity: 0; visibility: hidden;
+                transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), opacity 0.3s ease, visibility 0.3s ease;
+            }
+            .theme-nav-menu.menu-on { transform: translateY(0) !important; opacity: 1 !important; visibility: visible !important; }
+
+            /* هدر داخلی منو: لوگوی تکراری حذف و دکمه بستن در گوشه قرار می‌گیرد */
+            .theme-nav-menu .theme-menu-top {
+                display: flex !important; align-items: center; justify-content: flex-end !important;
+                margin-bottom: 20px; padding-bottom: 15px; border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            }
+
+            /* ترازبندی منو بر اساس زبان سایت */
+            html[dir="rtl"] .theme-nav-menu .main-menu ul { text-align: right !important; padding-right: 15px !important; padding-left: 0 !important; }
+            html[dir="ltr"] .theme-nav-menu .main-menu ul { text-align: left !important; padding-left: 15px !important; padding-right: 0 !important; }
+
+            .theme-nav-menu .main-menu { width: 100%; margin: 0 0 30px 0; }
+            .theme-nav-menu .main-menu ul { list-style: none !important; margin: 0 !important; display: flex; flex-direction: column; gap: 4px; }
+            .theme-nav-menu .main-menu ul li { margin: 0 !important; width: 100%; }
+            
+            /* اصلاح سایز فونت و افزودن خط جداکننده نازک */
+            .theme-nav-menu .main-menu ul li a {
+                display: block !important; width: 100% !important; color: #ffffff !important;
+                font-size: 14px !important; font-weight: 500 !important; padding: 12px 10px !important;
+                border-radius: 8px !important; background: transparent !important; text-decoration: none !important;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.05) !important;
+            }
+            .theme-nav-menu .main-menu ul li:last-child a { border-bottom: none !important; }
+            .theme-nav-menu .main-menu ul li a:active, .theme-nav-menu .main-menu ul li a:hover { background: rgba(255, 255, 255, 0.08) !important; }
+
+            .theme-nav-menu .theme-menu-bottom { padding-top: 15px; border-top: 1px solid rgba(255, 255, 255, 0.1); }
+            .theme-nav-menu .theme-menu-bottom h5 { color: #ffffff !important; font-size: 14px; margin-bottom: 15px; }
+            .theme-nav-menu .theme-menu-bottom .social-link { list-style: none !important; display: flex !important; gap: 12px; margin: 0 !important; padding: 0 !important; }
+            .theme-nav-menu .theme-menu-bottom .social-link a {
+                width: 38px; height: 38px; display: flex !important; align-items: center; justify-content: center;
+                border-radius: 50%; background: rgba(255, 255, 255, 0.08); border: 1px solid rgba(255, 255, 255, 0.15); color: #ffffff !important;
+            }
+
+            .navbar-close {
+                cursor: pointer; color: #ffffff; font-size: 16px; width: 36px; height: 36px;
+                display: flex; align-items: center; justify-content: center; border-radius: 50%;
+                background: rgba(255, 255, 255, 0.08); border: 1px solid rgba(255, 255, 255, 0.15); transition: all 0.3s ease; flex-shrink: 0;
+            }
+            .navbar-close:hover { background: rgba(255, 255, 255, 0.18); border-color: rgba(255, 255, 255, 0.35); }
+        }
+
+        /* ==================================================================== */
+        /* === 8b. رفع تداخل نوبار با هیرو در موبایل - مخصوص نسخه EN/LTR === */
+        /* ==================================================================== */
+        @media (max-width: 991.98px) {
+            html[dir="ltr"] #smart-header {
+                position: fixed !important; top: 0 !important; left: 0 !important; right: 0 !important;
+                width: 100% !important; margin: 0 !important; border-radius: 0 !important;
+                min-height: 70px !important; z-index: 9999 !important;
+            }
+            html[dir="ltr"] #smart-header:not(.is-fixed):not(.sticky) {
+                background: transparent !important; backdrop-filter: none !important; -webkit-backdrop-filter: none !important;
+                border-bottom: none !important; box-shadow: none !important;
+            }
+            html[dir="ltr"] .orbia-hero_one .hero-wrapper { padding-top: 70px !important; }
+        }
+
+        /* ======================================================== */
+        /* === 9 & 11. بخش چرا ما و خدمات === */
+        /* ======================================================== */
+        .glass-satisfaction-box {
+            background: rgba(255, 255, 255, 0.08) !important; backdrop-filter: blur(12px) !important;
+            -webkit-backdrop-filter: blur(12px) !important; border: 1px solid rgba(255, 255, 255, 0.15) !important;
+            border-radius: 15px !important; color: #ffffff !important; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2) !important; padding: 20px !important;
+        }
+        .glass-satisfaction-box h2, .glass-satisfaction-box span { color: #ffffff !important; }
+        .neon-subtitle { color: #ff3366 !important; font-weight: 600; }
+        .dark-bg-text { color: rgba(255, 255, 255, 0.8) !important; line-height: 1.8 !important; }
+        .feature-item-aligned { display: flex !important; align-items: center !important; margin-bottom: 25px !important; }
+        .feature-item-aligned .icon { margin-inline-start: 15px !important; display: flex; align-items: center; justify-content: center; }
+        .feature-item-aligned h4 { margin: 0 !important; line-height: 1.4 !important; color: #ffffff !important; }
+
+        .glass-service-card {
+            background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.6); border-radius: 20px !important; padding: 2.5rem 1.5rem !important; 
+            transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1); height: 100%; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        .dark-mode .glass-service-card { background: rgba(25, 28, 41, 0.7); border: 1px solid rgba(255, 255, 255, 0.1); box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); }
+        .hover-lift { transition: transform 0.3s ease, box-shadow 0.3s ease; }
+        .hover-lift:hover { transform: translateY(-10px) !important; box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08) !important; }
+        .dark-mode .hover-lift:hover { box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4) !important; }
+        .service-icon-wrapper {
+            display: inline-flex; align-items: center; justify-content: center; width: 70px; height: 70px;
+            border-radius: 18px; background: rgba(155, 81, 224, 0.1); color: #9b51e0; font-size: 32px;
+            margin-bottom: 1.5rem; transition: all 0.3s ease;
+        }
+        .hover-lift:hover .service-icon-wrapper { background: #9b51e0; color: #ffffff; transform: scale(1.1) rotate(5deg); }
+        .service-card-title { font-weight: 700 !important; font-size: 1.3rem; margin-bottom: 1rem; color: #1f1f1f; }
+        .dark-mode .service-card-title { color: #ffffff; }
+        .service-card-desc { font-weight: 400; line-height: 1.8 !important; color: #6c757d; font-size: 0.95rem; margin-bottom: 0; }
+        .dark-mode .service-card-desc { color: rgba(255, 255, 255, 0.7); }
+
+        /* ======================================================== */
+        /* === 12. بهبود ساختار متن و چیدمان بخش هیرو === */
+        /* ======================================================== */
+        .orbia-hero_one .hero-wrapper { min-height: 90vh; display: flex; align-items: stretch; }
+        .orbia-hero_one .hero-content { text-align: start !important; padding-top: 100px; z-index: 5; position: relative; align-self: center; }
+        @media (min-width: 1200px) { .orbia-hero_one .hero-content { max-width: 650px; margin-inline-end: 50px; } }
+        .orbia-hero_one .hero-content h1 { font-weight: 800 !important; margin-bottom: 20px; line-height: 1.4 !important; font-size: clamp(30px, 4vw, 52px) !important; max-width: 550px; text-shadow: 2px 2px 10px rgba(0,0,0,0.5); }
+        .orbia-hero_one .hero-content p { font-weight: 400 !important; line-height: 2 !important; font-size: 16px !important; max-width: 100%; opacity: 0.9; }
+        @media (min-width: 992px) { .orbia-hero_one .hero-content p { font-size: 18px !important; max-width: 85%; } }
+        
+        .orbia-hero_one .hero-image { display: flex !important; align-items: flex-end !important; align-self: flex-end !important; height: 100%; }
+        .orbia-hero_one .hero-image img { height: 85vh; max-height: 85vh; width: auto; object-fit: contain; object-position: bottom !important; vertical-align: bottom; margin-bottom: 0 !important; }
+
+        /* ======================================================== */
+        /* === 18. استایل‌های اختصاصی نسخه انگلیسی (LTR) === */
+        /* ======================================================== */
+        .sub-title::before, .sub-title::after, .tag-line::before, .tag-line::after, .section-title span::before, .section-title span::after { display: none !important; content: none !important; }
+        .sub-title, .tag-line, .section-title span { padding-inline-start: 0 !important; padding-inline-end: 0 !important; margin-inline-start: 0 !important; margin-inline-end: 0 !important; }
+        html[dir="ltr"] .orbia-hero_one .row { flex-direction: row !important; align-items: stretch !important; position: static !important; }
+        html[dir="ltr"] .orbia-about_one .orbia-content-box, html[dir="ltr"] .orbia-project_one .section-title { text-align: left !important; }
+        html[dir="ltr"] .orbia-hero_one .hero-wrapper { position: relative !important; overflow: hidden !important; }
+        html[dir="ltr"] .orbia-hero_one .hero-content { text-align: left !important; padding-top: calc(20vh) !important; position: relative !important; z-index: 10 !important; }
+        
+        @media (min-width: 768px) and (max-width: 1399px) {
+            html[dir="ltr"] .orbia-hero_one .hero-content { padding-top: calc(26vh + 20px) !important; }
+        }
+
+        html[dir="ltr"] .orbia-hero_one .hero-image {
+            position: absolute !important; bottom: 0 !important; right: 0 !important; left: auto !important; height: 85vh !important; width: auto !important;
+            display: flex !important; align-items: flex-end !important; justify-content: flex-end !important; z-index: 5 !important; transform: none !important;
+        }
+        html[dir="ltr"] .orbia-hero_one .hero-image img { height: 85vh !important; max-height: 85vh !important; width: auto !important; max-width: none !important; object-fit: contain !important; object-position: bottom right !important; transform: none !important; }
+        
+        @media (max-width: 991px) {
+            html[dir="ltr"] .orbia-hero_one .hero-wrapper { min-height: auto !important; padding-bottom: 50px !important; }
+            html[dir="ltr"] .orbia-hero_one .hero-content { padding-top: 15vh !important; margin-top: 0 !important; text-align: center !important; }
+            html[dir="ltr"] .orbia-hero_one .hero-content h1 { font-size: clamp(28px, 6vw, 40px) !important; text-align: center !important; word-break: break-word; }
+            html[dir="ltr"] .orbia-hero_one .hero-content p { font-size: clamp(15px, 3vw, 18px) !important; text-align: center !important; margin: 0 auto 20px auto !important; }
+            html[dir="ltr"] .orbia-hero_one .hero-image { position: relative !important; height: auto !important; right: auto !important; left: auto !important; }
+            html[dir="ltr"] .orbia-hero_one .hero-image img { height: auto !important; max-height: 50vh !important; }
+        }
+    </style>
+
+    <!-- Transparent Header -->
+    <header class="header-area header-one transparent-header" id="smart-header">
+        <div class="header-navigation">
+            <div class="container-fluid">
+                <div class="primary-menu">
+                    <div class="site-branding">
+                        <a class="brand-logo" href="{% url 'core:home' %}"><img alt="{% trans 'لوگو کیان صنعت' %}"
+                                src="{% static 'assets/images/home-one/logo/logo-white.png' %}" /></a>
+                    </div>
+                    
+                    <div class="theme-nav-menu" id="navbarNav">
+                        <!-- نسخه اصلاح‌شده هدر منوی موبایل -->
+                        <div class="theme-menu-top d-block d-xl-none">
+                            <div class="navbar-close"><i class="fas fa-times"></i></div>
+                        </div>
+                        <nav class="main-menu">
+                            <ul>
+                                <li class="menu-item"><a href="{% url 'core:home' %}">{% trans "صفحه اصلی" %}</a></li>
+                                <li class="menu-item"><a href="#">{% trans "فعالیت‌ها" %}</a></li>
+                                <li class="menu-item"><a href="#">{% trans "محصولات" %}</a></li>
+                                <li class="menu-item"><a href="#">{% trans "بازرگانی" %}</a></li>
+                                <li class="menu-item"><a href="#">{% trans "اخبار و رویدادها" %}</a></li>
+                                <li class="menu-item"><a href="{% url 'core:about' %}">{% trans "درباره ما" %}</a></li>
+                                <li class="menu-item"><a href="{% url 'core:contact' %}">{% trans "تماس با ما" %}</a></li>
+                            </ul>
+
+                        </nav>
+                        <div class="theme-menu-bottom mt-50 d-block d-xl-none">
+                            <h5>{% trans "ما را دنبال کنید" %}</h5>
+                            <ul class="social-link">
+                                <li><a href="#"><i class="fab fa-instagram"></i></a></li>
+                                <li><a href="#"><i class="fab fa-linkedin-in"></i></a></li>
+                                <li><a href="#"><i class="fab fa-telegram"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="nav-right-item d-flex align-items-center">
+                        <div class="language-switcher">
+                            <form action="{% url 'set_language' %}" method="post" id="lang-form" style="margin: 0; display: flex; align-items: center;">
+                                {% csrf_token %}
+                                <input name="next" type="hidden" value="{{ request.get_full_path|default:'/' }}" />
+                                {% get_current_language as LANGUAGE_CODE %}
+                                <input type="hidden" name="language" id="language-val" value="{{ LANGUAGE_CODE }}">
+                                <div class="custom-lang-toggle {% if LANGUAGE_CODE == 'en' %}en-active{% else %}fa-active{% endif %}" 
+                                     onclick="document.getElementById('language-val').value = '{% if LANGUAGE_CODE == 'en' %}fa{% else %}en{% endif %}'; document.getElementById('lang-form').submit();">
+                                    <div class="toggle-circle"></div>
+                                    <span class="lang-fa">FA</span>
+                                    <span class="lang-en">EN</span>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="search-button">
+                            <div class="search-btn" data-bs-target="#search-modal" data-bs-toggle="modal">
+                                <i class="far fa-search"></i>
+                            </div>
+                        </div>
+                        
+                        <div class="navbar-toggler" aria-label="Toggle navigation">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const header = document.getElementById('smart-header');
+            const headerNav = header.querySelector('.header-navigation');
+            
+            const neutralizeTemplateJS = function(mutations, observer) {
+                mutations.forEach(function(mutation) {
+                    const target = mutation.target;
+                    if (mutation.attributeName === 'class') {
+                        if (target.classList.contains('sticky')) {
+                            target.classList.remove('sticky');
+                        }
+                    }
+                    if (mutation.attributeName === 'style') {
+                        target.removeAttribute('style');
+                    }
+                });
+            };
+
+            const observerOptions = { attributes: true, attributeFilter: ['class', 'style'] };
+            
+            const headerObserver = new MutationObserver(neutralizeTemplateJS);
+            headerObserver.observe(header, observerOptions);
+            
+            if (headerNav) {
+                const navObserver = new MutationObserver(neutralizeTemplateJS);
+                navObserver.observe(headerNav, observerOptions);
+            }
+
+            let scrollTimeout;
+            window.addEventListener('scroll', function() {
+                let currentScroll = window.scrollY || document.documentElement.scrollTop;
+                if (currentScroll > 150) {
+                    if (!header.classList.contains('is-fixed')) {
+                        header.classList.add('is-fixed');
+                        header.classList.add('is-hidden');
+                        clearTimeout(scrollTimeout);
+                        scrollTimeout = setTimeout(function() {
+                            header.classList.remove('is-hidden');
+                        }, 300); 
+                    }
+                } else {
+                    if (header.classList.contains('is-fixed')) {
+                        header.classList.remove('is-fixed');
+                        header.classList.remove('is-hidden');
+                        clearTimeout(scrollTimeout);
+                    }
+                }
+            }, { passive: true });
+        });
+    </script>
+{% endblock %}
+
 
     <!--====== Smooth Scroll Wrapper ======-->
     <div id="smooth-wrapper">
         <div id="smooth-content">
             
-            <!--====== Main Content ======-->
             <main>
                 {% block content %}
                 {% endblock %}
             </main>
 
-            <!--====== Footer ======-->
             {% block footer %}
             <footer class="main-footer bg_cover" data-src="{% static 'assets/images/footer/footer-bg.jpg' %}">
                 <div class="shape">
                     <img alt="shape" src="{% static 'assets/images/footer/footer-shape1.png' %}" />
                 </div>
                 
-
-                <!--=== Footer Bottom Wrapper ===-->
                 <div class="footer-bottom-wrapper bg_cover" data-src="{% static 'assets/images/footer/footer-widget-bg.jpg' %}">
                     <div class="container">
                         <div class="footer-widget-area pt-100 pb-55">
@@ -211,7 +607,7 @@
                                     <div class="footer-widget footer-about-widget mb-40" data-aos="fade-up" data-aos-duration="800">
                                         <div class="widget-content">
                                             <div class="footer-logo mb-30">
-                                                <a href="/">
+                                                <a href="{% url 'core:home' %}">
                                                     <img alt="{% trans 'کیان صنعت' %}" src="{% static 'assets/images/home-one/logo/logo-white.png' %}" />
                                                 </a>
                                             </div>
@@ -234,12 +630,12 @@
                                                     <h4 class="widget-title">{% trans "لینک‌های سریع" %}</h4>
                                                     <div class="line-wrap"><span></span><span></span><span></span></div>
                                                     <ul class="widget-nav">
-                                                        <li><a href="/">{% trans "صفحه اصلی" %}</a></li>
-                                                        <li><a href="#">{% trans "درباره ما" %}</a></li>
+                                                        <li><a href="{% url 'core:home' %}">{% trans "صفحه اصلی" %}</a></li>
+                                                        <li><a href="{% url 'core:about' %}">{% trans "درباره ما" %}</a></li>
                                                         <li><a href="#">{% trans "خدمات ما" %}</a></li>
                                                         <li><a href="#">{% trans "پروژه‌ها" %}</a></li>
                                                         <li><a href="#">{% trans "اخبار و مقالات" %}</a></li>
-                                                        <li><a href="#">{% trans "تماس با ما" %}</a></li>
+                                                        <li><a href="{% url 'core:contact' %}">{% trans "تماس با ما" %}</a></li>
                                                     </ul>
                                                 </div>
                                             </div>
@@ -286,7 +682,6 @@
                             </div>
                         </div>
 
-                        <!--=== Copyright Area ===-->
                         <div class="copyright-area">
                             <div class="row">
                                 <div class="col-lg-6">
@@ -307,8 +702,8 @@
             </footer>
             {% endblock %}
 
-        </div> <!-- end smooth-content -->
-    </div> <!-- end smooth-wrapper -->
+        </div> 
+    </div> 
 
     <!--====== JS Plugins ======-->
     <script src="{% static 'assets/js/plugins/jquery-3.7.1.min.js' %}"></script>
@@ -325,6 +720,7 @@
     <script src="{% static 'assets/js/plugins/aos.js' %}"></script>
     <script src="{% static 'assets/js/theme.js' %}"></script>
 
+    <!-- جاوااسکریپت‌های عمومی بدنه -->
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             const termsCheckbox = document.getElementById("terms_checkbox");
@@ -340,7 +736,6 @@
                         subscribeBtn.classList.add("fade-out-btn");
                     }
                 };
-                
                 toggleButton();
                 termsCheckbox.addEventListener("change", toggleButton);
             }

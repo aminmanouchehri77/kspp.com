@@ -21,6 +21,12 @@ class HomeView(TemplateView):
         # بعداً می‌توانیم داده‌های دیتابیس را برای رندر مستقیم در HTML به اینجا اضافه کنیم
         return context
 
+class AboutView(TemplateView):
+    template_name = 'core/about.html'
+
+class ContactView(TemplateView):
+    template_name = 'core/contact.html'
+
 
 # ==========================================
 # ویوی تعویض زبان (جایگزین django.conf.urls.i18n.set_language)
@@ -28,19 +34,6 @@ class HomeView(TemplateView):
 def switch_language(request):
     """
     جایگزین امن‌تر برای ویوی پیش‌فرض set_language جنگو.
-
-    مشکل ویوی پیش‌فرض: برای resolve کردن next_url به resolve() و
-    "زبان فعلاً فعال" وابسته است، و آن زبان از روی کوکی/session
-    خوانده می‌شود -- نه از روی خودِ next_url. وقتی کوکی با پیشوند
-    زبانِ آدرس فعلی هماهنگ نباشد (مثلاً کاربر مستقیم /en/... را در
-    مرورگر تایپ کرده و قبلاً هیچ‌وقت از طریق این فرم زبان را عوض
-    نکرده)، آن resolve شکست می‌خورد و ریدایرکت روی همان آدرس قبلی
-    (با همان پیشوند قبلی) می‌ماند -- یعنی دقیقاً همان باگ "زبان عوض
-    نمی‌شود".
-
-    این ویو به‌جای اتکا به resolve/reverse، مستقیماً پیشوند زبان را
-    در خودِ رشته‌ی next دستکاری می‌کند، بدون هیچ وابستگی به وضعیت
-    فعلی کوکی یا session.
     """
     next_url = request.POST.get('next') or request.GET.get('next') or '/'
 
@@ -71,11 +64,8 @@ def switch_language(request):
             break
 
     # ۲. اضافه کردن پیشوند زبان جدید
-    #    (زبان پیش‌فرض settings.LANGUAGE_CODE پیشوند نمی‌گیرد چون
-    #     prefix_default_language=False در urls.py تنظیم شده)
     default_lang = settings.LANGUAGE_CODE
     if lang_code != default_lang:
-        # از تکرار // جلوگیری می‌کنیم اگر path خودش '/' باشد
         path = f'/{lang_code}' + (path if path != '/' else '/')
 
     response = HttpResponseRedirect(path)
