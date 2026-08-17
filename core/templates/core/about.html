@@ -4,13 +4,358 @@
 {% block title %}{% trans "درباره ما | شرکت کیان صنعت" %}{% endblock %}
 
 {% block content %}
+    <style>
+        /* ==========================================
+           بارگذاری فونت Vazirmatn 
+           ========================================== */
+        @import url('https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.0.0/Vazirmatn-font-face.css');
+        @import url('https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.0.0/Vazirmatn-FD-font-face.css');
+
+        /* ==========================================
+           تایپوگرافی پایه و عمومی
+           ========================================== */
+        body {
+            font-family: 'Vazirmatn', sans-serif;
+            line-height: 1.8;
+            color: #4b5563;
+        }
+
+        h1, h2, h3, h4, h5, h6, p, li, button, input, textarea,
+        .theme-btn, .sub-title, .position, .title {
+            font-family: 'Vazirmatn', sans-serif !important;
+        }
+
+        h1, h2, h3, h4, h5, h6, .title {
+            letter-spacing: normal; 
+            color: #111827;
+        }
+
+        /* ==========================================
+           استایل‌های یکپارچه و مدرن برای تمام تصاویر صفحه
+           ========================================== */
+        .clean-image-box img, 
+        .clean-image-box,
+        .orbia-we_two .orbia-image img,
+        .member-image img,
+        .orbia-features_three .orbia-image > img {
+            border-radius: 20px !important;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08) !important;
+            width: 100%;
+            height: auto;
+            display: block;
+            border: none !important;
+        }
+
+        /* ==========================================
+           یکپارچه‌سازی عناوین و متون برای تمام سکشن‌ها
+           ========================================== */
+        .section-title h2 {
+            font-size: 32px !important;
+            font-weight: 800 !important;
+            line-height: 1.5 !important;
+            margin-bottom: 25px !important;
+        }
+        
+        .section-title .sub-title {
+            font-size: 16px !important;
+            font-weight: 700 !important;
+            margin-bottom: 12px !important;
+            display: inline-block;
+        }
+
+        p {
+            font-size: 16px;
+            line-height: 1.9;
+            text-align: justify;
+        }
+
+        /* یکپارچه‌سازی تمامی باکس‌های آیکون‌دار در کل صفحه */
+        .orbia-iconic-box,
+        .orbia-iconic-left-box {
+            margin-bottom: 30px;
+        }
+        
+        .orbia-iconic-box .content h4,
+        .orbia-iconic-box .content h5,
+        .orbia-iconic-left-box .content h5 {
+            font-size: 18px !important;
+            font-weight: 700 !important;
+            margin-bottom: 10px;
+            color: #111827;
+        }
+        
+        .orbia-iconic-box .content p,
+        .orbia-iconic-left-box .content p {
+            font-size: 14px !important;
+            line-height: 1.8 !important;
+            margin-bottom: 0 !important;
+            text-align: right !important;
+            color: #6b7280 !important;
+        }
+
+        .orbia-button {
+            margin-top: 15px;
+        }
+
+        /* ==========================================
+           استایل‌های چک‌لیست آکادمی (گرادیانت نئونی)
+           ========================================== */
+        .check-list li {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+        .check-list li i {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 25px;
+            height: 25px;
+            background: linear-gradient(135deg, #8A2BE2, #FF3366, #FF8C00);
+            color: #ffffff;
+            border-radius: 50%;
+            margin-left: 10px;
+            font-size: 12px;
+            box-shadow: 0 4px 10px rgba(255, 51, 102, 0.3);
+        }
+
+        /* ==========================================
+           استایل‌های هیرو (عنوان صفحه)
+           ========================================== */
+        .page-hero h1,
+        .page-hero ul li,
+        .page-hero ul li a {
+            font-weight: 700; 
+        }
+        .page-hero ul li {
+            margin-top: 10px;
+        }
+        .page-hero ul li a {
+            color: #fff;
+            text-decoration: none;
+        }
+        .page-hero ul li a:hover {
+            text-decoration: underline;
+        }
+
+        /* ==========================================
+           استایل بخش آمار و ارقام (Counters)
+           ========================================== */
+        .orbia-counter-sec {
+            padding-top: 80px;
+            padding-bottom: 80px;
+            position: relative;
+            background: #ffffff !important;
+            z-index: 2;
+        }
+        .orbia-counter-sec::before,
+        .orbia-counter-sec::after,
+        .orbia-counter-sec .shape { display: none !important; }
+
+        .orbia-counter-item.style-two {
+            position: relative;
+            width: 210px;
+            height: 210px;
+            margin: 0 auto 30px auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: #ffffff;
+            z-index: 1;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .orbia-counter-item.style-two::before {
+            content: "";
+            position: absolute;
+            top: -4px; left: -4px; right: -4px; bottom: -4px;
+            background: linear-gradient(135deg, #8A2BE2, #FF3366, #FF8C00);
+            border-radius: 50%;
+            z-index: -1;
+            transition: all 0.4s ease;
+            opacity: 0.85;
+        }
+        .orbia-counter-item.style-two:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 40px rgba(255, 51, 102, 0.25);
+        }
+        .orbia-counter-item.style-two:hover::before {
+            opacity: 1;
+            top: -6px; left: -6px; right: -6px; bottom: -6px;
+        }
+        .orbia-counter-item.style-two .content h2 {
+            font-size: 52px !important;
+            font-weight: 800 !important;
+            color: #111827 !important;
+            margin-bottom: 2px;
+            letter-spacing: normal;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            direction: ltr !important; 
+        }
+        .orbia-counter-item.style-two .content h2 .counter {
+            font-family: 'Vazirmatn FD', sans-serif !important;
+        }
+        .orbia-counter-item.style-two .content h2 .suffix {
+            font-family: 'Vazirmatn', sans-serif !important;
+            font-size: 40px !important;
+            font-weight: 800 !important;
+            color: #111827 !important; 
+            margin-left: 5px; 
+        }
+        .orbia-counter-item.style-two .content p {
+            font-size: 16px !important; 
+            font-weight: 700;
+            color: #6b7280;
+            margin: 0;
+            text-align: center;
+        }
+
+        /* ==========================================
+           استایل بخش CTA
+           ========================================== */
+        .orbia-cta_three {
+            padding: 100px 0; 
+            position: relative;
+            z-index: 1;
+        }
+        .orbia-cta_three::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(to right, rgba(15, 23, 42, 0.85), rgba(15, 23, 42, 0.6));
+            z-index: -1;
+            display: block !important; 
+        }
+        .orbia-cta_three::after,
+        .orbia-cta_three > img { display: none !important; }
+        .orbia-cta_three .orbia-content-box {
+            position: relative;
+            z-index: 2;
+            background: rgba(255, 255, 255, 0.03); 
+            backdrop-filter: blur(8px); 
+            -webkit-backdrop-filter: blur(8px); 
+            padding: 40px 20px;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+        .orbia-cta_three .sub-title {
+            font-size: 18px !important;
+            font-weight: 700 !important;
+            color: #FF3366 !important; 
+            margin-bottom: 15px;
+            display: inline-block;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.8);
+        }
+        .orbia-cta_three h2 {
+            font-size: 36px !important;
+            font-weight: 800 !important;
+            line-height: 1.6 !important;
+            margin-bottom: 30px !important;
+            color: #ffffff !important;
+            text-shadow: 2px 2px 10px rgba(0,0,0,0.9);
+        }
+        @media (max-width: 768px) {
+            .orbia-cta_three h2 { font-size: 26px !important; line-height: 1.5 !important; }
+            .orbia-cta_three .orbia-content-box { padding: 30px 15px; }
+        }
+        .orbia-cta_three .orbia-button {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        /* ==========================================
+           استایل‌های اختصاصی تیم و گواهینامه‌ها
+           ========================================== */
+        .member-info .title {
+            font-size: 22px !important;
+            font-weight: 800 !important;
+            margin-bottom: 10px;
+        }
+
+        .certificate-card {
+            background: #fff;
+            border-radius: 15px;
+            padding: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+            transition: all 0.3s ease;
+            text-align: center;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+            overflow: hidden;
+        }
+        .certificate-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.12);
+        }
+        .certificate-card img {
+            border-radius: 10px;
+            width: 100%;
+            aspect-ratio: 3/4;
+            object-fit: cover;
+            margin-bottom: 15px;
+            cursor: pointer;
+            border: 1px solid #eee;
+        }
+        .certificate-card h5 {
+            font-size: 16px !important;
+            font-weight: 700 !important;
+            margin-bottom: 0;
+            color: #333;
+            line-height: 1.4;
+        }
+
+        .orbia-avatar-box {
+            border-radius: 15px !important;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1) !important;
+        }
+        
+        /* ==========================================
+           تنظیمات فلش‌های مسیر پروژه
+           ========================================== */
+        .process-wrapper {
+            position: relative;
+        }
+        
+        .process-wrapper .shape {
+            position: absolute;
+            z-index: 0;
+            /* قرینه کردن در محور افقی برای زبان فارسی (RTL) بجای چرخش 180 درجه */
+            transform: scaleX(-1);
+            opacity: 0.6;
+        }
+        
+        .process-wrapper .shape.shape-one {
+            top: 20%;
+            right: 23%;
+        }
+        
+        .process-wrapper .shape.shape-two {
+            top: 50%;
+            right: 56%;
+        }
+        
+        @media (max-width: 991px) {
+            .process-wrapper .shape {
+                display: none;
+            }
+        }
+    </style>
 
     <!--======  Start Page Hero Section  ======-->
     <section class="page-hero bg_cover p-r z-1" data-src="{% static 'assets/images/innerpage/bg/page-bg.jpg' %}">
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-lg-8">
-                    <!--=== Page Content ===-->
                     <div class="page-content text-center">
                         <h1>{% trans "درباره ما" %}</h1>
                         <ul>
@@ -24,63 +369,51 @@
     </section>
     <!--======  End Page Hero Section  ======-->
 
-    <!--======  Start About Section  ======-->
+    <!--======  Start About Section (مشتری مداری)  ======-->
     <section class="orbia-about_four pt-120 pb-120">
         <div class="container">
-            <div class="row justify-content-center">
+            <div class="row align-items-center justify-content-center">
                 <div class="col-xl-5 col-lg-9">
-                    <!-- Orbia Image Box -->
-                    <div class="orbia-image-box mb-5 mb-xl-0">
-                        <div class="orbia-image image_one">
-                            <img alt="{% trans 'تصویر درباره' %}" src="{% static 'assets/images/innerpage/about/about-img1.jpg' %}" />
-                        </div>
-                        <div class="orbia-image image_two">
-                            <img alt="{% trans 'تصویر درباره' %}" src="{% static 'assets/images/innerpage/about/about-img2.png' %}" />
-                        </div>
-                        <div class="shape shape-one"><img alt="{% trans 'شکل' %}"
-                                src="{% static 'assets/images/innerpage/about/shape1.png' %}" /></div>
-                        <div class="shape shape-two"><img alt="{% trans 'شکل' %}"
-                                src="{% static 'assets/images/innerpage/about/shape2.png' %}" /></div>
+                    <div class="mb-5 mb-xl-0 clean-image-box" data-aos="fade-left" data-aos-duration="1000">
+                        <img alt="{% trans 'درباره کیان صنعت' %}" src="{% static 'assets/images/innerpage/about/about-img1.jpg' %}" />
                     </div>
                 </div>
+                
                 <div class="col-xl-7 col-lg-9">
-                    <!-- Orbia Content Box -->
-                    <div class="orbia-content-box">
+                    <div class="orbia-content-box ps-xl-4">
                         <div class="section-title">
-                            <span class="sub-title" data-aos="fade-up" data-aos-duration="1000">{% trans "درباره ما" %}</span>
-                            <h2 class="">{% trans "استفاده از راهکارهای هوش مصنوعی برای رهبری آینده تجارت" %}</h2>
+                            <span class="sub-title" data-aos="fade-up" data-aos-duration="1000">{% trans "درباره کیان صنعت" %}</span>
+                            <h2 data-aos="fade-up" data-aos-duration="1100">{% trans "مشتری‌مداری؛ هسته مرکزی توسعه و نوآوری" %}</h2>
                         </div>
-                        <p data-aos="fade-up" data-aos-duration="1200">{% trans "ما با درک اهداف، چالش ها و فرصت های کسب و کار شما برای ادغام هوش مصنوعی شروع می کنیم." %}</p>
+                        <p class="mb-35" data-aos="fade-up" data-aos-duration="1200">{% trans "در شرکت کیان صنعت، ما معتقدیم که موفقیت در پروژه‌های هوشمندسازی، انرژی‌های نوین و زیرساخت‌های عمرانی تنها در سایه رضایت کامل و درک دقیق نیازهای کارفرمایان به دست می‌آید. ما راهکارها را دقیقاً بر اساس چالش‌های کسب‌وکار شما سفارشی‌سازی می‌کنیم." %}</p>
+                        
                         <div class="row">
                             <div class="col-md-6">
-                                <!-- Orbia Iconic Box -->
-                                <div class="orbia-iconic-box style-three mb-35" data-aos="fade-up"
-                                    data-aos-duration="1200">
+                                <div class="orbia-iconic-box style-three" data-aos="fade-up" data-aos-duration="1300">
                                     <div class="icon">
                                         <img alt="{% trans 'آیکون' %}" src="{% static 'assets/images/innerpage/icon/icon1.png' %}" />
                                     </div>
                                     <div class="content">
-                                        <h5>{% trans "100% رضایت مشتریان" %}</h5>
-                                        <p>{% trans "ما تیمی متشکل از متخصصان باتجربه هوش مصنوعی، دانشمندان داده، کارشناسان صنعت متعهد به پیشبرد مرزها را آورده ایم." %}</p>
+                                        <h5>{% trans "تعهد به کیفیت و زمان" %}</h5>
+                                        <p>{% trans "تضمین اجرای دقیق پروژه‌ها از طراحی نیروگاه‌های خورشیدی تا پیاده‌سازی ربات‌های هوشمند با بالاترین استانداردها." %}</p>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-md-6">
-                                <!-- Orbia Iconic Box -->
-                                <div class="orbia-iconic-box style-three mb-35" data-aos="fade-up"
-                                    data-aos-duration="1400">
+                                <div class="orbia-iconic-box style-three" data-aos="fade-up" data-aos-duration="1400">
                                     <div class="icon">
                                         <img alt="{% trans 'آیکون' %}" src="{% static 'assets/images/innerpage/icon/icon2.png' %}" />
                                     </div>
                                     <div class="content">
-                                        <h5>{% trans "تضمین کیفیت" %}</h5>
-                                        <p>{% trans "ما تیمی متشکل از متخصصان باتجربه هوش مصنوعی، دانشمندان داده، کارشناسان صنعت متعهد به پیشبرد مرزها را آورده ایم." %}</p>
+                                        <h5>{% trans "پشتیبانی و همراهی مستمر" %}</h5>
+                                        <p>{% trans "حضور در کنار مشتریان حتی پس از اتمام پروژه‌ها برای تضمین عملکرد بهینه سیستم‌های مدیریت هوشمند انرژی." %}</p>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="orbia-button" data-aos="fade-up" data-aos-duration="1600">
-                            <a class="theme-btn gradient-btn" href="{% url 'core:about' %}">{% trans "بیشتر کشف کنید" %}<i
+                        
+                        <div class="orbia-button" data-aos="fade-up" data-aos-duration="1500">
+                            <a class="theme-btn gradient-btn" href="{% url 'core:about' %}">{% trans "ارتباط با ما" %}<i
                                     class="far fa-arrow-left" style="margin-right: 10px !important;"></i></a>
                         </div>
                     </div>
@@ -90,47 +423,39 @@
     </section>
     <!--======  End About Section  ======-->
 
-    <!--======  Start Counter Section  ======-->
-    <section class="orbia-counter-sec pb-80">
+    <!--======  Start Counter Section (آمار نئونی)  ======-->
+    <section class="orbia-counter-sec">
         <div class="container">
             <div class="row">
                 <div class="col-xl-3 col-md-6 col-sm-12">
-                    <!-- Orbia Counter Item -->
-                    <div class="orbia-counter-item style-two mb-40" data-aos="fade-up"
-                        data-aos-duration="1000">
+                    <div class="orbia-counter-item style-two" data-aos="fade-up" data-aos-duration="1000">
                         <div class="content">
-                            <h2><span class="counter">58</span>{% trans "k+" %}</h2>
-                            <p>{% trans "پروژه تکمیل شد" %}</p>
+                            <h2><span class="counter">40</span><span class="suffix">{% trans "+" %}</span></h2>
+                            <p>{% trans "نیروی متخصص" %}</p>
                         </div>
                     </div>
                 </div>
                 <div class="col-xl-3 col-md-6 col-sm-12">
-                    <!-- Orbia Counter Item -->
-                    <div class="orbia-counter-item style-two mb-40" data-aos="fade-up"
-                        data-aos-duration="1200">
+                    <div class="orbia-counter-item style-two" data-aos="fade-up" data-aos-duration="1200">
                         <div class="content">
-                            <h2><span class="counter">6</span>{% trans "k+" %}</h2>
-                            <p>{% trans "ذهن های خلاق" %}</p>
+                            <h2><span class="counter">100</span><span class="suffix">{% trans "%" %}</span></h2>
+                            <p>{% trans "رضایت کارفرمایان" %}</p>
                         </div>
                     </div>
                 </div>
                 <div class="col-xl-3 col-md-6 col-sm-12">
-                    <!-- Orbia Counter Item -->
-                    <div class="orbia-counter-item style-two mb-40" data-aos="fade-up"
-                        data-aos-duration="1400">
+                    <div class="orbia-counter-item style-two" data-aos="fade-up" data-aos-duration="1400">
                         <div class="content">
-                            <h2><span class="counter">36</span>{% trans "k+" %}</h2>
-                            <p>{% trans "مشتریان خوشحال" %}</p>
+                            <h2><span class="counter">85</span><span class="suffix">{% trans "+" %}</span></h2>
+                            <p>{% trans "پروژه موفق" %}</p>
                         </div>
                     </div>
                 </div>
                 <div class="col-xl-3 col-md-6 col-sm-12">
-                    <!-- Orbia Counter Item -->
-                    <div class="orbia-counter-item style-two mb-40" data-aos="fade-up"
-                        data-aos-duration="1600">
+                    <div class="orbia-counter-item style-two" data-aos="fade-up" data-aos-duration="1600">
                         <div class="content">
-                            <h2><span class="counter">50</span>{% trans "K+" %}</h2>
-                            <p>{% trans "تیم مشارکتی" %}</p>
+                            <h2><span class="counter">15</span><span class="suffix">{% trans "+" %}</span></h2>
+                            <p>{% trans "سال تجربه صنعتی" %}</p>
                         </div>
                     </div>
                 </div>
@@ -144,15 +469,14 @@
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-lg-10">
-                    <!-- Orbia Content Box -->
                     <div class="orbia-content-box text-center text-white">
-                        <span class="sub-title" data-aos="fade-down" data-aos-duration="1000">{% trans "راه حل ها" %}</span>
-                        <h2 class="">{% trans "خدمات مشتری را با چت ربات های هوشمند برای کمک بدون استرس افزایش دهید" %}</h2>
+                        <span class="sub-title" data-aos="fade-down" data-aos-duration="1000">{% trans "آینده را با ما بسازید" %}</span>
+                        <h2 class="text-white">{% trans "برای شروع پروژه‌های هوشمندسازی و بهینه‌سازی انرژی خود آماده‌اید؟" %}</h2>
                         <div class="orbia-button" data-aos="fade-up" data-aos-duration="1000">
-                            <a class="theme-btn gradient-btn" href="{% url 'core:about' %}">{% trans "کاوش بیشتر" %}<i
+                            <a class="theme-btn gradient-btn" href="{% url 'core:about' %}">{% trans "دریافت مشاوره" %}<i
                                     class="far fa-arrow-left" style="margin-right: 10px !important;"></i></a>
                             <a class="theme-btn style-one video-popup"
-                                href="https://www.youtube.com/watch?v=8oON21G1Bqg">{% trans "تماشای ویدیو" %}<i
+                                href="https://www.youtube.com/watch?v=8oON21G1Bqg">{% trans "معرفی شرکت" %}<i
                                     class="far fa-arrow-left" style="margin-right: 10px !important;"></i></a>
                         </div>
                     </div>
@@ -162,60 +486,59 @@
     </section>
     <!--======  End CTA Section  ======-->
 
-    <!--======  Start Who We Section  ======-->
+    <!--======  Start Who We Section (آکادمی)  ======-->
     <section class="orbia-we_two pt-120 pb-120">
         <div class="container">
-            <div class="row justify-content-center">
+            <div class="row align-items-center justify-content-center">
                 <div class="col-xl-6 col-lg-10">
-                    <!-- Orbia Content Box -->
                     <div class="orbia-content-box mb-5 mb-xl-0">
                         <div class="section-title">
-                            <span class="sub-title" data-aos="fade-down" data-aos-duration="1000">{% trans "ما که هستیم" %}</span>
-                            <h2 class="">{% trans "بازتعریف خلاقیت با قدرت هوش مصنوعی" %}</h2>
+                            <span class="sub-title" data-aos="fade-down" data-aos-duration="1000">{% trans "آموزش و توسعه مهارت‌ها" %}</span>
+                            <h2 data-aos="fade-up" data-aos-duration="1100">{% trans "آکادمی کیان صنعت؛ پرورش نخبگان فناوری فردا" %}</h2>
                         </div>
-                        <p data-aos="fade-up" data-aos-duration="1000">{% trans "ما یک آژانس هوش مصنوعی پیشرفته هستیم که مشتاق تبدیل تخیل به واقعیت هستیم." %}</p>
-                        <div class="iconic-box-wrapper">
+                        <p data-aos="fade-up" data-aos-duration="1200">{% trans "هدف از تأسیس آکادمی کیان صنعت، پر کردن خلأ میان دانش تئوری و نیازهای صنعتی است. ما با بهره‌گیری از تجربه اجرای پروژه‌های کلان، فضایی را برای آموزش تخصصی و انتقال تجربه فراهم کرده‌ایم." %}</p>
+                        
+                        <div class="iconic-box-wrapper mt-4">
                             <div class="row">
                                 <div class="col-md-6 item-column">
-                                    <div class="orbia-iconic-left-box style-two mb-40" data-aos="fade-up"
-                                        data-aos-duration="1200">
+                                    <div class="orbia-iconic-left-box style-two" data-aos="fade-up" data-aos-duration="1300">
                                         <div class="icon">
-                                            <img alt="{% trans 'آیکون' %}" src="{% static 'assets/images/innerpage/icon/icon3.png' %}" />
+                                            <img alt="{% trans 'آموزش کاربردی' %}" src="{% static 'assets/images/innerpage/icon/icon3.png' %}" />
                                         </div>
                                         <div class="content">
-                                            <h5>{% blocktrans %}مجهز به هوش مصنوعی<br />نوآوری{% endblocktrans %}</h5>
+                                            <h5>{% blocktrans %}آموزش‌های کاربردی<br />و پروژه‌محور{% endblocktrans %}</h5>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-md-6 item-column">
-                                    <div class="orbia-iconic-left-box style-two mb-40" data-aos="fade-up"
-                                        data-aos-duration="1400">
+                                    <div class="orbia-iconic-left-box style-two" data-aos="fade-up" data-aos-duration="1400">
                                         <div class="icon">
-                                            <img alt="{% trans 'آیکون' %}" src="{% static 'assets/images/innerpage/icon/icon4.png' %}" />
+                                            <img alt="{% trans 'اساتید مجرب' %}" src="{% static 'assets/images/innerpage/icon/icon4.png' %}" />
                                         </div>
                                         <div class="content">
-                                            <h5>{% blocktrans %}بی حد و حصر<br />سبک ها{% endblocktrans %}</h5>
+                                            <h5>{% blocktrans %}اساتید مجرب<br />از دل صنعت{% endblocktrans %}</h5>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <ul class="check-list gradient-check mb-30" data-aos="fade-up"
-                            data-aos-duration="1600">
-                            <li><i class="fas fa-check-circle"></i>{% trans "استفاده از مدل های پیشرفته برای خلاقیت بی بدیل." %}</li>
-                            <li><i class="fas fa-check-circle"></i>{% trans "از فوق واقع گرایانه تا هنری، فانتزی و آینده نگر." %}</li>
-                            <li><i class="fas fa-check-circle"></i>{% trans "تولید تصاویر در چند ثانیه، برای افراد یا شرکت ها." %}</li>
+                        
+                        <ul class="check-list mt-3" data-aos="fade-up" data-aos-duration="1500" style="list-style:none; padding:0;">
+                            <li><i class="fas fa-check"></i>{% trans "برگزاری دوره‌های تخصصی هوش مصنوعی و رباتیک." %}</li>
+                            <li><i class="fas fa-check"></i>{% trans "آموزش‌های جامع طراحی و راه‌اندازی نیروگاه‌های خورشیدی." %}</li>
+                            <li><i class="fas fa-check"></i>{% trans "کارگاه‌های عملی مدیریت بهینه‌سازی انرژی و ساختمان." %}</li>
                         </ul>
-                        <div class="orbia-button">
-                            <a class="theme-btn gradient-btn" href="{% url 'core:about' %}">{% trans "اکنون شروع کنید" %}<i
+                        
+                        <div class="orbia-button mt-4" data-aos="fade-up" data-aos-duration="1600">
+                            <a class="theme-btn gradient-btn" href="#">{% trans "ورود به آکادمی" %}<i
                                     class="far fa-arrow-left" style="margin-right: 10px !important;"></i></a>
                         </div>
                     </div>
                 </div>
+
                 <div class="col-xl-6 col-lg-10">
-                    <!-- Orbia Image -->
-                    <div class="orbia-image" data-aos="fade-up" data-aos-duration="1000">
-                        <img alt="{% trans 'تصویر ما' %}" src="{% static 'assets/images/innerpage/gallery/who-we-img.jpg' %}" />
+                    <div class="orbia-image ps-xl-4 clean-image-box" data-aos="fade-right" data-aos-duration="1000">
+                        <img alt="{% trans 'آکادمی کیان صنعت' %}" src="{% static 'assets/images/innerpage/gallery/who-we-img.jpg' %}" />
                     </div>
                 </div>
             </div>
@@ -224,61 +547,52 @@
     <!--======  End Who We Section  ======-->
 
     <!--======  Start Process Section  ======-->
-    <section class="orbia-process_two bg_cover pt-110 pb-70"
-        data-src="{% static 'assets/images/innerpage/bg/process-bg.jpg' %}">
+    <section class="orbia-process_two bg_cover pt-120 pb-100" data-src="{% static 'assets/images/innerpage/bg/process-bg.jpg' %}">
         <div class="container">
             <div class="row justify-content-center">
-                <div class="col-xl-6 col-lg-10">
-                    <!-- Section Title -->
+                <div class="col-xl-8 col-lg-10">
                     <div class="section-title text-center mb-50">
                         <span class="sub-title" data-aos="fade-down" data-aos-duration="1000">{% trans "فرآیند کار" %}</span>
-                        <h2 class="">{% trans "ساختن موفقیت، یک قدم در یک زمان" %}</h2>
+                        <h2>{% trans "مسیر اجرای پروژه‌ها در کیان صنعت" %}</h2>
                     </div>
                 </div>
             </div>
-            <!-- Process Wrpper -->
             <div class="process-wrapper">
-                <div class="shape shape-one"><img alt="{% trans 'پیکان' %}"
-                        src="{% static 'assets/images/innerpage/gallery/process-arrow-img1.png' %}" /></div>
-                <div class="shape shape-two"><img alt="{% trans 'پیکان' %}"
-                        src="{% static 'assets/images/innerpage/gallery/process-arrow-img2.png' %}" /></div>
+                <!-- تزریق کدهای پیکان با کلاس shape -->
+                <div class="shape shape-one"><img alt="{% trans 'پیکان' %}" src="{% static 'assets/images/innerpage/gallery/process-arrow-img1.png' %}" /></div>
+                <div class="shape shape-two"><img alt="{% trans 'پیکان' %}" src="{% static 'assets/images/innerpage/gallery/process-arrow-img2.png' %}" /></div>
+                
                 <div class="row justify-content-center">
                     <div class="col-lg-4 col-md-6 col-sm-12">
-                        <!-- Orbia Iconic Box -->
-                        <div class="orbia-iconic-box style-four mb-40" data-aos="fade-up"
-                            data-aos-duration="1000">
-                            <div class="icon">
-                                <img alt="{% trans 'آیکون' %}" src="{% static 'assets/images/innerpage/icon/icon5.png' %}" />
+                        <div class="orbia-iconic-box style-four text-center mb-40" data-aos="fade-up" data-aos-duration="1000">
+                            <div class="icon mb-3">
+                                <img alt="{% trans 'آیکون' %}" src="{% static 'assets/images/innerpage/icon/icon5.png' %}" style="width: 60px;" />
                             </div>
                             <div class="content">
-                                <h4>{% trans "بهینه سازی طراحی" %}</h4>
-                                <p>{% trans "بازار کامل تحقیق را برای رفتارهای مخاطب هدف سریع انجام دهید." %}</p>
+                                <h4>{% trans "نیازسنجی و طراحی" %}</h4>
+                                <p class="text-center">{% trans "بررسی دقیق نیازهای کارفرما و ارائه طراحی‌های سفارشی مبتنی بر استانداردهای مهندسی." %}</p>
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-4 col-md-6 col-sm-12">
-                        <!-- Orbia Iconic Box -->
-                        <div class="orbia-iconic-box style-four mb-40" data-aos="fade-up"
-                            data-aos-duration="1200">
-                            <div class="icon">
-                                <img alt="{% trans 'آیکون' %}" src="{% static 'assets/images/innerpage/icon/icon5.png' %}" />
+                        <div class="orbia-iconic-box style-four text-center mb-40" data-aos="fade-up" data-aos-duration="1200">
+                            <div class="icon mb-3">
+                                <img alt="{% trans 'آیکون' %}" src="{% static 'assets/images/innerpage/icon/icon5.png' %}" style="width: 60px;" />
                             </div>
                             <div class="content">
-                                <h4>{% trans "پیاده سازی توسعه" %}</h4>
-                                <p>{% trans "بازار کامل تحقیق را برای رفتارهای مخاطب هدف سریع انجام دهید." %}</p>
+                                <h4>{% trans "توسعه و پیاده‌سازی" %}</h4>
+                                <p class="text-center">{% trans "استفاده از ماشین‌آلات پیشرفته و تیم متخصص برای اجرای بی‌نقص و زمان‌بندی شده پروژه‌ها." %}</p>
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-4 col-md-6 col-sm-12">
-                        <!-- Orbia Iconic Box -->
-                        <div class="orbia-iconic-box style-four mb-40" data-aos="fade-up"
-                            data-aos-duration="1400">
-                            <div class="icon">
-                                <img alt="{% trans 'آیکون' %}" src="{% static 'assets/images/innerpage/icon/icon5.png' %}" />
+                        <div class="orbia-iconic-box style-four text-center mb-40" data-aos="fade-up" data-aos-duration="1400">
+                            <div class="icon mb-3">
+                                <img alt="{% trans 'آیکون' %}" src="{% static 'assets/images/innerpage/icon/icon5.png' %}" style="width: 60px;" />
                             </div>
                             <div class="content">
-                                <h4>{% trans "تجزیه و تحلیل عملکرد" %}</h4>
-                                <p>{% trans "بازار کامل تحقیق را برای رفتارهای مخاطب هدف سریع انجام دهید." %}</p>
+                                <h4>{% trans "پشتیبانی و نگهداری" %}</h4>
+                                <p class="text-center">{% trans "ارائه خدمات پس از فروش و نظارت مستمر برای اطمینان از عملکرد پایدار سیستم‌ها." %}</p>
                             </div>
                         </div>
                     </div>
@@ -288,192 +602,101 @@
     </section>
     <!--======  End Process Section  ======-->
 
-    <!--======  Start Team Section  ======-->
-    <section class="orbia-team_one pt-115 pb-105 p-r z-1">
-        <div class="shape"><img alt="{% trans 'شکل تیم' %}" src="{% static 'assets/images/home-one/team/team-shape.png' %}" /></div>
+    <!--======  Start Team Section (منابع انسانی و دپارتمان‌ها)  ======-->
+    <section class="orbia-team_one pt-120 pb-120 p-r z-1">
         <div class="container">
             <div class="row justify-content-center">
-                <div class="col-lg-12">
-                    <!-- Section Title -->
+                <div class="col-lg-10">
                     <div class="section-title text-center mb-50">
-                        <span class="sub-title" data-aos="fade-down" data-aos-duration="1000">{% trans "تیم متخصص هوش مصنوعی" %}</span>
-                        <h2 class="">{% trans "تیم متخصص هوش مصنوعی حرفه ای ما." %}</h2>
+                        <span class="sub-title" data-aos="fade-down" data-aos-duration="1000">{% trans "سرمایه‌های اصلی ما" %}</span>
+                        <h2>{% trans "تکریم نیروی انسانی؛ کلید پیشرفت کیان صنعت" %}</h2>
                     </div>
                 </div>
             </div>
             <div class="row">
                 <div class="col-xl-4 col-lg-12">
-                    <!-- Tabs -->
                     <ul class="nav nav-tabs" data-aos="fade-up" data-aos-duration="1000">
                         <li>
-                            <div class="team-thumb-item mb-30" data-bs-target="#team_one" data-bs-toggle="tab">
-                                <div class="thumb">
-                                    <img alt="{% trans 'تصویر بندانگشتی تیم' %}" src="{% static 'assets/images/home-one/team/team-thumb1.jpg' %}" />
+                            <div class="team-thumb-item mb-30 active" data-bs-target="#team_one" data-bs-toggle="tab">
+                                <div class="thumb clean-image-box" style="width: 80px; height: 80px; overflow: hidden; border-radius: 15px !important;">
+                                    <img alt="{% trans 'دپارتمان هوش مصنوعی' %}" src="{% static 'assets/images/home-one/team/team-thumb1.jpg' %}" style="object-fit: cover; height: 100%;"/>
                                 </div>
-                                <div class="content">
-                                    <h5>{% trans "گای هاوکینز" %}</h5>
-                                    <span class="position" style="margin-right: 10px !important;">{% trans "رئیس بخش فروش" %}</span>
+                                <div class="content ms-3">
+                                    <h5>{% trans "هوش مصنوعی و رباتیک" %}</h5>
+                                    <span class="position">{% trans "دپارتمان تخصصی" %}</span>
                                 </div>
                             </div>
                         </li>
                         <li>
-                            <div class="team-thumb-item mb-30 active" data-bs-target="#team_two" data-bs-toggle="tab">
-                                <div class="thumb">
-                                    <img alt="{% trans 'تصویر بندانگشتی تیم' %}" src="{% static 'assets/images/home-one/team/team-thumb2.jpg' %}" />
+                            <div class="team-thumb-item mb-30" data-bs-target="#team_two" data-bs-toggle="tab">
+                                <div class="thumb clean-image-box" style="width: 80px; height: 80px; overflow: hidden; border-radius: 15px !important;">
+                                    <img alt="{% trans 'دپارتمان انرژی' %}" src="{% static 'assets/images/home-one/team/team-thumb2.jpg' %}" style="object-fit: cover; height: 100%;"/>
                                 </div>
-                                <div class="content">
-                                    <h5>{% trans "بروکلین سیمونز" %}</h5>
-                                    <span class="position" style="margin-right: 10px !important;">{% trans "رئیس بخش فروش" %}</span>
+                                <div class="content ms-3">
+                                    <h5>{% trans "انرژی‌های تجدیدپذیر" %}</h5>
+                                    <span class="position">{% trans "دپارتمان تخصصی" %}</span>
                                 </div>
                             </div>
                         </li>
                         <li>
                             <div class="team-thumb-item mb-30" data-bs-target="#team_three" data-bs-toggle="tab">
-                                <div class="thumb">
-                                    <img alt="{% trans 'تصویر بندانگشتی تیم' %}" src="{% static 'assets/images/home-one/team/team-thumb3.jpg' %}" />
+                                <div class="thumb clean-image-box" style="width: 80px; height: 80px; overflow: hidden; border-radius: 15px !important;">
+                                    <img alt="{% trans 'دپارتمان زیرساخت' %}" src="{% static 'assets/images/home-one/team/team-thumb3.jpg' %}" style="object-fit: cover; height: 100%;"/>
                                 </div>
-                                <div class="content">
-                                    <h5>{% trans "جنی ویلسون" %}</h5>
-                                    <span class="position" style="margin-right: 10px !important;">{% trans "رئیس بخش فروش" %}</span>
+                                <div class="content ms-3">
+                                    <h5>{% trans "زیرساخت و نمای هوشمند" %}</h5>
+                                    <span class="position">{% trans "دپارتمان تخصصی" %}</span>
                                 </div>
                             </div>
                         </li>
                     </ul>
                 </div>
                 <div class="col-xl-8 col-lg-12">
-                    <!-- Tab Content -->
                     <div class="tab-content">
-                        <div class="tab-pane fade" id="team_one">
-                            <div class="row">
+                        <div class="tab-pane fade show active" id="team_one">
+                            <div class="row align-items-center">
                                 <div class="col-lg-5">
-                                    <!-- Member Image -->
-                                    <div class="member-image" data-aos="fade-up" data-aos-duration="1000">
-                                        <img alt="{% trans 'تصویر تیم' %}" src="{% static 'assets/images/home-one/team/team-img1.jpg' %}" />
+                                    <div class="member-image clean-image-box mb-4 mb-lg-0" data-aos="fade-up" data-aos-duration="1000">
+                                        <img alt="{% trans 'دپارتمان هوش مصنوعی' %}" src="{% static 'assets/images/home-one/team/team-img1.jpg' %}" />
                                     </div>
                                 </div>
                                 <div class="col-lg-7">
-                                    <!-- Member Info -->
                                     <div class="member-info" data-aos="fade-up" data-aos-duration="1000">
-                                        <h3 class="title">{% trans "گای هاوکینز" %}</h3>
-                                        <span class="position">{% trans "رئیس بخش فروش" %}</span>
-                                        <p>{% trans "ما برای کنجکاوی، همکاری و نگرش می توانیم ارزش قائل شویم." %}</p>
-                                        <div class="orbia-progress-item mb-20">
-                                            <div class="progress-title">
-                                                <h6>{% trans "هوش مصنوعی" %}<span>90%</span></h6>
-                                            </div>
-                                            <div class="progress">
-                                                <div class="progress-bar" style="width: 90%;"></div>
-                                            </div>
-                                        </div>
-                                        <div class="orbia-progress-item mb-20">
-                                            <div class="progress-title">
-                                                <h6>{% trans "مدیریت رباتیک" %}<span>70%</span></h6>
-                                            </div>
-                                            <div class="progress">
-                                                <div class="progress-bar" style="width: 70%;"></div>
-                                            </div>
-                                        </div>
-                                        <div class="team-experience-social-box mt-40">
-                                            <div class="experience-box">
-                                                <h3>10+<span>{% trans "تجربه حرفه ای" %}</span></h3>
-                                            </div>
-                                            <div class="social-box">
-                                                <a href="#"><i class="fab fa-facebook-f"></i></a>
-                                                <a href="#"><i class="fab fa-twitter"></i></a>
-                                                <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                                                <a href="#"><i class="fab fa-youtube"></i></a>
-                                            </div>
-                                        </div>
+                                        <h3 class="title">{% trans "دپارتمان هوش مصنوعی و رباتیک" %}</h3>
+                                        <span class="position d-block mb-3" style="color: #FF3366; font-weight: bold;">{% trans "مغز متفکر کیان صنعت" %}</span>
+                                        <p class="mb-4">{% trans "طراحی سیستم‌های هوشمند، پردازش داده و ربات‌های صنعتی با رویکرد ارتقای بهره‌وری و کاهش خطای انسانی. ما فضایی پویا برای ایده‌پردازی و خلق نوآوری‌های مهندسانمان فراهم کرده‌ایم." %}</p>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="tab-pane fade show active" id="team_two">
-                            <div class="row">
+                        <div class="tab-pane fade" id="team_two">
+                            <div class="row align-items-center">
                                 <div class="col-lg-5">
-                                    <!-- Member Image -->
-                                    <div class="member-image" data-aos="fade-up" data-aos-duration="1000">
-                                        <img alt="{% trans 'تصویر تیم' %}" src="{% static 'assets/images/home-one/team/team-img2.jpg' %}" />
+                                    <div class="member-image clean-image-box mb-4 mb-lg-0" data-aos="fade-up" data-aos-duration="1000">
+                                        <img alt="{% trans 'دپارتمان انرژی' %}" src="{% static 'assets/images/home-one/team/team-img2.jpg' %}" />
                                     </div>
                                 </div>
                                 <div class="col-lg-7">
-                                    <!-- Member Info -->
                                     <div class="member-info" data-aos="fade-up" data-aos-duration="1000">
-                                        <h3 class="title">{% trans "بروکلین سیمونز" %}</h3>
-                                        <span class="position">{% trans "رئیس بخش فروش" %}</span>
-                                        <p>{% trans "ما برای کنجکاوی، همکاری و نگرش می توانیم ارزش قائل شویم." %}</p>
-                                        <div class="orbia-progress-item mb-20">
-                                            <div class="progress-title">
-                                                <h6>{% trans "هوش مصنوعی" %}<span>90%</span></h6>
-                                            </div>
-                                            <div class="progress">
-                                                <div class="progress-bar" style="width: 90%;"></div>
-                                            </div>
-                                        </div>
-                                        <div class="orbia-progress-item mb-20">
-                                            <div class="progress-title">
-                                                <h6>{% trans "مدیریت رباتیک" %}<span>70%</span></h6>
-                                            </div>
-                                            <div class="progress">
-                                                <div class="progress-bar" style="width: 70%;"></div>
-                                            </div>
-                                        </div>
-                                        <div class="team-experience-social-box mt-40">
-                                            <div class="experience-box">
-                                                <h3>10+<span>{% trans "تجربه حرفه ای" %}</span></h3>
-                                            </div>
-                                            <div class="social-box">
-                                                <a href="#"><i class="fab fa-facebook-f"></i></a>
-                                                <a href="#"><i class="fab fa-twitter"></i></a>
-                                                <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                                                <a href="#"><i class="fab fa-youtube"></i></a>
-                                            </div>
-                                        </div>
+                                        <h3 class="title">{% trans "دپارتمان انرژی‌های تجدیدپذیر" %}</h3>
+                                        <span class="position d-block mb-3" style="color: #FF3366; font-weight: bold;">{% trans "پیشگامان انرژی سبز" %}</span>
+                                        <p class="mb-4">{% trans "مشاوره، طراحی و راه‌اندازی نیروگاه‌های خورشیدی با تمرکز بر مدیریت بهینه انرژی و حفظ محیط زیست. تیم متخصص ما متعهد به استفاده از برترین استانداردهای بین‌المللی است." %}</p>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="tab-pane fade" id="team_three">
-                            <div class="row">
+                            <div class="row align-items-center">
                                 <div class="col-lg-5">
-                                    <!-- Member Image -->
-                                    <div class="member-image" data-aos="fade-up" data-aos-duration="1000">
-                                        <img alt="{% trans 'تصویر تیم' %}" src="{% static 'assets/images/home-one/team/team-img3.jpg' %}" />
+                                    <div class="member-image clean-image-box mb-4 mb-lg-0" data-aos="fade-up" data-aos-duration="1000">
+                                        <img alt="{% trans 'دپارتمان زیرساخت' %}" src="{% static 'assets/images/home-one/team/team-img3.jpg' %}" />
                                     </div>
                                 </div>
                                 <div class="col-lg-7">
-                                    <!-- Member Info -->
                                     <div class="member-info" data-aos="fade-up" data-aos-duration="1000">
-                                        <h3 class="title">{% trans "جنی ویلسون" %}</h3>
-                                        <span class="position">{% trans "رئیس بخش فروش" %}</span>
-                                        <p>{% trans "ما برای کنجکاوی، همکاری و نگرش می توانیم ارزش قائل شویم." %}</p>
-                                        <div class="orbia-progress-item mb-20">
-                                            <div class="progress-title">
-                                                <h6>{% trans "هوش مصنوعی" %}<span>90%</span></h6>
-                                            </div>
-                                            <div class="progress">
-                                                <div class="progress-bar" style="width: 90%;"></div>
-                                            </div>
-                                        </div>
-                                        <div class="orbia-progress-item mb-20">
-                                            <div class="progress-title">
-                                                <h6>{% trans "مدیریت رباتیک" %}<span>70%</span></h6>
-                                            </div>
-                                            <div class="progress">
-                                                <div class="progress-bar" style="width: 70%;"></div>
-                                            </div>
-                                        </div>
-                                        <div class="team-experience-social-box mt-40">
-                                            <div class="experience-box">
-                                                <h3>10+<span>{% trans "تجربه حرفه ای" %}</span></h3>
-                                            </div>
-                                            <div class="social-box">
-                                                <a href="#"><i class="fab fa-facebook-f"></i></a>
-                                                <a href="#"><i class="fab fa-twitter"></i></a>
-                                                <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                                                <a href="#"><i class="fab fa-youtube"></i></a>
-                                            </div>
-                                        </div>
+                                        <h3 class="title">{% trans "دپارتمان زیرساخت و نمای هوشمند" %}</h3>
+                                        <span class="position d-block mb-3" style="color: #FF3366; font-weight: bold;">{% trans "تلفیق هنر و فناوری" %}</span>
+                                        <p class="mb-4">{% trans "خلق ساختمان‌های هوشمند با استفاده از نماهای مدرن و متریال‌های پیشرفته متصل به سیستم‌های اینترنت اشیا (IoT). ما معماری را با تکنولوژی روز پیوند می‌زنیم." %}</p>
                                     </div>
                                 </div>
                             </div>
@@ -485,85 +708,63 @@
     </section>
     <!--======  End Team Section  ======-->
 
-    <!--======  Start Technology Section  ======-->
-    <section class="orbia-features_three gray-bg">
+    <!--======  Start Technology Section (تحقیق و توسعه - R&D)  ======-->
+    <section class="orbia-features_three pt-120 pb-120" style="background-color: #f9fafb;">
         <div class="container-fluid">
             <div class="row align-items-center">
                 <div class="col-xl-6">
-                    <!-- Orbia Image -->
-                    <div class="orbia-image">
-                        <img alt="{% trans 'تصویر پس زمینه تکنولوژی' %}" src="{% static 'assets/images/innerpage/bg/techno-bg.jpg' %}" />
-                        <div class="orbia-avatar-box" data-aos="fade-up" data-aos-duration="1000">
-                            <div class="avatar-list">
-                                <h3>{% trans "54 هزار" %}</h3>
-                                <h5>{% trans "نظرات مشتریان" %}</h5>
-                                <ul>
-                                    <li><img alt="{% trans 'آواتار' %}" src="{% static 'assets/images/innerpage/feature/avatar-img1.jpg' %}" /></li>
-                                    <li><img alt="{% trans 'آواتار' %}" src="{% static 'assets/images/innerpage/feature/avatar-img2.jpg' %}" /></li>
-                                    <li><img alt="{% trans 'آواتار' %}" src="{% static 'assets/images/innerpage/feature/avatar-img3.jpg' %}" /></li>
-                                </ul>
-                            </div>
-                        </div>
+                    <div class="orbia-image p-4 clean-image-box">
+                        <img alt="{% trans 'تحقیق و توسعه' %}" src="{% static 'assets/images/innerpage/bg/techno-bg.jpg' %}" />
                     </div>
                 </div>
                 <div class="col-xl-6">
-                    <!-- Orbia Content Box -->
-                    <div class="orbia-content-box mt-45">
-                        <!-- Section Title -->
-                        <div class="section-title mb-30">
-                            <span class="sub-title" data-aos="fade-down" data-aos-duration="1000">{% trans "فناوری پیشرفته" %}</span>
-                            <h2 class="">{% trans "انتخاب هوشمند هوش مصنوعی برای رشد کسب و کار" %}</h2>
+                    <div class="orbia-content-box mt-4 mt-xl-0 ps-xl-5">
+                        <div class="section-title mb-4">
+                            <span class="sub-title" data-aos="fade-down" data-aos-duration="1000">{% trans "نوآوری مستمر (R&D)" %}</span>
+                            <h2>{% trans "تحقیق و توسعه؛ مرزهای فناوری را جابجا می‌کنیم" %}</h2>
                         </div>
                         <div class="row">
                             <div class="col-md-6">
-                                <!-- Orbia Iconic Box -->
                                 <div class="orbia-iconic-box style-five mb-40" data-aos="fade-up" data-aos-duration="1000">
-                                    <div class="shape"><img alt="{% trans 'شکل' %}" src="{% static 'assets/images/innerpage/gallery/box-shape.png' %}" /></div>
-                                    <div class="icon">
-                                        <img alt="{% trans 'آیکون' %}" src="{% static 'assets/images/innerpage/icon/icon6.png' %}" />
+                                    <div class="icon mb-3">
+                                        <img alt="{% trans 'آیکون' %}" src="{% static 'assets/images/innerpage/icon/icon6.png' %}" style="width: 50px;" />
                                     </div>
                                     <div class="content">
-                                        <h4>{% trans "پشتیبانی فنی" %}</h4>
-                                        <p>{% trans "برای توانمندسازی کسب‌وکارها با راه‌حل‌های هوشمند، مقیاس‌پذیر و تأثیرگذار" %}</p>
+                                        <h4>{% trans "بومی‌سازی فناوری" %}</h4>
+                                        <p>{% trans "طراحی و توسعه راهکارهای اختصاصی و بومی‌سازی ماشین‌آلات هوشمند متناسب با صنایع." %}</p>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-md-6">
-                                <!-- Orbia Iconic Box -->
                                 <div class="orbia-iconic-box style-five mb-40" data-aos="fade-up" data-aos-duration="1200">
-                                    <div class="shape"><img alt="{% trans 'شکل' %}" src="{% static 'assets/images/innerpage/gallery/box-shape.png' %}" /></div>
-                                    <div class="icon">
-                                        <img alt="{% trans 'آیکون' %}" src="{% static 'assets/images/innerpage/icon/icon7.png' %}" />
+                                    <div class="icon mb-3">
+                                        <img alt="{% trans 'آیکون' %}" src="{% static 'assets/images/innerpage/icon/icon7.png' %}" style="width: 50px;" />
                                     </div>
                                     <div class="content">
-                                        <h4>{% trans "روبو نابغه" %}</h4>
-                                        <p>{% trans "برای توانمندسازی کسب‌وکارها با راه‌حل‌های هوشمند، مقیاس‌پذیر و تأثیرگذار" %}</p>
+                                        <h4>{% trans "اینترنت اشیا (IoT)" %}</h4>
+                                        <p>{% trans "اتصال یکپارچه سیستم‌های صنعتی و ساختمانی برای مانیتورینگ و کنترل هوشمند." %}</p>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-md-6">
-                                <!-- Orbia Iconic Box -->
                                 <div class="orbia-iconic-box style-five mb-40" data-aos="fade-up" data-aos-duration="1400">
-                                    <div class="shape"><img alt="{% trans 'شکل' %}" src="{% static 'assets/images/innerpage/gallery/box-shape.png' %}" /></div>
-                                    <div class="icon">
-                                        <img alt="{% trans 'آیکون' %}" src="{% static 'assets/images/innerpage/icon/icon8.png' %}" />
+                                    <div class="icon mb-3">
+                                        <img alt="{% trans 'آیکون' %}" src="{% static 'assets/images/innerpage/icon/icon8.png' %}" style="width: 50px;" />
                                     </div>
                                     <div class="content">
-                                        <h4>{% trans "تولید تصویر" %}</h4>
-                                        <p>{% trans "برای توانمندسازی کسب‌وکارها با راه‌حل‌های هوشمند، مقیاس‌پذیر و تأثیرگذار" %}</p>
+                                        <h4>{% trans "نماهای هوشمند" %}</h4>
+                                        <p>{% trans "طراحی سازه‌ها و نماهایی که با تغییرات شرایط محیطی جهت بهره‌وری سازگار می‌شوند." %}</p>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-md-6">
-                                <!-- Orbia Iconic Box -->
                                 <div class="orbia-iconic-box style-five mb-40" data-aos="fade-up" data-aos-duration="1600">
-                                    <div class="shape"><img alt="{% trans 'شکل' %}" src="{% static 'assets/images/innerpage/gallery/box-shape.png' %}" /></div>
-                                    <div class="icon">
-                                        <img alt="{% trans 'آیکون' %}" src="{% static 'assets/images/innerpage/icon/icon9.png' %}" />
+                                    <div class="icon mb-3">
+                                        <img alt="{% trans 'آیکون' %}" src="{% static 'assets/images/innerpage/icon/icon9.png' %}" style="width: 50px;" />
                                     </div>
                                     <div class="content">
-                                        <h4>{% trans "چت ربات ها" %}</h4>
-                                        <p>{% trans "برای توانمندسازی کسب‌وکارها با راه‌حل‌های هوشمند، مقیاس‌پذیر و تأثیرگذار" %}</p>
+                                        <h4>{% trans "مدیریت انرژی" %}</h4>
+                                        <p>{% trans "توسعه الگوریتم‌ها و پلتفرم‌های هوشمند برای کاهش هدررفت و مدیریت مصرف انرژی." %}</p>
                                     </div>
                                 </div>
                             </div>
@@ -575,51 +776,77 @@
     </section>
     <!--======  End Technology Section  ======-->
 
+    <!--======  Start Certificates Section (گواهینامه‌ها و مدارک)  ======-->
+    <section class="orbia-certificates-sec pt-120 pb-100">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="section-title text-center mb-50">
+                        <span class="sub-title" data-aos="fade-down" data-aos-duration="1000">{% trans "استانداردها و افتخارات" %}</span>
+                        <h2>{% trans "گواهینامه‌ها و مدارک کیان صنعت" %}</h2>
+                    </div>
+                </div>
+            </div>
+            <!-- Grid for Certificates -->
+            <div class="row justify-content-center">
+                <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12 mb-30" data-aos="fade-up" data-aos-duration="1000">
+                    <div class="certificate-card">
+                        <a href="{% static 'assets/images/innerpage/about/about-img1.jpg' %}" target="_blank">
+                            <img src="{% static 'assets/images/innerpage/about/about-img1.jpg' %}" alt="{% trans 'گواهینامه مدیریت کیفیت' %}">
+                        </a>
+                        <h5>{% trans "گواهینامه مدیریت کیفیت (ISO 9001)" %}</h5>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12 mb-30" data-aos="fade-up" data-aos-duration="1200">
+                    <div class="certificate-card">
+                        <a href="{% static 'assets/images/innerpage/about/about-img1.jpg' %}" target="_blank">
+                            <img src="{% static 'assets/images/innerpage/about/about-img1.jpg' %}" alt="{% trans 'مجوز فعالیت' %}">
+                        </a>
+                        <h5>{% trans "مجوز فعالیت در حوزه هوش مصنوعی" %}</h5>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12 mb-30" data-aos="fade-up" data-aos-duration="1400">
+                    <div class="certificate-card">
+                        <a href="{% static 'assets/images/innerpage/about/about-img1.jpg' %}" target="_blank">
+                            <img src="{% static 'assets/images/innerpage/about/about-img1.jpg' %}" alt="{% trans 'تاییدیه صلاحیت' %}">
+                        </a>
+                        <h5>{% trans "تأییدیه صلاحیت پیمانکاری" %}</h5>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12 mb-30" data-aos="fade-up" data-aos-duration="1600">
+                    <div class="certificate-card">
+                        <a href="{% static 'assets/images/innerpage/about/about-img1.jpg' %}" target="_blank">
+                            <img src="{% static 'assets/images/innerpage/about/about-img1.jpg' %}" alt="{% trans 'گواهینامه ثبت اختراع' %}">
+                        </a>
+                        <h5>{% trans "گواهینامه ثبت اختراع / مالکیت معنوی" %}</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--======  End Certificates Section  ======-->
+
     <!--======  Start Client Section  ======-->
-    <section class="orbia-client-sec pt-60 pb-60">
+    <section class="orbia-client-sec pt-60 pb-60" style="background-color: #f9fafb;">
         <div class="container-fluid">
             <!-- Client Slider -->
             <div class="clients-slider" data-aos="fade-up" data-aos-duration="1000">
-                <!-- Orbia Client Item -->
                 <div class="orbia-client-item style-one">
-                    <div class="content">
-                        <img alt="{% trans 'لوگوی مشتری' %}" src="{% static 'assets/images/home-one/client/client-logo1.png' %}" />
-                        <p><span>458+</span>{% trans "بررسی های Airbnb 5 را شروع می کند" %}</p>
+                    <div class="content text-center">
+                        <img alt="{% trans 'لوگوی مشتری' %}" src="{% static 'assets/images/home-one/client/client-logo1.png' %}" style="margin: 0 auto 15px;" />
+                        <p class="text-center">{% trans "شرکای تجاری و کارفرمایان کیان صنعت" %}</p>
                     </div>
                 </div>
-                <!-- Orbia Client Item -->
                 <div class="orbia-client-item style-one">
-                    <div class="content">
-                        <img alt="{% trans 'لوگوی مشتری' %}" src="{% static 'assets/images/home-one/client/client-logo2.png' %}" />
-                        <p><span>458+</span>{% trans "بررسی های Airbnb 5 را شروع می کند" %}</p>
+                    <div class="content text-center">
+                        <img alt="{% trans 'لوگوی مشتری' %}" src="{% static 'assets/images/home-one/client/client-logo2.png' %}" style="margin: 0 auto 15px;" />
+                        <p class="text-center">{% trans "شرکای تجاری و کارفرمایان کیان صنعت" %}</p>
                     </div>
                 </div>
-                <!-- Orbia Client Item -->
                 <div class="orbia-client-item style-one">
-                    <div class="content">
-                        <img alt="{% trans 'لوگوی مشتری' %}" src="{% static 'assets/images/home-one/client/client-logo3.png' %}" />
-                        <p><span>458+</span>{% trans "بررسی های Airbnb 5 را شروع می کند" %}</p>
-                    </div>
-                </div>
-                <!-- Orbia Client Item -->
-                <div class="orbia-client-item style-one">
-                    <div class="content">
-                        <img alt="{% trans 'لوگوی مشتری' %}" src="{% static 'assets/images/home-one/client/client-logo4.png' %}" />
-                        <p><span>458+</span>{% trans "بررسی های Airbnb 5 را شروع می کند" %}</p>
-                    </div>
-                </div>
-                <!-- Orbia Client Item -->
-                <div class="orbia-client-item style-one">
-                    <div class="content">
-                        <img alt="{% trans 'لوگوی مشتری' %}" src="{% static 'assets/images/home-one/client/client-logo5.png' %}" />
-                        <p><span>458+</span>{% trans "بررسی های Airbnb 5 را شروع می کند" %}</p>
-                    </div>
-                </div>
-                <!-- Orbia Client Item -->
-                <div class="orbia-client-item style-one">
-                    <div class="content">
-                        <img alt="{% trans 'لوگوی مشتری' %}" src="{% static 'assets/images/home-one/client/client-logo3.png' %}" />
-                        <p><span>458+</span>{% trans "بررسی های Airbnb 5 را شروع می کند" %}</p>
+                    <div class="content text-center">
+                        <img alt="{% trans 'لوگوی مشتری' %}" src="{% static 'assets/images/home-one/client/client-logo3.png' %}" style="margin: 0 auto 15px;" />
+                        <p class="text-center">{% trans "شرکای تجاری و کارفرمایان کیان صنعت" %}</p>
                     </div>
                 </div>
             </div>
