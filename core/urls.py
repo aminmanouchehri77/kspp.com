@@ -16,7 +16,11 @@ urlpatterns = [
     # مسیر صفحه اصلی و صفحات ثابت سایت
     path('', views.HomeView.as_view(), name='home'),
     path('about/', views.AboutView.as_view(), name='about'),
+    path('services/', views.ServicesView.as_view(), name='services'),  # صفحه خدمات اضافه شد
     path('contact/', views.ContactView.as_view(), name='contact'),
+    
+    # مسیر تعویض زبان
+    path('switch-language/', views.switch_language, name='switch_language'), # تغییر زبان اضافه شد
     
     # مسیرهای API (پیشوند api/ خواهند داشت)
     path('api/', include(router.urls)),

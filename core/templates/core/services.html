@@ -1,0 +1,731 @@
+{% extends '_base.html' %}
+{% load static i18n %}
+
+{% block title %}
+    {% trans "فعالیت‌های ما | شرکت کیان صنعت" %}
+{% endblock title %}
+
+{% block content %}
+    <style>
+        /* ==========================================
+           استایل‌های عمومی، پایه و تایپوگرافی
+           ========================================== */
+        :root {
+            --primary-color: #dd2a7b; 
+            --ai-gradient: linear-gradient(135deg, #8134af 0%, #dd2a7b 50%, #ff512f 100%);
+            /* رنگ‌های دقیق استخراج شده از تصاویر برای دکمه و کپسول‌ها */
+            --btn-grad-normal: linear-gradient(90deg, #8b33ff 0%, #df378b 100%);
+            --btn-grad-hover: linear-gradient(90deg, #df378b 0%, #ff5e3a 100%);
+            --transition-speed: 0.6s;
+        }
+
+        body, p, a, span, li, div, button {
+            font-family: 'Vazirmatn', sans-serif !important;
+            line-height: 1.7 !important;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Vazirmatn', sans-serif !important;
+            font-weight: 700 !important;
+            line-height: 1.5 !important;
+        }
+
+        .section-title h2 {
+            text-wrap: balance;
+            max-width: 850px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.6 !important;
+        }
+
+        /* ==========================================
+           استایل‌های هیرو سکشن و فلش Breadcrumb
+           ========================================== */
+        .page-hero h1, .page-hero ul li, .page-hero ul li a {
+            font-family: 'Vazirmatn', sans-serif !important;
+        }
+        .page-hero ul li { margin-top: 10px; }
+        .page-hero ul li a { color: #fff; text-decoration: none; }
+        .page-hero ul li a:hover { text-decoration: underline; }
+        
+        /* اصلاح فلش‌ها در Breadcrumb برای غلبه بر استایل‌های پایه */
+        html[dir="rtl"] body main section.page-hero .page-content ul li::after,
+        html[dir="rtl"] body main section.page-hero .page-content ul li::before,
+        html[dir="rtl"] body main section.page-hero .page-content ul li + li::before {
+            transform: scaleX(1) !important;
+            display: inline-block !important;
+        }
+
+        /* حالت انگلیسی (LTR): آینه کردن فلش‌ها */
+        html[dir="ltr"] body main section.page-hero .page-content ul li::after,
+        html[dir="ltr"] body main section.page-hero .page-content ul li::before,
+        html[dir="ltr"] body main section.page-hero .page-content ul li + li::before {
+            transform: scaleX(-1) !important;
+            display: inline-block !important;
+        }
+
+        .sub-title {
+            background: var(--ai-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 700;
+            display: inline-block;
+        }
+
+        /* ==========================================
+           استایل‌های اسلایدر تعاملی فعالیت‌ها 
+           ========================================== */
+        .activities-showcase {
+            position: relative;
+            overflow: hidden;
+            background-color: #f8f9fa;
+        }
+        
+        html[data-theme="dark"] .activities-showcase { background-color: #121212; }
+
+        .activity-display {
+            position: relative;
+            border-radius: 24px;
+            overflow: hidden;
+            height: 580px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.08);
+            background: #000;
+        }
+
+        .activity-image-slide {
+            position: absolute;
+            inset: 0;
+            opacity: 0;
+            visibility: hidden;
+            transform: scale(1.05);
+            transition: opacity var(--transition-speed) ease-in-out, transform var(--transition-speed) ease-in-out;
+        }
+
+        .activity-image-slide.active {
+            opacity: 1;
+            visibility: visible;
+            transform: scale(1);
+            z-index: 2;
+        }
+
+        .activity-image-slide::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.3) 50%, rgba(0,0,0,0) 100%);
+            z-index: 1;
+        }
+
+        .activity-image-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            padding: 35px;
+            color: #fff;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+        }
+
+        .activity-content-overlay {
+            position: absolute;
+            bottom: 30px;
+            left: 30px;
+            right: 30px;
+            z-index: 3;
+            transform: translateY(40px);
+            opacity: 0;
+            transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.7s ease;
+            transition-delay: 0.2s;
+        }
+
+        .activity-image-slide.active .activity-content-overlay {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .activity-content-overlay h3 {
+            color: #fff !important;
+            font-size: 26px !important;
+            margin-bottom: 15px !important;
+            font-weight: 800 !important;
+            text-shadow: 0 2px 5px rgba(0,0,0,0.4);
+        }
+
+        .activity-content-overlay p {
+            color: #f1f1f1 !important;
+            font-size: 15px !important;
+            margin-bottom: 25px !important;
+            line-height: 1.9 !important;
+            text-shadow: 0 1px 3px rgba(0,0,0,0.5);
+            text-align: justify;
+        }
+
+        html[dir="ltr"] .activity-content-overlay p { text-align: left !important; }
+
+        /* ==========================================
+           دکمه‌ها - طراحی مطابق تصاویر درخواستی
+           ========================================== */
+        .btn-activity {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--btn-grad-normal);
+            color: #fff !important;
+            padding: 12px 28px;
+            border-radius: 50px;
+            font-size: 15px;
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.4s ease;
+            border: none;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            box-shadow: 0 4px 15px rgba(139, 51, 255, 0.3);
+        }
+
+        .btn-activity::before, .btn-activity::after {
+            display: none !important;
+            content: none !important;
+        }
+
+        .btn-activity:hover {
+            background: var(--btn-grad-hover);
+            box-shadow: 0 8px 25px rgba(223, 55, 139, 0.4);
+        }
+
+        .btn-activity i {
+            margin-right: 12px;
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+        .btn-activity:hover i { 
+            transform: translate(-4px, 4px) rotate(-45deg); 
+        }
+
+        html[dir="ltr"] .btn-activity i {
+            margin-right: 0;
+            margin-left: 12px;
+            transform: scaleX(-1);
+        }
+        
+        html[dir="ltr"] .btn-activity:hover i { 
+            transform: translate(4px, 4px) scaleX(-1) rotate(-45deg); 
+        }
+
+        /* ==========================================
+           لیست تب‌های کناری (دسکتاپ)
+           ========================================== */
+        .activity-tabs {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            position: relative;
+            border-right: 2px solid rgba(0,0,0,0.06);
+        }
+
+        html[dir="ltr"] .activity-tabs {
+            border-right: none;
+            border-left: 2px solid rgba(0,0,0,0.06);
+        }
+        
+        html[data-theme="dark"] .activity-tabs { border-color: rgba(255,255,255,0.1); }
+
+        .activity-tabs-indicator {
+            position: absolute;
+            right: -2px;
+            width: 4px;
+            border-radius: 5px;
+            background: var(--btn-grad-normal);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 2;
+        }
+
+        html[dir="ltr"] .activity-tabs-indicator { right: auto; left: -2px; }
+
+        .activity-tab-item {
+            padding: 25px 35px 25px 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            opacity: 0.5;
+            position: relative;
+        }
+
+        html[dir="ltr"] .activity-tab-item {
+            padding: 25px 15px 25px 35px;
+            text-align: left !important;
+        }
+
+        .activity-tab-item:hover, .activity-tab-item.active {
+            opacity: 1;
+            transform: translateX(-5px);
+        }
+        
+        html[dir="ltr"] .activity-tab-item:hover, html[dir="ltr"] .activity-tab-item.active {
+            transform: translateX(5px);
+        }
+
+        .activity-tab-item h4 {
+            font-size: 21px !important;
+            margin-bottom: 8px !important;
+            font-weight: 700 !important;
+            transition: all 0.3s;
+        }
+        
+        html[data-theme="dark"] .activity-tab-item h4 { color: #fff; }
+
+        .activity-tab-item.active h4 {
+            background: var(--btn-grad-normal);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .activity-tab-item .tab-subtitle {
+            font-size: 14px;
+            color: #888;
+            display: block;
+            font-weight: 500;
+        }
+
+        /* ==========================================
+           استایل‌های ریسپانسیو (طراحی حرفه‌ای کپسول‌های موبایل)
+           ========================================== */
+        @media (max-width: 991.98px) {
+            .activity-display {
+                height: 450px;
+                border-radius: 18px;
+            }
+            
+            .activity-tabs {
+                display: flex;
+                overflow-x: auto;
+                border: none !important;
+                gap: 12px;
+                padding: 10px 15px 20px 15px;
+                margin-top: 30px;
+                margin-bottom: 25px;
+                scroll-snap-type: x mandatory;
+                scrollbar-width: none;
+                -webkit-overflow-scrolling: touch;
+            }
+            .activity-tabs::-webkit-scrollbar { display: none; }
+            .activity-tabs-indicator { display: none !important; }
+
+            .activity-tab-item {
+                flex: 0 0 auto;
+                scroll-snap-align: center;
+                padding: 12px 26px !important;
+                background: #ffffff;
+                border-radius: 50px;
+                margin: 0 !important;
+                border: 1px solid rgba(0,0,0,0.06);
+                opacity: 1;
+                transform: none !important;
+                box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+                white-space: nowrap;
+            }
+
+            .activity-tab-item .tab-subtitle { display: none; }
+
+            .activity-tab-item h4 {
+                font-size: 14px !important;
+                margin-bottom: 0 !important;
+                color: #555 !important;
+                font-weight: 600 !important;
+            }
+
+            .activity-tab-item.active {
+                background: var(--btn-grad-normal);
+                border-color: transparent;
+                box-shadow: 0 6px 18px rgba(139, 51, 255, 0.3);
+                transform: translateY(-2px) !important;
+            }
+
+            .activity-tab-item.active h4 {
+                background: none;
+                -webkit-text-fill-color: #fff;
+                color: #fff !important;
+                font-weight: 700 !important;
+            }
+            
+            .glass-panel {
+                padding: 20px 15px;
+                bottom: 15px;
+                left: 15px;
+                right: 15px;
+                border-radius: 16px;
+                background: rgba(10, 10, 10, 0.65);
+                backdrop-filter: blur(12px);
+                border: 1px solid rgba(255,255,255,0.1);
+            }
+            
+            .activity-content-overlay h3 { font-size: 18px !important; text-shadow: 0 2px 4px rgba(0,0,0,0.8); }
+            .activity-content-overlay p {
+                font-size: 13px !important;
+                margin-bottom: 15px !important;
+                line-height: 1.6 !important;
+                text-shadow: 0 1px 3px rgba(0,0,0,0.8);
+            }
+            .btn-activity { padding: 8px 20px; font-size: 13px; }
+
+            html[data-theme="dark"] .activity-tab-item {
+                background: #1e1e1e;
+                border-color: #333;
+                box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            }
+            html[data-theme="dark"] .activity-tab-item h4 { color: #bbb !important; }
+            html[data-theme="dark"] .activity-tab-item.active h4 { color: #fff !important; }
+        }
+
+        /* ==========================================
+           استایل‌های بازطراحی شده بخش "چرا ما"
+           ========================================== */
+        .feature-item-glass {
+            background: #ffffff;
+            border-radius: 16px;
+            padding: 20px 25px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.03);
+            border: 1px solid rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+            margin-bottom: 25px;
+        }
+
+        html[data-theme="dark"] .feature-item-glass {
+            background: #1e1e1e;
+            border-color: #333;
+        }
+
+        .feature-item-glass:hover {
+            box-shadow: 0 10px 30px rgba(221, 42, 123, 0.08);
+            transform: translateY(-3px);
+        }
+
+        .feature-icon-box {
+            width: 55px;
+            height: 55px;
+            min-width: 55px;
+            background: rgba(139, 51, 255, 0.08);
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            color: #8b33ff;
+        }
+
+        html[data-theme="dark"] .feature-icon-box { background: rgba(139, 51, 255, 0.15); }
+
+        .stats-card {
+            background: #ffffff;
+            border-radius: 16px;
+            padding: 30px 20px;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.04);
+            border: 1px solid rgba(0,0,0,0.04);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        html[data-theme="dark"] .stats-card { background: #1e1e1e; border-color: #333; }
+
+        .stats-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.08);
+        }
+
+        .stats-card::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--btn-grad-normal);
+        }
+
+        .stats-number {
+            font-size: 42px !important;
+            font-weight: 800 !important;
+            background: var(--btn-grad-normal);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px !important;
+            display: inline-block;
+        }
+
+        .stats-label { font-size: 16px !important; font-weight: 700 !important; color: #444; margin: 0 !important; }
+        html[data-theme="dark"] .stats-label { color: #ccc; }
+
+        html[dir="ltr"] .section-title { text-align: left !important; }
+        html[dir="ltr"] .feature-item-glass { text-align: left !important; }
+    </style>
+
+<main>
+    <!--======  Start Page Hero Section  ======-->
+    <section class="page-hero bg_cover p-r z-1" data-src="{% static 'assets/images/innerpage/bg/page-bg.jpg' %}">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="page-content text-center">
+                        <h1>{% trans "فعالیت‌های ما" %}</h1>
+                        <ul>
+                            <li><a href="{% url 'core:home' %}">{% trans "صفحه اصلی" %}</a></li>
+                            <li>{% trans "فعالیت‌ها" %}</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--======  End Page Hero Section  ======-->
+
+    <!--======  Start Activities Interactive Slider Section  ======-->
+    <section class="activities-showcase pt-120 pb-120">
+        <div class="container">
+            <!-- Section Title -->
+            <div class="row justify-content-center">
+                <div class="col-xl-9 col-lg-10">
+                    <div class="section-title text-center mb-70">
+                        <span class="sub-title" data-aos="fade-down" data-aos-duration="1000">{% trans "حوزه‌های تخصصی کیان صنعت" %}</span>
+                        <h2 data-aos="fade-up" data-aos-duration="1200">{% trans "پیشگام در ارائه راهکارهای هوشمند و پایدار" %}</h2>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row align-items-center">
+                <!-- Navigation Tabs -->
+                <div class="col-lg-4 col-md-12 mb-4 mb-lg-0 order-2 order-lg-1">
+                    <ul class="activity-tabs" id="activityTabs">
+                        <div class="activity-tabs-indicator"></div>
+                        
+                        <li class="activity-tab-item active" data-target="slide-1">
+                            <h4>{% trans "نیروگاه خورشیدی" %}</h4>
+                            <span class="tab-subtitle">{% trans "طراحی، تأمین و راه‌اندازی" %}</span>
+                        </li>
+                        
+                        <li class="activity-tab-item" data-target="slide-2">
+                            <h4>{% trans "مدیریت انرژی" %}</h4>
+                            <span class="tab-subtitle">{% trans "سیستم‌های هوشمندسازی" %}</span>
+                        </li>
+                        
+                        <li class="activity-tab-item" data-target="slide-3">
+                            <h4>{% trans "هوش مصنوعی و رباتیک" %}</h4>
+                            <span class="tab-subtitle">{% trans "اجرای پروژه‌های اتوماسیون" %}</span>
+                        </li>
+                        
+                        <li class="activity-tab-item" data-target="slide-4">
+                            <h4>{% trans "شهرهای هوشمند" %}</h4>
+                            <span class="tab-subtitle">{% trans "پروژه‌های کلان عمرانی" %}</span>
+                        </li>
+                        
+                        <li class="activity-tab-item" data-target="slide-5">
+                            <h4>{% trans "نما و محوطه‌سازی" %}</h4>
+                            <span class="tab-subtitle">{% trans "طراحی و ساخت مدرن" %}</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Display Slider with Images -->
+                <div class="col-lg-8 col-md-12 order-1 order-lg-2">
+                    <div class="activity-display">
+                        
+                        <!-- Slide 1 -->
+                        <div class="activity-image-slide active" id="slide-1">
+                            <img src="{% static 'assets/images/innerpage/feature/feature-img1.jpg' %}" alt="{% trans 'نیروگاه خورشیدی' %}">
+                            <div class="activity-content-overlay glass-panel">
+                                <h3>{% trans "طراحی و راه‌اندازی نیروگاه خورشیدی" %}</h3>
+                                <p>{% trans "طراحی، تأمین تجهیزات و اجرای صفر تا صد نیروگاه‌های خورشیدی با هدف بهره‌وری حداکثری از انرژی‌های تجدیدپذیر و کاهش چشمگیر هزینه‌های مصرف انرژی برای صنایع کلان و منازل مسکونی." %}</p>
+                                <a href="{% url 'core:contact' %}" class="btn-activity">{% trans "مشاوره رایگان" %} <i class="far fa-arrow-left"></i></a>
+                            </div>
+                        </div>
+
+                        <!-- Slide 2 -->
+                        <div class="activity-image-slide" id="slide-2">
+                            <img src="{% static 'assets/images/innerpage/bg/page-bg.jpg' %}" alt="{% trans 'مدیریت انرژی' %}">
+                            <div class="activity-content-overlay glass-panel">
+                                <h3>{% trans "پروژه‌های هوشمندسازی مدیریت انرژی" %}</h3>
+                                <p>{% trans "پیاده‌سازی سیستم‌های پیشرفته مانیتورینگ و کنترل مصرف انرژی جهت بهینه‌سازی عملکرد، جلوگیری از هدررفت منابع و ارتقای سطح پایداری در ساختمان‌های تجاری، اداری و مسکونی." %}</p>
+                                <a href="{% url 'core:contact' %}" class="btn-activity">{% trans "مشاوره رایگان" %} <i class="far fa-arrow-left"></i></a>
+                            </div>
+                        </div>
+
+                        <!-- Slide 3 -->
+                        <div class="activity-image-slide" id="slide-3">
+                            <img src="{% static 'assets/images/innerpage/feature/feature-img2.jpg' %}" alt="{% trans 'هوش مصنوعی' %}">
+                            <div class="activity-content-overlay glass-panel">
+                                <h3>{% trans "هوش مصنوعی و ربات‌های هوشمند" %}</h3>
+                                <p>{% trans "تطبیق و توسعه راهکارهای نوین مبتنی بر هوش مصنوعی و ربات‌های خودکار جهت اتوماسیون فرآیندهای صنعتی، افزایش دقت و سرعت در خطوط تولید و بهبود سیستم‌های تصمیم‌گیری هوشمند." %}</p>
+                                <a href="{% url 'core:contact' %}" class="btn-activity">{% trans "مشاوره رایگان" %} <i class="far fa-arrow-left"></i></a>
+                            </div>
+                        </div>
+
+                        <!-- Slide 4 -->
+                        <div class="activity-image-slide" id="slide-4">
+                            <img src="{% static 'assets/images/innerpage/feature/feature-img1.jpg' %}" alt="{% trans 'شهرهای هوشمند' %}">
+                            <div class="activity-content-overlay glass-panel">
+                                <h3>{% trans "پروژه‌های عمرانی شهرهای هوشمند" %}</h3>
+                                <p>{% trans "طراحی و اجرای زیرساخت‌های عمرانی یکپارچه با تکنولوژی برای توسعه شهرهای هوشمند، شامل سیستم‌های نوین حمل‌ونقل، روشنایی یکپارچه و پلتفرم‌های تعاملی مدیریت شهری." %}</p>
+                                <a href="{% url 'core:contact' %}" class="btn-activity">{% trans "مشاوره رایگان" %} <i class="far fa-arrow-left"></i></a>
+                            </div>
+                        </div>
+
+                        <!-- Slide 5 -->
+                        <div class="activity-image-slide" id="slide-5">
+                            <img src="{% static 'assets/images/innerpage/bg/page-bg.jpg' %}" alt="{% trans 'نما و محوطه‌سازی' %}">
+                            <div class="activity-content-overlay glass-panel">
+                                <h3>{% trans "طراحی و ساخت نما و محوطه‌سازی" %}</h3>
+                                <p>{% trans "تلفیق معماری مدرن و تکنولوژی‌های هوشمند در طراحی و اجرای حرفه‌ای نماهای ساختمانی و محوطه‌سازی، با تمرکز ویژه بر زیبایی‌شناختی، دوام و خلق فضاهای دوست‌دار محیط زیست." %}</p>
+                                <a href="{% url 'core:contact' %}" class="btn-activity">{% trans "مشاوره رایگان" %} <i class="far fa-arrow-left"></i></a>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--======  End Activities Interactive Slider Section  ======-->
+
+    <!--======  Start Features Section (Why Choose Us)  ======-->
+    <section class="orbia-features_two pt-90 pb-90" style="background-color: var(--bs-gray-100);">
+        <div class="container">
+            <div class="row align-items-center justify-content-center">
+                <div class="col-xl-5 col-lg-8 d-none d-xl-block">
+                    <div class="orbia-image-box position-relative">
+                        <div class="orbia-image" data-aos="fade-left" data-aos-duration="1000" style="border-radius: 24px; overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.1);">
+                            <img alt="{% trans 'ویژگی‌های کیان صنعت' %}" src="{% static 'assets/images/innerpage/feature/feature-img2.jpg' %}" style="width: 100%; height: 100%; object-fit: cover;" />
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-xl-7 col-lg-12">
+                    <div class="orbia-content-box ms-xl-5">
+                        <div class="section-title mb-50">
+                            <span class="sub-title" data-aos="fade-down" data-aos-duration="1000">{% trans "ارزش‌آفرینی کیان صنعت" %}</span>
+                            <h2 data-aos="fade-up" data-aos-duration="1200" style="margin-top: 15px;">{% trans "چرا اجرای پروژه‌های کلان خود را به ما بسپارید؟" %}</h2>
+                        </div>
+                        
+                        <div class="orbia-content-wrap">
+                            <div class="feature-item-glass" data-aos="fade-up" data-aos-duration="1000">
+                                <div class="d-flex align-items-start" style="gap: 20px;">
+                                    <div class="feature-icon-box">
+                                        <i class="fas fa-brain"></i>
+                                    </div>
+                                    <div>
+                                        <h3 class="title mb-2" style="font-size: 21px; font-weight: 700;">{% trans "تخصص و تجربه ترکیبی" %}</h3>
+                                        <p class="mb-0 text-muted" style="font-size: 15px; text-align: justify;">{% trans "ما دانش اصیل مهندسی عمران و الکترونیک را با فناوری‌های نوین مانند هوش مصنوعی و اینترنت اشیا تلفیق کرده‌ایم تا بهینه‌ترین نتایج را به کارفرمایان ارائه دهیم." %}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="feature-item-glass mb-5" data-aos="fade-up" data-aos-duration="1200">
+                                <div class="d-flex align-items-start" style="gap: 20px;">
+                                    <div class="feature-icon-box">
+                                        <i class="fas fa-leaf"></i>
+                                    </div>
+                                    <div>
+                                        <h3 class="title mb-2" style="font-size: 21px; font-weight: 700;">{% trans "تعهد به پایداری محیط زیست" %}</h3>
+                                        <p class="mb-0 text-muted" style="font-size: 15px; text-align: justify;">{% trans "تمرکز ویژه ما بر پروژه‌های سبز، مدیریت یکپارچه انرژی و انرژی‌های تجدیدپذیر، ضامن کاهش هزینه‌ها و حفظ محیط زیست در توسعه‌های شهری است." %}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="row g-4">
+                                <div class="col-md-6 col-sm-6">
+                                    <div class="stats-card" data-aos="fade-up" data-aos-duration="1300">
+                                        <div class="stats-number">{% trans "+۵۰" %}</div>
+                                        <h5 class="stats-label">{% trans "پروژه موفق کشوری" %}</h5>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-sm-6">
+                                    <div class="stats-card" data-aos="fade-up" data-aos-duration="1400">
+                                        <div class="stats-number">{% trans "۱۰۰٪" %}</div>
+                                        <h5 class="stats-label">{% trans "رضایت کارفرمایان" %}</h5>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const tabs = Array.from(document.querySelectorAll('.activity-tab-item'));
+        const slides = document.querySelectorAll('.activity-image-slide');
+        const indicator = document.querySelector('.activity-tabs-indicator');
+        let currentIndex = 0;
+        let slideInterval;
+
+        function updateIndicator(activeTab) {
+            if (!indicator || window.innerWidth < 992) return;
+            const topPos = activeTab.offsetTop;
+            const height = activeTab.offsetHeight;
+            indicator.style.top = topPos + 'px';
+            indicator.style.height = height + 'px';
+        }
+
+        function goToSlide(index) {
+            tabs.forEach(t => t.classList.remove('active'));
+            slides.forEach(s => s.classList.remove('active'));
+
+            const targetTab = tabs[index];
+            targetTab.classList.add('active');
+
+            const targetId = targetTab.getAttribute('data-target');
+            const targetSlide = document.getElementById(targetId);
+            if(targetSlide) targetSlide.classList.add('active');
+
+            updateIndicator(targetTab);
+            
+            if(window.innerWidth < 992) {
+                targetTab.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+            }
+            
+            currentIndex = index;
+        }
+
+        function startAutoPlay() {
+            slideInterval = setInterval(() => {
+                let nextIndex = (currentIndex + 1) % tabs.length;
+                goToSlide(nextIndex);
+            }, 4500); 
+        }
+
+        function resetAutoPlay() {
+            clearInterval(slideInterval);
+            startAutoPlay();
+        }
+
+        tabs.forEach((tab, index) => {
+            tab.addEventListener('click', function() {
+                goToSlide(index);
+                resetAutoPlay();
+            });
+        });
+
+        const initialActiveIndex = tabs.findIndex(tab => tab.classList.contains('active'));
+        currentIndex = initialActiveIndex !== -1 ? initialActiveIndex : 0;
+        
+        setTimeout(() => updateIndicator(tabs[currentIndex]), 100);
+        startAutoPlay();
+        
+        window.addEventListener('resize', () => {
+            if(tabs[currentIndex]) updateIndicator(tabs[currentIndex]);
+        });
+    });
+</script>
+{% endblock content %}

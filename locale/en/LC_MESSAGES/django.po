@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-08-17 18:58+0430\n"
+"POT-Creation-Date: 2026-08-18 18:18+0430\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -28,64 +28,65 @@ msgstr "English"
 msgid "درباره ما | شرکت کیان صنعت"
 msgstr "About Us | Kian Sanat Company"
 
-#: .\core\templates\core\about.html:472 .\core\templates\core\about.html:475
+#: .\core\templates\core\about.html:479 .\core\templates\core\about.html:482
 #: .\core\templates\core\index.html:371 .\templates\_base.html:487
 #: .\templates\_base.html:635
 msgid "درباره ما"
 msgstr "About Us"
 
-#: .\core\templates\core\about.html:474 .\core\templates\core\contact.html:236
-#: .\core\templates\core\index.html:365 .\templates\_base.html:481
+#: .\core\templates\core\about.html:481 .\core\templates\core\contact.html:245
+#: .\core\templates\core\index.html:365
+#: .\core\templates\core\services.html:481 .\templates\_base.html:481
 #: .\templates\_base.html:634
 msgid "صفحه اصلی"
 msgstr "Home"
 
-#: .\core\templates\core\about.html:490 .\core\templates\core\about.html:497
+#: .\core\templates\core\about.html:497 .\core\templates\core\about.html:504
 #: .\core\templates\core\index.html:643
 msgid "درباره کیان صنعت"
 msgstr "About Kian Sanat"
 
-#: .\core\templates\core\about.html:498
+#: .\core\templates\core\about.html:505
 msgid "مشتری‌مداری؛ هسته مرکزی توسعه و نوآوری"
 msgstr "Customer Focus; The Core of Development and Innovation"
 
-#: .\core\templates\core\about.html:500
+#: .\core\templates\core\about.html:507
 msgid ""
 "در شرکت کیان صنعت، ما معتقدیم که موفقیت در پروژه‌های هوشمندسازی، انرژی‌های "
 "نوین و زیرساخت‌های عمرانی تنها در سایه رضایت کامل و درک دقیق نیازهای "
 "کارفرمایان به دست می‌آید. ما راهکارها را دقیقاً بر اساس چالش‌های کسب‌وکار شما "
 "سفارشی‌سازی می‌کنیم."
 msgstr ""
-"At Kian Sanat Company, we believe that success in smartification, modern energy, "
-"and civil infrastructure projects is achieved only through complete satisfaction "
-"and an accurate understanding of employers' needs. We customize solutions "
-"exactly based on your business challenges."
+"At Kian Sanat Company, we believe that success in smartification, modern "
+"energy, and civil infrastructure projects is achieved only through complete "
+"satisfaction and an accurate understanding of employers' needs. We customize "
+"solutions exactly based on your business challenges."
 
-#: .\core\templates\core\about.html:506 .\core\templates\core\about.html:517
-#: .\core\templates\core\about.html:676 .\core\templates\core\about.html:687
-#: .\core\templates\core\about.html:698 .\core\templates\core\about.html:837
-#: .\core\templates\core\about.html:848 .\core\templates\core\about.html:859
-#: .\core\templates\core\about.html:870
+#: .\core\templates\core\about.html:513 .\core\templates\core\about.html:524
+#: .\core\templates\core\about.html:683 .\core\templates\core\about.html:694
+#: .\core\templates\core\about.html:705 .\core\templates\core\about.html:844
+#: .\core\templates\core\about.html:855 .\core\templates\core\about.html:866
+#: .\core\templates\core\about.html:877
 msgid "آیکون"
 msgstr "Icon"
 
-#: .\core\templates\core\about.html:509
+#: .\core\templates\core\about.html:516
 msgid "تعهد به کیفیت و زمان"
 msgstr "Commitment to Quality and Time"
 
-#: .\core\templates\core\about.html:510
+#: .\core\templates\core\about.html:517
 msgid ""
 "تضمین اجرای دقیق پروژه‌ها از طراحی نیروگاه‌های خورشیدی تا پیاده‌سازی ربات‌های "
 "هوشمند با بالاترین استانداردها."
 msgstr ""
-"Guaranteed precise execution of projects from designing solar power plants to "
-"implementing smart robots with the highest standards."
+"Guaranteed precise execution of projects from designing solar power plants "
+"to implementing smart robots with the highest standards."
 
-#: .\core\templates\core\about.html:520
+#: .\core\templates\core\about.html:527
 msgid "پشتیبانی و همراهی مستمر"
 msgstr "Continuous Support and Companionship"
 
-#: .\core\templates\core\about.html:521
+#: .\core\templates\core\about.html:528
 msgid ""
 "حضور در کنار مشتریان حتی پس از اتمام پروژه‌ها برای تضمین عملکرد بهینه "
 "سیستم‌های مدیریت هوشمند انرژی."
@@ -93,62 +94,64 @@ msgstr ""
 "Standing by customers even after project completion to guarantee the optimal "
 "performance of smart energy management systems."
 
-#: .\core\templates\core\about.html:528 .\core\templates\core\contact.html:253
+#: .\core\templates\core\about.html:535 .\core\templates\core\contact.html:262
 #: .\templates\_base.html:666
 msgid "ارتباط با ما"
 msgstr "Connect with Us"
 
-#: .\core\templates\core\about.html:544 .\core\templates\core\about.html:560
-#: .\core\templates\core\about.html:568
+#: .\core\templates\core\about.html:551 .\core\templates\core\about.html:567
+#: .\core\templates\core\about.html:575
 msgid "+"
 msgstr "+"
 
-#: .\core\templates\core\about.html:545
+#: .\core\templates\core\about.html:552
 msgid "نیروی متخصص"
 msgstr "Specialized Workforce"
 
-#: .\core\templates\core\about.html:552
+#: .\core\templates\core\about.html:559
 #, python-format
 msgid "%%"
 msgstr "%%"
 
-#: .\core\templates\core\about.html:553
+#: .\core\templates\core\about.html:560
+#: .\core\templates\core\services.html:652
 msgid "رضایت کارفرمایان"
 msgstr "Employers' Satisfaction"
 
-#: .\core\templates\core\about.html:561
+#: .\core\templates\core\about.html:568
 msgid "پروژه موفق"
 msgstr "Successful Project"
 
-#: .\core\templates\core\about.html:569
+#: .\core\templates\core\about.html:576
 msgid "سال تجربه صنعتی"
 msgstr "Years of Industrial Experience"
 
-#: .\core\templates\core\about.html:584
+#: .\core\templates\core\about.html:591
 msgid "آینده را با ما بسازید"
 msgstr "Build the Future with Us"
 
-#: .\core\templates\core\about.html:585
+#: .\core\templates\core\about.html:592
 msgid "برای شروع پروژه‌های هوشمندسازی و بهینه‌سازی انرژی خود آماده‌اید؟"
-msgstr "Are you ready to start your smartification and energy optimization projects?"
+msgstr ""
+"Are you ready to start your smartification and energy optimization projects?"
 
-#: .\core\templates\core\about.html:587
+#: .\core\templates\core\about.html:594
 msgid "دریافت مشاوره"
 msgstr "Get Consultation"
 
-#: .\core\templates\core\about.html:589
+#: .\core\templates\core\about.html:596
 msgid "معرفی شرکت"
 msgstr "Company Introduction"
 
-#: .\core\templates\core\about.html:605
+#: .\core\templates\core\about.html:612
 msgid "آموزش و توسعه مهارت‌ها"
 msgstr "Education and Skill Development"
 
-#: .\core\templates\core\about.html:606
+#: .\core\templates\core\about.html:613
 msgid "آکادمی کیان صنعت؛ پرورش نخبگان فناوری فردا"
 msgstr "Kian Sanat Academy; Nurturing Tomorrow's Tech Elites"
 
-#: .\core\templates\core\about.html:608
+#: .\core\templates\core\about.html:615
 msgid ""
 "هدف از تأسیس آکادمی کیان صنعت، پر کردن خلأ میان دانش تئوری و نیازهای صنعتی "
 "است. ما با بهره‌گیری از تجربه اجرای پروژه‌های کلان، فضایی را برای آموزش تخصصی "
@@ -159,59 +162,59 @@ msgstr ""
 "executing large-scale projects, we have provided a space for specialized "
 "training and experience transfer."
 
-#: .\core\templates\core\about.html:615
+#: .\core\templates\core\about.html:622
 msgid "آموزش کاربردی"
 msgstr "Applied Training"
 
-#: .\core\templates\core\about.html:618
+#: .\core\templates\core\about.html:625
 msgid "آموزش‌های کاربردی<br />و پروژه‌محور"
 msgstr "Applied and<br />Project-Oriented Training"
 
-#: .\core\templates\core\about.html:625
+#: .\core\templates\core\about.html:632
 msgid "اساتید مجرب"
 msgstr "Experienced Instructors"
 
-#: .\core\templates\core\about.html:628
+#: .\core\templates\core\about.html:635
 msgid "اساتید مجرب<br />از دل صنعت"
 msgstr "Experienced Instructors<br />from the Heart of the Industry"
 
-#: .\core\templates\core\about.html:636
+#: .\core\templates\core\about.html:643
 msgid "برگزاری دوره‌های تخصصی هوش مصنوعی و رباتیک."
 msgstr "Holding specialized courses in AI and robotics."
 
-#: .\core\templates\core\about.html:637
+#: .\core\templates\core\about.html:644
 msgid "آموزش‌های جامع طراحی و راه‌اندازی نیروگاه‌های خورشیدی."
 msgstr "Comprehensive training in designing and installing solar power plants."
 
-#: .\core\templates\core\about.html:638
+#: .\core\templates\core\about.html:645
 msgid "کارگاه‌های عملی مدیریت بهینه‌سازی انرژی و ساختمان."
 msgstr "Practical workshops on building and energy optimization management."
 
-#: .\core\templates\core\about.html:642
+#: .\core\templates\core\about.html:649
 msgid "ورود به آکادمی"
 msgstr "Enter the Academy"
 
-#: .\core\templates\core\about.html:649
+#: .\core\templates\core\about.html:656
 msgid "آکادمی کیان صنعت"
 msgstr "Kian Sanat Academy"
 
-#: .\core\templates\core\about.html:663
+#: .\core\templates\core\about.html:670
 msgid "فرآیند کار"
 msgstr "Working Process"
 
-#: .\core\templates\core\about.html:664
+#: .\core\templates\core\about.html:671
 msgid "مسیر اجرای پروژه‌ها در کیان صنعت"
 msgstr "Project Execution Path at Kian Sanat"
 
-#: .\core\templates\core\about.html:669 .\core\templates\core\about.html:670
+#: .\core\templates\core\about.html:676 .\core\templates\core\about.html:677
 msgid "پیکان"
 msgstr "Arrow"
 
-#: .\core\templates\core\about.html:679
+#: .\core\templates\core\about.html:686
 msgid "نیازسنجی و طراحی"
 msgstr "Needs Assessment and Design"
 
-#: .\core\templates\core\about.html:680
+#: .\core\templates\core\about.html:687
 msgid ""
 "بررسی دقیق نیازهای کارفرما و ارائه طراحی‌های سفارشی مبتنی بر استانداردهای "
 "مهندسی."
@@ -219,207 +222,211 @@ msgstr ""
 "Careful assessment of the employer's needs and providing custom designs "
 "based on engineering standards."
 
-#: .\core\templates\core\about.html:690
+#: .\core\templates\core\about.html:697
 msgid "توسعه و پیاده‌سازی"
 msgstr "Development and Implementation"
 
-#: .\core\templates\core\about.html:691
+#: .\core\templates\core\about.html:698
 msgid ""
 "استفاده از ماشین‌آلات پیشرفته و تیم متخصص برای اجرای بی‌نقص و زمان‌بندی شده "
 "پروژه‌ها."
 msgstr ""
-"Using advanced machinery and an expert team for flawless and timely execution "
-"of projects."
+"Using advanced machinery and an expert team for flawless and timely "
+"execution of projects."
 
-#: .\core\templates\core\about.html:701
+#: .\core\templates\core\about.html:708
 msgid "پشتیبانی و نگهداری"
 msgstr "Support and Maintenance"
 
-#: .\core\templates\core\about.html:702
+#: .\core\templates\core\about.html:709
 msgid ""
 "ارائه خدمات پس از فروش و نظارت مستمر برای اطمینان از عملکرد پایدار سیستم‌ها."
 msgstr ""
-"Providing after-sales services and continuous monitoring to ensure the stable "
-"performance of systems."
+"Providing after-sales services and continuous monitoring to ensure the "
+"stable performance of systems."
 
-#: .\core\templates\core\about.html:718
+#: .\core\templates\core\about.html:725
 msgid "سرمایه‌های اصلی ما"
 msgstr "Our Main Assets"
 
-#: .\core\templates\core\about.html:719
+#: .\core\templates\core\about.html:726
 msgid "تکریم نیروی انسانی؛ کلید پیشرفت کیان صنعت"
 msgstr "Honoring Human Resources; The Key to Kian Sanat's Progress"
 
-#: .\core\templates\core\about.html:729 .\core\templates\core\about.html:767
+#: .\core\templates\core\about.html:736 .\core\templates\core\about.html:774
 msgid "دپارتمان هوش مصنوعی"
 msgstr "AI Department"
 
-#: .\core\templates\core\about.html:732
+#: .\core\templates\core\about.html:739
+#: .\core\templates\core\services.html:521
 msgid "هوش مصنوعی و رباتیک"
 msgstr "AI and Robotics"
 
-#: .\core\templates\core\about.html:733 .\core\templates\core\about.html:744
-#: .\core\templates\core\about.html:755
+#: .\core\templates\core\about.html:740 .\core\templates\core\about.html:751
+#: .\core\templates\core\about.html:762
 msgid "دپارتمان تخصصی"
 msgstr "Specialized Department"
 
-#: .\core\templates\core\about.html:740 .\core\templates\core\about.html:783
+#: .\core\templates\core\about.html:747 .\core\templates\core\about.html:790
 msgid "دپارتمان انرژی"
 msgstr "Energy Department"
 
-#: .\core\templates\core\about.html:743
+#: .\core\templates\core\about.html:750
 msgid "انرژی‌های تجدیدپذیر"
 msgstr "Renewable Energies"
 
-#: .\core\templates\core\about.html:751 .\core\templates\core\about.html:799
+#: .\core\templates\core\about.html:758 .\core\templates\core\about.html:806
 msgid "دپارتمان زیرساخت"
 msgstr "Infrastructure Department"
 
-#: .\core\templates\core\about.html:754
+#: .\core\templates\core\about.html:761
 msgid "زیرساخت و نمای هوشمند"
 msgstr "Infrastructure and Smart Facades"
 
-#: .\core\templates\core\about.html:772
+#: .\core\templates\core\about.html:779
 msgid "دپارتمان هوش مصنوعی و رباتیک"
 msgstr "AI and Robotics Department"
 
-#: .\core\templates\core\about.html:773
+#: .\core\templates\core\about.html:780
 msgid "مغز متفکر کیان صنعت"
 msgstr "The Mastermind of Kian Sanat"
 
-#: .\core\templates\core\about.html:774
+#: .\core\templates\core\about.html:781
 msgid ""
 "طراحی سیستم‌های هوشمند، پردازش داده و ربات‌های صنعتی با رویکرد ارتقای بهره‌وری "
 "و کاهش خطای انسانی. ما فضایی پویا برای ایده‌پردازی و خلق نوآوری‌های مهندسانمان "
 "فراهم کرده‌ایم."
 msgstr ""
 "Designing smart systems, data processing, and industrial robots with the "
-"approach of increasing productivity and reducing human error. We have provided "
-"a dynamic space for ideation and creation of innovations for our engineers."
+"approach of increasing productivity and reducing human error. We have "
+"provided a dynamic space for ideation and creation of innovations for our "
+"engineers."
 
-#: .\core\templates\core\about.html:788
+#: .\core\templates\core\about.html:795
 msgid "دپارتمان انرژی‌های تجدیدپذیر"
 msgstr "Renewable Energies Department"
 
-#: .\core\templates\core\about.html:789
+#: .\core\templates\core\about.html:796
 msgid "پیشگامان انرژی سبز"
 msgstr "Pioneers of Green Energy"
 
-#: .\core\templates\core\about.html:790
+#: .\core\templates\core\about.html:797
 msgid ""
 "مشاوره، طراحی و راه‌اندازی نیروگاه‌های خورشیدی با تمرکز بر مدیریت بهینه انرژی "
 "و حفظ محیط زیست. تیم متخصص ما متعهد به استفاده از برترین استانداردهای "
 "بین‌المللی است."
 msgstr ""
-"Consulting, designing, and installing solar power plants with a focus on optimal "
-"energy management and environmental preservation. Our expert team is committed to "
-"using the highest international standards."
+"Consulting, designing, and installing solar power plants with a focus on "
+"optimal energy management and environmental preservation. Our expert team is "
+"committed to using the highest international standards."
 
-#: .\core\templates\core\about.html:804
+#: .\core\templates\core\about.html:811
 msgid "دپارتمان زیرساخت و نمای هوشمند"
 msgstr "Infrastructure and Smart Facade Department"
 
-#: .\core\templates\core\about.html:805
+#: .\core\templates\core\about.html:812
 msgid "تلفیق هنر و فناوری"
 msgstr "Integration of Art and Technology"
 
-#: .\core\templates\core\about.html:806
+#: .\core\templates\core\about.html:813
 msgid ""
 "خلق ساختمان‌های هوشمند با استفاده از نماهای مدرن و متریال‌های پیشرفته متصل به "
 "سیستم‌های اینترنت اشیا (IoT). ما معماری را با تکنولوژی روز پیوند می‌زنیم."
 msgstr ""
-"Creating smart buildings using modern facades and advanced materials connected to "
-"Internet of Things (IoT) systems. We link architecture with state-of-the-art "
-"technology."
+"Creating smart buildings using modern facades and advanced materials "
+"connected to Internet of Things (IoT) systems. We link architecture with "
+"state-of-the-art technology."
 
-#: .\core\templates\core\about.html:824 .\core\templates\core\index.html:647
+#: .\core\templates\core\about.html:831 .\core\templates\core\index.html:647
 msgid "تحقیق و توسعه"
 msgstr "Research & Development"
 
-#: .\core\templates\core\about.html:830
+#: .\core\templates\core\about.html:837
 msgid "نوآوری مستمر (R&D)"
 msgstr "Continuous Innovation (R&D)"
 
-#: .\core\templates\core\about.html:831
+#: .\core\templates\core\about.html:838
 msgid "تحقیق و توسعه؛ مرزهای فناوری را جابجا می‌کنیم"
 msgstr "Research and Development; We Push the Boundaries of Technology"
 
-#: .\core\templates\core\about.html:840
+#: .\core\templates\core\about.html:847
 msgid "بومی‌سازی فناوری"
 msgstr "Localization of Technology"
 
-#: .\core\templates\core\about.html:841
+#: .\core\templates\core\about.html:848
 msgid ""
 "طراحی و توسعه راهکارهای اختصاصی و بومی‌سازی ماشین‌آلات هوشمند متناسب با صنایع."
 msgstr ""
 "Designing and developing dedicated solutions and localizing smart machinery "
 "suited to industries."
 
-#: .\core\templates\core\about.html:851
+#: .\core\templates\core\about.html:858
 msgid "اینترنت اشیا (IoT)"
 msgstr "Internet of Things (IoT)"
 
-#: .\core\templates\core\about.html:852
+#: .\core\templates\core\about.html:859
 msgid "اتصال یکپارچه سیستم‌های صنعتی و ساختمانی برای مانیتورینگ و کنترل هوشمند."
 msgstr ""
-"Seamless connection of industrial and building systems for smart monitoring and "
-"control."
+"Seamless connection of industrial and building systems for smart monitoring "
+"and control."
 
-#: .\core\templates\core\about.html:862
+#: .\core\templates\core\about.html:869
 msgid "نماهای هوشمند"
 msgstr "Smart Facades"
 
-#: .\core\templates\core\about.html:863
+#: .\core\templates\core\about.html:870
 msgid ""
 "طراحی سازه‌ها و نماهایی که با تغییرات شرایط محیطی جهت بهره‌وری سازگار می‌شوند."
 msgstr ""
 "Designing structures and facades that adapt to changes in environmental "
 "conditions for productivity."
 
-#: .\core\templates\core\about.html:873
+#: .\core\templates\core\about.html:880
+#: .\core\templates\core\services.html:516
+#: .\core\templates\core\services.html:553
 msgid "مدیریت انرژی"
 msgstr "Energy Management"
 
-#: .\core\templates\core\about.html:874
+#: .\core\templates\core\about.html:881
 msgid ""
 "توسعه الگوریتم‌ها و پلتفرم‌های هوشمند برای کاهش هدررفت و مدیریت مصرف انرژی."
 msgstr ""
 "Developing smart algorithms and platforms to reduce waste and manage energy "
 "consumption."
 
-#: .\core\templates\core\about.html:896 .\core\templates\core\about.html:913
+#: .\core\templates\core\about.html:903 .\core\templates\core\about.html:920
 msgid "دپارتمان بازرگانی کیان صنعت"
 msgstr "Kian Sanat Commercial Department"
 
-#: .\core\templates\core\about.html:901
+#: .\core\templates\core\about.html:908
 msgid "توسعه تجارت"
 msgstr "Business Development"
 
-#: .\core\templates\core\about.html:902
+#: .\core\templates\core\about.html:909
 msgid "در سطح ملی و بین‌المللی"
 msgstr "At National and International Levels"
 
-#: .\core\templates\core\about.html:912
+#: .\core\templates\core\about.html:919
 msgid "توسعه بازار و تجارت هوشمند"
 msgstr "Market Development and Smart Trade"
 
-#: .\core\templates\core\about.html:914
+#: .\core\templates\core\about.html:921
 msgid ""
 "بخش بازرگانی کیان صنعت با تکیه بر دانش فنی و شناخت دقیق بازارهای هدف، پل "
 "ارتباطی قدرتمندی میان تولیدات دانش‌بنیان، تکنولوژی‌های نوین و صنایع ایجاد کرده "
 "است. ما در این دپارتمان چهار حوزه کلیدی را با بالاترین استانداردها مدیریت "
 "می‌کنیم:"
 msgstr ""
-"Relying on technical knowledge and precise understanding of target markets, Kian "
-"Sanat's commercial department has created a powerful bridge between knowledge-"
-"based products, new technologies, and industries. We manage four key areas with "
-"the highest standards in this department:"
+"Relying on technical knowledge and precise understanding of target markets, "
+"Kian Sanat's commercial department has created a powerful bridge between "
+"knowledge-based products, new technologies, and industries. We manage four "
+"key areas with the highest standards in this department:"
 
-#: .\core\templates\core\about.html:924
+#: .\core\templates\core\about.html:931
 msgid "۱. واحد بازرگانی داخلی"
 msgstr "1. Domestic Commercial Unit"
 
-#: .\core\templates\core\about.html:925
+#: .\core\templates\core\about.html:932
 msgid ""
 "تأمین قطعات تخصصی، عقد قرارداد با صنایع مادر و ارائه راهکارهای جامع "
 "هوشمندسازی برای کارخانجات و سازمان‌های ایرانی."
@@ -428,23 +435,24 @@ msgstr ""
 "providing comprehensive smartification solutions for Iranian factories and "
 "organizations."
 
-#: .\core\templates\core\about.html:935
+#: .\core\templates\core\about.html:942
 msgid "۲. واحد بازرگانی بین‌الملل"
 msgstr "2. International Commercial Unit"
 
-#: .\core\templates\core\about.html:936
+#: .\core\templates\core\about.html:943
 msgid ""
 "ارتباط مستقیم با شرکای جهانی، انتقال تکنولوژی‌های روز دنیا در حوزه انرژی‌های "
 "تجدیدپذیر و بومی‌سازی استانداردهای بین‌المللی."
 msgstr ""
 "Direct communication with global partners, transfer of state-of-the-art "
-"technologies in renewable energies, and localization of international standards."
+"technologies in renewable energies, and localization of international "
+"standards."
 
-#: .\core\templates\core\about.html:946
+#: .\core\templates\core\about.html:953
 msgid "۳. دستگاه‌های تولید هوشمند"
 msgstr "3. Smart Production Machinery"
 
-#: .\core\templates\core\about.html:947
+#: .\core\templates\core\about.html:954
 msgid ""
 "مشاوره، فروش و راه‌اندازی خطوط تولید رباتیک و ماشین‌آلات پیشرفته مبتنی بر "
 "اینترنت اشیا (IoT) جهت افزایش چشمگیر راندمان."
@@ -452,56 +460,56 @@ msgstr ""
 "Consulting, sales, and installation of robotic production lines and advanced "
 "machinery based on IoT for significant efficiency increases."
 
-#: .\core\templates\core\about.html:957
+#: .\core\templates\core\about.html:964
 msgid "۴. صادرات و واردات"
 msgstr "4. Export and Import"
 
-#: .\core\templates\core\about.html:958
+#: .\core\templates\core\about.html:965
 msgid ""
 "صادرات محصولات دانش‌بنیان شرکت به بازارهای منطقه و واردات تخصصی قطعات حساس "
 "الکترونیکی با تضمین اصالت و سرعت."
 msgstr ""
 "Exporting the company's knowledge-based products to regional markets and "
-"specialized importing of sensitive electronic parts with guaranteed authenticity "
-"and speed."
+"specialized importing of sensitive electronic parts with guaranteed "
+"authenticity and speed."
 
-#: .\core\templates\core\about.html:976
+#: .\core\templates\core\about.html:983
 msgid "استانداردها و افتخارات"
 msgstr "Standards and Honors"
 
-#: .\core\templates\core\about.html:977
+#: .\core\templates\core\about.html:984
 msgid "گواهینامه‌ها و مدارک کیان صنعت"
 msgstr "Kian Sanat Certificates and Credentials"
 
-#: .\core\templates\core\about.html:986
+#: .\core\templates\core\about.html:993
 msgid "گواهینامه مدیریت کیفیت"
 msgstr "Quality Management Certificate"
 
-#: .\core\templates\core\about.html:988
+#: .\core\templates\core\about.html:995
 msgid "گواهینامه مدیریت کیفیت (ISO 9001)"
 msgstr "Quality Management Certificate (ISO 9001)"
 
-#: .\core\templates\core\about.html:994
+#: .\core\templates\core\about.html:1001
 msgid "مجوز فعالیت"
 msgstr "Activity License"
 
-#: .\core\templates\core\about.html:996
+#: .\core\templates\core\about.html:1003
 msgid "مجوز فعالیت در حوزه هوش مصنوعی"
 msgstr "Activity License in the Field of Artificial Intelligence"
 
-#: .\core\templates\core\about.html:1002
+#: .\core\templates\core\about.html:1009
 msgid "تاییدیه صلاحیت"
 msgstr "Qualification Approval"
 
-#: .\core\templates\core\about.html:1004
+#: .\core\templates\core\about.html:1011
 msgid "تأییدیه صلاحیت پیمانکاری"
 msgstr "Contractor Qualification Approval"
 
-#: .\core\templates\core\about.html:1010
+#: .\core\templates\core\about.html:1017
 msgid "گواهینامه ثبت اختراع"
 msgstr "Patent Certificate"
 
-#: .\core\templates\core\about.html:1012
+#: .\core\templates\core\about.html:1019
 msgid "گواهینامه ثبت اختراع / مالکیت معنوی"
 msgstr "Patent / Intellectual Property Certificate"
 
@@ -509,17 +517,17 @@ msgstr "Patent / Intellectual Property Certificate"
 msgid "تماس با ما | شرکت کیان صنعت"
 msgstr "Contact Us | Kian Sanat Company"
 
-#: .\core\templates\core\contact.html:234
-#: .\core\templates\core\contact.html:237 .\core\templates\core\index.html:372
+#: .\core\templates\core\contact.html:243
+#: .\core\templates\core\contact.html:246 .\core\templates\core\index.html:372
 #: .\templates\_base.html:488 .\templates\_base.html:639
 msgid "تماس با ما"
 msgstr "Contact Us"
 
-#: .\core\templates\core\contact.html:256
+#: .\core\templates\core\contact.html:265
 msgid "همیشه پاسخگوی شما <br class=\"d-none d-md-block\"> هستیم"
 msgstr "We are always here <br class=\"d-none d-md-block\"> to answer you"
 
-#: .\core\templates\core\contact.html:260
+#: .\core\templates\core\contact.html:269
 msgid ""
 "جهت مشاوره، پشتیبانی و ثبت درخواست <br class=\"d-none d-md-block\"> با "
 "کارشناسان کیان صنعت در ارتباط باشید."
@@ -527,77 +535,77 @@ msgstr ""
 "Get in touch with Kian Sanat experts <br class=\"d-none d-md-block\"> for "
 "consultation, support, and requests."
 
-#: .\core\templates\core\contact.html:265
+#: .\core\templates\core\contact.html:274
 msgid "پست الکترونیک:"
 msgstr "Email:"
 
-#: .\core\templates\core\contact.html:271
+#: .\core\templates\core\contact.html:280
 msgid "شماره‌های تماس:"
 msgstr "Contact Numbers:"
 
-#: .\core\templates\core\contact.html:282
+#: .\core\templates\core\contact.html:291
 msgid "آدرس دفتر مرکزی و کارخانه:"
 msgstr "Headquarters and Factory Address:"
 
-#: .\core\templates\core\contact.html:284
+#: .\core\templates\core\contact.html:293
 msgid "اصفهان، شهرضا، شهرک صنعتی امیرکبیر، بلوار کاوه، نبش فرعی ۱"
 msgstr ""
 "Isfahan, Shahreza, Amirkabir Industrial Estate, Kaveh Blvd, Corner of Alley 1"
 
-#: .\core\templates\core\contact.html:291
+#: .\core\templates\core\contact.html:300
 msgid "شبکه‌های اجتماعی:"
 msgstr "Social Networks:"
 
-#: .\core\templates\core\contact.html:322
+#: .\core\templates\core\contact.html:331
 msgid "ارسال پیام به ما"
 msgstr "Send Us a Message"
 
-#: .\core\templates\core\contact.html:329
+#: .\core\templates\core\contact.html:338
 msgid "نام و نام خانوادگی"
 msgstr "Full Name"
 
-#: .\core\templates\core\contact.html:333
+#: .\core\templates\core\contact.html:342
 msgid "شماره تماس"
 msgstr "Phone Number"
 
-#: .\core\templates\core\contact.html:337
+#: .\core\templates\core\contact.html:346
 msgid "آدرس ایمیل (اختیاری)"
 msgstr "Email Address (Optional)"
 
-#: .\core\templates\core\contact.html:342 .\core\templates\core\index.html:977
+#: .\core\templates\core\contact.html:351 .\core\templates\core\index.html:977
 msgid "متن پیام شما..."
 msgstr "Your Message..."
 
-#: .\core\templates\core\contact.html:347 .\core\templates\core\index.html:995
+#: .\core\templates\core\contact.html:356 .\core\templates\core\index.html:995
 msgid "ارسال پیام"
 msgstr "Send Message"
 
-#: .\core\templates\core\contact.html:370
+#: .\core\templates\core\contact.html:379
 msgid "در حال ارسال..."
 msgstr "Sending..."
 
-#: .\core\templates\core\contact.html:371
+#: .\core\templates\core\contact.html:380
 msgid "پیام ارسال شد!"
 msgstr "Message Sent!"
 
-#: .\core\templates\core\contact.html:372
+#: .\core\templates\core\contact.html:381
 msgid ""
 "پیام شما با موفقیت ثبت شد و کارشناسان ما به زودی با شما تماس خواهند گرفت."
 msgstr ""
 "Your message has been successfully submitted, and our experts will contact "
 "you soon."
 
-#: .\core\templates\core\contact.html:373
+#: .\core\templates\core\contact.html:382
 msgid "خطا در ارسال"
 msgstr "Sending Error"
 
-#: .\core\templates\core\contact.html:374
+#: .\core\templates\core\contact.html:383
 msgid "متاسفانه مشکلی در ارسال پیام به وجود آمد. لطفاً دوباره تلاش کنید."
 msgstr ""
 "Unfortunately, an error occurred while sending your message. Please try "
 "again."
 
-#: .\core\templates\core\contact.html:375
+#: .\core\templates\core\contact.html:384
 msgid "تایید"
 msgstr "OK"
 
@@ -605,7 +613,8 @@ msgstr "OK"
 msgid "لوگو کیان صنعت"
 msgstr "Kian Sanat Logo"
 
-#: .\core\templates\core\index.html:366 .\templates\_base.html:482
+#: .\core\templates\core\index.html:366
+#: .\core\templates\core\services.html:482 .\templates\_base.html:482
 msgid "فعالیت‌ها"
 msgstr "Activities"
 
@@ -722,6 +731,7 @@ msgid "انرژی سبز و پایدار:"
 msgstr "Green and Sustainable Energy:"
 
 #: .\core\templates\core\index.html:729
+#: .\core\templates\core\services.html:545
 msgid "طراحی و راه‌اندازی نیروگاه خورشیدی"
 msgstr "Design and Installation of Solar Power Plants"
 
@@ -1040,6 +1050,185 @@ msgstr "Architecture Team"
 msgid "جدیدترین دستاوردهای نمای ساختمان هوشمند برای بهینه‌سازی انرژی."
 msgstr ""
 "The latest achievements in smart building facades for energy optimization."
+
+#: .\core\templates\core\services.html:5
+msgid "فعالیت‌های ما | شرکت کیان صنعت"
+msgstr "Our Activities | Kian Sanat Company"
+
+#: .\core\templates\core\services.html:479
+msgid "فعالیت‌های ما"
+msgstr "Our Activities"
+
+#: .\core\templates\core\services.html:498
+msgid "حوزه‌های تخصصی کیان صنعت"
+msgstr "Kian Sanat Specialized Areas"
+
+#: .\core\templates\core\services.html:499
+msgid "پیشگام در ارائه راهکارهای هوشمند و پایدار"
+msgstr "Pioneer in Providing Smart and Sustainable Solutions"
+
+#: .\core\templates\core\services.html:511
+#: .\core\templates\core\services.html:543
+msgid "نیروگاه خورشیدی"
+msgstr "Solar Power Plant"
+
+#: .\core\templates\core\services.html:512
+msgid "طراحی، تأمین و راه‌اندازی"
+msgstr "Design, Procurement, and Installation"
+
+#: .\core\templates\core\services.html:517
+msgid "سیستم‌های هوشمندسازی"
+msgstr "Smartification Systems"
+
+#: .\core\templates\core\services.html:522
+msgid "اجرای پروژه‌های اتوماسیون"
+msgstr "Execution of Automation Projects"
+
+#: .\core\templates\core\services.html:526
+#: .\core\templates\core\services.html:573
+msgid "شهرهای هوشمند"
+msgstr "Smart Cities"
+
+#: .\core\templates\core\services.html:527
+msgid "پروژه‌های کلان عمرانی"
+msgstr "Large-scale Civil Projects"
+
+#: .\core\templates\core\services.html:531
+#: .\core\templates\core\services.html:583
+msgid "نما و محوطه‌سازی"
+msgstr "Facade and Landscaping"
+
+#: .\core\templates\core\services.html:532
+msgid "طراحی و ساخت مدرن"
+msgstr "Modern Design and Construction"
+
+#: .\core\templates\core\services.html:546
+msgid ""
+"طراحی، تأمین تجهیزات و اجرای صفر تا صد نیروگاه‌های خورشیدی با هدف بهره‌وری "
+"حداکثری از انرژی‌های تجدیدپذیر و کاهش چشمگیر هزینه‌های مصرف انرژی برای صنایع "
+"کلان و منازل مسکونی."
+msgstr ""
+"Design, procurement, and turnkey execution of solar power plants aimed at "
+"maximizing efficiency from renewable energies and significantly reducing "
+"energy consumption costs for large industries and residential homes."
+
+#: .\core\templates\core\services.html:547
+#: .\core\templates\core\services.html:557
+#: .\core\templates\core\services.html:567
+#: .\core\templates\core\services.html:577
+#: .\core\templates\core\services.html:587
+msgid "مشاوره رایگان"
+msgstr "Free Consultation"
+
+#: .\core\templates\core\services.html:555
+msgid "پروژه‌های هوشمندسازی مدیریت انرژی"
+msgstr "Smart Energy Management Projects"
+
+#: .\core\templates\core\services.html:556
+msgid ""
+"پیاده‌سازی سیستم‌های پیشرفته مانیتورینگ و کنترل مصرف انرژی جهت بهینه‌سازی "
+"عملکرد، جلوگیری از هدررفت منابع و ارتقای سطح پایداری در ساختمان‌های تجاری، "
+"اداری و مسکونی."
+msgstr ""
+"Implementation of advanced energy monitoring and control systems to optimize "
+"performance, prevent resource waste, and enhance sustainability levels in "
+"commercial, administrative, and residential buildings."
+
+#: .\core\templates\core\services.html:563
+msgid "هوش مصنوعی"
+msgstr "Artificial Intelligence"
+
+#: .\core\templates\core\services.html:565
+msgid "هوش مصنوعی و ربات‌های هوشمند"
+msgstr "Artificial Intelligence and Smart Robots"
+
+#: .\core\templates\core\services.html:566
+msgid ""
+"تطبیق و توسعه راهکارهای نوین مبتنی بر هوش مصنوعی و ربات‌های خودکار جهت "
+"اتوماسیون فرآیندهای صنعتی، افزایش دقت و سرعت در خطوط تولید و بهبود سیستم‌های "
+"تصمیم‌گیری هوشمند."
+msgstr ""
+"Adaptation and development of modern solutions based on AI and automated robots "
+"for industrial process automation, increasing accuracy and speed in production "
+"lines, and improving smart decision-making systems."
+
+#: .\core\templates\core\services.html:575
+msgid "پروژه‌های عمرانی شهرهای هوشمند"
+msgstr "Smart City Civil Projects"
+
+#: .\core\templates\core\services.html:576
+msgid ""
+"طراحی و اجرای زیرساخت‌های عمرانی یکپارچه با تکنولوژی برای توسعه شهرهای "
+"هوشمند، شامل سیستم‌های نوین حمل‌ونقل، روشنایی یکپارچه و پلتفرم‌های تعاملی "
+"مدیریت شهری."
+msgstr ""
+"Design and execution of technology-integrated civil infrastructures for smart "
+"city development, including modern transportation systems, integrated lighting, "
+"and interactive urban management platforms."
+
+#: .\core\templates\core\services.html:585
+msgid "طراحی و ساخت نما و محوطه‌سازی"
+msgstr "Design and Construction of Facades and Landscaping"
+
+#: .\core\templates\core\services.html:586
+msgid ""
+"تلفیق معماری مدرن و تکنولوژی‌های هوشمند در طراحی و اجرای حرفه‌ای نماهای "
+"ساختمانی و محوطه‌سازی، با تمرکز ویژه بر زیبایی‌شناختی، دوام و خلق فضاهای "
+"دوست‌دار محیط زیست."
+msgstr ""
+"Integration of modern architecture and smart technologies in the professional "
+"design and execution of building facades and landscaping, with a special focus "
+"on aesthetics, durability, and creating eco-friendly spaces."
+
+#: .\core\templates\core\services.html:605
+msgid "ویژگی‌های کیان صنعت"
+msgstr "Features of Kian Sanat"
+
+#: .\core\templates\core\services.html:613
+msgid "ارزش‌آفرینی کیان صنعت"
+msgstr "Value Creation by Kian Sanat"
+
+#: .\core\templates\core\services.html:614
+msgid "چرا اجرای پروژه‌های کلان خود را به ما بسپارید؟"
+msgstr "Why entrust us with the execution of your large-scale projects?"
+
+#: .\core\templates\core\services.html:624
+msgid "تخصص و تجربه ترکیبی"
+msgstr "Combined Expertise and Experience"
+
+#: .\core\templates\core\services.html:625
+msgid ""
+"ما دانش اصیل مهندسی عمران و الکترونیک را با فناوری‌های نوین مانند هوش مصنوعی "
+"و اینترنت اشیا تلفیق کرده‌ایم تا بهینه‌ترین نتایج را به کارفرمایان ارائه دهیم."
+msgstr ""
+"We have integrated authentic civil and electronic engineering knowledge with "
+"modern technologies like artificial intelligence and IoT to provide the most "
+"optimal results for employers."
+
+#: .\core\templates\core\services.html:636
+msgid "تعهد به پایداری محیط زیست"
+msgstr "Commitment to Environmental Sustainability"
+
+#: .\core\templates\core\services.html:637
+msgid ""
+"تمرکز ویژه ما بر پروژه‌های سبز، مدیریت یکپارچه انرژی و انرژی‌های تجدیدپذیر، "
+"ضامن کاهش هزینه‌ها و حفظ محیط زیست در توسعه‌های شهری است."
+msgstr ""
+"Our special focus on green projects, integrated energy management, and "
+"renewable energies guarantees cost reduction and environmental preservation "
+"in urban developments."
+
+#: .\core\templates\core\services.html:645
+msgid "+۵۰"
+msgstr "+50"
+
+#: .\core\templates\core\services.html:646
+msgid "پروژه موفق کشوری"
+msgstr "Successful National Projects"
+
+#: .\core\templates\core\services.html:651
+msgid "۱۰۰٪"
+msgstr "100%"
 
 #: .\templates\_base.html:9
 msgid "شرکت کیان صنعت"
