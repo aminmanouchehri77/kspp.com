@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-08-18 18:18+0430\n"
+"POT-Creation-Date: 2026-08-19 00:58+0430\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -36,7 +36,8 @@ msgstr "About Us"
 
 #: .\core\templates\core\about.html:481 .\core\templates\core\contact.html:245
 #: .\core\templates\core\index.html:365
-#: .\core\templates\core\services.html:481 .\templates\_base.html:481
+#: .\core\templates\core\products.html:389
+#: .\core\templates\core\services.html:482 .\templates\_base.html:481
 #: .\templates\_base.html:634
 msgid "صفحه اصلی"
 msgstr "Home"
@@ -114,7 +115,7 @@ msgid "%%"
 msgstr "%%"
 
 #: .\core\templates\core\about.html:560
-#: .\core\templates\core\services.html:652
+#: .\core\templates\core\services.html:653
 msgid "رضایت کارفرمایان"
 msgstr "Employers' Satisfaction"
 
@@ -258,7 +259,7 @@ msgid "دپارتمان هوش مصنوعی"
 msgstr "AI Department"
 
 #: .\core\templates\core\about.html:739
-#: .\core\templates\core\services.html:521
+#: .\core\templates\core\services.html:522
 msgid "هوش مصنوعی و رباتیک"
 msgstr "AI and Robotics"
 
@@ -382,8 +383,8 @@ msgstr ""
 "conditions for productivity."
 
 #: .\core\templates\core\about.html:880
-#: .\core\templates\core\services.html:516
-#: .\core\templates\core\services.html:553
+#: .\core\templates\core\services.html:517
+#: .\core\templates\core\services.html:554
 msgid "مدیریت انرژی"
 msgstr "Energy Management"
 
@@ -614,11 +615,12 @@ msgid "لوگو کیان صنعت"
 msgstr "Kian Sanat Logo"
 
 #: .\core\templates\core\index.html:366
-#: .\core\templates\core\services.html:482 .\templates\_base.html:482
+#: .\core\templates\core\services.html:483 .\templates\_base.html:482
 msgid "فعالیت‌ها"
 msgstr "Activities"
 
-#: .\core\templates\core\index.html:367 .\templates\_base.html:483
+#: .\core\templates\core\index.html:367
+#: .\core\templates\core\products.html:392 .\templates\_base.html:483
 msgid "محصولات"
 msgstr "Products"
 
@@ -731,7 +733,7 @@ msgid "انرژی سبز و پایدار:"
 msgstr "Green and Sustainable Energy:"
 
 #: .\core\templates\core\index.html:729
-#: .\core\templates\core\services.html:545
+#: .\core\templates\core\services.html:546
 msgid "طراحی و راه‌اندازی نیروگاه خورشیدی"
 msgstr "Design and Installation of Solar Power Plants"
 
@@ -882,6 +884,7 @@ msgstr ""
 "efficiency."
 
 #: .\core\templates\core\index.html:915
+#: .\core\templates\core\products.html:433
 msgid "تجهیزات خورشیدی"
 msgstr "Solar Equipment"
 
@@ -1051,58 +1054,91 @@ msgid "جدیدترین دستاوردهای نمای ساختمان هوشمن�
 msgstr ""
 "The latest achievements in smart building facades for energy optimization."
 
+#: .\core\templates\core\products.html:5
+msgid "محصولات ما | شرکت کیان صنعت"
+msgstr "Our Products | Kian Sanat Company"
+
+#: .\core\templates\core\products.html:384
+msgid "محصولات ما"
+msgstr "Our Products"
+
+#: .\core\templates\core\products.html:410
+msgid "نوآوری و تکنولوژی در دستان شما"
+msgstr "Innovation and Technology in Your Hands"
+
+#: .\core\templates\core\products.html:417
+msgid "تجهیزات و راهکارهای هوشمند کیان صنعت"
+msgstr "Kian Sanat Smart Equipment and Solutions"
+
+#: .\core\templates\core\products.html:429
+msgid "همه محصولات"
+msgstr "All Products"
+
+#: .\core\templates\core\products.html:437
+msgid "هوشمندسازی"
+msgstr "Smartification"
+
+#: .\core\templates\core\products.html:441
+msgid "رباتیک و AI"
+msgstr "Robotics & AI"
+
+#: .\core\templates\core\products.html:499
+msgid "در حال حاضر هیچ محصولی برای نمایش وجود ندارد"
+msgstr "There are currently no products to display"
+
+
 #: .\core\templates\core\services.html:5
 msgid "فعالیت‌های ما | شرکت کیان صنعت"
 msgstr "Our Activities | Kian Sanat Company"
 
-#: .\core\templates\core\services.html:479
+#: .\core\templates\core\services.html:480
 msgid "فعالیت‌های ما"
 msgstr "Our Activities"
 
-#: .\core\templates\core\services.html:498
+#: .\core\templates\core\services.html:499
 msgid "حوزه‌های تخصصی کیان صنعت"
 msgstr "Kian Sanat Specialized Areas"
 
-#: .\core\templates\core\services.html:499
+#: .\core\templates\core\services.html:500
 msgid "پیشگام در ارائه راهکارهای هوشمند و پایدار"
 msgstr "Pioneer in Providing Smart and Sustainable Solutions"
 
-#: .\core\templates\core\services.html:511
-#: .\core\templates\core\services.html:543
+#: .\core\templates\core\services.html:512
+#: .\core\templates\core\services.html:544
 msgid "نیروگاه خورشیدی"
 msgstr "Solar Power Plant"
 
-#: .\core\templates\core\services.html:512
+#: .\core\templates\core\services.html:513
 msgid "طراحی، تأمین و راه‌اندازی"
 msgstr "Design, Procurement, and Installation"
 
-#: .\core\templates\core\services.html:517
+#: .\core\templates\core\services.html:518
 msgid "سیستم‌های هوشمندسازی"
 msgstr "Smartification Systems"
 
-#: .\core\templates\core\services.html:522
+#: .\core\templates\core\services.html:523
 msgid "اجرای پروژه‌های اتوماسیون"
 msgstr "Execution of Automation Projects"
 
-#: .\core\templates\core\services.html:526
-#: .\core\templates\core\services.html:573
+#: .\core\templates\core\services.html:527
+#: .\core\templates\core\services.html:574
 msgid "شهرهای هوشمند"
 msgstr "Smart Cities"
 
-#: .\core\templates\core\services.html:527
+#: .\core\templates\core\services.html:528
 msgid "پروژه‌های کلان عمرانی"
 msgstr "Large-scale Civil Projects"
 
-#: .\core\templates\core\services.html:531
-#: .\core\templates\core\services.html:583
+#: .\core\templates\core\services.html:532
+#: .\core\templates\core\services.html:584
 msgid "نما و محوطه‌سازی"
 msgstr "Facade and Landscaping"
 
-#: .\core\templates\core\services.html:532
+#: .\core\templates\core\services.html:533
 msgid "طراحی و ساخت مدرن"
 msgstr "Modern Design and Construction"
 
-#: .\core\templates\core\services.html:546
+#: .\core\templates\core\services.html:547
 msgid ""
 "طراحی، تأمین تجهیزات و اجرای صفر تا صد نیروگاه‌های خورشیدی با هدف بهره‌وری "
 "حداکثری از انرژی‌های تجدیدپذیر و کاهش چشمگیر هزینه‌های مصرف انرژی برای صنایع "
@@ -1112,19 +1148,19 @@ msgstr ""
 "maximizing efficiency from renewable energies and significantly reducing "
 "energy consumption costs for large industries and residential homes."
 
-#: .\core\templates\core\services.html:547
-#: .\core\templates\core\services.html:557
-#: .\core\templates\core\services.html:567
-#: .\core\templates\core\services.html:577
-#: .\core\templates\core\services.html:587
+#: .\core\templates\core\services.html:548
+#: .\core\templates\core\services.html:558
+#: .\core\templates\core\services.html:568
+#: .\core\templates\core\services.html:578
+#: .\core\templates\core\services.html:588
 msgid "مشاوره رایگان"
 msgstr "Free Consultation"
 
-#: .\core\templates\core\services.html:555
+#: .\core\templates\core\services.html:556
 msgid "پروژه‌های هوشمندسازی مدیریت انرژی"
 msgstr "Smart Energy Management Projects"
 
-#: .\core\templates\core\services.html:556
+#: .\core\templates\core\services.html:557
 msgid ""
 "پیاده‌سازی سیستم‌های پیشرفته مانیتورینگ و کنترل مصرف انرژی جهت بهینه‌سازی "
 "عملکرد، جلوگیری از هدررفت منابع و ارتقای سطح پایداری در ساختمان‌های تجاری، "
@@ -1134,69 +1170,69 @@ msgstr ""
 "performance, prevent resource waste, and enhance sustainability levels in "
 "commercial, administrative, and residential buildings."
 
-#: .\core\templates\core\services.html:563
+#: .\core\templates\core\services.html:564
 msgid "هوش مصنوعی"
 msgstr "Artificial Intelligence"
 
-#: .\core\templates\core\services.html:565
+#: .\core\templates\core\services.html:566
 msgid "هوش مصنوعی و ربات‌های هوشمند"
 msgstr "Artificial Intelligence and Smart Robots"
 
-#: .\core\templates\core\services.html:566
+#: .\core\templates\core\services.html:567
 msgid ""
 "تطبیق و توسعه راهکارهای نوین مبتنی بر هوش مصنوعی و ربات‌های خودکار جهت "
 "اتوماسیون فرآیندهای صنعتی، افزایش دقت و سرعت در خطوط تولید و بهبود سیستم‌های "
 "تصمیم‌گیری هوشمند."
 msgstr ""
-"Adaptation and development of modern solutions based on AI and automated robots "
-"for industrial process automation, increasing accuracy and speed in production "
-"lines, and improving smart decision-making systems."
+"Adaptation and development of modern solutions based on AI and automated "
+"robots for industrial process automation, increasing accuracy and speed in "
+"production lines, and improving smart decision-making systems."
 
-#: .\core\templates\core\services.html:575
+#: .\core\templates\core\services.html:576
 msgid "پروژه‌های عمرانی شهرهای هوشمند"
 msgstr "Smart City Civil Projects"
 
-#: .\core\templates\core\services.html:576
+#: .\core\templates\core\services.html:577
 msgid ""
 "طراحی و اجرای زیرساخت‌های عمرانی یکپارچه با تکنولوژی برای توسعه شهرهای "
 "هوشمند، شامل سیستم‌های نوین حمل‌ونقل، روشنایی یکپارچه و پلتفرم‌های تعاملی "
 "مدیریت شهری."
 msgstr ""
-"Design and execution of technology-integrated civil infrastructures for smart "
-"city development, including modern transportation systems, integrated lighting, "
-"and interactive urban management platforms."
+"Design and execution of technology-integrated civil infrastructures for "
+"smart city development, including modern transportation systems, integrated "
+"lighting, and interactive urban management platforms."
 
-#: .\core\templates\core\services.html:585
+#: .\core\templates\core\services.html:586
 msgid "طراحی و ساخت نما و محوطه‌سازی"
 msgstr "Design and Construction of Facades and Landscaping"
 
-#: .\core\templates\core\services.html:586
+#: .\core\templates\core\services.html:587
 msgid ""
 "تلفیق معماری مدرن و تکنولوژی‌های هوشمند در طراحی و اجرای حرفه‌ای نماهای "
 "ساختمانی و محوطه‌سازی، با تمرکز ویژه بر زیبایی‌شناختی، دوام و خلق فضاهای "
 "دوست‌دار محیط زیست."
 msgstr ""
-"Integration of modern architecture and smart technologies in the professional "
-"design and execution of building facades and landscaping, with a special focus "
-"on aesthetics, durability, and creating eco-friendly spaces."
+"Integration of modern architecture and smart technologies in the "
+"professional design and execution of building facades and landscaping, with "
+"a special focus on aesthetics, durability, and creating eco-friendly spaces."
 
-#: .\core\templates\core\services.html:605
+#: .\core\templates\core\services.html:606
 msgid "ویژگی‌های کیان صنعت"
 msgstr "Features of Kian Sanat"
 
-#: .\core\templates\core\services.html:613
+#: .\core\templates\core\services.html:614
 msgid "ارزش‌آفرینی کیان صنعت"
 msgstr "Value Creation by Kian Sanat"
 
-#: .\core\templates\core\services.html:614
+#: .\core\templates\core\services.html:615
 msgid "چرا اجرای پروژه‌های کلان خود را به ما بسپارید؟"
 msgstr "Why entrust us with the execution of your large-scale projects?"
 
-#: .\core\templates\core\services.html:624
+#: .\core\templates\core\services.html:625
 msgid "تخصص و تجربه ترکیبی"
 msgstr "Combined Expertise and Experience"
 
-#: .\core\templates\core\services.html:625
+#: .\core\templates\core\services.html:626
 msgid ""
 "ما دانش اصیل مهندسی عمران و الکترونیک را با فناوری‌های نوین مانند هوش مصنوعی "
 "و اینترنت اشیا تلفیق کرده‌ایم تا بهینه‌ترین نتایج را به کارفرمایان ارائه دهیم."
@@ -1205,11 +1241,11 @@ msgstr ""
 "modern technologies like artificial intelligence and IoT to provide the most "
 "optimal results for employers."
 
-#: .\core\templates\core\services.html:636
+#: .\core\templates\core\services.html:637
 msgid "تعهد به پایداری محیط زیست"
 msgstr "Commitment to Environmental Sustainability"
 
-#: .\core\templates\core\services.html:637
+#: .\core\templates\core\services.html:638
 msgid ""
 "تمرکز ویژه ما بر پروژه‌های سبز، مدیریت یکپارچه انرژی و انرژی‌های تجدیدپذیر، "
 "ضامن کاهش هزینه‌ها و حفظ محیط زیست در توسعه‌های شهری است."
@@ -1218,15 +1254,15 @@ msgstr ""
 "renewable energies guarantees cost reduction and environmental preservation "
 "in urban developments."
 
-#: .\core\templates\core\services.html:645
+#: .\core\templates\core\services.html:646
 msgid "+۵۰"
 msgstr "+50"
 
-#: .\core\templates\core\services.html:646
+#: .\core\templates\core\services.html:647
 msgid "پروژه موفق کشوری"
 msgstr "Successful National Projects"
 
-#: .\core\templates\core\services.html:651
+#: .\core\templates\core\services.html:652
 msgid "۱۰۰٪"
 msgstr "100%"
 

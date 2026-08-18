@@ -1,0 +1,589 @@
+{% extends '_base.html' %}
+{% load static i18n %}
+
+{% block title %}
+    {% trans "محصولات ما | شرکت کیان صنعت" %}
+{% endblock title %}
+
+{% block content %}
+<style>
+    :root {
+        --primary-color: #dd2a7b;
+        --ai-gradient: linear-gradient(135deg, #8134af 0%, #dd2a7b 50%, #ff512f 100%);
+        --btn-grad-normal: linear-gradient(90deg, #8b33ff 0%, #df378b 100%);
+        --btn-grad-hover: linear-gradient(90deg, #df378b 0%, #ff5e3a 100%);
+        --transition-speed: 0.5s;
+    }
+
+    body,
+    p,
+    a,
+    span,
+    li,
+    div,
+    button {
+        font-family: 'Vazirmatn', sans-serif !important;
+        line-height: 1.7 !important;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        font-family: 'Vazirmatn', sans-serif !important;
+        font-weight: 700 !important;
+    }
+
+    .section-title h2 {
+        text-wrap: balance;
+        max-width: 850px;
+        margin: 0 auto;
+        line-height: 1.6 !important;
+    }
+
+    .sub-title {
+        display: inline-block;
+        background: var(--ai-gradient);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        font-weight: 700;
+    }
+
+    .page-hero h1,
+    .page-hero ul li,
+    .page-hero ul li a {
+        font-family: 'Vazirmatn', sans-serif !important;
+    }
+
+    .page-hero ul li {
+        margin-top: 10px;
+    }
+
+    .page-hero ul li a {
+        color: #fff;
+        text-decoration: none;
+    }
+
+    .page-hero ul li a:hover {
+        text-decoration: underline;
+    }
+
+    html[dir="rtl"] body main section.page-hero .page-content ul li::after,
+    html[dir="rtl"] body main section.page-hero .page-content ul li::before,
+    html[dir="rtl"] body main section.page-hero .page-content ul li + li::before {
+        display: inline-block !important;
+        transform: scaleX(1) !important;
+    }
+
+    html[dir="ltr"] body main section.page-hero .page-content ul li::after,
+    html[dir="ltr"] body main section.page-hero .page-content ul li::before,
+    html[dir="ltr"] body main section.page-hero .page-content ul li + li::before {
+        display: inline-block !important;
+        transform: scaleX(-1) !important;
+    }
+
+    /* دسته‌بندی محصولات */
+    .products-filter-nav {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 15px;
+        margin-bottom: 50px;
+    }
+
+    .filter-btn {
+        padding: 10px 25px;
+        border: 1px solid rgba(0, 0, 0, 0.08);
+        border-radius: 50px;
+        background: #ffffff;
+        color: #555;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+        cursor: pointer;
+        font-size: 15px;
+        font-weight: 600;
+        transition: all 0.4s ease;
+    }
+
+    html[data-theme="dark"] .filter-btn {
+        border-color: #333;
+        background: #1e1e1e;
+        color: #ccc;
+    }
+
+    .filter-btn:hover {
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+        transform: translateY(-2px);
+    }
+
+    .filter-btn.active {
+        border-color: transparent;
+        background: var(--btn-grad-normal);
+        color: #fff;
+        box-shadow: 0 8px 20px rgba(139, 51, 255, 0.3);
+    }
+
+    /* بخش محصولات */
+    .products-showcase {
+        position: relative;
+        z-index: 1;
+        background-color: #f8f9fa;
+    }
+
+    html[data-theme="dark"] .products-showcase {
+        background-color: #121212;
+    }
+
+    .bento-grid {
+        display: grid;
+        grid-template-columns: repeat(12, 1fr);
+        gap: 30px;
+    }
+
+    .bento-item {
+        position: relative;
+        grid-column: span 4;
+        height: 480px;
+        overflow: hidden;
+        border-radius: 24px;
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.06);
+        transition: all var(--transition-speed) ease;
+    }
+
+    .bento-item.featured {
+        grid-column: span 8;
+    }
+
+    html[data-theme="dark"] .bento-item {
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+    }
+
+    .bento-item:hover {
+        box-shadow: 0 25px 45px rgba(139, 51, 255, 0.15);
+        transform: translateY(-8px);
+    }
+
+    .product-img-bg {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    .bento-item:hover .product-img-bg {
+        transform: scale(1.1);
+    }
+
+    .bento-item::before {
+        position: absolute;
+        z-index: 1;
+        inset: 0;
+        background: linear-gradient(
+            to top,
+            rgba(0, 0, 0, 0.85) 0%,
+            rgba(0, 0, 0, 0.2) 60%,
+            rgba(0, 0, 0, 0) 100%
+        );
+        content: '';
+    }
+
+    .product-badge {
+        position: absolute;
+        z-index: 2;
+        top: 20px;
+        right: 20px;
+        padding: 6px 16px;
+        border-radius: 30px;
+        background: var(--ai-gradient);
+        color: #fff;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        font-size: 13px;
+        font-weight: 700;
+    }
+
+    html[dir="ltr"] .product-badge {
+        right: auto;
+        left: 20px;
+    }
+
+    .product-glass-content {
+        position: absolute;
+        z-index: 3;
+        right: 20px;
+        bottom: 20px;
+        left: 20px;
+        padding: 25px;
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        border-radius: 20px;
+        background: rgba(20, 20, 20, 0.65);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        transition: all 0.5s ease;
+    }
+
+    .bento-item:hover .product-glass-content {
+        border-color: rgba(255, 255, 255, 0.3);
+        background: rgba(10, 10, 10, 0.85);
+    }
+
+    .product-title {
+        margin-bottom: 8px !important;
+        color: #fff !important;
+        font-size: 20px !important;
+        font-weight: 800 !important;
+    }
+
+    .product-desc {
+        display: -webkit-box;
+        overflow: hidden;
+        margin-bottom: 0;
+        color: #e0e0e0;
+        font-size: 14px;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+    }
+
+    .product-reveal-section {
+        max-height: 0;
+        overflow: hidden;
+        opacity: 0;
+        transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .bento-item:hover .product-reveal-section {
+        max-height: 300px;
+        margin-top: 15px;
+        opacity: 1;
+    }
+
+    .product-specs {
+        margin: 0;
+        padding: 15px 0 0;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        list-style: none;
+    }
+
+    .product-specs li {
+        display: flex;
+        align-items: center;
+        margin-bottom: 8px;
+        color: #ccc;
+        font-size: 13px;
+    }
+
+    .product-specs li i {
+        margin-left: 8px;
+        color: #df378b;
+        font-size: 12px;
+    }
+
+    html[dir="ltr"] .product-specs li i {
+        margin-right: 8px;
+        margin-left: 0;
+    }
+
+    /* حالت نبود محصول: فقط متن ساده */
+    .empty-wrap {
+        grid-column: 1 / -1;
+        padding-top: 10px;
+    }
+
+    .empty-state {
+        padding: 45px 25px;
+        border: 1px solid rgba(223, 55, 139, 0.12);
+        border-radius: 20px;
+        background: #ffffff;
+        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.05);
+        text-align: center;
+    }
+
+    html[data-theme="dark"] .empty-state {
+        border-color: rgba(255, 255, 255, 0.08);
+        background: #1a1a1a;
+        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.22);
+    }
+
+    .empty-state-text {
+        max-width: 680px;
+        margin: 0 auto;
+        color: #5f6368;
+        font-size: 16px;
+        font-weight: 500;
+    }
+
+    html[data-theme="dark"] .empty-state-text {
+        color: #c7c7c7;
+    }
+
+    @media (max-width: 1199.98px) {
+        .bento-item,
+        .bento-item.featured {
+            grid-column: span 6;
+            height: 420px;
+        }
+    }
+
+    @media (max-width: 767.98px) {
+        .products-filter-nav {
+            justify-content: flex-start;
+            flex-wrap: nowrap;
+            overflow-x: auto;
+            padding-bottom: 15px;
+            scroll-snap-type: x mandatory;
+            scrollbar-width: none;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .products-filter-nav::-webkit-scrollbar {
+            display: none;
+        }
+
+        .filter-btn {
+            flex: 0 0 auto;
+            padding: 8px 20px;
+            scroll-snap-align: start;
+            font-size: 13px;
+        }
+
+        .bento-item,
+        .bento-item.featured {
+            grid-column: span 12;
+            height: 400px;
+        }
+
+        .bento-item:active .product-reveal-section,
+        .bento-item.touched .product-reveal-section {
+            max-height: 300px;
+            margin-top: 15px;
+            opacity: 1;
+        }
+
+        .empty-state {
+            padding: 30px 18px;
+            border-radius: 16px;
+        }
+
+        .empty-state-text {
+            font-size: 14px;
+        }
+    }
+</style>
+
+<main>
+    <section
+        class="page-hero bg_cover p-r z-1"
+        data-src="{% static 'assets/images/innerpage/bg/page-bg.jpg' %}"
+    >
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="page-content text-center">
+                        <h1>{% trans "محصولات ما" %}</h1>
+
+                        <ul>
+                            <li>
+                                <a href="{% url 'core:home' %}">
+                                    {% trans "صفحه اصلی" %}
+                                </a>
+                            </li>
+                            <li>{% trans "محصولات" %}</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="products-showcase pt-120 pb-120">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-xl-9 col-lg-10">
+                    <div class="section-title text-center mb-60">
+                        <span
+                            class="sub-title"
+                            data-aos="fade-down"
+                            data-aos-duration="1000"
+                        >
+                            {% trans "نوآوری و تکنولوژی در دستان شما" %}
+                        </span>
+
+                        <h2
+                            data-aos="fade-up"
+                            data-aos-duration="1200"
+                        >
+                            {% trans "تجهیزات و راهکارهای هوشمند کیان صنعت" %}
+                        </h2>
+                    </div>
+                </div>
+            </div>
+
+            <div
+                class="products-filter-nav"
+                data-aos="fade-up"
+                data-aos-duration="1000"
+            >
+                <button class="filter-btn active" data-filter="all">
+                    {% trans "همه محصولات" %}
+                </button>
+
+                <button class="filter-btn" data-filter="solar">
+                    {% trans "تجهیزات خورشیدی" %}
+                </button>
+
+                <button class="filter-btn" data-filter="smart-home">
+                    {% trans "هوشمندسازی" %}
+                </button>
+
+                <button class="filter-btn" data-filter="ai-robotics">
+                    {% trans "رباتیک و AI" %}
+                </button>
+            </div>
+
+            <div class="bento-grid" id="productsGrid">
+                {% for product in products %}
+                    <div
+                        class="bento-item filter-item{% if product.is_featured %} featured{% endif %}"
+                        data-category="{{ product.category }}"
+                        data-aos="fade-up"
+                        data-aos-delay="{% widthratio forloop.counter 1 100 %}"
+                    >
+                        {% if product.image %}
+                            <img
+                                src="{{ product.image.url }}"
+                                alt="{{ product.title }}"
+                                class="product-img-bg"
+                                loading="lazy"
+                            >
+                        {% else %}
+                            <img
+                                src="{% static 'assets/images/innerpage/feature/feature-img1.jpg' %}"
+                                alt="{{ product.title }}"
+                                class="product-img-bg"
+                                loading="lazy"
+                            >
+                        {% endif %}
+
+                        {% if product.badge_label %}
+                            <div class="product-badge">
+                                {{ product.badge_label }}
+                            </div>
+                        {% endif %}
+
+                        <div class="product-glass-content">
+                            <h3 class="product-title">
+                                {{ product.title }}
+                            </h3>
+
+                            <p class="product-desc">
+                                {{ product.description }}
+                            </p>
+
+                            <div class="product-reveal-section">
+                                <ul class="product-specs">
+                                    <li>
+                                        <i class="fas fa-check-circle"></i>
+                                        {{ product.category_display }}
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                {% empty %}
+                    <div class="empty-wrap">
+                        <div class="empty-state">
+                            <p class="empty-state-text">
+                                {% trans "در حال حاضر هیچ محصولی برای نمایش وجود ندارد" %}
+                            </p>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+</main>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const filterBtns = document.querySelectorAll(".filter-btn");
+        const productItems = document.querySelectorAll(".filter-item");
+
+        filterBtns.forEach(function (btn) {
+            btn.addEventListener("click", function () {
+                filterBtns.forEach(function (button) {
+                    button.classList.remove("active");
+                });
+
+                this.classList.add("active");
+
+                const filterValue = this.getAttribute("data-filter");
+
+                productItems.forEach(function (item) {
+                    item.style.opacity = "0";
+                    item.style.transform = "scale(0.95)";
+
+                    setTimeout(function () {
+                        if (
+                            filterValue === "all" ||
+                            item.getAttribute("data-category") === filterValue
+                        ) {
+                            item.style.display = "block";
+
+                            setTimeout(function () {
+                                item.style.opacity = "1";
+                                item.style.transform = "scale(1)";
+                            }, 50);
+                        } else {
+                            item.style.display = "none";
+                        }
+                    }, 300);
+                });
+            });
+        });
+
+        const bentoItems = document.querySelectorAll(".bento-item");
+
+        bentoItems.forEach(function (item) {
+            item.addEventListener(
+                "touchstart",
+                function () {
+                    bentoItems.forEach(function (bentoItem) {
+                        bentoItem.classList.remove("touched");
+                    });
+
+                    this.classList.add("touched");
+                },
+                { passive: true }
+            );
+        });
+
+        function convertToPersianNumbers(node) {
+            const persianDigits = ["۰", "۱", "۲", "۳", "۴", "۵", "۶", "۷", "۸", "۹"];
+
+            if (node.nodeType === 3) {
+                node.nodeValue = node.nodeValue.replace(
+                    /\d/g,
+                    function (digit) {
+                        return persianDigits[digit];
+                    }
+                );
+            } else {
+                for (let child of node.childNodes) {
+                    convertToPersianNumbers(child);
+                }
+            }
+        }
+
+        if (document.documentElement.getAttribute("dir") === "rtl") {
+            const grid = document.getElementById("productsGrid");
+
+            if (grid) {
+                convertToPersianNumbers(grid);
+            }
+        }
+    });
+</script>
+{% endblock content %}
