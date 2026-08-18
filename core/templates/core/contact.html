@@ -7,13 +7,7 @@
 
 {% block content %}
     <style>
-        /* ==========================================
-           بارگذاری فونت Vazirmatn (پیش‌فرض)
-           ========================================== */
-        /* در صورتی که از CDN استفاده می‌کنید، این خط را نگه دارید */
-        /* اگر فونت را به صورت local دارید، مسیر آن را در اینجا قرار دهید */
-        @import url('https://cdn.jsdelivr.net/font/vazirmatn/vazirmatn.css'); /* یا مسیر محلی فونت */
-
+        
         /* ==========================================
            استایل‌های عمومی صفحه (فونت یکسان)
            ========================================== */
@@ -211,7 +205,7 @@
         }
 
         /* ==========================================
-           استایل‌های هیرو برای هماهنگی فونت
+           استایل‌های هیرو برای هماهنگی فونت و فلش مسیر
            ========================================== */
         .page-hero h1,
         .page-hero ul li,
@@ -228,6 +222,15 @@
         }
         .page-hero ul li a:hover {
             text-decoration: underline;
+        }
+
+        /* --- آینه کردن فلش مسیر (Breadcrumb) در هیرو برای حالت چپ‌چین (انگلیسی) --- */
+        html[dir="ltr"] body section.page-hero .page-content ul li::after,
+        html[dir="ltr"] body section.page-hero .page-content ul li::before {
+            display: inline-block !important;
+            transform: scaleX(-1) !important;
+            /* تبصره: اگر بعد از ذخیره دیدید فلش بالا یا پایین رفته (از مرکز خارج شده)، خط بالا را پاک کنید و کدهای خط پایین را از کامنت درآورید: */
+            /* position: absolute !important; top: 50% !important; transform: translateY(-50%) scaleX(-1) !important; */
         }
     </style>
 

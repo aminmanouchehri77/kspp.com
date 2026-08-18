@@ -5,15 +5,10 @@
 
 {% block content %}
     <style>
+       
         /* ==========================================
-           بارگذاری فونت Vazirmatn 
-           ========================================== */
-        @import url('https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.0.0/Vazirmatn-font-face.css');
-        @import url('https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.0.0/Vazirmatn-FD-font-face.css');
-
-        /* ==========================================
-           تایپوگرافی پایه و عمومی
-           ========================================== */
+        تایپوگرافی پایه و عمومی
+        ========================================== */
         body {
             font-family: 'Vazirmatn', sans-serif;
             line-height: 1.8;
@@ -31,8 +26,8 @@
         }
 
         /* ==========================================
-           استایل‌های یکپارچه و مدرن برای تمام تصاویر صفحه
-           ========================================== */
+        استایل‌های یکپارچه و مدرن برای تمام تصاویر صفحه
+        ========================================== */
         .clean-image-box img, 
         .clean-image-box,
         .orbia-we_two .orbia-image img,
@@ -47,8 +42,8 @@
         }
 
         /* ==========================================
-           یکپارچه‌سازی عناوین و متون برای تمام سکشن‌ها
-           ========================================== */
+        یکپارچه‌سازی عناوین و متون برای تمام سکشن‌ها
+        ========================================== */
         .section-title h2 {
             font-size: 32px !important;
             font-weight: 800 !important;
@@ -98,12 +93,13 @@
         }
 
         /* ==========================================
-           استایل‌های چک‌لیست آکادمی (گرادیانت نئونی)
-           ========================================== */
+        استایل‌های چک‌لیست آکادمی (گرادیانت نئونی)
+        ========================================== */
         .check-list li {
             margin-bottom: 15px;
             display: flex;
-            align-items: center;
+            align-items: center; /* در صورت نیاز برای وسط‌چین شدن خط اول متن با آیکون */
+            gap: 12px; /* جایگزین حاشیه ثابت برای پشتیبانی هوشمندانه از RTL و LTR */
         }
         .check-list li i {
             display: flex;
@@ -111,17 +107,18 @@
             justify-content: center;
             width: 25px;
             height: 25px;
+            min-width: 25px; /* جلوگیری از فشرده شدن آیکون در متون چند خطی */
             background: linear-gradient(135deg, #8A2BE2, #FF3366, #FF8C00);
             color: #ffffff;
             border-radius: 50%;
-            margin-left: 10px;
             font-size: 12px;
             box-shadow: 0 4px 10px rgba(255, 51, 102, 0.3);
+            /* margin-left حذف شد */
         }
 
         /* ==========================================
-           استایل‌های هیرو (عنوان صفحه)
-           ========================================== */
+        استایل‌های هیرو (عنوان صفحه)
+        ========================================== */
         .page-hero h1,
         .page-hero ul li,
         .page-hero ul li a {
@@ -137,10 +134,17 @@
         .page-hero ul li a:hover {
             text-decoration: underline;
         }
+        
+        /* --- آینه کردن فلش مسیر (Breadcrumb) در هیرو برای حالت چپ‌چین (انگلیسی) --- */
+        html[dir="ltr"] body section.page-hero .page-content ul li::after,
+        html[dir="ltr"] body section.page-hero .page-content ul li::before {
+            display: inline-block !important;
+            transform: scaleX(-1) !important;
+        }
 
         /* ==========================================
-           استایل بخش آمار و ارقام (Counters)
-           ========================================== */
+        استایل بخش آمار و ارقام (Counters)
+        ========================================== */
         .orbia-counter-sec {
             padding-top: 80px;
             padding-bottom: 80px;
@@ -215,8 +219,8 @@
         }
 
         /* ==========================================
-           استایل بخش CTA
-           ========================================== */
+        استایل بخش CTA
+        ========================================== */
         .orbia-cta_three {
             padding: 100px 0; 
             position: relative;
@@ -271,8 +275,8 @@
         }
 
         /* ==========================================
-           استایل‌های اختصاصی تیم و گواهینامه‌ها
-           ========================================== */
+        استایل‌های اختصاصی تیم و گواهینامه‌ها
+        ========================================== */
         .member-info .title {
             font-size: 22px !important;
             font-weight: 800 !important;
@@ -314,41 +318,156 @@
             line-height: 1.4;
         }
 
-        .orbia-avatar-box {
-            border-radius: 15px !important;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1) !important;
-        }
-        
         /* ==========================================
-           تنظیمات فلش‌های مسیر پروژه
-           ========================================== */
+        تنظیمات فلش‌های مسیر پروژه و دکمه‌ها (پشتیبانی LTR و RTL)
+        ========================================== */
         .process-wrapper {
             position: relative;
         }
-        
         .process-wrapper .shape {
             position: absolute;
             z-index: 0;
-            /* قرینه کردن در محور افقی برای زبان فارسی (RTL) بجای چرخش 180 درجه */
-            transform: scaleX(-1);
             opacity: 0.6;
         }
-        
-        .process-wrapper .shape.shape-one {
-            top: 20%;
-            right: 23%;
+
+        /* --- حالت راست‌چین (فارسی - RTL) --- */
+        html[dir="rtl"] .process-wrapper .shape,
+        [dir="rtl"] .process-wrapper .shape {
+            transform: scaleX(-1);
+        }
+        html[dir="rtl"] .process-wrapper .shape.shape-one,
+        [dir="rtl"] .process-wrapper .shape.shape-one { 
+            top: 20%; right: 23%; left: auto; 
+        }
+        html[dir="rtl"] .process-wrapper .shape.shape-two,
+        [dir="rtl"] .process-wrapper .shape.shape-two { 
+            top: 20%; right: 56%; left: auto; 
+        }
+
+        /* --- حالت چپ‌چین (انگلیسی - LTR) --- */
+        html[dir="ltr"] .process-wrapper .shape,
+        [dir="ltr"] .process-wrapper .shape {
+            transform: scaleX(1);
+        }
+        html[dir="ltr"] .process-wrapper .shape.shape-one,
+        [dir="ltr"] .process-wrapper .shape.shape-one { 
+            top: 20%; left: 23%; right: auto; 
+        }
+        html[dir="ltr"] .process-wrapper .shape.shape-two,
+        [dir="ltr"] .process-wrapper .shape.shape-two { 
+            top: 20%; left: 56%; right: auto; 
+        }
+
+        @media (max-width: 991px) { 
+            .process-wrapper .shape { display: none; } 
+        }
+
+        /* --- تنظیمات چرخش فلش دکمه‌ها --- */
+        .btn-dir-icon {
+            margin-inline-start: 10px !important; 
+            display: inline-block;
+        }
+        html[dir="ltr"] .btn-dir-icon,
+        [dir="ltr"] .btn-dir-icon {
+            scale: -1 1;
+        }
+
+        /* ==========================================
+        استایل‌های اختصاصی بخش بازرگانی (طراحی جدید)
+        ========================================== */
+        .commercial-card {
+            background: #f9fafb;
+            border-radius: 15px;
+            padding: 25px 20px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.03);
+            transition: all 0.3s ease;
+            border-right: 4px solid transparent;
+            margin-bottom: 25px;
+            height: calc(100% - 25px);
+            position: relative;
+            overflow: hidden;
+        }
+        .commercial-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.08);
+            border-right-color: #FF3366;
+            background: #ffffff;
+        }
+        .commercial-card .icon-wrapper {
+            width: 55px;
+            height: 55px;
+            background: linear-gradient(135deg, rgba(138, 43, 226, 0.1), rgba(255, 51, 102, 0.1));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 18px;
+            color: #FF3366;
+            font-size: 26px;
+            transition: all 0.3s ease;
+        }
+        .commercial-card:hover .icon-wrapper {
+            background: linear-gradient(135deg, #8A2BE2, #FF3366);
+            color: #ffffff;
+        }
+        .commercial-card h4 {
+            font-size: 18px !important;
+            font-weight: 800 !important;
+            margin-bottom: 12px;
+            color: #111827;
+        }
+        .commercial-card p {
+            font-size: 14px !important;
+            line-height: 1.9 !important;
+            color: #6b7280;
+            margin-bottom: 0;
+            text-align: justify;
         }
         
-        .process-wrapper .shape.shape-two {
-            top: 50%;
-            right: 56%;
+        .commercial-image-wrapper {
+            position: relative;
         }
-        
+        .commercial-floating-badge {
+            position: absolute;
+            bottom: 30px;
+            right: -30px;
+            background: linear-gradient(135deg, #8A2BE2, #FF3366, #FF8C00);
+            color: #fff;
+            padding: 20px 25px;
+            border-radius: 20px;
+            box-shadow: 0 15px 30px rgba(255, 51, 102, 0.3);
+            z-index: 2;
+            text-align: center;
+        }
         @media (max-width: 991px) {
-            .process-wrapper .shape {
-                display: none;
+            .commercial-floating-badge {
+                right: 15px;
+                bottom: -20px;
             }
         }
+        .commercial-floating-badge h5 {
+            color: #fff !important;
+            font-size: 22px !important;
+            font-weight: 800 !important;
+            margin-bottom: 5px;
+            font-family: 'Vazirmatn FD', sans-serif !important;
+        }
+        .commercial-floating-badge p {
+            color: rgba(255,255,255,0.9) !important;
+            font-size: 14px !important;
+            font-weight: 700 !important;
+            margin: 0;
+        }
+        /* انیمیشن شناور بودن المان */
+        @keyframes float-animation {
+            0% { transform: translateY(0); }
+            50% { transform: translateY(-12px); }
+            100% { transform: translateY(0); }
+        }
+        .animate-float {
+            animation: float-animation 4s ease-in-out infinite;
+        }
+
     </style>
 
     <!--======  Start Page Hero Section  ======-->
@@ -413,8 +532,7 @@
                         </div>
                         
                         <div class="orbia-button" data-aos="fade-up" data-aos-duration="1500">
-                            <a class="theme-btn gradient-btn" href="{% url 'core:about' %}">{% trans "ارتباط با ما" %}<i
-                                    class="far fa-arrow-left" style="margin-right: 10px !important;"></i></a>
+                            <a class="theme-btn gradient-btn" href="{% url 'core:about' %}">{% trans "ارتباط با ما" %}<i class="far fa-arrow-left btn-dir-icon"></i></a>
                         </div>
                     </div>
                 </div>
@@ -473,11 +591,9 @@
                         <span class="sub-title" data-aos="fade-down" data-aos-duration="1000">{% trans "آینده را با ما بسازید" %}</span>
                         <h2 class="text-white">{% trans "برای شروع پروژه‌های هوشمندسازی و بهینه‌سازی انرژی خود آماده‌اید؟" %}</h2>
                         <div class="orbia-button" data-aos="fade-up" data-aos-duration="1000">
-                            <a class="theme-btn gradient-btn" href="{% url 'core:about' %}">{% trans "دریافت مشاوره" %}<i
-                                    class="far fa-arrow-left" style="margin-right: 10px !important;"></i></a>
+                            <a class="theme-btn gradient-btn" href="{% url 'core:about' %}">{% trans "دریافت مشاوره" %}<i class="far fa-arrow-left btn-dir-icon"></i></a>
                             <a class="theme-btn style-one video-popup"
-                                href="https://www.youtube.com/watch?v=8oON21G1Bqg">{% trans "معرفی شرکت" %}<i
-                                    class="far fa-arrow-left" style="margin-right: 10px !important;"></i></a>
+                                href="https://www.youtube.com/watch?v=8oON21G1Bqg">{% trans "معرفی شرکت" %}<i class="far fa-arrow-left btn-dir-icon"></i></a>
                         </div>
                     </div>
                 </div>
@@ -530,8 +646,7 @@
                         </ul>
                         
                         <div class="orbia-button mt-4" data-aos="fade-up" data-aos-duration="1600">
-                            <a class="theme-btn gradient-btn" href="#">{% trans "ورود به آکادمی" %}<i
-                                    class="far fa-arrow-left" style="margin-right: 10px !important;"></i></a>
+                            <a class="theme-btn gradient-btn" href="#">{% trans "ورود به آکادمی" %}<i class="far fa-arrow-left btn-dir-icon"></i></a>
                         </div>
                     </div>
                 </div>
@@ -558,7 +673,6 @@
                 </div>
             </div>
             <div class="process-wrapper">
-                <!-- تزریق کدهای پیکان با کلاس shape -->
                 <div class="shape shape-one"><img alt="{% trans 'پیکان' %}" src="{% static 'assets/images/innerpage/gallery/process-arrow-img1.png' %}" /></div>
                 <div class="shape shape-two"><img alt="{% trans 'پیکان' %}" src="{% static 'assets/images/innerpage/gallery/process-arrow-img2.png' %}" /></div>
                 
@@ -776,8 +890,92 @@
     </section>
     <!--======  End Technology Section  ======-->
 
+    <!--======  Start Commercial Department Section (بخش جدید بازرگانی)  ======-->
+    <section class="orbia-commercial-sec pt-120 pb-120 z-1" style="background-color: #ffffff;">
+        <div class="container">
+            <div class="row align-items-center">
+                
+                <!-- Image Side -->
+                <div class="col-xl-5 col-lg-10 mx-auto mb-5 mb-xl-0">
+                    <div class="commercial-image-wrapper" data-aos="fade-left" data-aos-duration="1000">
+                        <div class="clean-image-box">
+                            <!-- می‌توانید تصویر اختصاصی این بخش را در مسیر زیر قرار دهید -->
+                            <img alt="{% trans 'دپارتمان بازرگانی کیان صنعت' %}" src="{% static 'assets/images/innerpage/about/about-img1.jpg' %}" style="min-height: 500px; object-fit: cover;" />
+                        </div>
+                        
+                        <!-- بج شناور و متحرک برای زیبایی بیشتر -->
+                        <div class="commercial-floating-badge animate-float">
+                            <h5 style="font-family: 'Vazirmatn', sans-serif !important; font-weight: 700;">{% trans "توسعه تجارت" %}</h5>
+                            <p style="font-family: 'Vazirmatn', sans-serif !important;">{% trans "در سطح ملی و بین‌المللی" %}</p>
+                        </div>
+
+                    </div>
+                </div>
+                
+                <!-- Content Side -->
+                <div class="col-xl-7 col-lg-12">
+                    <div class="orbia-content-box ps-xl-5">
+                        <div class="section-title mb-40">
+                            <span class="sub-title" data-aos="fade-down" data-aos-duration="1000">{% trans "توسعه بازار و تجارت هوشمند" %}</span>
+                            <h2 data-aos="fade-up" data-aos-duration="1100">{% trans "دپارتمان بازرگانی کیان صنعت" %}</h2>
+                            <p data-aos="fade-up" data-aos-duration="1200">{% trans "بخش بازرگانی کیان صنعت با تکیه بر دانش فنی و شناخت دقیق بازارهای هدف، پل ارتباطی قدرتمندی میان تولیدات دانش‌بنیان، تکنولوژی‌های نوین و صنایع ایجاد کرده است. ما در این دپارتمان چهار حوزه کلیدی را با بالاترین استانداردها مدیریت می‌کنیم:" %}</p>
+                        </div>
+                        
+                        <div class="row">
+                            <!-- Item 1: واحد بازرگانی داخلی -->
+                            <div class="col-md-6">
+                                <div class="commercial-card" data-aos="fade-up" data-aos-duration="1300">
+                                    <div class="icon-wrapper">
+                                        <i class="fas fa-handshake"></i>
+                                    </div>
+                                    <h4>{% trans "۱. واحد بازرگانی داخلی" %}</h4>
+                                    <p>{% trans "تأمین قطعات تخصصی، عقد قرارداد با صنایع مادر و ارائه راهکارهای جامع هوشمندسازی برای کارخانجات و سازمان‌های ایرانی." %}</p>
+                                </div>
+                            </div>
+                            
+                            <!-- Item 2: واحد بازرگانی بین‌الملل -->
+                            <div class="col-md-6">
+                                <div class="commercial-card" data-aos="fade-up" data-aos-duration="1400">
+                                    <div class="icon-wrapper">
+                                        <i class="fas fa-globe"></i>
+                                    </div>
+                                    <h4>{% trans "۲. واحد بازرگانی بین‌الملل" %}</h4>
+                                    <p>{% trans "ارتباط مستقیم با شرکای جهانی، انتقال تکنولوژی‌های روز دنیا در حوزه انرژی‌های تجدیدپذیر و بومی‌سازی استانداردهای بین‌المللی." %}</p>
+                                </div>
+                            </div>
+                            
+                            <!-- Item 3: دستگاه‌های تولید هوشمند -->
+                            <div class="col-md-6">
+                                <div class="commercial-card" data-aos="fade-up" data-aos-duration="1500">
+                                    <div class="icon-wrapper">
+                                        <i class="fas fa-cogs"></i>
+                                    </div>
+                                    <h4>{% trans "۳. دستگاه‌های تولید هوشمند" %}</h4>
+                                    <p>{% trans "مشاوره، فروش و راه‌اندازی خطوط تولید رباتیک و ماشین‌آلات پیشرفته مبتنی بر اینترنت اشیا (IoT) جهت افزایش چشمگیر راندمان." %}</p>
+                                </div>
+                            </div>
+                            
+                            <!-- Item 4: صادرات و واردات ماشین‌های هوشمند -->
+                            <div class="col-md-6">
+                                <div class="commercial-card" data-aos="fade-up" data-aos-duration="1600">
+                                    <div class="icon-wrapper">
+                                        <i class="fas fa-shipping-fast"></i>
+                                    </div>
+                                    <h4>{% trans "۴. صادرات و واردات" %}</h4>
+                                    <p>{% trans "صادرات محصولات دانش‌بنیان شرکت به بازارهای منطقه و واردات تخصصی قطعات حساس الکترونیکی با تضمین اصالت و سرعت." %}</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--======  End Commercial Department Section  ======-->
+
     <!--======  Start Certificates Section (گواهینامه‌ها و مدارک)  ======-->
-    <section class="orbia-certificates-sec pt-120 pb-100">
+    <section class="orbia-certificates-sec pt-120 pb-100" style="background-color: #f9fafb;">
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-lg-8">
@@ -825,33 +1023,5 @@
         </div>
     </section>
     <!--======  End Certificates Section  ======-->
-
-    <!--======  Start Client Section  ======-->
-    <section class="orbia-client-sec pt-60 pb-60" style="background-color: #f9fafb;">
-        <div class="container-fluid">
-            <!-- Client Slider -->
-            <div class="clients-slider" data-aos="fade-up" data-aos-duration="1000">
-                <div class="orbia-client-item style-one">
-                    <div class="content text-center">
-                        <img alt="{% trans 'لوگوی مشتری' %}" src="{% static 'assets/images/home-one/client/client-logo1.png' %}" style="margin: 0 auto 15px;" />
-                        <p class="text-center">{% trans "شرکای تجاری و کارفرمایان کیان صنعت" %}</p>
-                    </div>
-                </div>
-                <div class="orbia-client-item style-one">
-                    <div class="content text-center">
-                        <img alt="{% trans 'لوگوی مشتری' %}" src="{% static 'assets/images/home-one/client/client-logo2.png' %}" style="margin: 0 auto 15px;" />
-                        <p class="text-center">{% trans "شرکای تجاری و کارفرمایان کیان صنعت" %}</p>
-                    </div>
-                </div>
-                <div class="orbia-client-item style-one">
-                    <div class="content text-center">
-                        <img alt="{% trans 'لوگوی مشتری' %}" src="{% static 'assets/images/home-one/client/client-logo3.png' %}" style="margin: 0 auto 15px;" />
-                        <p class="text-center">{% trans "شرکای تجاری و کارفرمایان کیان صنعت" %}</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!--======  End Client Section  ======-->
 
 {% endblock content %}
