@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-08-19 00:58+0430\n"
+"POT-Creation-Date: 2026-08-19 23:42+0430\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -24,21 +24,43 @@ msgstr "Persian"
 msgid "English"
 msgstr "English"
 
+#: .\core\dummy_translations.py:7
+msgid "اخبار"
+msgstr "News"
+
+#: .\core\dummy_translations.py:8
+msgid "نمایشگاه‌ها"
+msgstr "Exhibitions"
+
+#: .\core\dummy_translations.py:9
+msgid "آکادمی"
+msgstr "Academy"
+
+#: .\core\dummy_translations.py:10
+msgid "فناوری اطلاعات"
+msgstr "Information Technology"
+
+#: .\core\dummy_translations.py:11
+msgid "کسب و کار"
+msgstr "Business"
+
 #: .\core\templates\core\about.html:4
 msgid "درباره ما | شرکت کیان صنعت"
 msgstr "About Us | Kian Sanat Company"
 
 #: .\core\templates\core\about.html:479 .\core\templates\core\about.html:482
-#: .\core\templates\core\index.html:371 .\templates\_base.html:487
-#: .\templates\_base.html:635
+#: .\core\templates\core\index.html:371 .\templates\_base.html:506
+#: .\templates\_base.html:654
 msgid "درباره ما"
 msgstr "About Us"
 
-#: .\core\templates\core\about.html:481 .\core\templates\core\contact.html:245
+#: .\core\templates\core\about.html:481
+#: .\core\templates\core\blog-details.html:990
+#: .\core\templates\core\blog.html:440 .\core\templates\core\contact.html:245
 #: .\core\templates\core\index.html:365
-#: .\core\templates\core\products.html:389
-#: .\core\templates\core\services.html:482 .\templates\_base.html:481
-#: .\templates\_base.html:634
+#: .\core\templates\core\products.html:394
+#: .\core\templates\core\services.html:495 .\templates\_base.html:500
+#: .\templates\_base.html:653
 msgid "صفحه اصلی"
 msgstr "Home"
 
@@ -96,7 +118,7 @@ msgstr ""
 "performance of smart energy management systems."
 
 #: .\core\templates\core\about.html:535 .\core\templates\core\contact.html:262
-#: .\templates\_base.html:666
+#: .\templates\_base.html:685
 msgid "ارتباط با ما"
 msgstr "Connect with Us"
 
@@ -115,7 +137,7 @@ msgid "%%"
 msgstr "%%"
 
 #: .\core\templates\core\about.html:560
-#: .\core\templates\core\services.html:653
+#: .\core\templates\core\services.html:666
 msgid "رضایت کارفرمایان"
 msgstr "Employers' Satisfaction"
 
@@ -259,7 +281,7 @@ msgid "دپارتمان هوش مصنوعی"
 msgstr "AI Department"
 
 #: .\core\templates\core\about.html:739
-#: .\core\templates\core\services.html:522
+#: .\core\templates\core\services.html:535
 msgid "هوش مصنوعی و رباتیک"
 msgstr "AI and Robotics"
 
@@ -383,8 +405,8 @@ msgstr ""
 "conditions for productivity."
 
 #: .\core\templates\core\about.html:880
-#: .\core\templates\core\services.html:517
-#: .\core\templates\core\services.html:554
+#: .\core\templates\core\services.html:530
+#: .\core\templates\core\services.html:567
 msgid "مدیریت انرژی"
 msgstr "Energy Management"
 
@@ -514,15 +536,383 @@ msgstr "Patent Certificate"
 msgid "گواهینامه ثبت اختراع / مالکیت معنوی"
 msgstr "Patent / Intellectual Property Certificate"
 
+#: .\core\templates\core\blog-details.html:5
+msgid "جزئیات وبلاگ | کیان صنعت"
+msgstr "Blog Details | Kian Sanat"
+
+#: .\core\templates\core\blog-details.html:985
+#: .\core\templates\core\blog-details.html:993
+msgid "جزئیات وبلاگ"
+msgstr "Blog Details"
+
+#: .\core\templates\core\blog-details.html:1022
+msgid "تصویر اصلی مقاله وبلاگ"
+msgstr "Main Blog Article Image"
+
+#: .\core\templates\core\blog-details.html:1032
+#: .\core\templates\core\blog.html:515 .\core\templates\core\index.html:1123
+#: .\core\templates\core\index.html:1140 .\core\templates\core\index.html:1157
+msgid "توسط"
+msgstr "By"
+
+#: .\core\templates\core\blog-details.html:1033
+#: .\core\templates\core\blog.html:515
+msgid "مدیر"
+msgstr "Admin"
+
+#: .\core\templates\core\blog-details.html:1038
+msgid "شرکتی"
+msgstr ""
+
+#: .\core\templates\core\blog-details.html:1044
+msgid "نظرات"
+msgstr "Comments"
+
+#: .\core\templates\core\blog-details.html:1050
+msgid "مزایای بالقوه راه حل های هوش مصنوعی برای مشاغل کوچک"
+msgstr "Potential Benefits of AI Solutions for Small Businesses"
+
+#: .\core\templates\core\blog-details.html:1054
+msgid ""
+"توسعه هوش مصنوعی (AI) بر ایجاد سیستم های هوشمندی متمرکز است که می توانند "
+"عملکردهای شناختی انسان مانند یادگیری، استدلال، حل مسئله و تصمیم گیری را "
+"تقلید کنند."
+msgstr ""
+"Artificial Intelligence (AI) development focuses on creating smart systems "
+"that can simulate human cognitive functions such as learning, reasoning, "
+"problem-solving, and decision-making."
+
+#: .\core\templates\core\blog-details.html:1058
+msgid ""
+"یادگیری ماشینی هوش مصنوعی (ML) شاخه‌ای از هوش مصنوعی (AI) است که رایانه‌ها و "
+"سیستم‌ها را قادر می‌سازد تا به طور خودکار از داده‌ها یاد بگیرند، الگوها را "
+"شناسایی کنند و بدون برنامه‌ریزی صریح تصمیم بگیرند."
+msgstr ""
+"Machine Learning (ML) is a branch of Artificial Intelligence (AI) that "
+"enables computers and systems to automatically learn from data, identify "
+"patterns, and make decisions without explicit programming."
+
+#: .\core\templates\core\blog-details.html:1064
+msgid "راه حل های هوش مصنوعی برای حفظ دقت و کارایی نیاز به نظارت مداوم دارند."
+msgstr ""
+"AI solutions require continuous monitoring to maintain accuracy and "
+"efficiency."
+
+#: .\core\templates\core\blog-details.html:1068
+msgid "مارتین و میشیل"
+msgstr "Martin and Michiel"
+
+#: .\core\templates\core\blog-details.html:1074
+#: .\core\templates\core\blog-details.html:1100
+msgid ""
+"تیم ما بر اساس نیازهای خاص شما، یک راه حل اختصاصی هوش مصنوعی طراحی می کند."
+msgstr "Our team designs a dedicated AI solution based on your specific needs."
+
+#: .\core\templates\core\blog-details.html:1082
+msgid "تصویر داخلی مقاله اول"
+msgstr "First Article Internal Image"
+
+#: .\core\templates\core\blog-details.html:1092
+msgid "تصویر داخلی مقاله دوم"
+msgstr "Second Article Internal Image"
+
+#: .\core\templates\core\blog-details.html:1110
+msgid "برچسب:"
+msgstr "Tag:"
+
+#: .\core\templates\core\blog-details.html:1112
+msgid "آپارتمان"
+msgstr "Apartment"
+
+#: .\core\templates\core\blog-details.html:1113
+msgid "خریدار"
+msgstr "Buyer"
+
+#: .\core\templates\core\blog-details.html:1114
+msgid "لوکس"
+msgstr "Luxury"
+
+#: .\core\templates\core\blog-details.html:1118
+msgid "به اشتراک بگذارید:"
+msgstr "Share:"
+
+#: .\core\templates\core\blog-details.html:1120
+msgid "اشتراک‌گذاری در فیسبوک"
+msgstr "Share on Facebook"
+
+#: .\core\templates\core\blog-details.html:1124
+msgid "اشتراک‌گذاری در اینستاگرام"
+msgstr "Share on Instagram"
+
+#: .\core\templates\core\blog-details.html:1128
+msgid "اشتراک‌گذاری در لینکدین"
+msgstr "Share on LinkedIn"
+
+#: .\core\templates\core\blog-details.html:1132
+msgid "اشتراک‌گذاری در توییتر"
+msgstr "Share on Twitter"
+
+#: .\core\templates\core\blog-details.html:1147
+msgid "نظرات محبوب"
+msgstr "Popular Comments"
+
+#: .\core\templates\core\blog-details.html:1158
+#: .\core\templates\core\blog-details.html:1233
+msgid "تصویر نویسنده دیدگاه"
+msgstr "Comment Author Image"
+
+#: .\core\templates\core\blog-details.html:1167
+msgid "ماریا دوزا"
+msgstr "Maria Doza"
+
+#: .\core\templates\core\blog-details.html:1170
+#: .\core\templates\core\blog-details.html:1206
+msgid "اوت"
+msgstr "August"
+
+#: .\core\templates\core\blog-details.html:1171
+#: .\core\templates\core\blog-details.html:1207
+msgid "بعد از ظهر"
+msgstr "PM"
+
+#: .\core\templates\core\blog-details.html:1176
+msgid ""
+"از طریق خبرنامه‌ها، رسانه‌های اجتماعی و وب‌سایت خیریه، به‌روزرسانی‌های منظم را "
+"برای اهداکنندگان و حامیان ارائه دهید، و جزئیات نحوه استفاده از بودجه و تأثیر "
+"به‌دست‌آمده را توضیح دهید."
+msgstr ""
+"Provide regular updates to donors and supporters through newsletters, social "
+"media, and the charity website, and explain the details of how the budget is "
+"used and the impact achieved."
+
+#: .\core\templates\core\blog-details.html:1181
+#: .\core\templates\core\blog-details.html:1217
+#: .\core\templates\core\blog-details.html:1256
+msgid "پاسخ دهید"
+msgstr "Reply"
+
+#: .\core\templates\core\blog-details.html:1194
+msgid "تصویر نویسنده پاسخ"
+msgstr "Reply Author Image"
+
+#: .\core\templates\core\blog-details.html:1203
+#: .\core\templates\core\blog-details.html:1242
+msgid "میشل فلوپ"
+msgstr "Michel Flop"
+
+#: .\core\templates\core\blog-details.html:1212
+#: .\core\templates\core\blog-details.html:1251
+msgid ""
+"از معیارها و بازخوردها برای ارزیابی موفقیت پروژه ها و برنامه ها استفاده کنید "
+"و این نتایج را با جامعه به اشتراک بگذارید تا مسئولیت پذیری را نشان دهید و "
+"اعتماد ایجاد کنید."
+msgstr ""
+"Use metrics and feedback to evaluate the success of projects and programs, "
+"and share these results with the community to demonstrate accountability and "
+"build trust."
+
+#: .\core\templates\core\blog-details.html:1245
+#: .\core\templates\core\blog-details.html:1460
+#: .\core\templates\core\blog-details.html:1482
+#: .\core\templates\core\blog-details.html:1504
+msgid "آگوست"
+msgstr "August"
+
+#: .\core\templates\core\blog-details.html:1246
+msgid "شب"
+msgstr "Night"
+
+#: .\core\templates\core\blog-details.html:1274
+msgid "یک پاسخ بگذارید"
+msgstr "Leave a Reply"
+
+#: .\core\templates\core\blog-details.html:1292
+msgid "نام"
+msgstr "Name"
+
+#: .\core\templates\core\blog-details.html:1305
+msgid "ایمیل"
+msgstr "Email"
+
+#: .\core\templates\core\blog-details.html:1319
+msgid "پیام"
+msgstr "Message"
+
+#: .\core\templates\core\blog-details.html:1331
+msgid "ارسال نظر"
+msgstr "Submit Comment"
+
+#: .\core\templates\core\blog-details.html:1362
+#: .\core\templates\core\blog.html:465 .\core\templates\core\blog.html:583
+#: .\templates\_base.html:122
+msgid "جستجو کنید..."
+msgstr "Search..."
+
+#: .\core\templates\core\blog-details.html:1363
+#: .\core\templates\core\blog.html:465 .\core\templates\core\blog.html:583
+msgid "جستجو در وبلاگ"
+msgstr "Search in blog"
+
+#: .\core\templates\core\blog-details.html:1370
+#: .\core\templates\core\blog.html:466 .\core\templates\core\blog.html:584
+msgid "جستجو"
+msgstr "Search"
+
+#: .\core\templates\core\blog-details.html:1387
+msgid "دسته بندی"
+msgstr "Category"
+
+#: .\core\templates\core\blog-details.html:1394
+msgid "راهنمای شهر"
+msgstr "City Guide"
+
+#: .\core\templates\core\blog-details.html:1401
+msgid "عشایر دیجیتال"
+msgstr "Digital Nomads"
+
+#: .\core\templates\core\blog-details.html:1408
+msgid "مکان های جدید"
+msgstr "New Places"
+
+#: .\core\templates\core\blog-details.html:1415
+msgid "هاست های محبوب"
+msgstr "Popular Hosts"
+
+#: .\core\templates\core\blog-details.html:1422
+msgid "اتاق با منظره"
+msgstr "Room with a View"
+
+#: .\core\templates\core\blog-details.html:1429
+msgid "نکات و ترفندها"
+msgstr "Tips & Tricks"
+
+#: .\core\templates\core\blog-details.html:1444
+msgid "پست های اخیر"
+msgstr "Recent Posts"
+
+#: .\core\templates\core\blog-details.html:1453
+#: .\core\templates\core\blog-details.html:1475
+#: .\core\templates\core\blog-details.html:1497
+msgid "تصویر پست اخیر"
+msgstr "Recent Post Image"
+
+#: .\core\templates\core\blog-details.html:1466
+msgid "هوش مصنوعی و خلاقیت: آیا ماشین‌ها می‌توانند واقعاً خلاق باشند؟"
+msgstr "AI and Creativity: Can Machines Truly Be Creative?"
+
+#: .\core\templates\core\blog-details.html:1488
+msgid "ساخت سیستم های مسئولانه و منصفانه"
+msgstr "Building Responsible and Fair Systems"
+
+#: .\core\templates\core\blog-details.html:1510
+msgid "قدرت گرفته از هوش مصنوعی: آینده برای آینده چیست؟"
+msgstr "Powered by AI: What Does the Future Hold?"
+
+#: .\core\templates\core\blog-details.html:1527
+msgid "برچسب های محبوب"
+msgstr "Popular Tags"
+
+#: .\core\templates\core\blog-details.html:1531
+#: .\core\templates\core\blog.html:640
+msgid "اتوماسیون"
+msgstr "Automation"
+
+#: .\core\templates\core\blog-details.html:1532
+#: .\core\templates\core\blog.html:641
+msgid "برندسازی"
+msgstr "Branding"
+
+#: .\core\templates\core\blog-details.html:1533
+#: .\core\templates\core\blog.html:642
+msgid "دیجیتال"
+msgstr "Digital"
+
+#: .\core\templates\core\blog-details.html:1534
+msgid "شبکه ها"
+msgstr "Networks"
+
+#: .\core\templates\core\blog-details.html:1535
+msgid "عرضه کنید"
+msgstr "Offer"
+
+#: .\core\templates\core\blog-details.html:1536
+#: .\core\templates\core\blog.html:643
+msgid "تکنولوژی"
+msgstr "Technology"
+
+#: .\core\templates\core\blog.html:5
+#, fuzzy
+#| msgid "جزئیات وبلاگ | کیان صنعت"
+msgid "وبلاگ | کیان صنعت"
+msgstr "Blog Details | Kian Sanat"
+
+#: .\core\templates\core\blog.html:438 .\core\templates\core\blog.html:441
+msgid "وبلاگ"
+msgstr "Blog"
+
+#: .\core\templates\core\blog.html:474 .\core\templates\core\blog.html:592
+msgid "دسته‌بندی"
+msgstr "Categories"
+
+#: .\core\templates\core\blog.html:479 .\core\templates\core\blog.html:597
+msgid "همه مقالات"
+msgstr "All Articles"
+
+#: .\core\templates\core\blog.html:499
+#, fuzzy
+#| msgid "نیازسنجی و طراحی"
+msgid "نتایج جستجو برای:"
+msgstr "Needs Assessment and Design"
+
+#: .\core\templates\core\blog.html:523 .\core\templates\core\index.html:1129
+#: .\core\templates\core\index.html:1146 .\core\templates\core\index.html:1163
+msgid "ادامه مطلب"
+msgstr "Read More"
+
+#: .\core\templates\core\blog.html:532
+msgid "هیچ مقاله‌ای یافت نشد."
+msgstr "No articles found."
+
+#: .\core\templates\core\blog.html:533
+msgid "متأسفانه با جستجو یا فیلتر فعلی مقاله‌ای پیدا نکردیم."
+msgstr ""
+"Unfortunately, we couldn't find any articles matching your search or filter."
+
+#: .\core\templates\core\blog.html:534
+msgid "بازگشت به همه مقالات"
+msgstr "Back to all articles"
+
+#: .\core\templates\core\blog.html:544
+msgid "صفحه قبلی"
+msgstr "Previous Page"
+
+#: .\core\templates\core\blog.html:560
+msgid "صفحه بعدی"
+msgstr "Next Page"
+
+#: .\core\templates\core\blog.html:614
+msgid "پست‌های اخیر"
+msgstr "Recent Posts"
+
+#: .\core\templates\core\blog.html:630
+msgid "مقاله‌ای موجود نیست."
+msgstr "No article available."
+
+#: .\core\templates\core\blog.html:638
+msgid "برچسب‌های محبوب"
+msgstr "Popular Tags"
+
 #: .\core\templates\core\contact.html:5
+#, fuzzy
+#| msgid "درباره ما | شرکت کیان صنعت"
 msgid "تماس با ما | شرکت کیان صنعت"
-msgstr "Contact Us | Kian Sanat Company"
+msgstr "About Us | Kian Sanat Company"
 
 #: .\core\templates\core\contact.html:243
 #: .\core\templates\core\contact.html:246 .\core\templates\core\index.html:372
-#: .\templates\_base.html:488 .\templates\_base.html:639
+#: .\templates\_base.html:507 .\templates\_base.html:658
 msgid "تماس با ما"
-msgstr "Contact Us"
+msgstr "Connect with Us"
 
 #: .\core\templates\core\contact.html:265
 msgid "همیشه پاسخگوی شما <br class=\"d-none d-md-block\"> هستیم"
@@ -610,25 +1000,25 @@ msgstr ""
 msgid "تایید"
 msgstr "OK"
 
-#: .\core\templates\core\index.html:354 .\templates\_base.html:470
+#: .\core\templates\core\index.html:354 .\templates\_base.html:489
 msgid "لوگو کیان صنعت"
 msgstr "Kian Sanat Logo"
 
 #: .\core\templates\core\index.html:366
-#: .\core\templates\core\services.html:483 .\templates\_base.html:482
+#: .\core\templates\core\services.html:496 .\templates\_base.html:501
 msgid "فعالیت‌ها"
 msgstr "Activities"
 
 #: .\core\templates\core\index.html:367
-#: .\core\templates\core\products.html:392 .\templates\_base.html:483
+#: .\core\templates\core\products.html:397 .\templates\_base.html:502
 msgid "محصولات"
 msgstr "Products"
 
-#: .\core\templates\core\index.html:370 .\templates\_base.html:486
+#: .\core\templates\core\index.html:370 .\templates\_base.html:505
 msgid "اخبار و رویدادها"
 msgstr "News & Events"
 
-#: .\core\templates\core\index.html:377 .\templates\_base.html:493
+#: .\core\templates\core\index.html:377 .\templates\_base.html:512
 msgid "ما را دنبال کنید"
 msgstr "Follow Us"
 
@@ -733,7 +1123,7 @@ msgid "انرژی سبز و پایدار:"
 msgstr "Green and Sustainable Energy:"
 
 #: .\core\templates\core\index.html:729
-#: .\core\templates\core\services.html:546
+#: .\core\templates\core\services.html:559
 msgid "طراحی و راه‌اندازی نیروگاه خورشیدی"
 msgstr "Design and Installation of Solar Power Plants"
 
@@ -884,7 +1274,7 @@ msgstr ""
 "efficiency."
 
 #: .\core\templates\core\index.html:915
-#: .\core\templates\core\products.html:433
+#: .\core\templates\core\products.html:438
 msgid "تجهیزات خورشیدی"
 msgstr "Solar Equipment"
 
@@ -1016,11 +1406,6 @@ msgstr "Industry News, Clean Energy"
 msgid "and New Technologies"
 msgstr "and New Technologies"
 
-#: .\core\templates\core\index.html:1123 .\core\templates\core\index.html:1140
-#: .\core\templates\core\index.html:1157
-msgid "توسط"
-msgstr "By"
-
 #: .\core\templates\core\index.html:1123
 msgid "روابط عمومی"
 msgstr "Public Relations"
@@ -1030,11 +1415,6 @@ msgid "آینده انرژی‌های تجدیدپذیر و نقش نیروگا�
 msgstr ""
 "The future of renewable energies and the role of solar power plants in "
 "industries."
-
-#: .\core\templates\core\index.html:1129 .\core\templates\core\index.html:1146
-#: .\core\templates\core\index.html:1163
-msgid "ادامه مطلب"
-msgstr "Read More"
 
 #: .\core\templates\core\index.html:1140
 msgid "واحد تحقیق و توسعه"
@@ -1058,87 +1438,86 @@ msgstr ""
 msgid "محصولات ما | شرکت کیان صنعت"
 msgstr "Our Products | Kian Sanat Company"
 
-#: .\core\templates\core\products.html:384
+#: .\core\templates\core\products.html:389
 msgid "محصولات ما"
 msgstr "Our Products"
 
-#: .\core\templates\core\products.html:410
+#: .\core\templates\core\products.html:415
 msgid "نوآوری و تکنولوژی در دستان شما"
 msgstr "Innovation and Technology in Your Hands"
 
-#: .\core\templates\core\products.html:417
+#: .\core\templates\core\products.html:422
 msgid "تجهیزات و راهکارهای هوشمند کیان صنعت"
 msgstr "Kian Sanat Smart Equipment and Solutions"
 
-#: .\core\templates\core\products.html:429
+#: .\core\templates\core\products.html:434
 msgid "همه محصولات"
 msgstr "All Products"
 
-#: .\core\templates\core\products.html:437
+#: .\core\templates\core\products.html:442
 msgid "هوشمندسازی"
 msgstr "Smartification"
 
-#: .\core\templates\core\products.html:441
+#: .\core\templates\core\products.html:446
 msgid "رباتیک و AI"
 msgstr "Robotics & AI"
 
-#: .\core\templates\core\products.html:499
+#: .\core\templates\core\products.html:504
 msgid "در حال حاضر هیچ محصولی برای نمایش وجود ندارد"
 msgstr "There are currently no products to display"
-
 
 #: .\core\templates\core\services.html:5
 msgid "فعالیت‌های ما | شرکت کیان صنعت"
 msgstr "Our Activities | Kian Sanat Company"
 
-#: .\core\templates\core\services.html:480
+#: .\core\templates\core\services.html:493
 msgid "فعالیت‌های ما"
 msgstr "Our Activities"
 
-#: .\core\templates\core\services.html:499
+#: .\core\templates\core\services.html:512
 msgid "حوزه‌های تخصصی کیان صنعت"
 msgstr "Kian Sanat Specialized Areas"
 
-#: .\core\templates\core\services.html:500
+#: .\core\templates\core\services.html:513
 msgid "پیشگام در ارائه راهکارهای هوشمند و پایدار"
 msgstr "Pioneer in Providing Smart and Sustainable Solutions"
 
-#: .\core\templates\core\services.html:512
-#: .\core\templates\core\services.html:544
+#: .\core\templates\core\services.html:525
+#: .\core\templates\core\services.html:557
 msgid "نیروگاه خورشیدی"
 msgstr "Solar Power Plant"
 
-#: .\core\templates\core\services.html:513
+#: .\core\templates\core\services.html:526
 msgid "طراحی، تأمین و راه‌اندازی"
 msgstr "Design, Procurement, and Installation"
 
-#: .\core\templates\core\services.html:518
+#: .\core\templates\core\services.html:531
 msgid "سیستم‌های هوشمندسازی"
 msgstr "Smartification Systems"
 
-#: .\core\templates\core\services.html:523
+#: .\core\templates\core\services.html:536
 msgid "اجرای پروژه‌های اتوماسیون"
 msgstr "Execution of Automation Projects"
 
-#: .\core\templates\core\services.html:527
-#: .\core\templates\core\services.html:574
+#: .\core\templates\core\services.html:540
+#: .\core\templates\core\services.html:587
 msgid "شهرهای هوشمند"
 msgstr "Smart Cities"
 
-#: .\core\templates\core\services.html:528
+#: .\core\templates\core\services.html:541
 msgid "پروژه‌های کلان عمرانی"
 msgstr "Large-scale Civil Projects"
 
-#: .\core\templates\core\services.html:532
-#: .\core\templates\core\services.html:584
+#: .\core\templates\core\services.html:545
+#: .\core\templates\core\services.html:597
 msgid "نما و محوطه‌سازی"
 msgstr "Facade and Landscaping"
 
-#: .\core\templates\core\services.html:533
+#: .\core\templates\core\services.html:546
 msgid "طراحی و ساخت مدرن"
 msgstr "Modern Design and Construction"
 
-#: .\core\templates\core\services.html:547
+#: .\core\templates\core\services.html:560
 msgid ""
 "طراحی، تأمین تجهیزات و اجرای صفر تا صد نیروگاه‌های خورشیدی با هدف بهره‌وری "
 "حداکثری از انرژی‌های تجدیدپذیر و کاهش چشمگیر هزینه‌های مصرف انرژی برای صنایع "
@@ -1148,19 +1527,19 @@ msgstr ""
 "maximizing efficiency from renewable energies and significantly reducing "
 "energy consumption costs for large industries and residential homes."
 
-#: .\core\templates\core\services.html:548
-#: .\core\templates\core\services.html:558
-#: .\core\templates\core\services.html:568
-#: .\core\templates\core\services.html:578
-#: .\core\templates\core\services.html:588
+#: .\core\templates\core\services.html:561
+#: .\core\templates\core\services.html:571
+#: .\core\templates\core\services.html:581
+#: .\core\templates\core\services.html:591
+#: .\core\templates\core\services.html:601
 msgid "مشاوره رایگان"
 msgstr "Free Consultation"
 
-#: .\core\templates\core\services.html:556
+#: .\core\templates\core\services.html:569
 msgid "پروژه‌های هوشمندسازی مدیریت انرژی"
 msgstr "Smart Energy Management Projects"
 
-#: .\core\templates\core\services.html:557
+#: .\core\templates\core\services.html:570
 msgid ""
 "پیاده‌سازی سیستم‌های پیشرفته مانیتورینگ و کنترل مصرف انرژی جهت بهینه‌سازی "
 "عملکرد، جلوگیری از هدررفت منابع و ارتقای سطح پایداری در ساختمان‌های تجاری، "
@@ -1170,15 +1549,17 @@ msgstr ""
 "performance, prevent resource waste, and enhance sustainability levels in "
 "commercial, administrative, and residential buildings."
 
-#: .\core\templates\core\services.html:564
+#: .\core\templates\core\services.html:577
+#, fuzzy
+#| msgid "هوش مصنوعی و رباتیک"
 msgid "هوش مصنوعی"
-msgstr "Artificial Intelligence"
+msgstr "AI and Robotics"
 
-#: .\core\templates\core\services.html:566
+#: .\core\templates\core\services.html:579
 msgid "هوش مصنوعی و ربات‌های هوشمند"
 msgstr "Artificial Intelligence and Smart Robots"
 
-#: .\core\templates\core\services.html:567
+#: .\core\templates\core\services.html:580
 msgid ""
 "تطبیق و توسعه راهکارهای نوین مبتنی بر هوش مصنوعی و ربات‌های خودکار جهت "
 "اتوماسیون فرآیندهای صنعتی، افزایش دقت و سرعت در خطوط تولید و بهبود سیستم‌های "
@@ -1188,11 +1569,11 @@ msgstr ""
 "robots for industrial process automation, increasing accuracy and speed in "
 "production lines, and improving smart decision-making systems."
 
-#: .\core\templates\core\services.html:576
+#: .\core\templates\core\services.html:589
 msgid "پروژه‌های عمرانی شهرهای هوشمند"
 msgstr "Smart City Civil Projects"
 
-#: .\core\templates\core\services.html:577
+#: .\core\templates\core\services.html:590
 msgid ""
 "طراحی و اجرای زیرساخت‌های عمرانی یکپارچه با تکنولوژی برای توسعه شهرهای "
 "هوشمند، شامل سیستم‌های نوین حمل‌ونقل، روشنایی یکپارچه و پلتفرم‌های تعاملی "
@@ -1202,11 +1583,11 @@ msgstr ""
 "smart city development, including modern transportation systems, integrated "
 "lighting, and interactive urban management platforms."
 
-#: .\core\templates\core\services.html:586
+#: .\core\templates\core\services.html:599
 msgid "طراحی و ساخت نما و محوطه‌سازی"
 msgstr "Design and Construction of Facades and Landscaping"
 
-#: .\core\templates\core\services.html:587
+#: .\core\templates\core\services.html:600
 msgid ""
 "تلفیق معماری مدرن و تکنولوژی‌های هوشمند در طراحی و اجرای حرفه‌ای نماهای "
 "ساختمانی و محوطه‌سازی، با تمرکز ویژه بر زیبایی‌شناختی، دوام و خلق فضاهای "
@@ -1216,23 +1597,23 @@ msgstr ""
 "professional design and execution of building facades and landscaping, with "
 "a special focus on aesthetics, durability, and creating eco-friendly spaces."
 
-#: .\core\templates\core\services.html:606
+#: .\core\templates\core\services.html:619
 msgid "ویژگی‌های کیان صنعت"
 msgstr "Features of Kian Sanat"
 
-#: .\core\templates\core\services.html:614
+#: .\core\templates\core\services.html:627
 msgid "ارزش‌آفرینی کیان صنعت"
 msgstr "Value Creation by Kian Sanat"
 
-#: .\core\templates\core\services.html:615
+#: .\core\templates\core\services.html:628
 msgid "چرا اجرای پروژه‌های کلان خود را به ما بسپارید؟"
 msgstr "Why entrust us with the execution of your large-scale projects?"
 
-#: .\core\templates\core\services.html:625
+#: .\core\templates\core\services.html:638
 msgid "تخصص و تجربه ترکیبی"
 msgstr "Combined Expertise and Experience"
 
-#: .\core\templates\core\services.html:626
+#: .\core\templates\core\services.html:639
 msgid ""
 "ما دانش اصیل مهندسی عمران و الکترونیک را با فناوری‌های نوین مانند هوش مصنوعی "
 "و اینترنت اشیا تلفیق کرده‌ایم تا بهینه‌ترین نتایج را به کارفرمایان ارائه دهیم."
@@ -1241,11 +1622,11 @@ msgstr ""
 "modern technologies like artificial intelligence and IoT to provide the most "
 "optimal results for employers."
 
-#: .\core\templates\core\services.html:637
+#: .\core\templates\core\services.html:650
 msgid "تعهد به پایداری محیط زیست"
 msgstr "Commitment to Environmental Sustainability"
 
-#: .\core\templates\core\services.html:638
+#: .\core\templates\core\services.html:651
 msgid ""
 "تمرکز ویژه ما بر پروژه‌های سبز، مدیریت یکپارچه انرژی و انرژی‌های تجدیدپذیر، "
 "ضامن کاهش هزینه‌ها و حفظ محیط زیست در توسعه‌های شهری است."
@@ -1254,15 +1635,15 @@ msgstr ""
 "renewable energies guarantees cost reduction and environmental preservation "
 "in urban developments."
 
-#: .\core\templates\core\services.html:646
+#: .\core\templates\core\services.html:659
 msgid "+۵۰"
 msgstr "+50"
 
-#: .\core\templates\core\services.html:647
+#: .\core\templates\core\services.html:660
 msgid "پروژه موفق کشوری"
 msgstr "Successful National Projects"
 
-#: .\core\templates\core\services.html:652
+#: .\core\templates\core\services.html:665
 msgid "۱۰۰٪"
 msgstr "100%"
 
@@ -1270,15 +1651,11 @@ msgstr "100%"
 msgid "شرکت کیان صنعت"
 msgstr "Kian Sanat Company"
 
-#: .\templates\_base.html:103
-msgid "جستجو کنید..."
-msgstr "Search..."
-
-#: .\templates\_base.html:612
+#: .\templates\_base.html:631
 msgid "کیان صنعت"
 msgstr "Kian Sanat"
 
-#: .\templates\_base.html:615
+#: .\templates\_base.html:634
 msgid ""
 "شرکت کیان صنعت، پیشرو در ارائه راهکارهای مهندسی، تجهیزات صنعتی و خدمات فنی و "
 "مهندسی با بالاترین استانداردهای کیفی."
@@ -1287,62 +1664,62 @@ msgstr ""
 "equipment, and technical engineering services with the highest quality "
 "standards."
 
-#: .\templates\_base.html:631
+#: .\templates\_base.html:650
 msgid "لینک‌های سریع"
 msgstr "Quick Links"
 
-#: .\templates\_base.html:636 .\templates\_base.html:647
+#: .\templates\_base.html:655 .\templates\_base.html:666
 msgid "خدمات ما"
 msgstr "Our Services"
 
-#: .\templates\_base.html:637
+#: .\templates\_base.html:656
 msgid "پروژه‌ها"
 msgstr "Projects"
 
-#: .\templates\_base.html:638
+#: .\templates\_base.html:657
 msgid "اخبار و مقالات"
 msgstr "News & Articles"
 
-#: .\templates\_base.html:650
+#: .\templates\_base.html:669
 msgid "مشاوره مهندسی"
 msgstr "Engineering Consulting"
 
-#: .\templates\_base.html:651
+#: .\templates\_base.html:670
 msgid "تامین تجهیزات صنعتی"
 msgstr "Industrial Equipment Supply"
 
-#: .\templates\_base.html:652
+#: .\templates\_base.html:671
 msgid "طراحی و اجرای خطوط"
 msgstr "Design and Execution of Lines"
 
-#: .\templates\_base.html:653
+#: .\templates\_base.html:672
 msgid "اتوماسیون صنعتی"
 msgstr "Industrial Automation"
 
-#: .\templates\_base.html:654
+#: .\templates\_base.html:673
 msgid "نگهداری و تعمیرات"
 msgstr "Maintenance and Repair"
 
-#: .\templates\_base.html:655
+#: .\templates\_base.html:674
 msgid "پشتیبانی تخصصی"
 msgstr "Specialized Support"
 
-#: .\templates\_base.html:670
+#: .\templates\_base.html:689
 msgid "تهران، خیابان شریعتی، پلاک ۱۲۶"
 msgstr "Tehran, Shariati St, No. 126"
 
-#: .\templates\_base.html:678
+#: .\templates\_base.html:697
 msgid "۰۲۱-۱۲۳۴۵۶۷۸"
 msgstr "021-12345678"
 
-#: .\templates\_base.html:690
+#: .\templates\_base.html:709
 msgid "© تمامی حقوق برای شرکت <span>کیان صنعت</span> محفوظ است."
 msgstr "© All rights reserved for <span>Kian Sanat</span> Company."
 
-#: .\templates\_base.html:695
+#: .\templates\_base.html:714
 msgid "شرایط و ضوابط"
 msgstr "Terms & Conditions"
 
-#: .\templates\_base.html:696
+#: .\templates\_base.html:715
 msgid "حریم خصوصی"
 msgstr "Privacy Policy"

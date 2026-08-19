@@ -20,10 +20,9 @@ class ProductSerializer(serializers.ModelSerializer):
 
 
 class ArticleSerializer(serializers.ModelSerializer):
-    category_display = serializers.CharField(
-        source="get_category_display",
-        read_only=True,
-    )
+    title = serializers.ReadOnlyField()
+    content = serializers.ReadOnlyField()
+    category_display = serializers.ReadOnlyField()
 
     class Meta:
         model = Article

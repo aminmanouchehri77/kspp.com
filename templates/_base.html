@@ -88,6 +88,25 @@
             .newsletter-input-field { font-size: 12px; padding-inline-end: 105px; padding-inline-start: 15px; }
             .newsletter-submit-btn { height: 50px; padding: 0 18px; font-size: 13px; }
         }
+
+        /* ======================================================== */
+        /* === استایل‌های مربوط به جهت فلش‌های Breadcrumb (RTL/LTR) === */
+        /* ======================================================== */
+        /* اصلاح فلش‌ها در Breadcrumb برای غلبه بر استایل‌های پایه (حالت پیش‌فرض راست‌چین) */
+        html[dir="rtl"] body main section.page-hero .page-content ul li::after,
+        html[dir="rtl"] body main section.page-hero .page-content ul li::before,
+        html[dir="rtl"] body main section.page-hero .page-content ul li + li::before {
+            transform: scaleX(1) !important;
+            display: inline-block !important;
+        }
+
+        /* حالت انگلیسی (LTR): آینه کردن فلش‌ها (چپ‌چین) */
+        html[dir="ltr"] body main section.page-hero .page-content ul li::after,
+        html[dir="ltr"] body main section.page-hero .page-content ul li::before,
+        html[dir="ltr"] body main section.page-hero .page-content ul li + li::before {
+            transform: scaleX(-1) !important;
+            display: inline-block !important;
+        }
     </style>
 
     {% block extra_css %}{% endblock %}
@@ -482,7 +501,7 @@
                                 <li class="menu-item"><a href="{% url 'core:services' %}">{% trans "فعالیت‌ها" %}</a></li>
                                 <li class="menu-item"><a href="{% url 'core:products' %}">{% trans "محصولات" %}</a></li>
                                 {% comment %} <li class="menu-item"><a href="#">{% trans "بازرگانی" %}</a></li> {% endcomment %}
-                                <li class="menu-item"><a href="#">{% trans "اخبار و رویدادها" %}</a></li>
+                                <li class="menu-item"><a href="{% url 'core:blog' %}">{% trans "اخبار و رویدادها" %}</a></li>
                                 <li class="menu-item"><a href="{% url 'core:about' %}">{% trans "درباره ما" %}</a></li>
                                 <li class="menu-item"><a href="{% url 'core:contact' %}">{% trans "تماس با ما" %}</a></li>
                             </ul>

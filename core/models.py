@@ -143,55 +143,27 @@ class Product(models.Model):
     # ------------------------------
     @property
     def title(self):
-        """
-        عنوان محصول را طبق زبان فعال سایت برمی‌گرداند.
-
-        اگر سایت انگلیسی باشد، title_en نمایش داده می‌شود.
-        در صورت خالی‌بودن title_en، عنوان فارسی به‌عنوان fallback نمایش داده می‌شود.
-        """
         language = get_language() or "fa"
-
         if language.startswith("en") and self.title_en:
             return self.title_en
-
         return self.title_fa
 
     @property
     def description(self):
-        """
-        توضیح محصول را طبق زبان فعال سایت برمی‌گرداند.
-
-        اگر ترجمه انگلیسی وارد نشده باشد، توضیحات فارسی نمایش داده می‌شود.
-        """
         language = get_language() or "fa"
-
         if language.startswith("en") and self.description_en:
             return self.description_en
-
         return self.description_fa
 
     @property
     def badge_label(self):
-        """
-        متن Badge محصول را طبق زبان فعال سایت برمی‌گرداند.
-
-        در صورت خالی‌بودن نسخه انگلیسی، نسخه فارسی نمایش داده می‌شود.
-        """
         language = get_language() or "fa"
-
         if language.startswith("en") and self.badge_label_en:
             return self.badge_label_en
-
         return self.badge_label_fa
 
     @property
     def category_display(self):
-        """
-        نام نمایشی فارسی دسته‌بندی.
-
-        برای API و قالب قابل استفاده است:
-        {{ product.category_display }}
-        """
         return self.get_category_display()
 
 
@@ -205,31 +177,51 @@ class Article(models.Model):
         ("academy", "آکادمی"),
     )
 
-    title = models.CharField(
+    # ------------------------------
+    # محتوای فارسی و انگلیسی مقاله
+    # ------------------------------
+    title_fa = models.CharField(
         max_length=250,
-        verbose_name="عنوان",
+        verbose_name="عنوان (فارسی)",
     )
+    title_en = models.CharField(
+        max_length=250,
+        blank=True,
+        verbose_name="عنوان (انگلیسی)",
+    )
+
     slug = models.SlugField(
         max_length=250,
         unique=True,
         allow_unicode=True,
         verbose_name="لینک (Slug)",
     )
+
+    content_fa = models.TextField(
+        verbose_name="محتوا (فارسی)",
+    )
+    content_en = models.TextField(
+        blank=True,
+        verbose_name="محتوا (انگلیسی)",
+    )
+
+    # ------------------------------
+    # دسته‌بندی و تنظیمات نمایشی
+    # ------------------------------
     category = models.CharField(
         max_length=20,
         choices=CATEGORY_CHOICES,
         default="news",
         verbose_name="دسته‌بندی",
     )
-    content = models.TextField(
-        verbose_name="محتوا",
-    )
+    
     image = models.ImageField(
         upload_to="articles/",
         blank=True,
         null=True,
         verbose_name="تصویر شاخص",
     )
+    
     created_at = models.DateTimeField(
         auto_now_add=True,
         verbose_name="تاریخ انتشار",
@@ -245,7 +237,37 @@ class Article(models.Model):
         verbose_name_plural = "مقالات و اخبار"
 
     def __str__(self):
-        return f"{self.title} ({self.get_category_display()})"
+        return f"{self.title_fa} ({self.get_category_display()})"
+
+    # ------------------------------
+    # پراپرتی‌های محلی‌سازی‌شده
+    # ------------------------------
+    @property
+    def title(self):
+        """
+        عنوان مقاله را طبق زبان فعال سایت برمی‌گرداند.
+        """
+        language = get_language() or "fa"
+        if language.startswith("en") and self.title_en:
+            return self.title_en
+        return self.title_fa
+
+    @property
+    def content(self):
+        """
+        محتوای مقاله را طبق زبان فعال سایت برمی‌گرداند.
+        """
+        language = get_language() or "fa"
+        if language.startswith("en") and self.content_en:
+            return self.content_en
+        return self.content_fa
+
+    @property
+    def category_display(self):
+        """
+        نام نمایشی فارسی دسته‌بندی.
+        """
+        return self.get_category_display()
 
 
 # ==========================================
@@ -313,7 +335,4 @@ class ClientLogo(models.Model):
     class Meta:
         ordering = ["order", "-id"]
         verbose_name = "لوگوی همکار"
-        verbose_name_plural = "لوگوی همکاران"
-
-    def __str__(self):
-        return self.name
+        verbose_name_plural = "لوگوی"

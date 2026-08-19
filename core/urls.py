@@ -68,6 +68,16 @@ urlpatterns = [
         name="products",
     ),
     path(
+        "blog/",
+        views.BlogView.as_view(),
+        name="blog",
+    ),
+    path(
+        "blog/<slug:slug>/",
+        views.BlogDetailView.as_view(),
+        name="blog_detail",
+    ),
+    path(
         "contact/",
         views.ContactView.as_view(),
         name="contact",
