@@ -13,7 +13,7 @@ urlpatterns = [
 # استفاده از prefix_default_language=False باعث می‌شود زبان پیش‌فرض (فارسی)
 # در آدرس سایت پیشوند /fa/ نگیرد و به سئو کمک می‌کند.
 urlpatterns += i18n_patterns(
-    path('admin/', admin.site.urls),
+    path('kspphubadmin/', admin.site.urls),
     
     # متصل کردن URL های اپلیکیشن core برای نمایش سایت و API
     path('', include('core.urls')), 
