@@ -56,9 +56,6 @@ class Product(models.Model):
         ("ai-robotics", "رباتیک و هوش مصنوعی"),
     )
 
-    # ------------------------------
-    # محتوای فارسی و انگلیسی محصول
-    # ------------------------------
     title_fa = models.CharField(
         max_length=200,
         verbose_name="نام محصول (فارسی)",
@@ -90,9 +87,6 @@ class Product(models.Model):
         verbose_name="تصویر محصول",
     )
 
-    # ------------------------------
-    # دسته‌بندی و تنظیمات نمایشی
-    # ------------------------------
     category = models.CharField(
         max_length=50,
         choices=CATEGORY_CHOICES,
@@ -104,25 +98,21 @@ class Product(models.Model):
         max_length=50,
         blank=True,
         verbose_name="نشان محصول (فارسی)",
-        help_text="مثال: جدید، پرفروش‌ترین، تخفیف ویژه",
     )
     badge_label_en = models.CharField(
         max_length=50,
         blank=True,
         verbose_name="نشان محصول (انگلیسی)",
-        help_text="Example: New, Best Seller, Special Offer",
     )
 
     is_featured = models.BooleanField(
         default=False,
         verbose_name="محصول ویژه",
-        help_text="برای نمایش محصول در کارت بزرگ‌تر گرید Bento فعال کنید.",
     )
 
     order = models.PositiveSmallIntegerField(
         default=0,
         verbose_name="ترتیب نمایش",
-        help_text="عدد کمتر، نمایش زودتر در صفحه محصولات.",
     )
 
     created_at = models.DateTimeField(
@@ -138,28 +128,31 @@ class Product(models.Model):
     def __str__(self):
         return self.title_fa
 
-    # ------------------------------
-    # پراپرتی‌های محلی‌سازی‌شده
-    # ------------------------------
     @property
     def title(self):
         language = get_language() or "fa"
+
         if language.startswith("en") and self.title_en:
             return self.title_en
+
         return self.title_fa
 
     @property
     def description(self):
         language = get_language() or "fa"
+
         if language.startswith("en") and self.description_en:
             return self.description_en
+
         return self.description_fa
 
     @property
     def badge_label(self):
         language = get_language() or "fa"
+
         if language.startswith("en") and self.badge_label_en:
             return self.badge_label_en
+
         return self.badge_label_fa
 
     @property
@@ -168,7 +161,54 @@ class Product(models.Model):
 
 
 # ==========================================
-# ۳. مدل مقالات، اخبار، نمایشگاه‌ها و آکادمی
+# ۳. مدل برچسب‌های مقالات
+# ==========================================
+class Tag(models.Model):
+    """
+    برچسب‌ها برای اتصال به یک یا چند مقاله استفاده می‌شوند.
+    مثال:
+    هوش مصنوعی، تجهیزات صنعتی، انرژی خورشیدی، نمایشگاه و ...
+    """
+
+    name_fa = models.CharField(
+        max_length=100,
+        verbose_name="نام برچسب (فارسی)",
+    )
+    name_en = models.CharField(
+        max_length=100,
+        blank=True,
+        verbose_name="نام برچسب (انگلیسی)",
+    )
+    slug = models.SlugField(
+        max_length=120,
+        unique=True,
+        allow_unicode=True,
+        verbose_name="لینک برچسب (Slug)",
+    )
+
+    class Meta:
+        ordering = ["name_fa"]
+        verbose_name = "برچسب"
+        verbose_name_plural = "برچسب‌ها"
+
+    def __str__(self):
+        return self.name_fa
+
+    @property
+    def name(self):
+        """
+        نام برچسب بر اساس زبان فعال سایت.
+        """
+        language = get_language() or "fa"
+
+        if language.startswith("en") and self.name_en:
+            return self.name_en
+
+        return self.name_fa
+
+
+# ==========================================
+# ۴. مدل مقالات، اخبار، نمایشگاه‌ها و آکادمی
 # ==========================================
 class Article(models.Model):
     CATEGORY_CHOICES = (
@@ -176,6 +216,22 @@ class Article(models.Model):
         ("exhibition", "نمایشگاه‌ها"),
         ("academy", "آکادمی"),
     )
+
+    # عنوان داینامیک دسته‌بندی‌ها برای فارسی و انگلیسی
+    CATEGORY_LABELS = {
+        "news": {
+            "fa": "اخبار",
+            "en": "News",
+        },
+        "exhibition": {
+            "fa": "نمایشگاه‌ها",
+            "en": "Exhibitions",
+        },
+        "academy": {
+            "fa": "آکادمی",
+            "en": "Academy",
+        },
+    }
 
     # ------------------------------
     # محتوای فارسی و انگلیسی مقاله
@@ -206,7 +262,7 @@ class Article(models.Model):
     )
 
     # ------------------------------
-    # دسته‌بندی و تنظیمات نمایشی
+    # دسته‌بندی و برچسب
     # ------------------------------
     category = models.CharField(
         max_length=20,
@@ -214,14 +270,22 @@ class Article(models.Model):
         default="news",
         verbose_name="دسته‌بندی",
     )
-    
+
+    tags = models.ManyToManyField(
+        Tag,
+        blank=True,
+        related_name="articles",
+        verbose_name="برچسب‌ها",
+        help_text="برچسب‌های مرتبط با این مقاله را انتخاب کنید.",
+    )
+
     image = models.ImageField(
         upload_to="articles/",
         blank=True,
         null=True,
         verbose_name="تصویر شاخص",
     )
-    
+
     created_at = models.DateTimeField(
         auto_now_add=True,
         verbose_name="تاریخ انتشار",
@@ -239,39 +303,77 @@ class Article(models.Model):
     def __str__(self):
         return f"{self.title_fa} ({self.get_category_display()})"
 
-    # ------------------------------
-    # پراپرتی‌های محلی‌سازی‌شده
-    # ------------------------------
     @property
     def title(self):
         """
-        عنوان مقاله را طبق زبان فعال سایت برمی‌گرداند.
+        عنوان مقاله مطابق زبان فعال سایت.
         """
         language = get_language() or "fa"
+
         if language.startswith("en") and self.title_en:
             return self.title_en
+
         return self.title_fa
 
     @property
     def content(self):
         """
-        محتوای مقاله را طبق زبان فعال سایت برمی‌گرداند.
+        محتوای مقاله مطابق زبان فعال سایت.
         """
         language = get_language() or "fa"
+
         if language.startswith("en") and self.content_en:
             return self.content_en
+
         return self.content_fa
 
     @property
     def category_display(self):
         """
-        نام نمایشی فارسی دسته‌بندی.
+        نام دسته‌بندی مطابق زبان فعال سایت.
         """
-        return self.get_category_display()
+        language = get_language() or "fa"
+        lang_code = "en" if language.startswith("en") else "fa"
+
+        return self.CATEGORY_LABELS.get(
+            self.category,
+            {},
+        ).get(
+            lang_code,
+            self.get_category_display(),
+        )
+
+    @classmethod
+    def get_categories_for_language(cls):
+        """
+        خروجی مناسب برای استفاده در قالب‌ها.
+
+        نمونه:
+        [
+            {"code": "news", "label": "اخبار"},
+            {"code": "exhibition", "label": "نمایشگاه‌ها"},
+        ]
+        """
+        language = get_language() or "fa"
+        lang_code = "en" if language.startswith("en") else "fa"
+
+        return [
+            {
+                "code": code,
+                "label": cls.CATEGORY_LABELS.get(
+                    code,
+                    {},
+                ).get(
+                    lang_code,
+                    default_label,
+                ),
+            }
+            for code, default_label in cls.CATEGORY_CHOICES
+        ]
 
 
 # ==========================================
-# ۴. مدل پیام‌های فرم تماس
+# ۵. مدل پیام‌های فرم تماس
 # ==========================================
 class ContactMessage(models.Model):
     name = models.CharField(
@@ -312,7 +414,7 @@ class ContactMessage(models.Model):
 
 
 # ==========================================
-# ۵. مدل لوگوی مشتریان و همکاران
+# ۶. مدل لوگوی مشتریان و همکاران
 # ==========================================
 class ClientLogo(models.Model):
     name = models.CharField(
@@ -335,4 +437,7 @@ class ClientLogo(models.Model):
     class Meta:
         ordering = ["order", "-id"]
         verbose_name = "لوگوی همکار"
-        verbose_name_plural = "لوگوی"
+        verbose_name_plural = "لوگوهای همکاران"
+
+    def __str__(self):
+        return self.name

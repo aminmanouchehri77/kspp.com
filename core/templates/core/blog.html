@@ -1,5 +1,6 @@
 {% extends '_base.html' %}
-{% load static i18n %}
+{% load static i18n jformat %}
+{% get_current_language as CURRENT_LANGUAGE %}
 
 {% block title %}
     {% trans "وبلاگ | کیان صنعت" %}
@@ -48,26 +49,39 @@
         --orbia-transition: 0.35s ease;
     }
 
-    /* تنظیمات عمومی صفحه */
-    body, body p, body a, body span, body li, body button, body input, body textarea, body select, body label {
+    body,
+    body p,
+    body a,
+    body span,
+    body li,
+    body button,
+    body input,
+    body textarea,
+    body select,
+    body label {
         font-family: "Vazirmatn", sans-serif !important;
         line-height: 1.8 !important;
     }
 
-    h1, h2, h3, h4, h5, h6 {
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
         font-family: "Vazirmatn", sans-serif !important;
         font-weight: 800 !important;
         line-height: 1.6 !important;
     }
 
     a {
-        transition: color var(--orbia-transition),
-                    background var(--orbia-transition),
-                    border-color var(--orbia-transition),
-                    transform var(--orbia-transition);
+        transition:
+            color var(--orbia-transition),
+            background var(--orbia-transition),
+            border-color var(--orbia-transition),
+            transform var(--orbia-transition);
     }
 
-    /* حالت تاریک */
     html[data-theme="dark"] {
         --orbia-text: #f5f5f5;
         --orbia-muted: #b7b7b7;
@@ -81,22 +95,22 @@
 
     /*
     |--------------------------------------------------------------------------
-    | استایل‌های هیرو و مسیرنما
+    | Hero / Breadcrumb
     |--------------------------------------------------------------------------
     */
     .page-hero .page-content h1 {
-        margin-bottom: 0px !important;
-        font-size: clamp(40px, 7vw, 75px) !important; 
+        margin-bottom: 0 !important;
+        color: #ffffff !important;
+        font-size: clamp(40px, 7vw, 75px) !important;
         font-weight: 900 !important;
         letter-spacing: -0.5px;
-        color: #ffffff !important;
-        text-shadow: 0 4px 20px rgba(0,0,0,0.4) !important;
+        text-shadow: 0 4px 20px rgba(0, 0, 0, 0.4) !important;
     }
 
     .page-hero .page-content ul {
         display: flex !important;
-        justify-content: center !important;
         align-items: center !important;
+        justify-content: center !important;
         flex-wrap: wrap !important;
         gap: 12px !important;
         margin: 0 !important;
@@ -105,20 +119,19 @@
     }
 
     .page-hero .page-content ul li {
-        font-family: 'Vazirmatn', sans-serif !important;
-        font-weight: 700 !important;
-        margin-top: 0px !important;
-        font-size: 20px !important;
+        margin-top: 0 !important;
         color: #ffffff !important;
-        text-shadow: 0 2px 10px rgba(0,0,0,0.3) !important;
+        font-family: "Vazirmatn", sans-serif !important;
+        font-size: 20px !important;
+        font-weight: 700 !important;
+        text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3) !important;
     }
 
     .page-hero .page-content ul li a {
-        font-family: 'Vazirmatn', sans-serif !important;
-        font-weight: 700 !important;
         color: #ffffff !important;
+        font-family: "Vazirmatn", sans-serif !important;
+        font-weight: 700 !important;
         text-decoration: none !important;
-        transition: color 0.3s ease, text-decoration 0.3s ease !important;
     }
 
     .page-hero .page-content ul li a:hover {
@@ -126,7 +139,11 @@
         text-decoration: underline !important;
     }
 
-    /* بخش اصلی وبلاگ */
+    /*
+    |--------------------------------------------------------------------------
+    | Blog Main Area
+    |--------------------------------------------------------------------------
+    */
     .orbia-blog-standard-sec {
         position: relative !important;
         z-index: 1 !important;
@@ -137,14 +154,21 @@
         width: 100% !important;
     }
 
-    /* کارت‌های مقاله */
+    /*
+    |--------------------------------------------------------------------------
+    | Article Cards
+    |--------------------------------------------------------------------------
+    */
     .orbia-blog-post-item {
         overflow: hidden !important;
         border: 1px solid var(--orbia-border) !important;
         border-radius: var(--orbia-radius-lg) !important;
         background: var(--orbia-card-bg) !important;
         box-shadow: var(--orbia-shadow-sm) !important;
-        transition: transform var(--orbia-transition), box-shadow var(--orbia-transition), border-color var(--orbia-transition);
+        transition:
+            transform var(--orbia-transition),
+            box-shadow var(--orbia-transition),
+            border-color var(--orbia-transition);
     }
 
     .orbia-blog-post-item:hover {
@@ -163,7 +187,11 @@
     .orbia-blog-post-item .post-thumbnail::after {
         position: absolute !important;
         inset: 0 !important;
-        background: linear-gradient(to bottom, rgba(0, 0, 0, 0.02), rgba(0, 0, 0, 0.12)) !important;
+        background: linear-gradient(
+            to bottom,
+            rgba(0, 0, 0, 0.02),
+            rgba(0, 0, 0, 0.12)
+        ) !important;
         content: "" !important;
         pointer-events: none !important;
     }
@@ -237,7 +265,6 @@
         line-height: 2 !important;
     }
 
-    /* دکمه ادامه مطلب */
     .orbia-blog-post-item .read-more {
         display: inline-flex !important;
         align-items: center !important;
@@ -271,7 +298,11 @@
         transform: scaleX(-1) translateX(-5px) !important;
     }
 
-    /* سایدبار */
+    /*
+    |--------------------------------------------------------------------------
+    | Sidebar
+    |--------------------------------------------------------------------------
+    */
     .sidebar-widget-area {
         position: sticky !important;
         top: 30px !important;
@@ -296,8 +327,8 @@
 
     .sidebar-widget .widget-title::after {
         position: absolute !important;
-        bottom: 0 !important;
         right: 0 !important;
+        bottom: 0 !important;
         width: 48px !important;
         height: 3px !important;
         border-radius: 10px !important;
@@ -310,134 +341,409 @@
         left: 0 !important;
     }
 
-    /* ویجت جستجو */
-    .sidebar-search-widget { padding: 18px !important; }
-    .sidebar-search-widget .form-group { position: relative !important; margin: 0 !important; display: flex !important; }
+    /*
+    |--------------------------------------------------------------------------
+    | Search Widget
+    |--------------------------------------------------------------------------
+    */
+    .sidebar-search-widget {
+        padding: 18px !important;
+    }
+
+    .sidebar-search-widget .form-group {
+        position: relative !important;
+        display: flex !important;
+        margin: 0 !important;
+    }
+
     .sidebar-search-widget .form_control {
-        width: 100% !important; height: 54px !important; padding: 0 18px 0 54px !important;
-        border: 1px solid var(--orbia-border) !important; border-radius: 14px !important; outline: none !important;
-        background: var(--orbia-section-bg) !important; color: var(--orbia-text) !important; font-size: 14px !important;
-        transition: border-color var(--orbia-transition), box-shadow var(--orbia-transition) !important;
+        width: 100% !important;
+        height: 54px !important;
+        padding: 0 18px 0 54px !important;
+        border: 1px solid var(--orbia-border) !important;
+        border-radius: 14px !important;
+        outline: none !important;
+        background: var(--orbia-section-bg) !important;
+        color: var(--orbia-text) !important;
+        font-size: 14px !important;
+        transition:
+            border-color var(--orbia-transition),
+            box-shadow var(--orbia-transition) !important;
     }
+
     .sidebar-search-widget .form_control:focus {
-        border-color: rgba(221, 42, 123, 0.55) !important; box-shadow: 0 0 0 4px rgba(221, 42, 123, 0.1) !important;
+        border-color: rgba(221, 42, 123, 0.55) !important;
+        box-shadow: 0 0 0 4px rgba(221, 42, 123, 0.1) !important;
     }
+
     .sidebar-search-widget .search-btn {
-        position: absolute !important; top: 0 !important; bottom: 0 !important; margin: auto 0 !important; left: 6px !important; right: auto !important;
-        width: 42px !important; height: 42px !important; border: 0 !important; border-radius: 11px !important; background: var(--orbia-button-gradient) !important; color: #ffffff !important; cursor: pointer !important; transition: transform var(--orbia-transition), background var(--orbia-transition) !important;
+        position: absolute !important;
+        top: 0 !important;
+        bottom: 0 !important;
+        left: 6px !important;
+        right: auto !important;
+        width: 42px !important;
+        height: 42px !important;
+        margin: auto 0 !important;
+        border: 0 !important;
+        border-radius: 11px !important;
+        background: var(--orbia-button-gradient) !important;
+        color: #ffffff !important;
+        cursor: pointer !important;
+        transition:
+            transform var(--orbia-transition),
+            background var(--orbia-transition) !important;
     }
-    .sidebar-search-widget .search-btn:hover { background: var(--orbia-button-hover) !important; transform: translateY(-2px) !important; }
-    html[dir="ltr"] .sidebar-search-widget .form_control { padding: 0 54px 0 18px !important; }
-    html[dir="ltr"] .sidebar-search-widget .search-btn { left: auto !important; right: 6px !important; }
 
-    /* دسته‌بندی‌ها */
-    .sidebar-nav-widget ul { margin: 0 !important; padding: 0 !important; list-style: none !important; display: flex !important; flex-direction: column !important; gap: 12px !important; }
-    .sidebar-nav-widget ul li { border-bottom: 0 !important; }
+    .sidebar-search-widget .search-btn:hover {
+        background: var(--orbia-button-hover) !important;
+        transform: translateY(-2px) !important;
+    }
+
+    html[dir="ltr"] .sidebar-search-widget .form_control {
+        padding: 0 54px 0 18px !important;
+    }
+
+    html[dir="ltr"] .sidebar-search-widget .search-btn {
+        right: 6px !important;
+        left: auto !important;
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Categories
+    |--------------------------------------------------------------------------
+    */
+    .sidebar-nav-widget ul {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 12px !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        list-style: none !important;
+    }
+
+    .sidebar-nav-widget ul li {
+        border-bottom: 0 !important;
+    }
+
     .sidebar-nav-widget ul li a {
-        display: flex !important; justify-content: space-between !important; align-items: center !important; gap: 12px !important; padding: 14px 20px !important;
-        border: 1px solid var(--orbia-border) !important; border-radius: 50px !important; background: var(--orbia-section-bg) !important; color: var(--orbia-text) !important; font-size: 14px !important; font-weight: 700 !important; text-decoration: none !important; transition: all var(--orbia-transition) !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: space-between !important;
+        gap: 12px !important;
+        padding: 14px 20px !important;
+        border: 1px solid var(--orbia-border) !important;
+        border-radius: 50px !important;
+        background: var(--orbia-section-bg) !important;
+        color: var(--orbia-text) !important;
+        font-size: 14px !important;
+        font-weight: 700 !important;
+        text-decoration: none !important;
+        transition: all var(--orbia-transition) !important;
     }
-    .sidebar-nav-widget ul li a span { display: inline-flex !important; align-items: center !important; color: var(--orbia-muted); transition: color var(--orbia-transition), transform var(--orbia-transition) !important; }
-    body .sidebar-nav-widget ul li a span i { display: inline-block !important; transition: transform var(--orbia-transition) !important; }
-    .sidebar-nav-widget ul li a:hover { border-color: transparent !important; background: var(--orbia-button-gradient) !important; color: #ffffff !important; transform: translateY(-2px) !important; box-shadow: var(--orbia-shadow-sm) !important; }
-    body .sidebar-nav-widget ul li a:hover span { color: #ffffff !important; transform: translateX(-5px) !important; }
-    html[dir="ltr"] body .sidebar-nav-widget ul li a span i { transform: scaleX(-1) !important; }
-    html[dir="ltr"] body .sidebar-nav-widget ul li a:hover span { color: #ffffff !important; transform: translateX(5px) !important; }
 
-    /* پست‌های اخیر */
-    .recent-post-list { margin: 0 !important; padding: 0 !important; list-style: none !important; }
-    .post-thumbnail-content { display: flex !important; align-items: flex-start !important; gap: 13px !important; margin-bottom: 18px !important; }
-    .post-thumbnail-content:last-child { margin-bottom: 0 !important; }
-    .post-thumbnail-content img { flex: 0 0 75px !important; width: 75px !important; height: 75px !important; border-radius: 12px !important; object-fit: cover !important; }
-    .post-title-date { min-width: 0 !important; }
-    .post-title-date .posted-on { display: block !important; margin-bottom: 4px !important; color: var(--orbia-primary) !important; font-size: 12px !important; }
-    .post-title-date h5 { margin: 0 !important; font-size: 13px !important; line-height: 1.8 !important; }
-    .post-title-date h5 a { display: -webkit-box !important; overflow: hidden !important; color: var(--orbia-text) !important; text-decoration: none !important; -webkit-box-orient: vertical !important; -webkit-line-clamp: 3 !important; }
-    .post-title-date h5 a:hover { color: var(--orbia-primary) !important; }
+    .sidebar-nav-widget ul li a span {
+        display: inline-flex !important;
+        align-items: center !important;
+        color: var(--orbia-muted) !important;
+        transition:
+            color var(--orbia-transition),
+            transform var(--orbia-transition) !important;
+    }
 
-    /* برچسب‌ها */
-    .sidebar-tag-widget .widget-content { display: flex !important; flex-wrap: wrap !important; gap: 9px !important; }
+    body .sidebar-nav-widget ul li a span i {
+        display: inline-block !important;
+        transition: transform var(--orbia-transition) !important;
+    }
+
+    .sidebar-nav-widget ul li a:hover,
+    .sidebar-nav-widget ul li a.active {
+        border-color: transparent !important;
+        background: var(--orbia-button-gradient) !important;
+        color: #ffffff !important;
+        box-shadow: var(--orbia-shadow-sm) !important;
+        transform: translateY(-2px) !important;
+    }
+
+    body .sidebar-nav-widget ul li a:hover span,
+    body .sidebar-nav-widget ul li a.active span {
+        color: #ffffff !important;
+        transform: translateX(-5px) !important;
+    }
+
+    html[dir="ltr"] body .sidebar-nav-widget ul li a span i {
+        transform: scaleX(-1) !important;
+    }
+
+    html[dir="ltr"] body .sidebar-nav-widget ul li a:hover span,
+    html[dir="ltr"] body .sidebar-nav-widget ul li a.active span {
+        color: #ffffff !important;
+        transform: translateX(5px) !important;
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Recent Posts
+    |--------------------------------------------------------------------------
+    */
+    .recent-post-list {
+        margin: 0 !important;
+        padding: 0 !important;
+        list-style: none !important;
+    }
+
+    .post-thumbnail-content {
+        display: flex !important;
+        align-items: flex-start !important;
+        gap: 13px !important;
+        margin-bottom: 18px !important;
+    }
+
+    .post-thumbnail-content:last-child {
+        margin-bottom: 0 !important;
+    }
+
+    .post-thumbnail-content img {
+        flex: 0 0 75px !important;
+        width: 75px !important;
+        height: 75px !important;
+        border-radius: 12px !important;
+        object-fit: cover !important;
+    }
+
+    .post-title-date {
+        min-width: 0 !important;
+    }
+
+    .post-title-date .posted-on {
+        display: block !important;
+        margin-bottom: 4px !important;
+        color: var(--orbia-primary) !important;
+        font-size: 12px !important;
+    }
+
+    .post-title-date .posted-on a {
+        color: var(--orbia-primary) !important;
+        text-decoration: none !important;
+    }
+
+    .post-title-date h5 {
+        margin: 0 !important;
+        font-size: 13px !important;
+        line-height: 1.8 !important;
+    }
+
+    .post-title-date h5 a {
+        display: -webkit-box !important;
+        overflow: hidden !important;
+        color: var(--orbia-text) !important;
+        text-decoration: none !important;
+        -webkit-box-orient: vertical !important;
+        -webkit-line-clamp: 3 !important;
+    }
+
+    .post-title-date h5 a:hover {
+        color: var(--orbia-primary) !important;
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Tags
+    |--------------------------------------------------------------------------
+    */
+    .sidebar-tag-widget .widget-content {
+        display: flex !important;
+        flex-wrap: wrap !important;
+        gap: 9px !important;
+    }
+
     .sidebar-tag-widget .widget-content a {
-        display: inline-flex !important; align-items: center !important; min-height: 36px !important; padding: 5px 13px !important; border: 1px solid var(--orbia-border) !important; border-radius: 50px !important; background: transparent !important; color: var(--orbia-muted) !important; font-size: 13px !important; text-decoration: none !important; transition: all var(--orbia-transition) !important;
+        display: inline-flex !important;
+        align-items: center !important;
+        min-height: 36px !important;
+        padding: 5px 13px !important;
+        border: 1px solid var(--orbia-border) !important;
+        border-radius: 50px !important;
+        background: transparent !important;
+        color: var(--orbia-muted) !important;
+        font-size: 13px !important;
+        text-decoration: none !important;
+        transition: all var(--orbia-transition) !important;
     }
-    .sidebar-tag-widget .widget-content a:hover { border-color: transparent !important; background: var(--orbia-button-gradient) !important; color: #ffffff !important; transform: translateY(-2px) !important; }
 
-    /* صفحه‌بندی */
-    .theme-pagination { margin-top: 35px !important; }
-    .theme-pagination ul { display: flex !important; justify-content: center !important; align-items: center !important; flex-wrap: wrap !important; gap: 10px !important; margin: 0 !important; padding: 0 !important; list-style: none !important; }
-    .theme-pagination ul li a { display: grid !important; place-items: center !important; min-width: 42px !important; height: 42px !important; padding: 0 12px !important; border: 1px solid var(--orbia-border) !important; border-radius: 12px !important; background: var(--orbia-card-bg) !important; color: var(--orbia-muted) !important; font-size: 14px !important; font-weight: 700 !important; text-decoration: none !important; transition: all var(--orbia-transition) !important; }
-    body .theme-pagination ul li a i { display: inline-block !important; transition: transform var(--orbia-transition) !important; }
-    html[dir="ltr"] body .theme-pagination ul li a i { transform: scaleX(-1) !important; }
-    .theme-pagination ul li a:hover, .theme-pagination ul li:first-child a, .theme-pagination ul li:last-child a { border-color: transparent !important; background: var(--orbia-button-gradient) !important; color: #ffffff !important; transform: translateY(-2px) !important; }
+    .sidebar-tag-widget .widget-content a:hover,
+    .sidebar-tag-widget .widget-content a.active {
+        border-color: transparent !important;
+        background: var(--orbia-button-gradient) !important;
+        color: #ffffff !important;
+        transform: translateY(-2px) !important;
+    }
 
-    /* استایل اختصاصی برای کارت پیام "مقاله‌ای یافت نشد" */
+    /*
+    |--------------------------------------------------------------------------
+    | Pagination
+    |--------------------------------------------------------------------------
+    */
+    .theme-pagination {
+        margin-top: 35px !important;
+    }
+
+    .theme-pagination ul {
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        flex-wrap: wrap !important;
+        gap: 10px !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        list-style: none !important;
+    }
+
+    .theme-pagination ul li a {
+        display: grid !important;
+        min-width: 42px !important;
+        height: 42px !important;
+        padding: 0 12px !important;
+        place-items: center !important;
+        border: 1px solid var(--orbia-border) !important;
+        border-radius: 12px !important;
+        background: var(--orbia-card-bg) !important;
+        color: var(--orbia-muted) !important;
+        font-size: 14px !important;
+        font-weight: 700 !important;
+        text-decoration: none !important;
+        transition: all var(--orbia-transition) !important;
+    }
+
+    body .theme-pagination ul li a i {
+        display: inline-block !important;
+        transition: transform var(--orbia-transition) !important;
+    }
+
+    html[dir="ltr"] body .theme-pagination ul li a i {
+        transform: scaleX(-1) !important;
+    }
+
+    .theme-pagination ul li a:hover,
+    .theme-pagination ul li a.is-current,
+    .theme-pagination ul li a.pagination-nav {
+        border-color: transparent !important;
+        background: var(--orbia-button-gradient) !important;
+        color: #ffffff !important;
+        transform: translateY(-2px) !important;
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Empty State
+    |--------------------------------------------------------------------------
+    */
     .empty-state-card {
         padding: 50px 20px !important;
-        text-align: center !important;
         border: 1px solid var(--orbia-border) !important;
         border-radius: var(--orbia-radius-lg) !important;
         background: var(--orbia-card-bg) !important;
+        color: var(--orbia-text) !important;
+        text-align: center !important;
         box-shadow: var(--orbia-shadow-sm) !important;
     }
+
     .empty-state-card .icon {
         display: inline-flex !important;
         align-items: center !important;
         justify-content: center !important;
         width: 80px !important;
         height: 80px !important;
+        margin-bottom: 20px !important;
         border-radius: 50% !important;
         background: rgba(221, 42, 123, 0.1) !important;
         color: var(--orbia-primary) !important;
         font-size: 32px !important;
-        margin-bottom: 20px !important;
     }
+
     .empty-state-card h4 {
-        color: var(--orbia-text) !important;
         margin-bottom: 10px !important;
+        color: var(--orbia-text) !important;
         font-weight: 800 !important;
     }
+
     .empty-state-card p {
-        color: var(--orbia-muted) !important;
         margin-bottom: 25px !important;
+        color: var(--orbia-muted) !important;
     }
+
     .empty-state-card .btn-back {
         display: inline-block !important;
         padding: 12px 30px !important;
+        border-radius: 50px !important;
         background: var(--orbia-button-gradient) !important;
         color: #fff !important;
-        border-radius: 50px !important;
-        text-decoration: none !important;
         font-weight: 700 !important;
-        transition: transform var(--orbia-transition), box-shadow var(--orbia-transition) !important;
-    }
-    .empty-state-card .btn-back:hover {
-        transform: translateY(-3px) !important;
-        box-shadow: var(--orbia-shadow-md) !important;
-        color: #fff !important;
+        text-decoration: none !important;
+        transition:
+            transform var(--orbia-transition),
+            box-shadow var(--orbia-transition) !important;
     }
 
-    /* ریسپانسیو */
-    @media (max-width: 1199.98px) {
-        .sidebar-widget-area { position: static !important; margin-top: 35px !important; }
+    .empty-state-card .btn-back:hover {
+        color: #ffffff !important;
+        box-shadow: var(--orbia-shadow-md) !important;
+        transform: translateY(-3px) !important;
     }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Responsive
+    |--------------------------------------------------------------------------
+    */
+    @media (max-width: 1199.98px) {
+        .sidebar-widget-area {
+            position: static !important;
+            margin-top: 35px !important;
+        }
+    }
+
     @media (max-width: 767.98px) {
-        .orbia-blog-standard-sec { padding-top: 75px !important; padding-bottom: 75px !important; }
-        .orbia-blog-post-item .post-thumbnail { height: 245px !important; }
-        .orbia-blog-post-item .post-content { padding: 22px 20px 25px !important; }
-        .sidebar-widget { padding: 21px 18px !important; }
-        .empty-state-card { padding: 35px 15px !important; }
+        .orbia-blog-standard-sec {
+            padding-top: 75px !important;
+            padding-bottom: 75px !important;
+        }
+
+        .orbia-blog-post-item .post-thumbnail {
+            height: 245px !important;
+        }
+
+        .orbia-blog-post-item .post-content {
+            padding: 22px 20px 25px !important;
+        }
+
+        .sidebar-widget {
+            padding: 21px 18px !important;
+        }
+
+        .empty-state-card {
+            padding: 35px 15px !important;
+        }
     }
 </style>
 
-<!--====== Start Page Hero Section ======-->
-<section class="page-hero bg_cover p-r z-1" data-src="{% static 'assets/images/innerpage/bg/page-bg.jpg' %}">
+<section
+    class="page-hero bg_cover p-r z-1"
+    data-src="{% static 'assets/images/innerpage/bg/page-bg.jpg' %}"
+>
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-lg-8">
                 <div class="page-content text-center">
                     <h1>{% trans "وبلاگ" %}</h1>
+
                     <ul>
-                        <li><a href="{% url 'core:home' %}">{% trans "صفحه اصلی" %}</a></li>
+                        <li>
+                            <a href="{% url 'core:home' %}">
+                                {% trans "صفحه اصلی" %}
+                            </a>
+                        </li>
                         <li>{% trans "وبلاگ" %}</li>
                     </ul>
                 </div>
@@ -445,202 +751,458 @@
         </div>
     </div>
 </section>
-<!--====== End Page Hero Section ======-->
 
-<!--====== Start Blog Section ======-->
 <section class="orbia-blog-standard-sec pt-120 pb-120">
     <div class="container">
         <div class="row justify-content-center">
 
-            <!-- Blog Content -->
             <div class="col-xl-8 col-lg-10">
-                
-                <!-- المان‌های مخصوص موبایل که قبل از بلاگ‌ها نمایش داده می‌شوند -->
+
                 <div class="d-xl-none mb-40">
-                    <!-- Search Widget (Mobile) -->
-                    <div class="sidebar-widget sidebar-search-widget mb-30" data-aos="fade-up" data-aos-duration="600">
+
+                    <div
+                        class="sidebar-widget sidebar-search-widget mb-30"
+                        data-aos="fade-up"
+                        data-aos-duration="600"
+                    >
                         <div class="widget-content">
-                            <form action="{% url 'core:blog' %}" method="GET">
+                            <form action="{% url 'core:blog' %}" method="get">
+                                {% if current_category %}
+                                    <input
+                                        type="hidden"
+                                        name="category"
+                                        value="{{ current_category }}"
+                                    >
+                                {% endif %}
+
+                                {% if current_tag %}
+                                    <input
+                                        type="hidden"
+                                        name="tag"
+                                        value="{{ current_tag }}"
+                                    >
+                                {% endif %}
+
                                 <div class="form-group">
-                                    <input class="form_control" type="search" name="q" value="{{ current_q }}" placeholder="{% trans 'جستجو کنید...' %}" aria-label="{% trans 'جستجو در وبلاگ' %}" required>
-                                    <button class="search-btn" type="submit" aria-label="{% trans 'جستجو' %}"><i class="far fa-search"></i></button>
+                                    <input
+                                        class="form_control"
+                                        type="search"
+                                        name="q"
+                                        value="{{ current_q }}"
+                                        placeholder="{% trans 'جستجو کنید...' %}"
+                                        aria-label="{% trans 'جستجو در وبلاگ' %}"
+                                        required
+                                    >
+
+                                    <button
+                                        class="search-btn"
+                                        type="submit"
+                                        aria-label="{% trans 'جستجو' %}"
+                                    >
+                                        <i class="far fa-search"></i>
+                                    </button>
                                 </div>
                             </form>
                         </div>
                     </div>
 
-                    <!-- Categories Widget (Mobile) -->
-                    <div class="sidebar-widget sidebar-nav-widget" data-aos="fade-up" data-aos-duration="800">
+                    <div
+                        class="sidebar-widget sidebar-nav-widget"
+                        data-aos="fade-up"
+                        data-aos-duration="800"
+                    >
                         <h4 class="widget-title">{% trans "دسته‌بندی" %}</h4>
+
                         <div class="widget-content">
                             <ul>
                                 <li>
-                                    <a href="{% url 'core:blog' %}">
-                                        {% trans "همه مقالات" %} <span><i class="far fa-arrow-left"></i></span>
+                                    <a
+                                        href="{% url 'core:blog' %}"
+                                        class="{% if not current_q and not current_category and not current_tag %}active{% endif %}"
+                                    >
+                                        {% trans "همه مقالات" %}
+                                        <span><i class="far fa-arrow-left"></i></span>
                                     </a>
                                 </li>
-                                {% for cat_code, cat_name in categories %}
-                                <li>
-                                    <a href="?category={{ cat_code }}">
-                                        {% trans cat_name %} <span><i class="far fa-arrow-left"></i></span>
-                                    </a>
-                                </li>
+
+                                {% for category in categories %}
+                                    <li>
+                                        <a
+                                            href="{% url 'core:blog' %}?category={{ category.code|urlencode }}"
+                                            class="{% if current_category == category.code %}active{% endif %}"
+                                        >
+                                            {{ category.label }}
+                                            <span><i class="far fa-arrow-left"></i></span>
+                                        </a>
+                                    </li>
                                 {% endfor %}
                             </ul>
                         </div>
                     </div>
                 </div>
-                <!-- پایان المان‌های مخصوص موبایل -->
 
                 <div class="blog-standard-wrapper">
-                    
+
                     {% if current_q %}
                         <div class="mb-4">
-                            <h5>{% trans "نتایج جستجو برای:" %} <span class="text-primary">{{ current_q }}</span></h5>
+                            <h5>
+                                {% trans "نتایج جستجو برای:" %}
+                                <span class="text-primary">{{ current_q }}</span>
+                            </h5>
                         </div>
                     {% endif %}
 
-                    <!-- حلقه‌ی نمایش مقالات (Dynamic) -->
+                    {% if current_tag %}
+                        <div class="mb-4">
+                            <h5>
+                                {% trans "مقالات دارای برچسب:" %}
+                                <span class="text-primary">{{ current_tag }}</span>
+                            </h5>
+                        </div>
+                    {% endif %}
+
+                    {% if current_category %}
+                        <div class="mb-4">
+                            <h5>
+                                {% trans "دسته‌بندی انتخاب‌شده:" %}
+                                {% for category in categories %}
+                                    {% if category.code == current_category %}
+                                        <span class="text-primary">
+                                            {{ category.label }}
+                                        </span>
+                                    {% endif %}
+                                {% endfor %}
+                            </h5>
+                        </div>
+                    {% endif %}
+
                     {% for article in articles %}
-                    <article class="orbia-blog-post-item style-one mb-30" data-aos="fade-up" data-aos-duration="800">
-                        <div class="post-thumbnail">
-                            {% if article.image %}
-                                <img src="{{ article.image.url }}" alt="{{ article.title }}" loading="lazy">
-                            {% else %}
-                                <img src="{% static 'assets/images/innerpage/blog/blog-std-img1.jpg' %}" alt="{{ article.title }}" loading="lazy">
-                            {% endif %}
-                        </div>
-                        <div class="post-content">
-                            <div class="post-meta">
-                                <span><i class="far fa-user"></i> {% trans "توسط" %} <a href="#">{% trans "مدیر" %}</a></span>
-                                <span><i class="far fa-calendar-alt"></i> <a href="#">{{ article.created_at|date:"d M Y" }}</a></span>
-                                <span><i class="far fa-folder"></i> <a href="?category={{ article.category }}">{% trans article.category_display %}</a></span>
+                        <article
+                            class="orbia-blog-post-item style-one mb-30"
+                            data-aos="fade-up"
+                            data-aos-duration="800"
+                        >
+                            <div class="post-thumbnail">
+                                {% if article.image %}
+                                    <img
+                                        src="{{ article.image.url }}"
+                                        alt="{{ article.title }}"
+                                        loading="lazy"
+                                    >
+                                {% else %}
+                                    <img
+                                        src="{% static 'assets/images/innerpage/blog/blog-std-img1.jpg' %}"
+                                        alt="{{ article.title }}"
+                                        loading="lazy"
+                                    >
+                                {% endif %}
                             </div>
-                            <h4 class="title">
-                                <a href="{% url 'core:blog-detail' slug=article.slug %}">{{ article.title }}</a>
-                            </h4>
-                            <p>{{ article.content|striptags|truncatewords:25 }}</p>
-                            <a class="read-more style-one" href="{% url 'core:blog-detail' slug=article.slug %}">{% trans "ادامه مطلب" %} <i class="far fa-arrow-left"></i></a>
-                        </div>
-                    </article>
+
+                            <div class="post-content">
+                                <div class="post-meta">
+                                    <span>
+                                        <i class="far fa-user"></i>
+                                        {% trans "توسط" %}
+                                        <span>{% trans "مدیر" %}</span>
+                                    </span>
+
+                                    <span>
+                                        <i class="far fa-calendar-alt"></i>
+
+                                        <a href="{% url 'core:blog-detail' slug=article.slug %}">
+                                            {% if CURRENT_LANGUAGE == "fa" %}
+                                                {{ article.created_at|jformat:"%d %b %Y" }}
+                                            {% else %}
+                                                {{ article.created_at|date:"d M Y" }}
+                                            {% endif %}
+                                        </a>
+                                    </span>
+
+                                    <span>
+                                        <i class="far fa-folder"></i>
+
+                                        <a
+                                            href="{% url 'core:blog' %}?category={{ article.category|urlencode }}"
+                                        >
+                                            {{ article.category_display }}
+                                        </a>
+                                    </span>
+                                </div>
+
+                                <h4 class="title">
+                                    <a href="{% url 'core:blog-detail' slug=article.slug %}">
+                                        {{ article.title }}
+                                    </a>
+                                </h4>
+
+                                <p>
+                                    {{ article.content|striptags|truncatewords:25 }}
+                                </p>
+
+                                <a
+                                    class="read-more style-one"
+                                    href="{% url 'core:blog-detail' slug=article.slug %}"
+                                >
+                                    {% trans "ادامه مطلب" %}
+                                    <i class="far fa-arrow-left"></i>
+                                </a>
+                            </div>
+                        </article>
+
                     {% empty %}
-                        <!-- کارت شکیل جایگزین Alert زرد رنگ -->
-                        <div class="empty-state-card" data-aos="fade-up" data-aos-duration="800">
+                        <div
+                            class="empty-state-card"
+                            data-aos="fade-up"
+                            data-aos-duration="800"
+                        >
                             <div class="icon">
                                 <i class="far fa-folder-open"></i>
                             </div>
+
                             <h4>{% trans "هیچ مقاله‌ای یافت نشد." %}</h4>
-                            <p>{% trans "متأسفانه با جستجو یا فیلتر فعلی مقاله‌ای پیدا نکردیم." %}</p>
-                            <a href="{% url 'core:blog' %}" class="btn-back">{% trans "بازگشت به همه مقالات" %}</a>
+
+                            <p>
+                                {% trans "متأسفانه با جستجو، دسته‌بندی یا برچسب فعلی مقاله‌ای پیدا نکردیم." %}
+                            </p>
+
+                            <a
+                                href="{% url 'core:blog' %}"
+                                class="btn-back"
+                            >
+                                {% trans "بازگشت به همه مقالات" %}
+                            </a>
                         </div>
                     {% endfor %}
 
-                    <!-- Pagination (Dynamic) -->
                     {% if is_paginated %}
-                    <div class="theme-pagination mt-30" data-aos="fade-up" data-aos-duration="1400">
-                        <ul>
-                            {% if page_obj.has_previous %}
-                                <li>
-                                    <a href="?page={{ page_obj.previous_page_number }}{% if current_q %}&q={{ current_q }}{% endif %}{% if current_category %}&category={{ current_category }}{% endif %}" aria-label="{% trans 'صفحه قبلی' %}">
-                                        <i class="fas fa-arrow-right"></i>
-                                    </a>
-                                </li>
-                            {% endif %}
-                            
-                            {% for num in page_obj.paginator.page_range %}
-                                {% if page_obj.number == num %}
-                                    <li><a href="#" style="background: var(--orbia-button-gradient); color: #fff; border-color: transparent;">{{ num }}</a></li>
-                                {% else %}
-                                    <li><a href="?page={{ num }}{% if current_q %}&q={{ current_q }}{% endif %}{% if current_category %}&category={{ current_category }}{% endif %}">{{ num }}</a></li>
+                        <div
+                            class="theme-pagination mt-30"
+                            data-aos="fade-up"
+                            data-aos-duration="1400"
+                        >
+                            <ul>
+                                {% if page_obj.has_previous %}
+                                    <li>
+                                        <a
+                                            class="pagination-nav"
+                                            href="?page={{ page_obj.previous_page_number }}{% if current_q %}&q={{ current_q|urlencode }}{% endif %}{% if current_category %}&category={{ current_category|urlencode }}{% endif %}{% if current_tag %}&tag={{ current_tag|urlencode }}{% endif %}"
+                                            aria-label="{% trans 'صفحه قبلی' %}"
+                                        >
+                                            <i class="fas fa-arrow-right"></i>
+                                        </a>
+                                    </li>
                                 {% endif %}
-                            {% endfor %}
 
-                            {% if page_obj.has_next %}
-                                <li>
-                                    <a href="?page={{ page_obj.next_page_number }}{% if current_q %}&q={{ current_q }}{% endif %}{% if current_category %}&category={{ current_category }}{% endif %}" aria-label="{% trans 'صفحه بعدی' %}">
-                                        <i class="fas fa-arrow-left"></i>
-                                    </a>
-                                </li>
-                            {% endif %}
-                        </ul>
-                    </div>
+                                {% for num in page_obj.paginator.page_range %}
+                                    {% if page_obj.number == num %}
+                                        <li>
+                                            <a
+                                                class="is-current"
+                                                href="#"
+                                                aria-current="page"
+                                            >
+                                                {{ num }}
+                                            </a>
+                                        </li>
+                                    {% else %}
+                                        <li>
+                                            <a
+                                                href="?page={{ num }}{% if current_q %}&q={{ current_q|urlencode }}{% endif %}{% if current_category %}&category={{ current_category|urlencode }}{% endif %}{% if current_tag %}&tag={{ current_tag|urlencode }}{% endif %}"
+                                            >
+                                                {{ num }}
+                                            </a>
+                                        </li>
+                                    {% endif %}
+                                {% endfor %}
+
+                                {% if page_obj.has_next %}
+                                    <li>
+                                        <a
+                                            class="pagination-nav"
+                                            href="?page={{ page_obj.next_page_number }}{% if current_q %}&q={{ current_q|urlencode }}{% endif %}{% if current_category %}&category={{ current_category|urlencode }}{% endif %}{% if current_tag %}&tag={{ current_tag|urlencode }}{% endif %}"
+                                            aria-label="{% trans 'صفحه بعدی' %}"
+                                        >
+                                            <i class="fas fa-arrow-left"></i>
+                                        </a>
+                                    </li>
+                                {% endif %}
+                            </ul>
+                        </div>
                     {% endif %}
 
                 </div>
             </div>
 
-            <!-- Sidebar -->
             <div class="col-xl-4 col-lg-10">
                 <aside class="sidebar-widget-area">
 
-                    <!-- این بخش‌ها فقط در دسکتاپ نمایش داده می‌شوند (در موبایل مخفی شده‌اند) -->
                     <div class="d-none d-xl-block">
-                        <!-- Search Widget (Desktop) -->
-                        <div class="sidebar-widget sidebar-search-widget mb-30" data-aos="fade-up" data-aos-duration="600">
+
+                        <div
+                            class="sidebar-widget sidebar-search-widget mb-30"
+                            data-aos="fade-up"
+                            data-aos-duration="600"
+                        >
                             <div class="widget-content">
-                                <form action="{% url 'core:blog' %}" method="GET">
+                                <form action="{% url 'core:blog' %}" method="get">
+                                    {% if current_category %}
+                                        <input
+                                            type="hidden"
+                                            name="category"
+                                            value="{{ current_category }}"
+                                        >
+                                    {% endif %}
+
+                                    {% if current_tag %}
+                                        <input
+                                            type="hidden"
+                                            name="tag"
+                                            value="{{ current_tag }}"
+                                        >
+                                    {% endif %}
+
                                     <div class="form-group">
-                                        <input class="form_control" type="search" name="q" value="{{ current_q }}" placeholder="{% trans 'جستجو کنید...' %}" aria-label="{% trans 'جستجو در وبلاگ' %}" required>
-                                        <button class="search-btn" type="submit" aria-label="{% trans 'جستجو' %}"><i class="far fa-search"></i></button>
+                                        <input
+                                            class="form_control"
+                                            type="search"
+                                            name="q"
+                                            value="{{ current_q }}"
+                                            placeholder="{% trans 'جستجو کنید...' %}"
+                                            aria-label="{% trans 'جستجو در وبلاگ' %}"
+                                            required
+                                        >
+
+                                        <button
+                                            class="search-btn"
+                                            type="submit"
+                                            aria-label="{% trans 'جستجو' %}"
+                                        >
+                                            <i class="far fa-search"></i>
+                                        </button>
                                     </div>
                                 </form>
                             </div>
                         </div>
 
-                        <!-- Categories Widget (Desktop) -->
-                        <div class="sidebar-widget sidebar-nav-widget mb-30" data-aos="fade-up" data-aos-duration="800">
+                        <div
+                            class="sidebar-widget sidebar-nav-widget mb-30"
+                            data-aos="fade-up"
+                            data-aos-duration="800"
+                        >
                             <h4 class="widget-title">{% trans "دسته‌بندی" %}</h4>
+
                             <div class="widget-content">
                                 <ul>
                                     <li>
-                                        <a href="{% url 'core:blog' %}">
-                                            {% trans "همه مقالات" %} <span><i class="far fa-arrow-left"></i></span>
+                                        <a
+                                            href="{% url 'core:blog' %}"
+                                            class="{% if not current_q and not current_category and not current_tag %}active{% endif %}"
+                                        >
+                                            {% trans "همه مقالات" %}
+                                            <span><i class="far fa-arrow-left"></i></span>
                                         </a>
                                     </li>
-                                    {% for cat_code, cat_name in categories %}
-                                    <li>
-                                        <a href="?category={{ cat_code }}">
-                                            {% trans cat_name %} <span><i class="far fa-arrow-left"></i></span>
-                                        </a>
-                                    </li>
+
+                                    {% for category in categories %}
+                                        <li>
+                                            <a
+                                                href="{% url 'core:blog' %}?category={{ category.code|urlencode }}"
+                                                class="{% if current_category == category.code %}active{% endif %}"
+                                            >
+                                                {{ category.label }}
+                                                <span><i class="far fa-arrow-left"></i></span>
+                                            </a>
+                                        </li>
                                     {% endfor %}
                                 </ul>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Recent Posts Widget (Dynamic) -->
-                    <div class="sidebar-widget sidebar-post-widget mb-40" data-aos="fade-up" data-aos-duration="1000">
+                    <div
+                        class="sidebar-widget sidebar-post-widget mb-40"
+                        data-aos="fade-up"
+                        data-aos-duration="1000"
+                    >
                         <h4 class="widget-title">{% trans "پست‌های اخیر" %}</h4>
+
                         <div class="widget-content">
                             <ul class="recent-post-list">
                                 {% for recent in recent_posts %}
-                                <li class="post-thumbnail-content">
-                                    {% if recent.image %}
-                                        <img src="{{ recent.image.url }}" alt="{{ recent.title }}" loading="lazy">
-                                    {% else %}
-                                        <img src="{% static 'assets/images/innerpage/blog/post-thumb1.jpg' %}" alt="{{ recent.title }}" loading="lazy">
-                                    {% endif %}
-                                    <div class="post-title-date">
-                                        <span class="posted-on"><a href="{% url 'core:blog-detail' slug=recent.slug %}">{{ recent.created_at|date:"d M Y" }}</a></span>
-                                        <h5><a href="{% url 'core:blog-detail' slug=recent.slug %}">{{ recent.title }}</a></h5>
-                                    </div>
-                                </li>
+                                    <li class="post-thumbnail-content">
+                                        {% if recent.image %}
+                                            <img
+                                                src="{{ recent.image.url }}"
+                                                alt="{{ recent.title }}"
+                                                loading="lazy"
+                                            >
+                                        {% else %}
+                                            <img
+                                                src="{% static 'assets/images/innerpage/blog/post-thumb1.jpg' %}"
+                                                alt="{{ recent.title }}"
+                                                loading="lazy"
+                                            >
+                                        {% endif %}
+
+                                        <div class="post-title-date">
+                                            <span class="posted-on">
+                                                <a
+                                                    href="{% url 'core:blog-detail' slug=recent.slug %}"
+                                                >
+                                                    {% if CURRENT_LANGUAGE == "fa" %}
+                                                        {{ recent.created_at|jformat:"%d %b %Y" }}
+                                                    {% else %}
+                                                        {{ recent.created_at|date:"d M Y" }}
+                                                    {% endif %}
+                                                </a>
+                                            </span>
+
+                                            <h5>
+                                                <a
+                                                    href="{% url 'core:blog-detail' slug=recent.slug %}"
+                                                >
+                                                    {{ recent.title }}
+                                                </a>
+                                            </h5>
+                                        </div>
+                                    </li>
+
                                 {% empty %}
-                                    <li class="text-muted" style="font-size: 14px;">{% trans "مقاله‌ای موجود نیست." %}</li>
+                                    <li
+                                        class="text-muted"
+                                        style="font-size: 14px;"
+                                    >
+                                        {% trans "مقاله‌ای موجود نیست." %}
+                                    </li>
                                 {% endfor %}
                             </ul>
                         </div>
                     </div>
 
-                    <!-- Tags Widget -->
-                    <div class="sidebar-widget sidebar-tag-widget mb-30" data-aos="fade-up" data-aos-duration="1200">
+                    <div
+                        class="sidebar-widget sidebar-tag-widget mb-30"
+                        data-aos="fade-up"
+                        data-aos-duration="1200"
+                    >
                         <h4 class="widget-title">{% trans "برچسب‌های محبوب" %}</h4>
+
                         <div class="widget-content">
-                            <a href="#">{% trans "اتوماسیون" %}</a>
-                            <a href="#">{% trans "برندسازی" %}</a>
-                            <a href="#">{% trans "دیجیتال" %}</a>
-                            <a href="#">{% trans "تکنولوژی" %}</a>
+                            {% for tag in all_tags %}
+                                <a
+                                    href="{% url 'core:blog' %}?tag={{ tag.slug|urlencode }}"
+                                    class="{% if current_tag == tag.slug %}active{% endif %}"
+                                    title="{{ tag.name }}"
+                                >
+                                    {{ tag.name }}
+                                </a>
+                            {% empty %}
+                                <span
+                                    class="text-muted"
+                                    style="font-size: 14px;"
+                                >
+                                    {% trans "برچسبی موجود نیست." %}
+                                </span>
+                            {% endfor %}
                         </div>
                     </div>
 
@@ -650,6 +1212,5 @@
         </div>
     </div>
 </section>
-<!--====== End Blog Section ======-->
 
 {% endblock content %}

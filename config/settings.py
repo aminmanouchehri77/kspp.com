@@ -47,6 +47,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    # پکیج‌های جانبی
+    "django_jalali", 
     
     # اپلیکیشن‌های پروژه
     'accounts',

@@ -1,8 +1,9 @@
 {% extends '_base.html' %}
-{% load static i18n %}
+{% load static i18n jformat %}
+{% get_current_language as CURRENT_LANGUAGE %}
 
 {% block title %}
-    {% trans "جزئیات وبلاگ | کیان صنعت" %}
+    {{ article.title }} | {% trans "کیان صنعت" %}
 {% endblock title %}
 
 {% block content %}
@@ -37,7 +38,6 @@
         --orbia-border: rgba(0, 0, 0, 0.08);
         --orbia-card-bg: #ffffff;
         --orbia-section-bg: #f8f9fa;
-        --orbia-input-bg: #f8f9fa;
 
         --orbia-shadow-sm: 0 8px 24px rgba(0, 0, 0, 0.05);
         --orbia-shadow-md: 0 16px 36px rgba(0, 0, 0, 0.08);
@@ -48,12 +48,6 @@
 
         --orbia-transition: 0.35s ease;
     }
-
-    /*
-    |--------------------------------------------------------------------------
-    | تنظیمات عمومی
-    |--------------------------------------------------------------------------
-    */
 
     body,
     body p,
@@ -80,603 +74,261 @@
         line-height: 1.6 !important;
     }
 
-    a,
-    button,
-    input,
-    textarea {
-        transition: color var(--orbia-transition),
-                    background var(--orbia-transition),
-                    border-color var(--orbia-transition),
-                    box-shadow var(--orbia-transition),
-                    transform var(--orbia-transition);
+    a {
+        transition:
+            color var(--orbia-transition),
+            background var(--orbia-transition),
+            border-color var(--orbia-transition),
+            transform var(--orbia-transition);
     }
 
-    /*
-    |--------------------------------------------------------------------------
-    | Dark Mode
-    |--------------------------------------------------------------------------
-    */
-
+    /* حالت تاریک */
     html[data-theme="dark"] {
         --orbia-text: #f5f5f5;
         --orbia-muted: #b7b7b7;
         --orbia-border: rgba(255, 255, 255, 0.09);
         --orbia-card-bg: #1a1a1a;
         --orbia-section-bg: #121212;
-        --orbia-input-bg: #222222;
 
         --orbia-shadow-sm: 0 8px 24px rgba(0, 0, 0, 0.22);
-        --orbia-shadow-md: 0 16px 36px rgba(0, 0, 0, 0.3);
+        --orbia-shadow-md: 0 16px 36px rgba(0, 0, 0, 0.30);
     }
 
     /*
     |--------------------------------------------------------------------------
-    | Page Hero
+    | Hero / Breadcrumb
     |--------------------------------------------------------------------------
     */
-
     .page-hero .page-content h1 {
-        margin-bottom: 16px;
-        font-size: clamp(28px, 4vw, 44px);
+        margin-bottom: 0 !important;
+        color: #ffffff !important;
+        font-size: clamp(40px, 7vw, 75px) !important;
         font-weight: 900 !important;
+        text-shadow: 0 4px 20px rgba(0, 0, 0, 0.4) !important;
     }
 
     .page-hero .page-content ul {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-wrap: wrap;
-        gap: 8px;
-        margin: 0;
-        padding: 0;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        flex-wrap: wrap !important;
+        gap: 12px !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        list-style: none !important;
     }
 
     .page-hero .page-content ul li {
-        margin: 0;
-        font-size: 14px;
+        margin-top: 0 !important;
+        color: #ffffff !important;
+        font-size: 20px !important;
+        font-weight: 700 !important;
+        text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3) !important;
     }
 
     .page-hero .page-content ul li a {
-        color: #ffffff;
-        text-decoration: none;
+        color: #ffffff !important;
+        font-weight: 700 !important;
+        text-decoration: none !important;
     }
 
     .page-hero .page-content ul li a:hover {
-        color: #ffd4e8;
-    }
-
-    html[dir="rtl"] .page-hero .page-content ul li + li::before {
-        display: inline-block;
-        margin-left: 10px;
-        margin-right: 0;
-        transform: scaleX(1) !important;
-    }
-
-    html[dir="ltr"] .page-hero .page-content ul li + li::before {
-        display: inline-block;
-        margin-right: 10px;
-        margin-left: 0;
-        transform: scaleX(-1) !important;
+        color: #ffd4e8 !important;
+        text-decoration: underline !important;
     }
 
     /*
     |--------------------------------------------------------------------------
-    | Blog Details Section
+    | Main Article
     |--------------------------------------------------------------------------
     */
-
     .orbia-blog-details-sec {
-        background: var(--orbia-section-bg);
+        background: var(--orbia-section-bg) !important;
     }
 
-    .blog-details-wrapper {
-        width: 100%;
+    .blog-article-content {
+        color: var(--orbia-muted) !important;
+        font-size: 15px !important;
+        line-height: 2.1 !important;
+        text-align: justify !important;
     }
 
-    /*
-    |--------------------------------------------------------------------------
-    | Blog Main Card
-    |--------------------------------------------------------------------------
-    */
-
-    .blog-post-main {
-        width: 100%;
+    .blog-article-content p {
+        margin-bottom: 18px !important;
     }
 
-    .blog-post-item {
-        overflow: hidden;
-        border: 1px solid var(--orbia-border);
-        border-radius: var(--orbia-radius-lg);
-        background: var(--orbia-card-bg);
-        box-shadow: var(--orbia-shadow-sm);
+    .blog-article-content p:last-child {
+        margin-bottom: 0 !important;
     }
 
-    .blog-post-item .post-thumbnail {
-        position: relative;
-        overflow: hidden;
-        height: 440px;
-        background: #eeeeee;
+    .article-body {
+        color: var(--orbia-muted) !important;
+        font-size: 15px !important;
+        line-height: 2.1 !important;
     }
 
-    .blog-post-item .post-thumbnail::after {
-        position: absolute;
-        inset: 0;
-        background: linear-gradient(
-            to bottom,
-            rgba(0, 0, 0, 0.02),
-            rgba(0, 0, 0, 0.12)
-        );
-        content: "";
-        pointer-events: none;
-    }
-
-    .blog-post-item .post-thumbnail img {
-        display: block;
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        transition: transform 0.7s ease;
-    }
-
-    .blog-post-item:hover .post-thumbnail img {
-        transform: scale(1.04);
-    }
-
-    .blog-post-item .post-content {
-        padding: 32px 35px 38px;
-    }
-
-    /*
-    |--------------------------------------------------------------------------
-    | Post Meta
-    |--------------------------------------------------------------------------
-    */
-
-    .blog-post-item .post-meta {
-        display: flex;
-        align-items: center;
-        flex-wrap: wrap;
-        gap: 10px 22px;
-        margin-bottom: 16px;
-        color: var(--orbia-muted);
-        font-size: 13px;
-    }
-
-    .blog-post-item .post-meta span {
-        display: inline-flex;
-        align-items: center;
-        gap: 7px;
-    }
-
-    .blog-post-item .post-meta i {
-        color: var(--orbia-primary);
-        font-size: 13px;
-    }
-
-    .blog-post-item .post-meta a {
-        color: var(--orbia-muted);
-        text-decoration: none;
-    }
-
-    .blog-post-item .post-meta a:hover {
-        color: var(--orbia-primary);
-    }
-
-    /*
-    |--------------------------------------------------------------------------
-    | Post Content
-    |--------------------------------------------------------------------------
-    */
-
-    .blog-post-item .title {
-        margin: 0 0 20px;
-        color: var(--orbia-text);
-        font-size: clamp(24px, 3vw, 34px);
-        font-weight: 900 !important;
-        line-height: 1.8 !important;
-    }
-
-    .blog-post-item .post-content > p {
-        margin: 0 0 20px;
-        color: var(--orbia-muted);
-        font-size: 15px;
-        line-height: 2.15 !important;
-        text-align: justify;
-    }
-
-    /*
-    |--------------------------------------------------------------------------
-    | Quote
-    |--------------------------------------------------------------------------
-    */
-
-    .blog-post-item blockquote {
-        position: relative;
-        margin: 30px 0;
-        padding: 28px 30px;
-        border: 0;
-        border-radius: var(--orbia-radius-md);
-        background: var(--orbia-gradient);
-        color: #ffffff;
-        box-shadow: var(--orbia-shadow-sm);
-    }
-
-    .blog-post-item blockquote::before {
-        position: absolute;
-        top: 14px;
-        right: 24px;
-        color: rgba(255, 255, 255, 0.28);
-        content: "\f10d";
-        font-family: "Font Awesome 5 Pro";
-        font-size: 38px;
-    }
-
-    html[dir="ltr"] .blog-post-item blockquote::before {
-        right: auto;
-        left: 24px;
-    }
-
-    .blog-post-item blockquote .content {
-        position: relative;
-        z-index: 1;
-    }
-
-    .blog-post-item blockquote p {
-        margin: 0 0 10px;
-        color: #ffffff;
-        font-size: 17px;
-        font-weight: 600;
-        line-height: 2 !important;
-    }
-
-    .blog-post-item blockquote h5 {
-        margin: 0;
-        color: #ffffff;
-        font-size: 14px;
+    .article-body a {
+        color: var(--orbia-primary) !important;
         font-weight: 700 !important;
     }
 
+    .article-body a:hover {
+        color: var(--orbia-purple) !important;
+    }
+
+    .article-image {
+        width: 100% !important;
+        max-height: 440px !important;
+        overflow: hidden !important;
+        margin-bottom: 28px !important;
+        border-radius: var(--orbia-radius-lg) !important;
+        background: #eeeeee !important;
+        box-shadow: var(--orbia-shadow-sm) !important;
+    }
+
+    .article-image img {
+        display: block !important;
+        width: 100% !important;
+        height: auto !important;
+        object-fit: cover !important;
+    }
+
+    .article-title {
+        margin: 0 0 18px !important;
+        color: var(--orbia-text) !important;
+        font-size: clamp(24px, 3vw, 34px) !important;
+        font-weight: 900 !important;
+        line-height: 1.6 !important;
+    }
+
+    .post-meta {
+        display: flex !important;
+        flex-wrap: wrap !important;
+        gap: 18px !important;
+        margin-bottom: 22px !important;
+        color: var(--orbia-muted) !important;
+        font-size: 13px !important;
+    }
+
+    .post-meta span {
+        display: inline-flex !important;
+        align-items: center !important;
+        gap: 6px !important;
+    }
+
+    .post-meta i {
+        color: var(--orbia-primary) !important;
+    }
+
     /*
     |--------------------------------------------------------------------------
-    | تصاویر داخل مقاله
+    | Tags / Social Footer
     |--------------------------------------------------------------------------
     */
-
-    .orbia-image {
-        overflow: hidden;
-        height: 245px;
-        margin: 10px 0 25px;
-        border-radius: var(--orbia-radius-md);
-        background: #eeeeee;
-    }
-
-    .orbia-image img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        transition: transform 0.6s ease;
-    }
-
-    .orbia-image:hover img {
-        transform: scale(1.06);
-    }
-
-    /*
-    |--------------------------------------------------------------------------
-    | Entry Footer
-    |--------------------------------------------------------------------------
-    */
-
     .entry-footer {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        flex-wrap: wrap;
-        gap: 20px;
-        padding: 22px 25px;
-        border: 1px solid var(--orbia-border);
-        border-radius: var(--orbia-radius-md);
-        background: var(--orbia-card-bg);
-        box-shadow: var(--orbia-shadow-sm);
+        display: flex !important;
+        align-items: center !important;
+        justify-content: space-between !important;
+        flex-wrap: wrap !important;
+        gap: 20px !important;
+        padding: 22px 25px !important;
+        border: 1px solid var(--orbia-border) !important;
+        border-radius: var(--orbia-radius-md) !important;
+        background: var(--orbia-card-bg) !important;
+        box-shadow: var(--orbia-shadow-sm) !important;
     }
 
     .tag-links,
     .social-share {
-        display: flex;
-        align-items: center;
-        flex-wrap: wrap;
-        gap: 8px;
+        display: flex !important;
+        align-items: center !important;
+        flex-wrap: wrap !important;
+        gap: 9px !important;
     }
 
     .tag-links > span,
     .social-share > span {
-        margin-left: 4px;
-        color: var(--orbia-text);
-        font-size: 13px;
-        font-weight: 800;
+        color: var(--orbia-text) !important;
+        font-size: 14px !important;
+        font-weight: 800 !important;
     }
 
-    html[dir="ltr"] .tag-links > span,
-    html[dir="ltr"] .social-share > span {
-        margin-right: 4px;
-        margin-left: 0;
+    .tag-links a,
+    .social-share a {
+        display: inline-flex !important;
+        align-items: center !important;
+        border: 1px solid var(--orbia-border) !important;
+        color: var(--orbia-muted) !important;
+        text-decoration: none !important;
+        transition: all var(--orbia-transition) !important;
     }
 
     .tag-links a {
-        display: inline-flex;
-        align-items: center;
-        min-height: 32px;
-        padding: 4px 12px;
-        border: 1px solid var(--orbia-border);
-        border-radius: 50px;
-        color: var(--orbia-muted);
-        font-size: 12px;
-        text-decoration: none;
-    }
-
-    .tag-links a:hover {
-        border-color: transparent;
-        background: var(--orbia-button-gradient);
-        color: #ffffff;
+        min-height: 36px !important;
+        padding: 5px 13px !important;
+        border-radius: 50px !important;
+        background: transparent !important;
+        font-size: 13px !important;
     }
 
     .social-share a {
-        display: grid;
-        place-items: center;
-        width: 34px;
-        height: 34px;
-        border-radius: 10px;
-        background: var(--orbia-section-bg);
-        color: var(--orbia-muted);
-        text-decoration: none;
+        justify-content: center !important;
+        width: 37px !important;
+        height: 37px !important;
+        border-radius: 50% !important;
     }
 
+    .tag-links a:hover,
+    .tag-links a.active,
     .social-share a:hover {
-        background: var(--orbia-button-gradient);
-        color: #ffffff;
-        transform: translateY(-3px);
+        border-color: transparent !important;
+        background: var(--orbia-button-gradient) !important;
+        color: #ffffff !important;
+        transform: translateY(-2px) !important;
     }
 
     /*
     |--------------------------------------------------------------------------
-    | Comments
+    | Sidebar Base
     |--------------------------------------------------------------------------
     */
-
-    .comments-area,
-    .comment-wrapper {
-        padding: 30px;
-        border: 1px solid var(--orbia-border);
-        border-radius: var(--orbia-radius-lg);
-        background: var(--orbia-card-bg);
-        box-shadow: var(--orbia-shadow-sm);
-    }
-
-    .comments-title,
-    .comment-wrapper h3 {
-        position: relative;
-        margin: 0 0 28px;
-        padding-bottom: 14px;
-        color: var(--orbia-text);
-        font-size: 23px;
-        font-weight: 900 !important;
-    }
-
-    .comments-title::after,
-    .comment-wrapper h3::after {
-        position: absolute;
-        right: 0;
-        bottom: 0;
-        width: 48px;
-        height: 3px;
-        border-radius: 10px;
-        background: var(--orbia-gradient);
-        content: "";
-    }
-
-    html[dir="ltr"] .comments-title::after,
-    html[dir="ltr"] .comment-wrapper h3::after {
-        right: auto;
-        left: 0;
-    }
-
-    .comments-list,
-    .comment-reply {
-        margin: 0;
-        padding: 0;
-        list-style: none;
-    }
-
-    .comments-list > li {
-        margin-bottom: 28px;
-    }
-
-    .comments-list > li:last-child {
-        margin-bottom: 0;
-    }
-
-    .comment {
-        display: flex;
-        align-items: flex-start;
-        gap: 18px;
-    }
-
-    .comment-avatar {
-        flex: 0 0 68px;
-        width: 68px;
-        height: 68px;
-        overflow: hidden;
-        border-radius: 50%;
-        background: var(--orbia-section-bg);
-    }
-
-    .comment-avatar img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-    }
-
-    .comment-wrap {
-        flex: 1;
-        min-width: 0;
-    }
-
-    .comment-author-content {
-        padding: 20px;
-        border: 1px solid var(--orbia-border);
-        border-radius: var(--orbia-radius-md);
-        background: var(--orbia-section-bg);
-    }
-
-    .author-name {
-        display: block;
-        margin-bottom: 8px;
-        color: var(--orbia-text);
-        font-size: 15px;
-        font-weight: 900;
-    }
-
-    .author-name .date {
-        display: block;
-        margin-top: 3px;
-        color: var(--orbia-muted);
-        font-size: 11px;
-        font-weight: 400;
-    }
-
-    .comment-author-content p {
-        margin: 0 0 10px;
-        color: var(--orbia-muted);
-        font-size: 14px;
-        line-height: 2 !important;
-        text-align: justify;
-    }
-
-    .comment-author-content .reply {
-        display: inline-flex;
-        align-items: center;
-        gap: 7px;
-        color: var(--orbia-primary);
-        font-size: 13px;
-        font-weight: 800;
-        text-decoration: none;
-    }
-
-    .comment-author-content .reply:hover {
-        color: var(--orbia-purple);
-    }
-
-    .comment-reply {
-        margin-top: 20px;
-        padding-right: 75px;
-    }
-
-    html[dir="ltr"] .comment-reply {
-        padding-right: 0;
-        padding-left: 75px;
-    }
-
-    /*
-    |--------------------------------------------------------------------------
-    | Comment Form
-    |--------------------------------------------------------------------------
-    */
-
-    .comment-form .form-group {
-        margin-bottom: 20px;
-    }
-
-    .comment-form .form_control {
-        width: 100%;
-        min-height: 56px;
-        padding: 12px 17px;
-        border: 1px solid var(--orbia-border);
-        border-radius: 13px;
-        outline: none;
-        background: var(--orbia-input-bg);
-        color: var(--orbia-text);
-        font-size: 14px;
-    }
-
-    .comment-form textarea.form_control {
-        min-height: 150px;
-        resize: vertical;
-    }
-
-    .comment-form .form_control::placeholder {
-        color: var(--orbia-muted);
-    }
-
-    .comment-form .form_control:focus {
-        border-color: rgba(221, 42, 123, 0.55);
-        box-shadow: 0 0 0 4px rgba(221, 42, 123, 0.1);
-    }
-
-    .comment-form .gradient-btn,
-    .comment-form .theme-btn {
-        display: inline-flex;
-        justify-content: center;
-        align-items: center;
-        min-height: 50px;
-        padding: 10px 25px;
-        border: 0;
-        border-radius: 12px;
-        background: var(--orbia-button-gradient);
-        color: #ffffff;
-        cursor: pointer;
-        font-size: 14px;
-        font-weight: 800;
-    }
-
-    .comment-form .gradient-btn:hover,
-    .comment-form .theme-btn:hover {
-        background: var(--orbia-button-hover);
-        transform: translateY(-3px);
-        box-shadow: 0 10px 22px rgba(221, 42, 123, 0.22);
-    }
-
-    /*
-    |--------------------------------------------------------------------------
-    | Sidebar
-    |--------------------------------------------------------------------------
-    */
-
     .sidebar-widget-area {
-        position: sticky;
-        top: 30px;
+        position: sticky !important;
+        top: 30px !important;
     }
 
     .sidebar-widget {
-        padding: 25px;
-        border: 1px solid var(--orbia-border);
-        border-radius: var(--orbia-radius-md);
-        background: var(--orbia-card-bg);
-        box-shadow: var(--orbia-shadow-sm);
+        padding: 25px !important;
+        margin-bottom: 30px !important;
+        border: 1px solid var(--orbia-border) !important;
+        border-radius: var(--orbia-radius-md) !important;
+        background: var(--orbia-card-bg) !important;
+        box-shadow: var(--orbia-shadow-sm) !important;
     }
 
     .sidebar-widget .widget-title {
-        position: relative;
-        margin: 0 0 20px;
-        padding-bottom: 13px;
-        color: var(--orbia-text);
-        font-size: 20px;
+        position: relative !important;
+        margin: 0 0 20px !important;
+        padding-bottom: 12px !important;
+        color: var(--orbia-text) !important;
+        font-size: 18px !important;
         font-weight: 900 !important;
     }
 
     .sidebar-widget .widget-title::after {
-        position: absolute;
-        right: 0;
-        bottom: 0;
-        width: 48px;
-        height: 3px;
-        border-radius: 10px;
-        background: var(--orbia-gradient);
-        content: "";
+        position: absolute !important;
+        right: 0 !important;
+        bottom: 0 !important;
+        width: 45px !important;
+        height: 3px !important;
+        border-radius: 10px !important;
+        background: var(--orbia-gradient) !important;
+        content: "" !important;
     }
 
     html[dir="ltr"] .sidebar-widget .widget-title::after {
-        right: auto;
-        left: 0;
+        right: auto !important;
+        left: 0 !important;
     }
 
     /*
@@ -684,129 +336,146 @@
     | Search Widget
     |--------------------------------------------------------------------------
     */
-
-    .sidebar-search-widget {
-        padding: 18px;
-    }
-
     .sidebar-search-widget .form-group {
-        position: relative;
-        margin: 0;
+        position: relative !important;
+        display: flex !important;
+        margin: 0 !important;
     }
 
     .sidebar-search-widget .form_control {
-        width: 100%;
-        height: 54px;
-        padding: 0 18px;
-        border: 1px solid var(--orbia-border);
-        border-radius: 14px;
-        outline: none;
-        background: var(--orbia-input-bg);
-        color: var(--orbia-text);
-        font-size: 14px;
-    }
-
-    .sidebar-search-widget .form_control::placeholder {
-        color: var(--orbia-muted);
+        width: 100% !important;
+        height: 54px !important;
+        padding: 0 18px 0 54px !important;
+        border: 1px solid var(--orbia-border) !important;
+        border-radius: 14px !important;
+        outline: none !important;
+        background: var(--orbia-section-bg) !important;
+        color: var(--orbia-text) !important;
     }
 
     .sidebar-search-widget .form_control:focus {
-        border-color: rgba(221, 42, 123, 0.55);
-        box-shadow: 0 0 0 4px rgba(221, 42, 123, 0.1);
+        border-color: rgba(221, 42, 123, 0.55) !important;
+        box-shadow: 0 0 0 4px rgba(221, 42, 123, 0.1) !important;
     }
 
     .sidebar-search-widget .search-btn {
-        position: absolute;
-        top: 6px;
-        right: 6px;
-        width: 42px;
-        height: 42px;
-        border: 0;
-        border-radius: 11px;
-        background: var(--orbia-button-gradient);
-        color: #ffffff;
-        cursor: pointer;
+        position: absolute !important;
+        top: 6px !important;
+        left: 6px !important;
+        width: 42px !important;
+        height: 42px !important;
+        border: 0 !important;
+        border-radius: 11px !important;
+        background: var(--orbia-button-gradient) !important;
+        color: #ffffff !important;
+        cursor: pointer !important;
+        transition:
+            transform var(--orbia-transition),
+            background var(--orbia-transition) !important;
     }
 
     .sidebar-search-widget .search-btn:hover {
-        background: var(--orbia-button-hover);
-        transform: translateY(-2px);
+        background: var(--orbia-button-hover) !important;
+        transform: translateY(-2px) !important;
+    }
+
+    html[dir="ltr"] .sidebar-search-widget .form_control {
+        padding: 0 54px 0 18px !important;
     }
 
     html[dir="ltr"] .sidebar-search-widget .search-btn {
-        right: auto;
-        left: 6px;
+        right: 6px !important;
+        left: auto !important;
     }
 
     /*
     |--------------------------------------------------------------------------
-    | Category Widget
+    | Categories
     |--------------------------------------------------------------------------
     */
-
     .sidebar-nav-widget ul {
-        margin: 0;
-        padding: 0;
-        list-style: none;
-    }
-
-    .sidebar-nav-widget ul li {
-        border-bottom: 1px solid var(--orbia-border);
-    }
-
-    .sidebar-nav-widget ul li:last-child {
-        border-bottom: 0;
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 10px !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        list-style: none !important;
     }
 
     .sidebar-nav-widget ul li a {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        gap: 12px;
-        padding: 12px 0;
-        color: var(--orbia-muted);
-        font-size: 14px;
-        text-decoration: none;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: space-between !important;
+        gap: 12px !important;
+        padding: 12px 20px !important;
+        border: 1px solid var(--orbia-border) !important;
+        border-radius: 50px !important;
+        background: var(--orbia-section-bg) !important;
+        color: var(--orbia-text) !important;
+        font-weight: 700 !important;
+        text-decoration: none !important;
+        transition: all var(--orbia-transition) !important;
     }
 
-    .sidebar-nav-widget ul li a:hover {
-        color: var(--orbia-primary);
+    .sidebar-nav-widget ul li a:hover,
+    .sidebar-nav-widget ul li a.active {
+        border-color: transparent !important;
+        background: var(--orbia-button-gradient) !important;
+        color: #ffffff !important;
+        box-shadow: var(--orbia-shadow-sm) !important;
+        transform: translateY(-2px) !important;
     }
 
-    .sidebar-nav-widget ul li a span {
-        color: var(--orbia-primary);
+    .category-arrow {
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        flex-shrink: 0 !important;
+        color: var(--orbia-muted) !important;
+        transition:
+            color var(--orbia-transition),
+            transform var(--orbia-transition) !important;
     }
 
-    .sidebar-nav-widget ul li a i {
-        margin: 0 !important;
-        transition: transform var(--orbia-transition);
+    .sidebar-nav-widget ul li a:hover .category-arrow,
+    .sidebar-nav-widget ul li a.active .category-arrow {
+        color: #ffffff !important;
     }
 
-    html[dir="rtl"] .sidebar-nav-widget ul li a:hover i {
-        transform: translateX(-4px);
+    html[dir="rtl"] .category-arrow {
+        transform: scaleX(1) !important;
     }
 
-    html[dir="ltr"] .sidebar-nav-widget ul li a:hover i {
-        transform: translateX(4px);
+    html[dir="ltr"] .category-arrow {
+        transform: scaleX(-1) !important;
+    }
+
+    html[dir="rtl"] .sidebar-nav-widget ul li a:hover .category-arrow,
+    html[dir="rtl"] .sidebar-nav-widget ul li a.active .category-arrow {
+        transform: translateX(-5px) !important;
+    }
+
+    html[dir="ltr"] .sidebar-nav-widget ul li a:hover .category-arrow,
+    html[dir="ltr"] .sidebar-nav-widget ul li a.active .category-arrow {
+        transform: translateX(5px) scaleX(-1) !important;
     }
 
     /*
     |--------------------------------------------------------------------------
-    | Recent Posts
+    | Recent / Related Posts
     |--------------------------------------------------------------------------
     */
-
     .recent-post-list {
-        margin: 0;
-        padding: 0;
-        list-style: none;
+        margin: 0 !important;
+        padding: 0 !important;
+        list-style: none !important;
     }
 
     .post-thumbnail-content {
-        display: flex;
-        align-items: flex-start;
-        gap: 13px;
-        margin-bottom: 18px !important;
+        display: flex !important;
+        align-items: flex-start !important;
+        gap: 15px !important;
+        margin-bottom: 15px !important;
     }
 
     .post-thumbnail-content:last-child {
@@ -814,77 +483,75 @@
     }
 
     .post-thumbnail-content img {
-        flex: 0 0 75px;
-        width: 75px;
-        height: 75px;
-        border-radius: 12px;
-        object-fit: cover;
+        flex: 0 0 70px !important;
+        width: 70px !important;
+        height: 70px !important;
+        border-radius: 12px !important;
+        object-fit: cover !important;
     }
 
     .post-title-date {
-        min-width: 0;
-    }
-
-    .post-title-date .posted-on {
-        display: block;
-        margin-bottom: 4px;
-        color: var(--orbia-primary);
-        font-size: 12px;
-    }
-
-    .post-title-date .posted-on a {
-        color: inherit;
-        text-decoration: none;
+        min-width: 0 !important;
     }
 
     .post-title-date h5 {
-        margin: 0;
-        font-size: 14px;
-        line-height: 1.8 !important;
+        margin: 0 !important;
+        font-size: 13px !important;
     }
 
     .post-title-date h5 a {
-        display: -webkit-box;
-        overflow: hidden;
-        color: var(--orbia-text);
-        text-decoration: none;
-        -webkit-box-orient: vertical;
-        -webkit-line-clamp: 3;
+        display: -webkit-box !important;
+        overflow: hidden !important;
+        color: var(--orbia-text) !important;
+        text-decoration: none !important;
+        -webkit-box-orient: vertical !important;
+        -webkit-line-clamp: 2 !important;
     }
 
     .post-title-date h5 a:hover {
-        color: var(--orbia-primary);
+        color: var(--orbia-primary) !important;
+    }
+
+    .post-title-date .post-date {
+        display: block !important;
+        margin-bottom: 3px !important;
+        color: var(--orbia-primary) !important;
+        font-size: 11px !important;
+        text-decoration: none !important;
     }
 
     /*
     |--------------------------------------------------------------------------
-    | Tags
+    | Sidebar Tags
     |--------------------------------------------------------------------------
     */
-
     .sidebar-tag-widget .widget-content {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 9px;
+        display: flex !important;
+        flex-wrap: wrap !important;
+        gap: 9px !important;
     }
 
     .sidebar-tag-widget .widget-content a {
-        display: inline-flex;
-        align-items: center;
-        min-height: 36px;
-        padding: 5px 13px;
-        border: 1px solid var(--orbia-border);
-        border-radius: 50px;
-        color: var(--orbia-muted);
-        font-size: 13px;
-        text-decoration: none;
+        display: inline-flex !important;
+        align-items: center !important;
+        min-height: 36px !important;
+        padding: 5px 13px !important;
+        border: 1px solid var(--orbia-border) !important;
+        border-radius: 50px !important;
+        background: transparent !important;
+        color: var(--orbia-muted) !important;
+        font-size: 13px !important;
+        text-decoration: none !important;
+        transition: all var(--orbia-transition) !important;
     }
 
-    .sidebar-tag-widget .widget-content a:hover {
-        border-color: transparent;
-        background: var(--orbia-button-gradient);
-        color: #ffffff;
-        transform: translateY(-2px);
+    .sidebar-tag-widget .widget-content a:hover,
+    .sidebar-tag-widget .widget-content a.active {
+        border-color: transparent !important;
+        background: var(--orbia-button-gradient) !important;
+        color: #ffffff !important;
+        box-shadow: var(--orbia-shadow-sm) !important;
+        transform: translateY(-2px) !important;
     }
 
     /*
@@ -892,88 +559,61 @@
     | Responsive
     |--------------------------------------------------------------------------
     */
-
     @media (max-width: 1199.98px) {
         .sidebar-widget-area {
-            position: static;
-            margin-top: 35px;
+            position: static !important;
+            margin-bottom: 30px !important;
+        }
+
+        .article-image {
+            max-height: 320px !important;
         }
     }
 
     @media (max-width: 767.98px) {
         .orbia-blog-details-sec {
-            padding-top: 75px;
-            padding-bottom: 50px;
+            padding-top: 75px !important;
+            padding-bottom: 75px !important;
         }
 
-        .blog-post-item .post-thumbnail {
-            height: 245px;
+        .article-image {
+            margin-bottom: 22px !important;
         }
 
-        .blog-post-item .post-content {
-            padding: 23px 20px 28px;
-        }
-
-        .blog-post-item .post-meta {
-            align-items: flex-start;
-            flex-direction: column;
-            gap: 5px;
-        }
-
-        .blog-post-item .title {
-            font-size: 22px;
-        }
-
-        .blog-post-item .post-content > p {
-            font-size: 14px;
-            text-align: right;
-        }
-
-        .orbia-image {
-            height: 210px;
-        }
-
-        .entry-footer {
-            align-items: flex-start;
-            flex-direction: column;
-            padding: 20px;
-        }
-
-        .comments-area,
-        .comment-wrapper {
-            padding: 21px 18px;
-        }
-
-        .comment {
-            gap: 12px;
-        }
-
-        .comment-avatar {
-            flex: 0 0 50px;
-            width: 50px;
-            height: 50px;
-        }
-
-        .comment-author-content {
-            padding: 15px;
-        }
-
-        .comment-reply {
-            padding-right: 20px;
-        }
-
-        html[dir="ltr"] .comment-reply {
-            padding-right: 0;
-            padding-left: 20px;
+        .article-title {
+            font-size: 22px !important;
         }
 
         .sidebar-widget {
-            padding: 21px 18px;
+            padding: 21px 18px !important;
+        }
+
+        .entry-footer {
+            align-items: flex-start !important;
+            flex-direction: column !important;
+            padding: 20px 18px !important;
+        }
+
+        .entry-footer .tag-links {
+            width: 100% !important;
+        }
+
+        .entry-footer .tag-links > span {
+            width: 100% !important;
+            margin: 0 0 2px !important;
+            font-size: 18px !important;
+            font-weight: 900 !important;
+        }
+
+        .entry-footer .social-share {
+            width: 100% !important;
+            padding-top: 18px !important;
+            border-top: 1px solid var(--orbia-border) !important;
         }
     }
 </style>
 
-<!--====== Start Page Hero Section ======-->
+<!--====== Start Hero ======-->
 <section
     class="page-hero bg_cover p-r z-1"
     data-src="{% static 'assets/images/innerpage/bg/page-bg.jpg' %}"
@@ -990,375 +630,43 @@
                                 {% trans "صفحه اصلی" %}
                             </a>
                         </li>
-                        <li>{% trans "جزئیات وبلاگ" %}</li>
+
+                        <li>
+                            <a href="{% url 'core:blog' %}">
+                                {% trans "وبلاگ" %}
+                            </a>
+                        </li>
+
+                        <li>{{ article.title }}</li>
                     </ul>
                 </div>
             </div>
         </div>
     </div>
 </section>
-<!--====== End Page Hero Section ======-->
+<!--====== End Hero ======-->
 
-<!--====== Start Blog Details Section ======-->
-<section class="orbia-blog-details-sec pt-120 pb-70">
+<!--====== Start Blog Details ======-->
+<section class="orbia-blog-details-sec pt-120 pb-120">
     <div class="container">
         <div class="row">
 
-            <!--====== Blog Content ======-->
-            <div class="col-xl-8 col-lg-10">
-                <div class="blog-details-wrapper">
-
-                    <!--====== Blog Post Main ======-->
-                    <div
-                        class="blog-post-main mb-70"
-                        data-aos="fade-up"
-                        data-aos-duration="1000"
-                    >
-                        <div class="blog-post-item">
-
-                            <div class="post-thumbnail">
-                                <img
-                                    src="{% static 'assets/images/innerpage/blog/blog-single-img1.jpg' %}"
-                                    alt="{% trans 'تصویر اصلی مقاله وبلاگ' %}"
-                                    loading="lazy"
-                                >
-                            </div>
-
-                            <div class="post-content">
-
-                                <div class="post-meta">
-                                    <span>
-                                        <i class="far fa-user"></i>
-                                        {% trans "توسط" %}
-                                        <a href="#">{% trans "مدیر" %}</a>
-                                    </span>
-
-                                    <span>
-                                        <i class="far fa-tags"></i>
-                                        <a href="#">{% trans "شرکتی" %}</a>
-                                    </span>
-
-                                    <span>
-                                        <i class="far fa-comment"></i>
-                                        <a href="#">
-                                            {% trans "نظرات" %} (03)
-                                        </a>
-                                    </span>
-                                </div>
-
-                                <h4 class="title">
-                                    {% trans "مزایای بالقوه راه حل های هوش مصنوعی برای مشاغل کوچک" %}
-                                </h4>
-
-                                <p>
-                                    {% trans "توسعه هوش مصنوعی (AI) بر ایجاد سیستم های هوشمندی متمرکز است که می توانند عملکردهای شناختی انسان مانند یادگیری، استدلال، حل مسئله و تصمیم گیری را تقلید کنند." %}
-                                </p>
-
-                                <p>
-                                    {% trans "یادگیری ماشینی هوش مصنوعی (ML) شاخه‌ای از هوش مصنوعی (AI) است که رایانه‌ها و سیستم‌ها را قادر می‌سازد تا به طور خودکار از داده‌ها یاد بگیرند، الگوها را شناسایی کنند و بدون برنامه‌ریزی صریح تصمیم بگیرند." %}
-                                </p>
-
-                                <blockquote>
-                                    <div class="content">
-                                        <p>
-                                            {% trans "راه حل های هوش مصنوعی برای حفظ دقت و کارایی نیاز به نظارت مداوم دارند." %}
-                                        </p>
-
-                                        <h5>
-                                            {% trans "مارتین و میشیل" %}
-                                        </h5>
-                                    </div>
-                                </blockquote>
-
-                                <p>
-                                    {% trans "تیم ما بر اساس نیازهای خاص شما، یک راه حل اختصاصی هوش مصنوعی طراحی می کند." %}
-                                </p>
-
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="orbia-image">
-                                            <img
-                                                src="{% static 'assets/images/innerpage/blog/blog-single-img2.jpg' %}"
-                                                alt="{% trans 'تصویر داخلی مقاله اول' %}"
-                                                loading="lazy"
-                                            >
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-6">
-                                        <div class="orbia-image">
-                                            <img
-                                                src="{% static 'assets/images/innerpage/blog/blog-single-img3.jpg' %}"
-                                                alt="{% trans 'تصویر داخلی مقاله دوم' %}"
-                                                loading="lazy"
-                                            >
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <p>
-                                    {% trans "تیم ما بر اساس نیازهای خاص شما، یک راه حل اختصاصی هوش مصنوعی طراحی می کند." %}
-                                </p>
-
-                            </div>
-                        </div>
-
-                        <!--====== Entry Footer ======-->
-                        <div class="entry-footer mt-30">
-
-                            <div class="tag-links">
-                                <span>{% trans "برچسب:" %}</span>
-
-                                <a href="#">{% trans "آپارتمان" %}</a>
-                                <a href="#">{% trans "خریدار" %}</a>
-                                <a href="#">{% trans "لوکس" %}</a>
-                            </div>
-
-                            <div class="social-share">
-                                <span>{% trans "به اشتراک بگذارید:" %}</span>
-
-                                <a href="#" aria-label="{% trans 'اشتراک‌گذاری در فیسبوک' %}">
-                                    <i class="fab fa-facebook-f"></i>
-                                </a>
-
-                                <a href="#" aria-label="{% trans 'اشتراک‌گذاری در اینستاگرام' %}">
-                                    <i class="fab fa-instagram"></i>
-                                </a>
-
-                                <a href="#" aria-label="{% trans 'اشتراک‌گذاری در لینکدین' %}">
-                                    <i class="fab fa-linkedin-in"></i>
-                                </a>
-
-                                <a href="#" aria-label="{% trans 'اشتراک‌گذاری در توییتر' %}">
-                                    <i class="fab fa-twitter"></i>
-                                </a>
-                            </div>
-
-                        </div>
-                    </div>
-
-                    <!--====== Comments Area ======-->
-                    <div
-                        class="comments-area mb-80"
-                        data-aos="fade-up"
-                        data-aos-duration="1200"
-                    >
-                        <h3 class="comments-title">
-                            {% trans "نظرات محبوب" %}
-                        </h3>
-
-                        <ul class="comments-list">
-
-                            <li>
-                                <div class="comment">
-
-                                    <div class="comment-avatar">
-                                        <img
-                                            src="{% static 'assets/images/innerpage/blog/comment-img1.jpg' %}"
-                                            alt="{% trans 'تصویر نویسنده دیدگاه' %}"
-                                            loading="lazy"
-                                        >
-                                    </div>
-
-                                    <div class="comment-wrap">
-                                        <div class="comment-author-content">
-
-                                            <span class="author-name">
-                                                {% trans "ماریا دوزا" %}
-
-                                                <span class="date">
-                                                    16 {% trans "اوت" %} 2025،
-                                                    06:30 {% trans "بعد از ظهر" %}
-                                                </span>
-                                            </span>
-
-                                            <p>
-                                                {% trans "از طریق خبرنامه‌ها، رسانه‌های اجتماعی و وب‌سایت خیریه، به‌روزرسانی‌های منظم را برای اهداکنندگان و حامیان ارائه دهید، و جزئیات نحوه استفاده از بودجه و تأثیر به‌دست‌آمده را توضیح دهید." %}
-                                            </p>
-
-                                            <a class="reply" href="#">
-                                                <i class="fas fa-reply"></i>
-                                                {% trans "پاسخ دهید" %}
-                                            </a>
-
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <ul class="comment-reply">
-                                    <li class="comment">
-
-                                        <div class="comment-avatar">
-                                            <img
-                                                src="{% static 'assets/images/innerpage/blog/comment-img2.jpg' %}"
-                                                alt="{% trans 'تصویر نویسنده پاسخ' %}"
-                                                loading="lazy"
-                                            >
-                                        </div>
-
-                                        <div class="comment-wrap">
-                                            <div class="comment-author-content">
-
-                                                <span class="author-name">
-                                                    {% trans "میشل فلوپ" %}
-
-                                                    <span class="date">
-                                                        16 {% trans "اوت" %} 2025،
-                                                        08:30 {% trans "بعد از ظهر" %}
-                                                    </span>
-                                                </span>
-
-                                                <p>
-                                                    {% trans "از معیارها و بازخوردها برای ارزیابی موفقیت پروژه ها و برنامه ها استفاده کنید و این نتایج را با جامعه به اشتراک بگذارید تا مسئولیت پذیری را نشان دهید و اعتماد ایجاد کنید." %}
-                                                </p>
-
-                                                <a class="reply" href="#">
-                                                    <i class="fas fa-reply"></i>
-                                                    {% trans "پاسخ دهید" %}
-                                                </a>
-
-                                            </div>
-                                        </div>
-
-                                    </li>
-                                </ul>
-                            </li>
-
-                            <li>
-                                <div class="comment">
-
-                                    <div class="comment-avatar">
-                                        <img
-                                            src="{% static 'assets/images/innerpage/blog/comment-img2.jpg' %}"
-                                            alt="{% trans 'تصویر نویسنده دیدگاه' %}"
-                                            loading="lazy"
-                                        >
-                                    </div>
-
-                                    <div class="comment-wrap">
-                                        <div class="comment-author-content">
-
-                                            <span class="author-name">
-                                                {% trans "میشل فلوپ" %}
-
-                                                <span class="date">
-                                                    16 {% trans "آگوست" %} 2025،
-                                                    10:30 {% trans "شب" %}
-                                                </span>
-                                            </span>
-
-                                            <p>
-                                                {% trans "از معیارها و بازخوردها برای ارزیابی موفقیت پروژه ها و برنامه ها استفاده کنید و این نتایج را با جامعه به اشتراک بگذارید تا مسئولیت پذیری را نشان دهید و اعتماد ایجاد کنید." %}
-                                            </p>
-
-                                            <a class="reply" href="#">
-                                                <i class="fas fa-reply"></i>
-                                                {% trans "پاسخ دهید" %}
-                                            </a>
-
-                                        </div>
-                                    </div>
-
-                                </div>
-                            </li>
-
-                        </ul>
-                    </div>
-
-                    <!--====== Comment Form ======-->
-                    <div
-                        class="comment-wrapper mb-50"
-                        data-aos="fade-up"
-                        data-aos-duration="1400"
-                    >
-                        <h3>{% trans "یک پاسخ بگذارید" %}</h3>
-
-                        <form
-                            class="comment-form"
-                            method="POST"
-                            action=""
-                            autocomplete="off"
-                        >
-                            {% csrf_token %}
-
-                            <div class="row">
-
-                                <div class="col-lg-6">
-                                    <div class="form-group">
-                                        <input
-                                            class="form_control"
-                                            type="text"
-                                            name="name"
-                                            placeholder="{% trans 'نام' %}"
-                                            autocomplete="name"
-                                            required
-                                        >
-                                    </div>
-                                </div>
-
-                                <div class="col-lg-6">
-                                    <div class="form-group">
-                                        <input
-                                            class="form_control"
-                                            type="email"
-                                            name="email"
-                                            placeholder="{% trans 'ایمیل' %}"
-                                            autocomplete="email"
-                                            required
-                                        >
-                                    </div>
-                                </div>
-
-                                <div class="col-lg-12">
-                                    <div class="form-group">
-                                        <textarea
-                                            class="form_control"
-                                            name="message"
-                                            cols="8"
-                                            rows="5"
-                                            placeholder="{% trans 'پیام' %}"
-                                            required
-                                        ></textarea>
-                                    </div>
-                                </div>
-
-                                <div class="col-lg-12">
-                                    <div class="form-group mb-0">
-                                        <button
-                                            class="theme-btn gradient-btn"
-                                            type="submit"
-                                        >
-                                            {% trans "ارسال نظر" %}
-                                        </button>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </form>
-                    </div>
-
-                </div>
-            </div>
-
-            <!--====== Sidebar ======-->
-            <div class="col-xl-4 col-lg-10">
+            <!-- Sidebar -->
+            <div class="col-xl-4 order-1 order-xl-2">
                 <aside class="sidebar-widget-area">
 
-                    <!--====== Search Widget ======-->
+                    <!-- Search -->
                     <div
-                        class="sidebar-widget sidebar-search-widget mb-30"
+                        class="sidebar-widget sidebar-search-widget"
                         data-aos="fade-up"
-                        data-aos-duration="600"
                     >
                         <div class="widget-content">
-                            <form method="GET" action="">
+                            <form action="{% url 'core:blog' %}" method="get">
                                 <div class="form-group">
-
                                     <input
                                         class="form_control"
                                         type="search"
                                         name="q"
-                                        value="{{ request.GET.q }}"
                                         placeholder="{% trans 'جستجو کنید...' %}"
                                         aria-label="{% trans 'جستجو در وبلاگ' %}"
                                         required
@@ -1371,178 +679,290 @@
                                     >
                                         <i class="far fa-search"></i>
                                     </button>
-
                                 </div>
                             </form>
                         </div>
                     </div>
 
-                    <!--====== Category Widget ======-->
+                    <!-- Categories -->
                     <div
-                        class="sidebar-widget sidebar-nav-widget mb-30"
+                        class="sidebar-widget sidebar-nav-widget"
                         data-aos="fade-up"
-                        data-aos-duration="800"
                     >
-                        <h4 class="widget-title">
-                            {% trans "دسته بندی" %}
-                        </h4>
+                        <h4 class="widget-title">{% trans "دسته‌بندی" %}</h4>
 
-                        <div class="widget-content">
-                            <ul>
+                        <ul class="widget-content">
+                            <li>
+                                <a href="{% url 'core:blog' %}">
+                                    <span>{% trans "همه مقالات" %}</span>
+
+                                    <span class="category-arrow">
+                                        <i class="far fa-arrow-left"></i>
+                                    </span>
+                                </a>
+                            </li>
+
+                            {% for category in categories %}
                                 <li>
-                                    <a href="#">
-                                        {% trans "راهنمای شهر" %}
-                                        <span><i class="far fa-arrow-left"></i></span>
+                                    <a
+                                        href="{% url 'core:blog' %}?category={{ category.code|urlencode }}"
+                                        class="{% if article.category == category.code %}active{% endif %}"
+                                    >
+                                        <span>{{ category.label }}</span>
+
+                                        <span class="category-arrow">
+                                            <i class="far fa-arrow-left"></i>
+                                        </span>
                                     </a>
                                 </li>
-
-                                <li>
-                                    <a href="#">
-                                        {% trans "عشایر دیجیتال" %}
-                                        <span><i class="far fa-arrow-left"></i></span>
-                                    </a>
-                                </li>
-
-                                <li>
-                                    <a href="#">
-                                        {% trans "مکان های جدید" %}
-                                        <span><i class="far fa-arrow-left"></i></span>
-                                    </a>
-                                </li>
-
-                                <li>
-                                    <a href="#">
-                                        {% trans "هاست های محبوب" %}
-                                        <span><i class="far fa-arrow-left"></i></span>
-                                    </a>
-                                </li>
-
-                                <li>
-                                    <a href="#">
-                                        {% trans "اتاق با منظره" %}
-                                        <span><i class="far fa-arrow-left"></i></span>
-                                    </a>
-                                </li>
-
-                                <li>
-                                    <a href="#">
-                                        {% trans "نکات و ترفندها" %}
-                                        <span><i class="far fa-arrow-left"></i></span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
+                            {% endfor %}
+                        </ul>
                     </div>
 
-                    <!--====== Recent Posts Widget ======-->
-                    <div
-                        class="sidebar-widget sidebar-post-widget mb-40"
-                        data-aos="fade-up"
-                        data-aos-duration="1000"
-                    >
-                        <h4 class="widget-title">
-                            {% trans "پست های اخیر" %}
-                        </h4>
+                    <!-- Recent Posts -->
+                    {% if recent_posts %}
+                        <div
+                            class="sidebar-widget d-none d-xl-block"
+                            data-aos="fade-up"
+                        >
+                            <h4 class="widget-title">{% trans "پست‌های اخیر" %}</h4>
 
-                        <div class="widget-content">
                             <ul class="recent-post-list">
+                                {% for recent in recent_posts %}
+                                    <li class="post-thumbnail-content">
+                                        {% if recent.image %}
+                                            <img
+                                                src="{{ recent.image.url }}"
+                                                alt="{{ recent.title }}"
+                                                loading="lazy"
+                                            >
+                                        {% else %}
+                                            <img
+                                                src="{% static 'assets/images/innerpage/blog/post-thumb1.jpg' %}"
+                                                alt="{{ recent.title }}"
+                                                loading="lazy"
+                                            >
+                                        {% endif %}
 
-                                <li class="post-thumbnail-content">
-                                    <img
-                                        src="{% static 'assets/images/innerpage/blog/post-thumb1.jpg' %}"
-                                        alt="{% trans 'تصویر پست اخیر' %}"
-                                        loading="lazy"
-                                    >
-
-                                    <div class="post-title-date">
-                                        <span class="posted-on">
-                                            <a href="#">
-                                                1 {% trans "آگوست" %} 2025
+                                        <div class="post-title-date">
+                                            <a
+                                                class="post-date"
+                                                href="{% url 'core:blog-detail' slug=recent.slug %}"
+                                            >
+                                                {% if CURRENT_LANGUAGE == "fa" %}
+                                                    {{ recent.created_at|jformat:"%d %b %Y" }}
+                                                {% else %}
+                                                    {{ recent.created_at|date:"d M Y" }}
+                                                {% endif %}
                                             </a>
-                                        </span>
 
-                                        <h5>
-                                            <a href="#">
-                                                {% trans "هوش مصنوعی و خلاقیت: آیا ماشین‌ها می‌توانند واقعاً خلاق باشند؟" %}
-                                            </a>
-                                        </h5>
-                                    </div>
-                                </li>
-
-                                <li class="post-thumbnail-content">
-                                    <img
-                                        src="{% static 'assets/images/innerpage/blog/post-thumb2.jpg' %}"
-                                        alt="{% trans 'تصویر پست اخیر' %}"
-                                        loading="lazy"
-                                    >
-
-                                    <div class="post-title-date">
-                                        <span class="posted-on">
-                                            <a href="#">
-                                                4 {% trans "آگوست" %} 2025
-                                            </a>
-                                        </span>
-
-                                        <h5>
-                                            <a href="#">
-                                                {% trans "ساخت سیستم های مسئولانه و منصفانه" %}
-                                            </a>
-                                        </h5>
-                                    </div>
-                                </li>
-
-                                <li class="post-thumbnail-content">
-                                    <img
-                                        src="{% static 'assets/images/innerpage/blog/post-thumb3.jpg' %}"
-                                        alt="{% trans 'تصویر پست اخیر' %}"
-                                        loading="lazy"
-                                    >
-
-                                    <div class="post-title-date">
-                                        <span class="posted-on">
-                                            <a href="#">
-                                                7 {% trans "آگوست" %} 2025
-                                            </a>
-                                        </span>
-
-                                        <h5>
-                                            <a href="#">
-                                                {% trans "قدرت گرفته از هوش مصنوعی: آینده برای آینده چیست؟" %}
-                                            </a>
-                                        </h5>
-                                    </div>
-                                </li>
-
+                                            <h5>
+                                                <a
+                                                    href="{% url 'core:blog-detail' slug=recent.slug %}"
+                                                >
+                                                    {{ recent.title }}
+                                                </a>
+                                            </h5>
+                                        </div>
+                                    </li>
+                                {% endfor %}
                             </ul>
                         </div>
-                    </div>
+                    {% endif %}
 
-                    <!--====== Popular Tags Widget ======-->
+                    <!-- Related Posts -->
+                    {% if related_posts %}
+                        <div
+                            class="sidebar-widget d-none d-xl-block"
+                            data-aos="fade-up"
+                        >
+                            <h4 class="widget-title">{% trans "مقالات مرتبط" %}</h4>
+
+                            <ul class="recent-post-list">
+                                {% for related in related_posts %}
+                                    <li class="post-thumbnail-content">
+                                        {% if related.image %}
+                                            <img
+                                                src="{{ related.image.url }}"
+                                                alt="{{ related.title }}"
+                                                loading="lazy"
+                                            >
+                                        {% else %}
+                                            <img
+                                                src="{% static 'assets/images/innerpage/blog/post-thumb1.jpg' %}"
+                                                alt="{{ related.title }}"
+                                                loading="lazy"
+                                            >
+                                        {% endif %}
+
+                                        <div class="post-title-date">
+                                            <a
+                                                class="post-date"
+                                                href="{% url 'core:blog-detail' slug=related.slug %}"
+                                            >
+                                                {% if CURRENT_LANGUAGE == "fa" %}
+                                                    {{ related.created_at|jformat:"%d %b %Y" }}
+                                                {% else %}
+                                                    {{ related.created_at|date:"d M Y" }}
+                                                {% endif %}
+                                            </a>
+
+                                            <h5>
+                                                <a
+                                                    href="{% url 'core:blog-detail' slug=related.slug %}"
+                                                >
+                                                    {{ related.title }}
+                                                </a>
+                                            </h5>
+                                        </div>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    {% endif %}
+
+                    <!-- Popular Tags -->
                     <div
-                        class="sidebar-widget sidebar-tag-widget mb-30"
+                        class="sidebar-widget sidebar-tag-widget d-none d-xl-block"
                         data-aos="fade-up"
-                        data-aos-duration="1200"
                     >
-                        <h4 class="widget-title">
-                            {% trans "برچسب های محبوب" %}
-                        </h4>
+                        <h4 class="widget-title">{% trans "برچسب‌های محبوب" %}</h4>
 
                         <div class="widget-content">
-                            <a href="#">{% trans "اتوماسیون" %}</a>
-                            <a href="#">{% trans "برندسازی" %}</a>
-                            <a href="#">{% trans "دیجیتال" %}</a>
-                            <a href="#">{% trans "شبکه ها" %}</a>
-                            <a href="#">{% trans "عرضه کنید" %}</a>
-                            <a href="#">{% trans "تکنولوژی" %}</a>
+                            {% for tag in all_tags %}
+                                <a
+                                    href="{% url 'core:blog' %}?tag={{ tag.slug|urlencode }}"
+                                    class="{% if tag in article_tags %}active{% endif %}"
+                                    title="{{ tag.name }}"
+                                >
+                                    {{ tag.name }}
+                                </a>
+                            {% empty %}
+                                <span
+                                    class="text-muted"
+                                    style="font-size: 14px;"
+                                >
+                                    {% trans "برچسبی موجود نیست." %}
+                                </span>
+                            {% endfor %}
                         </div>
                     </div>
 
                 </aside>
             </div>
 
+            <!-- Article Content -->
+            <div class="col-xl-8 order-2 order-xl-1">
+                <div class="blog-details-wrapper">
+
+                    {% if article.image %}
+                        <div class="article-image" data-aos="fade-up">
+                            <img
+                                src="{{ article.image.url }}"
+                                alt="{{ article.title }}"
+                                loading="lazy"
+                            >
+                        </div>
+                    {% endif %}
+
+                    <article
+                        class="blog-article-content"
+                        data-aos="fade-up"
+                    >
+                        <div class="post-meta">
+                            <span>
+                                <i class="far fa-user"></i>
+                                {% trans "نویسنده:" %}
+                                {% trans "مدیر سایت" %}
+                            </span>
+
+                            <span>
+                                <i class="far fa-calendar-alt"></i>
+
+                                {% if CURRENT_LANGUAGE == "fa" %}
+                                    {{ article.created_at|jformat:"%d %b %Y" }}
+                                {% else %}
+                                    {{ article.created_at|date:"d M Y" }}
+                                {% endif %}
+                            </span>
+
+                            <span>
+                                <i class="far fa-folder"></i>
+
+                                <a
+                                    href="{% url 'core:blog' %}?category={{ article.category|urlencode }}"
+                                >
+                                    {{ article.category_display }}
+                                </a>
+                            </span>
+                        </div>
+
+                        <h1 class="article-title">{{ article.title }}</h1>
+
+                        <div class="article-body">
+                            {{ article.content|linebreaks }}
+                        </div>
+                    </article>
+
+                    <!-- Tags and Sharing -->
+                    <div
+                        class="entry-footer mb-50"
+                        data-aos="fade-up"
+                    >
+                        {% if article_tags %}
+                            <div class="tag-links">
+                                <span>{% trans "برچسب‌ها:" %}</span>
+
+                                {% for tag in article_tags %}
+                                    <a
+                                        class="active"
+                                        href="{% url 'core:blog' %}?tag={{ tag.slug|urlencode }}"
+                                        title="{{ tag.name }}"
+                                    >
+                                        {{ tag.name }}
+                                    </a>
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+
+                        <div class="social-share">
+                            <span>{% trans "اشتراک‌گذاری:" %}</span>
+
+                            <a
+                                href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri|urlencode }}"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                aria-label="{% trans 'اشتراک‌گذاری در فیسبوک' %}"
+                            >
+                                <i class="fab fa-facebook-f"></i>
+                            </a>
+
+                            <a
+                                href="https://twitter.com/intent/tweet?url={{ request.build_absolute_uri|urlencode }}&text={{ article.title|urlencode }}"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                aria-label="{% trans 'اشتراک‌گذاری در توییتر' %}"
+                            >
+                                <i class="fab fa-twitter"></i>
+                            </a>
+
+                            <a
+                                href="https://www.linkedin.com/sharing/share-offsite/?url={{ request.build_absolute_uri|urlencode }}"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                aria-label="{% trans 'اشتراک‌گذاری در لینکدین' %}"
+                            >
+                                <i class="fab fa-linkedin-in"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
         </div>
     </div>
 </section>
-<!--====== End Blog Details Section ======-->
+<!--====== End Blog Details ======-->
 
 {% endblock content %}
